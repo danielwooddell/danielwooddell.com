@@ -802,9 +802,39 @@ main,
   }
 }
 
+/* =========================
+   MOBILE PARALLAX SAFETY
+========================= */
+
 @media (max-width: 768px) {
+  .parallax-background {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+
   .parallax-layer {
+    position: absolute;
+    inset: 0;
     transform: none !important;
+    will-change: auto;
+  }
+
+  .parallax-stars {
+    opacity: 0.18;
+  }
+
+  .parallax-grid {
+    opacity: 0.22;
+    background-size: 56px 56px;
+  }
+
+  .parallax-glow-one,
+  .parallax-glow-two,
+  .parallax-glow-three {
+    opacity: 0.7;
+    filter: none;
   }
 }
 
