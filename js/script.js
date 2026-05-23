@@ -4,6 +4,8 @@
 
 (() => {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const desktopParallaxQuery = window.matchMedia('(min-width: 1181px) and (hover: hover) and (pointer: fine)');
+  const finePointerQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
   const parallaxLayers = document.querySelectorAll('.parallax-layer');
   const lowerParallaxWrap = document.querySelector('[data-lower-parallax-wrap]');
   const lowerParallaxLayers = document.querySelectorAll('[data-lower-parallax]');
@@ -25,9 +27,69 @@
     const slides = Array.from(root.querySelectorAll(config.slideSelector));
     const dots = Array.from(root.querySelectorAll(config.dotSelector));
     const label = config.labelSelector ? root.querySelector(config.labelSelector) : null;
+    const viewport = config.viewportSelector ? root.querySelector(config.viewportSelector) : null;
     let activeIndex = 0;
     let timer = null;
     let paused = false;
+
+    function equalizeViewportHeight() {
+      if (!viewport || !slides.length) return;
+
+      const viewportWidth = viewport.clientWidth;
+      if (!viewportWidth) return;
+
+      const measureBox = document.createElement('div');
+      measureBox.setAttribute('aria-hidden', 'true');
+      measureBox.style.position = 'absolute';
+      measureBox.style.visibility = 'hidden';
+      measureBox.style.pointerEvents = 'none';
+      measureBox.style.left = '-9999px';
+      measureBox.style.top = '0';
+      measureBox.style.width = `${viewportWidth}px`;
+      measureBox.style.height = 'auto';
+      measureBox.style.overflow = 'visible';
+
+      viewport.appendChild(measureBox);
+
+      let maxHeight = 0;
+
+      slides.forEach(slide => {
+        const clone = slide.cloneNode(true);
+        clone.classList.add('is-active');
+        clone.removeAttribute('aria-hidden');
+        clone.style.position = 'relative';
+        clone.style.inset = 'auto';
+        clone.style.width = `${viewportWidth}px`;
+        clone.style.opacity = '1';
+        clone.style.visibility = 'hidden';
+        clone.style.transform = 'none';
+        clone.style.pointerEvents = 'none';
+        clone.style.transition = 'none';
+
+        measureBox.appendChild(clone);
+        maxHeight = Math.max(maxHeight, clone.scrollHeight, clone.getBoundingClientRect().height);
+        measureBox.removeChild(clone);
+      });
+
+      measureBox.remove();
+
+      if (maxHeight > 0) {
+        viewport.style.minHeight = `${Math.ceil(maxHeight)}px`;
+      }
+    }
+
+    let resizeFrame = null;
+
+    function requestHeightSync() {
+      if (resizeFrame) {
+        window.cancelAnimationFrame(resizeFrame);
+      }
+
+      resizeFrame = window.requestAnimationFrame(() => {
+        equalizeViewportHeight();
+        resizeFrame = null;
+      });
+    }
 
     function setSlide(index) {
       if (!slides.length) return;
@@ -99,7 +161,15 @@
     });
 
     setSlide(0);
+    requestHeightSync();
     startTimer();
+
+    window.addEventListener('resize', requestHeightSync, { passive: true });
+    window.addEventListener('load', requestHeightSync);
+
+    if (document.fonts && typeof document.fonts.ready === 'object') {
+      document.fonts.ready.then(requestHeightSync).catch(() => {});
+    }
 
     if (typeof prefersReducedMotion.addEventListener === 'function') {
       prefersReducedMotion.addEventListener('change', () => {
@@ -117,6 +187,7 @@
     rootSelector: '[data-hero-panel]',
     slideSelector: '[data-hero-slide]',
     dotSelector: '[data-hero-dot]',
+    viewportSelector: '.panel-viewport',
     labelDataset: 'heroLabel',
     interval: 8400
   });
@@ -125,6 +196,7 @@
     rootSelector: '[data-focus-carousel]',
     slideSelector: '[data-focus-slide]',
     dotSelector: '[data-focus-dot]',
+    viewportSelector: '.focus-carousel-viewport',
     labelSelector: '[data-focus-label]',
     labelDataset: 'focusLabel',
     defaultLabel: 'Current Focus',
@@ -167,7 +239,7 @@
   let parallaxTicking = false;
 
   function parallaxEnabled() {
-    return !prefersReducedMotion.matches && window.matchMedia('(min-width: 769px)').matches;
+    return !prefersReducedMotion.matches && desktopParallaxQuery.matches;
   }
 
   function resetParallax() {
@@ -218,6 +290,13 @@
 
   window.addEventListener('scroll', requestParallaxUpdate, { passive: true });
   window.addEventListener('resize', requestParallaxUpdate);
+
+  if (typeof desktopParallaxQuery.addEventListener === 'function') {
+    desktopParallaxQuery.addEventListener('change', () => {
+      resetParallax();
+      requestParallaxUpdate();
+    });
+  }
 
   /* =========================
      HEADER SCROLL STATE
@@ -435,7 +514,7 @@
     card.style.setProperty('--pointer-y', `${y}%`);
   }
 
-  if (!prefersReducedMotion.matches) {
+  if (!prefersReducedMotion.matches && finePointerQuery.matches) {
     pointerCards.forEach(card => {
       card.addEventListener('pointermove', handlePointerMove);
     });
