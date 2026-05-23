@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 512 512"
+   role="img"
+   aria-label="Daniel Wooddell DW identity mark"
+   version="1.1"
+   id="svg14"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs12">
+    <linearGradient
+       id="edge"
+       x1="76"
+       y1="60"
+       x2="436"
+       y2="452"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0"
+         stop-color="#38bdf8"
+         id="stop1" />
+      <stop
+         offset="0.52"
+         stop-color="#8b5cf6"
+         id="stop2" />
+      <stop
+         offset="1"
+         stop-color="#ec4899"
+         id="stop3" />
+    </linearGradient>
+    <linearGradient
+       id="letters"
+       x1="132"
+       y1="148"
+       x2="384"
+       y2="360"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0"
+         stop-color="#f8fafc"
+         id="stop4" />
+      <stop
+         offset="0.45"
+         stop-color="#bfdbfe"
+         id="stop5" />
+      <stop
+         offset="1"
+         stop-color="#c4b5fd"
+         id="stop6" />
+    </linearGradient>
+    <radialGradient
+       id="surface"
+       cx="34%"
+       cy="22%"
+       r="78%">
+      <stop
+         offset="0"
+         stop-color="#172554"
+         id="stop7" />
+      <stop
+         offset="0.52"
+         stop-color="#0b1024"
+         id="stop8" />
+      <stop
+         offset="1"
+         stop-color="#050816"
+         id="stop9" />
+    </radialGradient>
+    <filter
+       id="edgeGlow"
+       x="-0.045111111"
+       y="-0.045111111"
+       width="1.0902222"
+       height="1.0902222">
+      <feGaussianBlur
+         stdDeviation="7"
+         result="blur"
+         id="feGaussianBlur9" />
+      <feColorMatrix
+         in="blur"
+         type="matrix"
+         values="0 0 0 0 0.22 0 0 0 0 0.74 0 0 0 0 0.97 0 0 0 0.34 0"
+         result="color"
+         id="feColorMatrix9" />
+      <feMerge
+         id="feMerge10">
+        <feMergeNode
+           in="color"
+           id="feMergeNode9" />
+        <feMergeNode
+           in="SourceGraphic"
+           id="feMergeNode10" />
+      </feMerge>
+    </filter>
+    <filter
+       id="letterGlow"
+       x="-0.024386136"
+       y="-0.053084006"
+       width="1.0487723"
+       height="1.106168">
+      <feGaussianBlur
+         stdDeviation="2.8"
+         result="blur"
+         id="feGaussianBlur10" />
+      <feColorMatrix
+         in="blur"
+         type="matrix"
+         values="0 0 0 0 0.22 0 0 0 0 0.74 0 0 0 0 0.97 0 0 0 0.28 0"
+         result="color"
+         id="feColorMatrix10" />
+      <feMerge
+         id="feMerge12">
+        <feMergeNode
+           in="color"
+           id="feMergeNode11" />
+        <feMergeNode
+           in="SourceGraphic"
+           id="feMergeNode12" />
+      </feMerge>
+    </filter>
+  </defs>
+  <rect
+     x="24"
+     y="24"
+     width="464"
+     height="464"
+     rx="128"
+     fill="url(#surface)"
+     id="rect12" />
+  <rect
+     x="31"
+     y="31"
+     width="450"
+     height="450"
+     rx="121"
+     fill="none"
+     stroke="url(#edge)"
+     stroke-width="7"
+     opacity="0.88"
+     filter="url(#edgeGlow)"
+     id="rect13" />
+  <rect
+     x="45"
+     y="45"
+     width="422"
+     height="422"
+     rx="109"
+     fill="none"
+     stroke="#ffffff"
+     stroke-width="1.15"
+     opacity="0.10"
+     id="rect14" />
+  <path
+     d="m 171.0625,309 c 38.99707,0 64.06055,-24.80859 64.06055,-63.21094 0,-38.4873 -25.48828,-63.38086 -64.57032,-63.38086 h -48.9375 V 309 Z m -14.10352,-29.22656 v -68.13867 h 11.38477 c 21.3252,0 31.0957,10.95996 31.0957,34.15429 0,23.02442 -9.43066,33.98438 -30.07617,33.98438 z M 250.28418,309 h 38.82715 l 14.3584,-58.45313 c 1.10449,-4.41796 2.12402,-9.7705 3.48339,-16.39746 1.35938,6.62696 2.37891,11.9795 3.4834,16.39746 L 324.79492,309 h 38.82715 L 397.18164,182.4082 H 358.7793 l -10.19532,49.10742 c -2.29394,11.04493 -4.333,22.08985 -6.28711,33.13477 -2.20898,-11.04492 -4.41796,-22.08984 -6.96679,-33.13477 L 324.11523,182.4082 h -34.32421 l -11.21485,49.10742 c -2.54883,11.12989 -4.84277,22.25977 -6.9668,33.38965 -2.03906,-11.12988 -4.07812,-22.25976 -6.37207,-33.38965 L 255.12695,182.4082 h -38.40234 z"
+     id="text14"
+     style="font-weight:900;font-size:174px;font-family:'Inter Display', Inter, Arial, sans-serif;letter-spacing:-15;text-anchor:middle;fill:url(#letters);filter:url(#letterGlow)"
+     aria-label="DW" />
+</svg>
