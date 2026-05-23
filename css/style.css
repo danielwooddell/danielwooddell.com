@@ -23,6 +23,8 @@
   --radius: 26px;
   --radius-lg: 34px;
   --header-height: 76px;
+  --recommendation-scroll-duration: 108s;
+  --recommendation-scroll-duration-alt: 104s;
 }
 
 /* =========================
@@ -529,13 +531,15 @@ main,
 
 .panel-viewport {
   position: relative;
-  min-height: 300px;
+  min-height: 360px;
   overflow: hidden;
+  transition: min-height 0.25s ease;
 }
 
 .panel-slide {
   position: absolute;
   inset: 0;
+  width: 100%;
   opacity: 0;
   transform: translateY(12px) scale(0.992);
   pointer-events: none;
@@ -847,7 +851,8 @@ main,
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: 1rem;
-  padding: 1rem 1.15rem;
+  min-height: 5.9rem;
+  padding: 1.18rem 1.35rem;
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 999px;
   background:
@@ -874,13 +879,17 @@ main,
 .focus-carousel-viewport {
   position: relative;
   min-width: 0;
-  min-height: 2.35rem;
+  min-height: 3rem;
   overflow: hidden;
+  transition: min-height 0.25s ease;
 }
 
 .focus-slide {
   position: absolute;
   inset: 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
   opacity: 0;
   transform: translateY(8px);
   pointer-events: none;
@@ -898,6 +907,7 @@ main,
   list-style: none;
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
   gap: 0.5rem;
 }
@@ -1080,13 +1090,13 @@ main,
 .recommendation-track {
   display: flex;
   width: max-content;
-  animation: recommendation-scroll-left 76s linear infinite;
+  animation: recommendation-scroll-left var(--recommendation-scroll-duration) linear infinite;
   will-change: transform;
 }
 
 .recommendation-track.track-right {
   animation-name: recommendation-scroll-right;
-  animation-duration: 84s;
+  animation-duration: var(--recommendation-scroll-duration-alt);
 }
 
 .recommendation-marquee:hover .recommendation-track,
@@ -1680,10 +1690,19 @@ main,
 
 .process-card > span {
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  margin-bottom: 1.45rem;
   color: var(--cyan);
+  border-radius: 50%;
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.24);
   font-family: "Space Grotesk", sans-serif;
   font-weight: 800;
-  margin-bottom: 2.1rem;
+  font-size: 0.82rem;
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.10);
 }
 
 .process-card h3 {
@@ -1859,7 +1878,62 @@ main,
 }
 
 /* =========================
-   MOBILE PARALLAX SAFETY
+   TABLET + TOUCH PARALLAX SAFETY
+========================= */
+
+@media (max-width: 1180px), (pointer: coarse) {
+  .parallax-background {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .parallax-layer {
+    position: absolute;
+    inset: 0;
+    transform: none !important;
+    will-change: auto;
+  }
+
+  .parallax-stars {
+    opacity: 0.18;
+  }
+
+  .parallax-grid {
+    opacity: 0.22;
+    background-size: 56px 56px;
+  }
+
+  .parallax-glow-one,
+  .parallax-glow-two,
+  .parallax-glow-three {
+    opacity: 0.7;
+    filter: none;
+  }
+
+  .lower-parallax-field {
+    inset: 0;
+    opacity: 0.75;
+  }
+
+  .lower-parallax-layer {
+    transform: none !important;
+    will-change: auto;
+  }
+
+  .lower-parallax-grid {
+    opacity: 0.16;
+    background-size: 64px 64px, 64px 64px, 180px 180px;
+  }
+
+  .lower-parallax-stars {
+    opacity: 0.13;
+  }
+}
+
+/* =========================
+   MOBILE LAYOUT SAFETY
 ========================= */
 
 @media (max-width: 768px) {
@@ -1899,7 +1973,7 @@ main,
   }
 
   .panel-viewport {
-    min-height: 430px;
+    min-height: 460px;
   }
 
   .lower-parallax-field {
@@ -1940,6 +2014,7 @@ main,
   .focus-strip-inner {
     grid-template-columns: 1fr;
     justify-items: start;
+    min-height: auto;
     border-radius: 26px;
   }
 
