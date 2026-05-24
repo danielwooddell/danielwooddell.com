@@ -828,7 +828,7 @@
         command: 'open_ally_accessibility_systems',
         aliases: ['ally', 'anthology ally', 'accessibility strategies', 'canvas accessibility', 'accessible canvas', 'accessible content'],
         kicker: 'Accessibility Support Layer',
-        title: 'Canvas Accessibility Strategies',
+        title: 'Ally Accessibility Workflows',
         copy: 'Accessibility support becomes stronger when it is connected to LMS workflows, document improvement, readable design, captions, alternative text, and consistent faculty-facing guidance.',
         systems: ['Ally-informed workflows', 'Accessible Canvas practices', 'Content improvement pathways'],
         primary: 'Accessibility works best as a visible workflow, not a hidden compliance task.',
