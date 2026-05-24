@@ -748,8 +748,8 @@
         copy: 'My work connects learning objectives, instructional pathways, digital materials, and support resources so technology serves the learning experience instead of distracting from it.',
         systems: ['Course design strategy', 'Instructional pathways', 'Reusable faculty resources'],
         primary: 'Strong learning systems make the next action clear.',
-        linkText: 'Launch Design Lab',
-        linkUrl: 'https://www.xavier.edu/teachingwithtech/ai-in-design'
+        linkText: 'Launch Design Site',
+        linkUrl: 'https://www.xavier.edu/id'
       },
       accessibility: {
         set: 'primary',
@@ -762,8 +762,8 @@
         copy: 'Accessibility works best when it is embedded into everyday design, documentation, LMS support, and content improvement workflows rather than added after the fact.',
         systems: ['Readable interface patterns', 'Inclusive design workflows', 'Content improvement systems'],
         primary: 'Accessible systems reduce friction for everyone.',
-        linkText: 'Launch Access',
-        linkUrl: '#capabilities'
+        linkText: 'Launch Accessibility',
+        linkUrl: 'https://www.xavier.edu/id/canvas/accessibility-strategies'
       },
       support: {
         set: 'primary',
@@ -776,7 +776,7 @@
         copy: 'I build resource hubs, training materials, documentation, and AI support layers that help people find accurate guidance without waiting for one-to-one help every time.',
         systems: ['Resource hubs', 'Documentation systems', 'Always-available support layers'],
         primary: 'Good support architecture multiplies institutional capacity.',
-        linkText: 'Launch Support Systems',
+        linkText: 'Launch Support System',
         linkUrl: 'https://www.xavier.edu/teachingwithtech'
       },
       workflow: {
@@ -832,13 +832,13 @@
         copy: 'Accessibility support becomes stronger when it is connected to LMS workflows, document improvement, readable design, captions, alternative text, and consistent faculty-facing guidance.',
         systems: ['Ally-informed workflows', 'Accessible Canvas practices', 'Content improvement pathways'],
         primary: 'Accessibility works best as a visible workflow, not a hidden compliance task.',
-        linkText: 'Launch Ally Access',
-        linkUrl: 'https://www.xavier.edu/id/canvas/accessibility-strategies'
+        linkText: 'Launch Ally Info',
+        linkUrl: 'https://www.xavier.edu/teachingwithtech/a-z/tools/ally'
       },
       teachingTech: {
         set: 'operations',
         number: '03',
-        nav: 'Teaching Tech Hub',
+        nav: 'Teaching w/Tech Hub',
         command: 'open_teaching_technology_hub',
         aliases: ['teaching with technology', 'technology hub', 'edtech hub', 'tool hub', 'teaching tools'],
         kicker: 'Digital Resource Ecosystem',
