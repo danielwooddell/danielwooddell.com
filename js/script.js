@@ -528,4 +528,164 @@
       }
     });
   }
+
+  /* =========================
+     SITE AUDIO SYSTEM
+  ========================= */
+
+  const startupSound = document.querySelector('#startup-sound');
+  const interactionSound = document.querySelector('#interaction-sound');
+  const soundToggle = document.querySelector('#sound-toggle');
+  const soundToggleText = soundToggle ? soundToggle.querySelector('.sound-toggle-text') : null;
+  const soundStatus = document.querySelector('#sound-status');
+  const soundStorageKey = 'dw-site-sound-enabled';
+  let startupPlayed = false;
+  let startupArmed = false;
+  let lastInteractionSoundAt = 0;
+
+  const startupVolume = 0.10;
+  const interactionVolume = 0.16;
+
+  function getStoredSoundPreference() {
+    try {
+      return window.localStorage.getItem(soundStorageKey);
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function storeSoundPreference(enabled) {
+    try {
+      window.localStorage.setItem(soundStorageKey, enabled ? 'true' : 'false');
+    } catch (error) {
+      // Local storage can be unavailable in some private browsing contexts.
+    }
+  }
+
+  let soundEnabled = getStoredSoundPreference() === 'true';
+
+  function updateSoundControl() {
+    if (!soundToggle) return;
+
+    soundToggle.setAttribute('aria-pressed', String(soundEnabled));
+    soundToggle.setAttribute('aria-label', soundEnabled ? 'Disable site sound' : 'Enable site sound');
+
+    if (soundStatus) {
+      soundStatus.textContent = soundEnabled ? 'Site sound is on.' : 'Site sound is off.';
+    }
+  }
+
+  function prepareAudioElement(audio, volume) {
+    if (!audio) return;
+    audio.volume = volume;
+    audio.preload = 'auto';
+  }
+
+  function stopAudio(audio) {
+    if (!audio) return;
+    audio.pause();
+    audio.currentTime = 0;
+  }
+
+  function playAudio(audio, options = {}) {
+    if (!audio || !soundEnabled) return;
+
+    const volume = typeof options.volume === 'number' ? options.volume : interactionVolume;
+    audio.volume = volume;
+
+    if (options.restart !== false) {
+      audio.currentTime = 0;
+    }
+
+    const playPromise = audio.play();
+
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {
+        // Browser autoplay protections may block audio until user interaction.
+      });
+    }
+  }
+
+  function playStartupSound() {
+    if (startupPlayed || !soundEnabled) return;
+    startupPlayed = true;
+    playAudio(startupSound, { volume: startupVolume });
+  }
+
+  function playInteractionSound() {
+    if (!soundEnabled || !startupPlayed) return;
+
+    const now = Date.now();
+    if (now - lastInteractionSoundAt < 450) return;
+
+    lastInteractionSoundAt = now;
+    playAudio(interactionSound, { volume: interactionVolume });
+  }
+
+  function armStartupSound() {
+    if (startupArmed || startupPlayed) return;
+
+    startupArmed = true;
+
+    const startupEvents = ['pointerdown', 'keydown', 'touchstart'];
+
+    function handleFirstInteraction(event) {
+      if (soundToggle && event.target && soundToggle.contains(event.target)) {
+        return;
+      }
+
+      playStartupSound();
+
+      startupEvents.forEach(eventName => {
+        window.removeEventListener(eventName, handleFirstInteraction, true);
+      });
+
+      startupArmed = false;
+    }
+
+    startupEvents.forEach(eventName => {
+      window.addEventListener(eventName, handleFirstInteraction, { capture: true, passive: true });
+    });
+  }
+
+  if (startupSound || interactionSound) {
+    prepareAudioElement(startupSound, startupVolume);
+    prepareAudioElement(interactionSound, interactionVolume);
+    updateSoundControl();
+
+    if (soundEnabled) {
+      armStartupSound();
+    }
+  }
+
+  if (soundToggle) {
+    soundToggle.addEventListener('click', event => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      soundEnabled = !soundEnabled;
+      storeSoundPreference(soundEnabled);
+      updateSoundControl();
+
+      if (!soundEnabled) {
+        stopAudio(startupSound);
+        stopAudio(interactionSound);
+        return;
+      }
+
+      if (!startupPlayed) {
+        armStartupSound();
+      }
+    });
+  }
+
+  const audioInteractionTargets = document.querySelectorAll(
+    '.button, .text-link, .footer-top-link, [data-nav-link], [data-hero-dot], [data-focus-dot]'
+  );
+
+  audioInteractionTargets.forEach(target => {
+    if (target === soundToggle) return;
+    target.addEventListener('click', playInteractionSound);
+  });
+
 })();
