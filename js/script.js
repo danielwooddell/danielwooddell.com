@@ -695,8 +695,38 @@
   const interfaceSystem = document.querySelector('[data-interface-system]');
 
   if (interfaceSystem) {
+    const interfaceSets = {
+      primary: {
+        label: 'Active Pathways',
+        subtitle: 'Primary systems',
+        modeLabel: 'Primary pathways active',
+        countLabel: '6 pathways connected',
+        autoplay: true,
+        keys: ['ai', 'learning', 'accessibility', 'support', 'workflow', 'human']
+      },
+      operations: {
+        label: 'Operational Layer',
+        subtitle: 'Support modules',
+        modeLabel: 'Manual exploration mode',
+        countLabel: '6 operational modules connected',
+        autoplay: false,
+        keys: ['canvasBasics', 'allyAccess', 'teachingTech', 'etaAssistant', 'genaiPrompting', 'courseSystems']
+      },
+      media: {
+        label: 'Media Layer',
+        subtitle: 'Future modules',
+        modeLabel: 'Media layer reserved',
+        countLabel: '6 media bays reserved',
+        autoplay: false,
+        keys: ['mediaPreview', 'videoWalkthroughs', 'imageSystems', 'demoConsole', 'workflowReplay', 'caseStudyPlayer']
+      }
+    };
+
     const interfaceData = {
       ai: {
+        set: 'primary',
+        number: '01',
+        nav: 'AI Systems',
         command: 'analyze_ai_systems',
         aliases: ['ai', 'artificial intelligence', 'genai', 'generative ai', 'prompt', 'prompting', 'gpt', 'chatgpt', 'copilot', 'automation'],
         kicker: 'Generative AI Strategy',
@@ -708,6 +738,9 @@
         linkUrl: 'https://www.xavier.edu/teachingwithtech/genai'
       },
       learning: {
+        set: 'primary',
+        number: '02',
+        nav: 'Learning Design',
         command: 'map_learning_design_logic',
         aliases: ['learning', 'design', 'course', 'instructional design', 'learning design', 'faculty development', 'teaching'],
         kicker: 'Learning Experience Design',
@@ -719,6 +752,9 @@
         linkUrl: 'https://www.xavier.edu/teachingwithtech/ai-in-design'
       },
       accessibility: {
+        set: 'primary',
+        number: '03',
+        nav: 'Accessibility',
         command: 'sync_accessibility_layer',
         aliases: ['accessibility', 'accessible', 'ada', 'ally', 'inclusive', 'wcag', 'readability', 'universal design', 'udl'],
         kicker: 'Inclusive Digital Systems',
@@ -730,6 +766,9 @@
         linkUrl: '#capabilities'
       },
       support: {
+        set: 'primary',
+        number: '04',
+        nav: 'Support Ecosystems',
         command: 'activate_support_ecosystem',
         aliases: ['support', 'ecosystem', 'documentation', 'resource', 'resources', 'training', 'faculty support', 'help'],
         kicker: 'Support Architecture',
@@ -741,6 +780,9 @@
         linkUrl: 'https://www.xavier.edu/teachingwithtech'
       },
       workflow: {
+        set: 'primary',
+        number: '05',
+        nav: 'Workflow Intelligence',
         command: 'reduce_workflow_friction',
         aliases: ['workflow', 'process', 'friction', 'systems', 'operations', 'efficiency', 'clarity', 'navigation'],
         kicker: 'Workflow Intelligence',
@@ -752,6 +794,9 @@
         linkUrl: '#projects'
       },
       human: {
+        set: 'primary',
+        number: '06',
+        nav: 'Human-Centered Tech',
         command: 'prioritize_human_centered_technology',
         aliases: ['human', 'people', 'user', 'users', 'communication', 'judgment', 'trust', 'experience', 'ux'],
         kicker: 'Human-Centered Technology',
@@ -761,10 +806,183 @@
         primary: 'Technology should make people more capable, not more confused.',
         linkText: 'Launch Intelligence',
         linkUrl: '#recommendations'
+      },
+      canvasBasics: {
+        set: 'operations',
+        number: '01',
+        nav: 'Canvas Basics',
+        command: 'launch_canvas_basics',
+        aliases: ['canvas', 'canvas basics', 'lms basics', 'faculty canvas', 'canvas course', 'training course'],
+        kicker: 'Faculty Training System',
+        title: 'Canvas Basics for Faculty',
+        copy: 'A structured faculty training course that supports practical Canvas use, common teaching workflows, and scalable LMS guidance for instructors who need clear next steps.',
+        systems: ['Faculty LMS training', 'Canvas workflow support', 'Reusable course guidance'],
+        primary: 'Effective LMS support gives faculty confidence before complexity appears.',
+        linkText: 'Launch Canvas Basics',
+        linkUrl: 'https://canvas.xavier.edu/courses/23190'
+      },
+      allyAccess: {
+        set: 'operations',
+        number: '02',
+        nav: 'Ally Accessibility',
+        command: 'open_ally_accessibility_systems',
+        aliases: ['ally', 'anthology ally', 'accessibility strategies', 'canvas accessibility', 'accessible canvas', 'accessible content'],
+        kicker: 'Accessibility Support Layer',
+        title: 'Canvas Accessibility Strategies',
+        copy: 'Accessibility support becomes stronger when it is connected to LMS workflows, document improvement, readable design, captions, alternative text, and consistent faculty-facing guidance.',
+        systems: ['Ally-informed workflows', 'Accessible Canvas practices', 'Content improvement pathways'],
+        primary: 'Accessibility works best as a visible workflow, not a hidden compliance task.',
+        linkText: 'Launch Ally Access',
+        linkUrl: 'https://www.xavier.edu/id/canvas/accessibility-strategies'
+      },
+      teachingTech: {
+        set: 'operations',
+        number: '03',
+        nav: 'Teaching Tech Hub',
+        command: 'open_teaching_technology_hub',
+        aliases: ['teaching with technology', 'technology hub', 'edtech hub', 'tool hub', 'teaching tools'],
+        kicker: 'Digital Resource Ecosystem',
+        title: 'Teaching with Technology Hub',
+        copy: 'A public-facing ecosystem for helping faculty discover educational technology, generative AI guidance, accessibility support, and practical digital teaching resources.',
+        systems: ['Tool discovery', 'Faculty resource pathways', 'Public-facing support UX'],
+        primary: 'A strong resource hub reduces support friction before questions become tickets.',
+        linkText: 'Launch Tech Hub',
+        linkUrl: 'https://www.xavier.edu/teachingwithtech'
+      },
+      etaAssistant: {
+        set: 'operations',
+        number: '04',
+        nav: 'ETA Assistant',
+        command: 'activate_edtech_assistant',
+        aliases: ['eta', 'edtech assistant', 'custom gpt', 'assistant', 'ai assistant', 'support bot'],
+        kicker: 'AI Support Assistant',
+        title: 'EdTech Assistant as a Support Layer',
+        copy: 'ETA extends the support ecosystem through conversational guidance for Canvas, educational technology tools, accessibility workflows, and Teaching with Technology resources.',
+        systems: ['Custom GPT support', '24/7 guidance layer', 'Ed-tech workflow routing'],
+        primary: 'AI assistants are strongest when they sit inside a real support architecture.',
+        linkText: 'Launch ETA',
+        linkUrl: 'https://chatgpt.com/g/g-69ffe6dfccf48191b6afb459d0c78cce-edtech-assistant-eta'
+      },
+      genaiPrompting: {
+        set: 'operations',
+        number: '05',
+        nav: 'Prompting Systems',
+        command: 'route_prompting_systems',
+        aliases: ['prompting', 'prompts', 'prompt', 'prompt design', 'ai prompts', 'genai prompts'],
+        kicker: 'Prompting Architecture',
+        title: 'Prompting as a Workflow System',
+        copy: 'Prompting works best when users understand context, role, output format, constraints, examples, and review habits rather than relying on one-off prompt tricks.',
+        systems: ['Prompt structure', 'Faculty productivity', 'AI output review'],
+        primary: 'Good prompting is structured thinking made visible.',
+        linkText: 'Launch Prompting',
+        linkUrl: 'https://www.xavier.edu/teachingwithtech/genai/prompting'
+      },
+      courseSystems: {
+        set: 'operations',
+        number: '06',
+        nav: 'Course Systems',
+        command: 'map_course_design_systems',
+        aliases: ['course systems', 'course design', 'ai course design', 'ai in design', 'design systems'],
+        kicker: 'Course Design Infrastructure',
+        title: 'AI-Supported Course Design Systems',
+        copy: 'Course design support becomes more useful when AI is positioned as a planning partner for outcomes, activities, materials, feedback, and instructor judgment.',
+        systems: ['Outcome alignment', 'Activity planning', 'Instructor judgment'],
+        primary: 'AI should support better design decisions, not replace educator expertise.',
+        linkText: 'Launch Course Design',
+        linkUrl: 'https://www.xavier.edu/teachingwithtech/ai-in-design'
+      },
+      mediaPreview: {
+        set: 'media',
+        number: '01',
+        nav: 'Media Bay One',
+        command: 'reserve_media_preview_bay',
+        aliases: ['media', 'preview', 'screenshots', 'images', 'image', 'visuals'],
+        kicker: 'Future Media Module',
+        title: 'Reserved for Visual System Previews',
+        copy: 'This pathway is reserved for future screenshots, interface captures, and visual previews that can turn this command layer into a richer interactive showcase.',
+        systems: ['Screenshot modules', 'Project previews', 'Visual walkthroughs'],
+        primary: 'Future media can make the interface feel like a true project console.',
+        linkText: 'Media Bay Reserved',
+        linkUrl: '#interface'
+      },
+      videoWalkthroughs: {
+        set: 'media',
+        number: '02',
+        nav: 'Video Bay',
+        command: 'reserve_video_walkthroughs',
+        aliases: ['video', 'videos', 'walkthrough', 'demo', 'player', 'embedded video'],
+        kicker: 'Future Video Layer',
+        title: 'Reserved for Embedded Walkthroughs',
+        copy: 'This pathway is reserved for future short demos, looping interface clips, and embedded walkthroughs that show systems in motion without leaving the page.',
+        systems: ['Embedded videos', 'Looping UI clips', 'Project demos'],
+        primary: 'Video should demonstrate system behavior without slowing the experience.',
+        linkText: 'Video Bay Reserved',
+        linkUrl: '#interface'
+      },
+      imageSystems: {
+        set: 'media',
+        number: '03',
+        nav: 'Showcase Bay',
+        command: 'reserve_showcase_layer',
+        aliases: ['showcase', 'gallery', 'case study media', 'portfolio media', 'pip boy', 'pipboy'],
+        kicker: 'Future Showcase Layer',
+        title: 'Reserved for Interactive Showcase Modules',
+        copy: 'This pathway is reserved for a future Pip-Boy-like media layer where screenshots, videos, and project modules can be explored from one focused interface.',
+        systems: ['Interactive player', 'Media modules', 'Expandable case studies'],
+        primary: 'The interface can evolve from navigation layer into immersive project console.',
+        linkText: 'Showcase Reserved',
+        linkUrl: '#interface'
+      },
+      demoConsole: {
+        set: 'media',
+        number: '04',
+        nav: 'Demo Console',
+        command: 'reserve_demo_console',
+        aliases: ['demo console', 'demo', 'interactive demo', 'system demo', 'live demo'],
+        kicker: 'Future Demo Console',
+        title: 'Reserved for Interactive System Demos',
+        copy: 'This pathway is reserved for future embedded demos that let visitors explore selected systems, workflows, and interface behaviors directly inside this command layer.',
+        systems: ['Interactive demos', 'System previews', 'Guided exploration'],
+        primary: 'A focused demo layer can show how the system works before users leave the page.',
+        linkText: 'Demo Reserved',
+        linkUrl: '#interface'
+      },
+      workflowReplay: {
+        set: 'media',
+        number: '05',
+        nav: 'Workflow Replay',
+        command: 'reserve_workflow_replay',
+        aliases: ['workflow replay', 'replay', 'process video', 'workflow video', 'walkthrough replay'],
+        kicker: 'Future Workflow Replay',
+        title: 'Reserved for Workflow Walkthroughs',
+        copy: 'This pathway is reserved for future visual walkthroughs that show how support systems, AI workflows, and learning design processes move from problem to usable pathway.',
+        systems: ['Workflow sequences', 'Process walkthroughs', 'Before-after views'],
+        primary: 'Workflow media should make invisible design decisions easier to see.',
+        linkText: 'Replay Reserved',
+        linkUrl: '#interface'
+      },
+      caseStudyPlayer: {
+        set: 'media',
+        number: '06',
+        nav: 'Case Player',
+        command: 'reserve_case_study_player',
+        aliases: ['case player', 'case study player', 'project player', 'portfolio player', 'media player'],
+        kicker: 'Future Case Study Player',
+        title: 'Reserved for Rich Project Playback',
+        copy: 'This pathway is reserved for a future player-style experience where project visuals, short clips, and focused explanations can be explored as connected case modules.',
+        systems: ['Project playback', 'Screenshot sequences', 'Narrated modules'],
+        primary: 'The future media layer can become the project console for the entire portfolio.',
+        linkText: 'Player Reserved',
+        linkUrl: '#interface'
       }
     };
 
-    const pathButtons = Array.from(interfaceSystem.querySelectorAll('[data-interface-path]'));
+    const pathList = interfaceSystem.querySelector('[data-interface-path-list]');
+    const setButtons = Array.from(interfaceSystem.querySelectorAll('[data-interface-set-button]'));
+    const railLabel = interfaceSystem.querySelector('[data-interface-rail-label]');
+    const railSubtitle = interfaceSystem.querySelector('[data-interface-rail-subtitle]');
+    const modeLabel = interfaceSystem.querySelector('[data-interface-mode-label]');
+    const countLabel = interfaceSystem.querySelector('[data-interface-count-label]');
     const commandInput = interfaceSystem.querySelector('[data-interface-command-input]');
     const response = interfaceSystem.querySelector('[data-interface-response]');
     const kicker = interfaceSystem.querySelector('[data-interface-kicker]');
@@ -773,9 +991,66 @@
     const systems = interfaceSystem.querySelector('[data-interface-systems]');
     const primary = interfaceSystem.querySelector('[data-interface-primary]');
     const link = interfaceSystem.querySelector('[data-interface-link]');
+    let activeInterfaceSet = 'primary';
     let activeInterfaceKey = 'ai';
     let interfaceTimer = null;
     let interfacePaused = false;
+
+    function getSetForKey(key) {
+      return interfaceData[key] ? interfaceData[key].set : activeInterfaceSet;
+    }
+
+    function renderInterfacePaths(setKey) {
+      const set = interfaceSets[setKey] || interfaceSets.primary;
+      if (railLabel) railLabel.textContent = set.label;
+      if (railSubtitle) railSubtitle.textContent = set.subtitle;
+      if (modeLabel) modeLabel.textContent = set.modeLabel;
+      if (countLabel) countLabel.textContent = set.countLabel;
+
+      setButtons.forEach(button => {
+        const isActive = button.dataset.interfaceSetButton === setKey;
+        button.classList.toggle('is-active', isActive);
+        button.setAttribute('aria-pressed', String(isActive));
+      });
+
+      if (!pathList) return;
+
+      pathList.innerHTML = set.keys.map(key => {
+        const data = interfaceData[key];
+        return `
+          <button class="interface-path${key === activeInterfaceKey ? ' is-active' : ''}" data-interface-path="${key}" type="button" aria-pressed="${key === activeInterfaceKey ? 'true' : 'false'}">
+            <span>${data.number}</span>
+            <strong>${data.nav}</strong>
+          </button>
+        `;
+      }).join('');
+
+      Array.from(pathList.querySelectorAll('[data-interface-path]')).forEach(button => {
+        button.addEventListener('click', () => {
+          setInterfacePath(button.dataset.interfacePath, { playSound: true, manual: activeInterfaceSet !== 'primary' });
+          startInterfaceAutoplay();
+        });
+      });
+    }
+
+    function switchInterfaceSet(setKey, options = {}) {
+      if (!interfaceSets[setKey]) return;
+      activeInterfaceSet = setKey;
+      const set = interfaceSets[setKey];
+      const nextKey = set.keys.includes(activeInterfaceKey) ? activeInterfaceKey : set.keys[0];
+
+      if (pathList && !prefersReducedMotion.matches) {
+        pathList.classList.add('is-switching');
+      }
+
+      window.setTimeout(() => {
+        activeInterfaceKey = nextKey;
+        renderInterfacePaths(setKey);
+        setInterfacePath(nextKey, { playSound: options.playSound, updateSet: false });
+        if (pathList) pathList.classList.remove('is-switching');
+        startInterfaceAutoplay();
+      }, prefersReducedMotion.matches ? 0 : 130);
+    }
 
     function findInterfaceMatch(value) {
       const normalized = String(value || '').toLowerCase().replace(/^dw:\/\//, '').replace(/[_-]/g, ' ').trim();
@@ -785,7 +1060,7 @@
       let bestScore = 0;
 
       Object.entries(interfaceData).forEach(([key, data]) => {
-        const terms = [key, data.command, data.kicker, data.title, ...data.aliases].map(term => String(term).toLowerCase().replace(/[_-]/g, ' '));
+        const terms = [key, data.command, data.kicker, data.title, data.nav, ...data.aliases].map(term => String(term).toLowerCase().replace(/[_-]/g, ' '));
         terms.forEach(term => {
           let score = 0;
           if (normalized === term) score = 100;
@@ -834,15 +1109,24 @@
     function setInterfacePath(key, options = {}) {
       const data = interfaceData[key];
       if (!data) return;
+
+      const targetSet = getSetForKey(key);
+      if (options.updateSet !== false && targetSet !== activeInterfaceSet) {
+        activeInterfaceSet = targetSet;
+        renderInterfacePaths(targetSet);
+      }
+
       activeInterfaceKey = key;
-      pathButtons.forEach(button => {
+      Array.from(interfaceSystem.querySelectorAll('[data-interface-path]')).forEach(button => {
         const isActive = button.dataset.interfacePath === key;
         button.classList.toggle('is-active', isActive);
         button.setAttribute('aria-pressed', String(isActive));
       });
+
       if (response && !prefersReducedMotion.matches) {
         response.classList.add('is-switching');
       }
+
       window.setTimeout(() => {
         if (commandInput && options.updateCommand !== false) commandInput.value = data.command;
         if (kicker) kicker.textContent = data.kicker;
@@ -853,6 +1137,7 @@
         updateInterfaceLink(data);
         if (response) response.classList.remove('is-switching');
       }, prefersReducedMotion.matches ? 0 : 140);
+
       if (options.playSound && typeof playInteractionSound === 'function') {
         playInteractionSound();
       }
@@ -865,9 +1150,9 @@
       window.setTimeout(() => {
         if (kicker) kicker.textContent = 'Command Routing';
         if (title) title.textContent = 'No Exact Pathway Found';
-        if (copy) copy.textContent = `The interface did not find a direct pathway for "${value}". Try AI, accessibility, workflow, support, learning design, LMS, or human-centered technology.`;
+        if (copy) copy.textContent = `The interface did not find a direct pathway for "${value}". Try AI, Canvas, Ally, accessibility, workflow, support, learning design, ETA, video, or media.`;
         if (primary) primary.textContent = 'A good system should fail clearly, then help the user recover.';
-        updateSystemsList({ systems: ['Try: AI systems', 'Try: accessibility', 'Try: workflow intelligence'] });
+        updateSystemsList({ systems: ['Try: AI systems', 'Try: Canvas Basics', 'Try: media preview'] });
         updateInterfaceLink({ linkText: 'Launch Workflows', linkUrl: '#projects' });
         if (response) response.classList.remove('is-switching');
       }, prefersReducedMotion.matches ? 0 : 140);
@@ -875,20 +1160,18 @@
 
     function startInterfaceAutoplay() {
       window.clearInterval(interfaceTimer);
-      if (prefersReducedMotion.matches || interfacePaused || pathButtons.length < 2 || (commandInput && document.activeElement === commandInput)) return;
+      const set = interfaceSets[activeInterfaceSet] || interfaceSets.primary;
+      if (!set.autoplay || prefersReducedMotion.matches || interfacePaused || set.keys.length < 2 || (commandInput && document.activeElement === commandInput)) return;
       interfaceTimer = window.setInterval(() => {
-        const keys = Object.keys(interfaceData);
-        const currentIndex = keys.indexOf(activeInterfaceKey);
-        const nextKey = keys[(currentIndex + 1) % keys.length];
-        setInterfacePath(nextKey);
+        const currentIndex = set.keys.indexOf(activeInterfaceKey);
+        const nextKey = set.keys[(currentIndex + 1) % set.keys.length];
+        setInterfacePath(nextKey, { updateSet: false });
       }, 9000);
     }
 
-    pathButtons.forEach(button => {
-      button.setAttribute('aria-pressed', button.classList.contains('is-active') ? 'true' : 'false');
+    setButtons.forEach(button => {
       button.addEventListener('click', () => {
-        setInterfacePath(button.dataset.interfacePath, { playSound: true });
-        startInterfaceAutoplay();
+        switchInterfaceSet(button.dataset.interfaceSetButton, { playSound: true });
       });
     });
 
@@ -952,7 +1235,8 @@
       startInterfaceAutoplay();
     });
 
-    setInterfacePath('ai');
+    renderInterfacePaths('primary');
+    setInterfacePath('ai', { updateSet: false });
     startInterfaceAutoplay();
   }
 
