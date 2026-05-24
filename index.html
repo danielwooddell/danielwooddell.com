@@ -802,37 +802,56 @@
 
     <div class="interface-status-bar" aria-label="Interface status">
       <span><i></i> System online</span>
-      <span><i></i> Command layer active</span>
-      <span><i></i> 6 pathways connected</span>
+      <span><i></i> <span data-interface-mode-label>Primary pathways active</span></span>
+      <span><i></i> <span data-interface-count-label>6 pathways connected</span></span>
     </div>
 
     <div class="interface-grid">
       <aside class="interface-rail" aria-label="System pathways">
-        <p class="interface-rail-label">Active Pathways</p>
-        <button class="interface-path is-active" data-interface-path="ai" type="button">
-          <span>01</span>
-          <strong>AI Systems</strong>
-        </button>
-        <button class="interface-path" data-interface-path="learning" type="button">
-          <span>02</span>
-          <strong>Learning Design</strong>
-        </button>
-        <button class="interface-path" data-interface-path="accessibility" type="button">
-          <span>03</span>
-          <strong>Accessibility</strong>
-        </button>
-        <button class="interface-path" data-interface-path="support" type="button">
-          <span>04</span>
-          <strong>Support Ecosystems</strong>
-        </button>
-        <button class="interface-path" data-interface-path="workflow" type="button">
-          <span>05</span>
-          <strong>Workflow Intelligence</strong>
-        </button>
-        <button class="interface-path" data-interface-path="human" type="button">
-          <span>06</span>
-          <strong>Human-Centered Tech</strong>
-        </button>
+        <div class="interface-rail-header">
+          <div>
+            <p class="interface-rail-label" data-interface-rail-label>Active Pathways</p>
+            <p class="interface-rail-subtitle" data-interface-rail-subtitle>Primary systems</p>
+          </div>
+          <div class="interface-set-controls" aria-label="Pathway set controls">
+            <button class="interface-set-button is-active" data-interface-set-button="primary" type="button" aria-label="Show primary pathways" aria-pressed="true">
+              <span></span>
+            </button>
+            <button class="interface-set-button" data-interface-set-button="operations" type="button" aria-label="Show operational pathways" aria-pressed="false">
+              <span></span>
+            </button>
+            <button class="interface-set-button" data-interface-set-button="media" type="button" aria-label="Show future media pathways" aria-pressed="false">
+              <span></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="interface-path-list" data-interface-path-list>
+          <button class="interface-path is-active" data-interface-path="ai" type="button">
+            <span>01</span>
+            <strong>AI Systems</strong>
+          </button>
+          <button class="interface-path" data-interface-path="learning" type="button">
+            <span>02</span>
+            <strong>Learning Design</strong>
+          </button>
+          <button class="interface-path" data-interface-path="accessibility" type="button">
+            <span>03</span>
+            <strong>Accessibility</strong>
+          </button>
+          <button class="interface-path" data-interface-path="support" type="button">
+            <span>04</span>
+            <strong>Support Ecosystems</strong>
+          </button>
+          <button class="interface-path" data-interface-path="workflow" type="button">
+            <span>05</span>
+            <strong>Workflow Intelligence</strong>
+          </button>
+          <button class="interface-path" data-interface-path="human" type="button">
+            <span>06</span>
+            <strong>Human-Centered Tech</strong>
+          </button>
+        </div>
       </aside>
 
       <div class="interface-core" aria-live="polite">
