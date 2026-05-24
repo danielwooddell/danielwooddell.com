@@ -3069,3 +3069,55 @@ main,
     letter-spacing: 0.09em;
   }
 }
+
+/* =========================
+   MOBILE INTERFACE HEIGHT STABILIZER
+   Keeps the command interface from resizing as pathway text wraps.
+========================= */
+
+@media (max-width: 768px) {
+  .interface-grid {
+    align-items: stretch;
+  }
+
+  .interface-core {
+    min-height: 500px;
+  }
+
+  .interface-response[data-interface-response] {
+    min-height: 22rem;
+  }
+
+  .interface-side-panel {
+    min-height: 430px;
+    grid-template-rows: minmax(8.5rem, auto) minmax(10.75rem, 1fr) minmax(4.85rem, auto);
+  }
+
+  .interface-output-card {
+    min-height: 8.5rem;
+  }
+
+  .interface-output-card-soft {
+    min-height: 10.75rem;
+  }
+
+  .interface-jump-link {
+    min-height: 4.85rem;
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .interface-core {
+    min-height: 540px;
+  }
+
+  .interface-response[data-interface-response] {
+    min-height: 24rem;
+  }
+
+  .interface-side-panel {
+    min-height: 455px;
+  }
+}
