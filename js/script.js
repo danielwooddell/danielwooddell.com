@@ -688,4 +688,273 @@
     target.addEventListener('click', playInteractionSound);
   });
 
+  /* =========================
+     INTELLIGENCE INTERFACE
+  ========================= */
+
+  const interfaceSystem = document.querySelector('[data-interface-system]');
+
+  if (interfaceSystem) {
+    const interfaceData = {
+      ai: {
+        command: 'analyze_ai_systems',
+        aliases: ['ai', 'artificial intelligence', 'genai', 'generative ai', 'prompt', 'prompting', 'gpt', 'chatgpt', 'copilot', 'automation'],
+        kicker: 'Generative AI Strategy',
+        title: 'AI Systems That Support Real Work',
+        copy: 'I design AI guidance around practical teaching, course design, prompting, productivity, and responsible adoption rather than treating AI as only a policy conversation.',
+        systems: ['Prompting guidance', 'Faculty workflows', 'Custom GPT support'],
+        primary: 'AI adoption becomes useful when it is tied to actual work.',
+        linkText: 'Launch GenAI Hub',
+        linkUrl: 'https://www.xavier.edu/teachingwithtech/genai'
+      },
+      learning: {
+        command: 'map_learning_design_logic',
+        aliases: ['learning', 'design', 'course', 'instructional design', 'learning design', 'faculty development', 'teaching'],
+        kicker: 'Learning Experience Design',
+        title: 'Learning Design With Structure and Purpose',
+        copy: 'My work connects learning objectives, instructional pathways, digital materials, and support resources so technology serves the learning experience instead of distracting from it.',
+        systems: ['Course design strategy', 'Instructional pathways', 'Reusable faculty resources'],
+        primary: 'Strong learning systems make the next action clear.',
+        linkText: 'Launch Design Lab',
+        linkUrl: 'https://www.xavier.edu/teachingwithtech/ai-in-design'
+      },
+      accessibility: {
+        command: 'sync_accessibility_layer',
+        aliases: ['accessibility', 'accessible', 'ada', 'ally', 'inclusive', 'wcag', 'readability', 'universal design', 'udl'],
+        kicker: 'Inclusive Digital Systems',
+        title: 'Accessibility Built Into the Workflow',
+        copy: 'Accessibility works best when it is embedded into everyday design, documentation, LMS support, and content improvement workflows rather than added after the fact.',
+        systems: ['Readable interface patterns', 'Inclusive design workflows', 'Content improvement systems'],
+        primary: 'Accessible systems reduce friction for everyone.',
+        linkText: 'Launch Access',
+        linkUrl: '#capabilities'
+      },
+      support: {
+        command: 'activate_support_ecosystem',
+        aliases: ['support', 'ecosystem', 'documentation', 'resource', 'resources', 'training', 'faculty support', 'help'],
+        kicker: 'Support Architecture',
+        title: 'Support Ecosystems That Scale Knowledge',
+        copy: 'I build resource hubs, training materials, documentation, and AI support layers that help people find accurate guidance without waiting for one-to-one help every time.',
+        systems: ['Resource hubs', 'Documentation systems', 'Always-available support layers'],
+        primary: 'Good support architecture multiplies institutional capacity.',
+        linkText: 'Launch Support Systems',
+        linkUrl: 'https://www.xavier.edu/teachingwithtech'
+      },
+      workflow: {
+        command: 'reduce_workflow_friction',
+        aliases: ['workflow', 'process', 'friction', 'systems', 'operations', 'efficiency', 'clarity', 'navigation'],
+        kicker: 'Workflow Intelligence',
+        title: 'Complex Tools Translated Into Usable Pathways',
+        copy: 'The goal is to identify where people get stuck, remove unnecessary complexity, and design pathways that make tools, processes, and decisions easier to act on.',
+        systems: ['Process mapping', 'Tool guidance', 'Cognitive load reduction'],
+        primary: 'The best interface removes unnecessary effort.',
+        linkText: 'Launch Workflows',
+        linkUrl: '#projects'
+      },
+      human: {
+        command: 'prioritize_human_centered_technology',
+        aliases: ['human', 'people', 'user', 'users', 'communication', 'judgment', 'trust', 'experience', 'ux'],
+        kicker: 'Human-Centered Technology',
+        title: 'Technology Decisions Grounded in People',
+        copy: 'I approach emerging technology through the lens of real users, real constraints, accessibility, trust, training, and long-term maintainability.',
+        systems: ['User confidence', 'Clear communication', 'Sustainable systems'],
+        primary: 'Technology should make people more capable, not more confused.',
+        linkText: 'Launch Intelligence',
+        linkUrl: '#recommendations'
+      }
+    };
+
+    const pathButtons = Array.from(interfaceSystem.querySelectorAll('[data-interface-path]'));
+    const commandInput = interfaceSystem.querySelector('[data-interface-command-input]');
+    const response = interfaceSystem.querySelector('[data-interface-response]');
+    const kicker = interfaceSystem.querySelector('[data-interface-kicker]');
+    const title = interfaceSystem.querySelector('[data-interface-title]');
+    const copy = interfaceSystem.querySelector('[data-interface-copy]');
+    const systems = interfaceSystem.querySelector('[data-interface-systems]');
+    const primary = interfaceSystem.querySelector('[data-interface-primary]');
+    const link = interfaceSystem.querySelector('[data-interface-link]');
+    let activeInterfaceKey = 'ai';
+    let interfaceTimer = null;
+    let interfacePaused = false;
+
+    function findInterfaceMatch(value) {
+      const normalized = String(value || '').toLowerCase().replace(/^dw:\/\//, '').replace(/[_-]/g, ' ').trim();
+      if (!normalized) return activeInterfaceKey;
+
+      let bestKey = null;
+      let bestScore = 0;
+
+      Object.entries(interfaceData).forEach(([key, data]) => {
+        const terms = [key, data.command, data.kicker, data.title, ...data.aliases].map(term => String(term).toLowerCase().replace(/[_-]/g, ' '));
+        terms.forEach(term => {
+          let score = 0;
+          if (normalized === term) score = 100;
+          else if (normalized.includes(term)) score = 72;
+          else if (term.includes(normalized)) score = 58;
+          else {
+            normalized.split(/\s+/).forEach(part => {
+              if (part.length > 2 && term.includes(part)) score += 12;
+            });
+          }
+
+          if (score > bestScore) {
+            bestScore = score;
+            bestKey = key;
+          }
+        });
+      });
+
+      return bestScore >= 12 ? bestKey : null;
+    }
+
+    function updateInterfaceLink(data) {
+      if (!link) return;
+      link.textContent = data.linkText;
+      link.setAttribute('href', data.linkUrl);
+      if (data.linkUrl.startsWith('#')) {
+        link.removeAttribute('target');
+        link.removeAttribute('rel');
+      } else {
+        link.setAttribute('target', '_blank');
+        link.setAttribute('rel', 'noopener noreferrer');
+      }
+    }
+
+    function updateSystemsList(data) {
+      if (!systems) return;
+      systems.innerHTML = data.systems.map(system => `<li>${system}</li>`).join('');
+      if (!prefersReducedMotion.matches) {
+        systems.querySelectorAll('li').forEach((item, index) => {
+          window.setTimeout(() => item.classList.add('is-refreshing'), index * 70);
+          window.setTimeout(() => item.classList.remove('is-refreshing'), 760 + (index * 70));
+        });
+      }
+    }
+
+    function setInterfacePath(key, options = {}) {
+      const data = interfaceData[key];
+      if (!data) return;
+      activeInterfaceKey = key;
+      pathButtons.forEach(button => {
+        const isActive = button.dataset.interfacePath === key;
+        button.classList.toggle('is-active', isActive);
+        button.setAttribute('aria-pressed', String(isActive));
+      });
+      if (response && !prefersReducedMotion.matches) {
+        response.classList.add('is-switching');
+      }
+      window.setTimeout(() => {
+        if (commandInput && options.updateCommand !== false) commandInput.value = data.command;
+        if (kicker) kicker.textContent = data.kicker;
+        if (title) title.textContent = data.title;
+        if (copy) copy.textContent = data.copy;
+        if (primary) primary.textContent = data.primary;
+        updateSystemsList(data);
+        updateInterfaceLink(data);
+        if (response) response.classList.remove('is-switching');
+      }, prefersReducedMotion.matches ? 0 : 140);
+      if (options.playSound && typeof playInteractionSound === 'function') {
+        playInteractionSound();
+      }
+    }
+
+    function showInterfaceFallback(value) {
+      if (response && !prefersReducedMotion.matches) {
+        response.classList.add('is-switching');
+      }
+      window.setTimeout(() => {
+        if (kicker) kicker.textContent = 'Command Routing';
+        if (title) title.textContent = 'No Exact Pathway Found';
+        if (copy) copy.textContent = `The interface did not find a direct pathway for "${value}". Try AI, accessibility, workflow, support, learning design, LMS, or human-centered technology.`;
+        if (primary) primary.textContent = 'A good system should fail clearly, then help the user recover.';
+        updateSystemsList({ systems: ['Try: AI systems', 'Try: accessibility', 'Try: workflow intelligence'] });
+        updateInterfaceLink({ linkText: 'Launch Workflows', linkUrl: '#projects' });
+        if (response) response.classList.remove('is-switching');
+      }, prefersReducedMotion.matches ? 0 : 140);
+    }
+
+    function startInterfaceAutoplay() {
+      window.clearInterval(interfaceTimer);
+      if (prefersReducedMotion.matches || interfacePaused || pathButtons.length < 2 || (commandInput && document.activeElement === commandInput)) return;
+      interfaceTimer = window.setInterval(() => {
+        const keys = Object.keys(interfaceData);
+        const currentIndex = keys.indexOf(activeInterfaceKey);
+        const nextKey = keys[(currentIndex + 1) % keys.length];
+        setInterfacePath(nextKey);
+      }, 9000);
+    }
+
+    pathButtons.forEach(button => {
+      button.setAttribute('aria-pressed', button.classList.contains('is-active') ? 'true' : 'false');
+      button.addEventListener('click', () => {
+        setInterfacePath(button.dataset.interfacePath, { playSound: true });
+        startInterfaceAutoplay();
+      });
+    });
+
+    if (commandInput) {
+      commandInput.addEventListener('focus', () => {
+        interfacePaused = true;
+        window.clearInterval(interfaceTimer);
+        commandInput.select();
+      });
+      commandInput.addEventListener('input', () => {
+        const match = findInterfaceMatch(commandInput.value);
+        if (match && match !== activeInterfaceKey) {
+          setInterfacePath(match, { updateCommand: false });
+        }
+      });
+      commandInput.addEventListener('keydown', event => {
+        if (event.key !== 'Enter') return;
+        event.preventDefault();
+        const value = commandInput.value.trim();
+        const match = findInterfaceMatch(value);
+        if (match) setInterfacePath(match, { playSound: true });
+        else if (value) showInterfaceFallback(value);
+      });
+      commandInput.addEventListener('blur', () => {
+        const value = commandInput.value.trim();
+        const match = findInterfaceMatch(value);
+        if (match) setInterfacePath(match);
+        else if (!value) setInterfacePath(activeInterfaceKey);
+        interfacePaused = false;
+        startInterfaceAutoplay();
+      });
+    }
+
+    if (link) {
+      link.addEventListener('click', event => {
+        const href = link.getAttribute('href');
+        if (!href || !href.startsWith('#')) return;
+        const target = document.getElementById(decodeURIComponent(href.slice(1)));
+        if (!target) return;
+        event.preventDefault();
+        scrollToTarget(target, target.id);
+        if (history.pushState) history.pushState(null, '', href);
+      });
+    }
+
+    interfaceSystem.addEventListener('mouseenter', () => {
+      interfacePaused = true;
+      window.clearInterval(interfaceTimer);
+    });
+    interfaceSystem.addEventListener('mouseleave', () => {
+      interfacePaused = false;
+      startInterfaceAutoplay();
+    });
+    interfaceSystem.addEventListener('focusin', () => {
+      interfacePaused = true;
+      window.clearInterval(interfaceTimer);
+    });
+    interfaceSystem.addEventListener('focusout', event => {
+      if (event.relatedTarget && interfaceSystem.contains(event.relatedTarget)) return;
+      interfacePaused = false;
+      startInterfaceAutoplay();
+    });
+
+    setInterfacePath('ai');
+    startInterfaceAutoplay();
+  }
+
+
 })();
