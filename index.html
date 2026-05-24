@@ -830,9 +830,63 @@
 <p>© <span id="year">2026</span> Daniel Wooddell. All rights reserved.</p>
 <p class="footer-signature">Technology · AI · Digital Learning Systems</p>
 </div>
+<div class="footer-utilities">
 <a class="footer-top-link" href="#top">Jarvis Fly to Top ↑</a>
+<div class="site-audio" aria-label="Site sound controls">
+  <audio id="startup-sound" preload="auto">
+    <source src="audio/startup-hum.mp3" type="audio/mpeg"/>
+  </audio>
+
+  <audio id="interaction-sound" preload="auto">
+    <source src="audio/repulsor-click.mp3" type="audio/mpeg"/>
+  </audio>
+
+  <button
+    class="sound-toggle"
+    id="sound-toggle"
+    type="button"
+    aria-pressed="false"
+    aria-label="Enable site sound"
+  >
+    <svg
+      class="sound-toggle-icon"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <path
+        d="M14 5L9 9H5v6h4l5 4V5z"
+        fill="currentColor"
+      ></path>
+
+      <path
+        class="sound-wave"
+        d="M18 9c1.5 1.5 1.5 4.5 0 6"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+      ></path>
+
+      <path
+        class="sound-wave"
+        d="M20.5 6.5c3 3 3 8 0 11"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+      ></path>
+    </svg>
+  </button>
+
+  <span class="sr-only" id="sound-status" aria-live="polite">
+    Site sound is off.
+  </span>
+</div>
+</div>
 </div>
 </footer>
+
+
 <!-- =========================
        JAVASCRIPT
   ========================== -->
