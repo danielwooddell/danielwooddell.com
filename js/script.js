@@ -740,7 +740,7 @@
       learning: {
         set: 'primary',
         number: '02',
-        nav: 'Learning Design',
+        nav: 'Experience Design',
         command: 'map_learning_design_logic',
         aliases: ['learning', 'design', 'course', 'instructional design', 'learning design', 'faculty development', 'teaching'],
         kicker: 'Learning Experience Design',
