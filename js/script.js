@@ -698,7 +698,7 @@
     const interfaceSets = {
       primary: {
         label: 'Active Pathways',
-        subtitle: 'Primary systems',
+        subtitle: 'Primary Systems',
         modeLabel: 'Primary pathways active',
         countLabel: '6 pathways connected',
         autoplay: true,
@@ -706,7 +706,7 @@
       },
       operations: {
         label: 'Operational Layer',
-        subtitle: 'Support modules',
+        subtitle: 'Support Modules',
         modeLabel: 'Manual exploration mode',
         countLabel: '6 operational modules connected',
         autoplay: false,
@@ -714,7 +714,7 @@
       },
       media: {
         label: 'Media Layer',
-        subtitle: 'Future modules',
+        subtitle: 'Future Modules',
         modeLabel: 'Media layer reserved',
         countLabel: '6 media bays reserved',
         autoplay: false,
@@ -831,7 +831,7 @@
         title: 'Ally Accessibility Workflows',
         copy: 'Accessibility support becomes stronger when it is connected to LMS workflows, document improvement, readable design, captions, alternative text, and human guidance.',
         systems: ['Ally-informed workflows', 'Accessible Canvas practices', 'Improvement pathways'],
-        primary: 'Accessibility works best as a visible workflow, not a hidden compliance task.',
+        primary: 'Accessibility works best as a visible workflow, not a hidden compliance task. All systems go.',
         linkText: 'Launch Ally Info',
         linkUrl: 'https://www.xavier.edu/teachingwithtech/a-z/tools/ally'
       },
@@ -873,7 +873,7 @@
         title: 'Prompting as a Workflow System',
         copy: 'Prompting works best when users understand context, role, output format, constraints, examples, and review habits rather than relying on one-off prompt tricks.',
         systems: ['Prompt structure', 'Educator productivity', 'AI output review'],
-        primary: 'Good prompting is structured thinking made visible.',
+        primary: 'Good prompting is structured thinking made visible. An iterative process for my CPU.',
         linkText: 'Launch Prompting',
         linkUrl: 'https://www.xavier.edu/teachingwithtech/genai/prompting'
       },
@@ -901,7 +901,7 @@
         title: 'Reserved for Visual System Previews',
         copy: 'This pathway is reserved for future screenshots, interface captures, and visual previews that can turn this command layer into a richer interactive showcase.',
         systems: ['Screenshot modules', 'Project previews', 'Visual walkthroughs'],
-        primary: 'Future media can make the interface feel like a true project console.',
+        primary: 'Future media can make the interface feel like a true project console. Mission critical.',
         linkText: 'Media Bay Reserved',
         linkUrl: '#interface'
       },
@@ -957,7 +957,7 @@
         title: 'Reserved for Workflow Walkthroughs',
         copy: 'This pathway is reserved for future visual walkthroughs that show how support systems, AI workflows, and learning design processes move from problem to usable pathway.',
         systems: ['Workflow sequences', 'Process walkthroughs', 'Before-after views'],
-        primary: 'Workflow media should make invisible design decisions easier to see.',
+        primary: 'Workflow media should make invisible design decisions easier to see and experience.',
         linkText: 'Replay Reserved',
         linkUrl: '#interface'
       },
