@@ -1160,6 +1160,22 @@ main,
   font-weight: 750;
 }
 
+/* Impact Spotlight hover artifact fix */
+.stat-card.interactive-card::after {
+  content: none;
+}
+
+.stat-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  border-color: rgba(56, 189, 248, 0.55);
+  background:
+    linear-gradient(150deg, rgba(255,255,255,0.14), rgba(255,255,255,0.055)),
+    radial-gradient(circle at top right, rgba(56,189,248,0.19), transparent 42%);
+  box-shadow:
+    var(--shadow-soft),
+    0 0 34px rgba(56,189,248,0.10);
+}
+
 /* =========================
    PROFESSIONAL RECOMMENDATIONS
 ========================= */
