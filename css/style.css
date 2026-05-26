@@ -3723,3 +3723,120 @@ main,
     animation: none;
   }
 }
+
+/* =========================
+   WINTERFACE ONLINE/OFFLINE TOGGLE
+   Lightweight performance mode for mobile and repeated interaction.
+========================= */
+
+.interface-system-toggle {
+  appearance: none;
+  -webkit-appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.48rem;
+  min-height: 2rem;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+}
+
+.interface-system-toggle:hover,
+.interface-system-toggle:focus-visible {
+  color: var(--text);
+}
+
+.interface-system-toggle i {
+  position: relative;
+  flex: 0 0 auto;
+  width: 0.58rem;
+  height: 0.58rem;
+  border-radius: 50%;
+  background: var(--online-green);
+  box-shadow:
+    0 0 10px rgba(34,197,94,0.95),
+    0 0 24px rgba(34,197,94,0.56),
+    0 0 42px rgba(34,197,94,0.26);
+  animation: interfaceOnlineOrbPulse 2.65s ease-in-out infinite;
+}
+
+.interface-system-toggle i::after {
+  content: "";
+  position: absolute;
+  inset: -0.42rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(34,197,94,0.30), rgba(34,197,94,0.12) 38%, transparent 70%);
+  opacity: 0.86;
+  transform: scale(0.88);
+  animation: interfaceOnlineHaloPulse 2.65s ease-in-out infinite;
+  pointer-events: none;
+}
+
+body.winterface-offline .interface-system-toggle i {
+  background: #ef4444;
+  box-shadow:
+    0 0 10px rgba(239,68,68,0.88),
+    0 0 22px rgba(239,68,68,0.46),
+    0 0 38px rgba(239,68,68,0.22);
+  animation: none;
+}
+
+body.winterface-offline .interface-system-toggle i::after {
+  background: radial-gradient(circle, rgba(239,68,68,0.28), rgba(239,68,68,0.10) 38%, transparent 70%);
+  opacity: 0.58;
+  animation: none;
+}
+
+/* Match the original first status orb selector now that the first status item is a button. */
+.interface-status-bar > .interface-system-toggle i {
+  position: relative;
+  width: 0.58rem;
+  height: 0.58rem;
+}
+
+.interface-status-bar > .interface-system-toggle i::after {
+  content: "";
+}
+
+/* Offline mode keeps the interface usable while reducing decorative work. */
+body.winterface-offline .interface-orbit,
+body.winterface-offline .interface-scan,
+body.winterface-offline .interface-cursor,
+body.winterface-offline .interface-playback-status::before,
+body.winterface-offline .interface-media-toggle::before,
+body.winterface-offline .interface-jump-link::before,
+body.winterface-offline .interface-playback-dot,
+body.winterface-offline .interface-system-list li::before {
+  animation: none !important;
+}
+
+body.winterface-offline .interface-ambient {
+  opacity: 0.38;
+}
+
+body.winterface-offline .interface-shell::after {
+  opacity: 0.38;
+}
+
+body.winterface-offline .interface-system-list li::before {
+  box-shadow:
+    0 0 7px rgba(56,189,248,0.60),
+    0 0 14px rgba(56,189,248,0.24);
+}
+
+body.winterface-offline .interactive-card::after {
+  opacity: 0 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interface-system-toggle i,
+  .interface-system-toggle i::after {
+    animation: none !important;
+  }
+}
