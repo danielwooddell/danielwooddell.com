@@ -1055,9 +1055,9 @@
         mediaType: 'image',
         image: 'assets/showcase/Woodrow.png',
         imageAlt: 'Creator visual asset',
-        mediaKicker: 'WInterface Personality Layer',
+        mediaKicker: 'WInterface™ = (Daniel)Wooddell’s + Interface',
         mediaTitle: 'Daniel Wooddell',
-        mediaCopy: 'A visual identity asset that supports the site’s intelligent interface atmosphere. WInterface™ = (Wooddell’s + Interface) ...Daniel 🦇'
+        mediaCopy: 'A visual identity asset that supports the site’s intelligent interface atmosphere. WInterface™ = (Daniel)Wooddell’s + Interface 🦇'
       },
       caseStudyPlayer: {
         set: 'media',
