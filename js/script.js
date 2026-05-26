@@ -736,7 +736,7 @@
       }
 
       if (interfaceSystemStatusText) {
-        interfaceSystemStatusText.textContent = winterfaceOnline ? 'Winterface System online' : 'Winterface System offline';
+        interfaceSystemStatusText.textContent = winterfaceOnline ? 'Winterface System online' : 'Winterface System paused';
       }
 
       if (!winterfaceOnline) {
