@@ -785,7 +785,7 @@
 <section aria-labelledby="interface-title" class="section interface-section reveal" id="interface" data-interface-system>
   <div class="interface-header">
     <div class="section-heading compact">
-      <p class="eyebrow">Winterface</p>
+      <p class="eyebrow">Winterface™</p>
       <h2 id="interface-title">A live command layer for exploring my complex intelligence systems and digital work.</h2>
     </div>
     <p class="interface-intro">
@@ -872,7 +872,21 @@
 
         <div class="interface-media-panel" data-interface-media-panel hidden>
           <div class="interface-media-frame-shell">
-            <div class="interface-video-frame">
+            <div class="interface-showcase-frame" data-interface-showcase-frame>
+              <img
+                alt="Selected portfolio showcase preview"
+                data-interface-showcase-image
+                decoding="async"
+                loading="lazy"
+                src="assets/showcase/TwT.png"
+              />
+              <div class="interface-showcase-caption">
+                <span data-interface-showcase-kicker>Showcase Bay</span>
+                <strong data-interface-showcase-title>Teaching with Technology</strong>
+                <p data-interface-showcase-copy>A visual preview layer for featured work and support ecosystems.</p>
+              </div>
+            </div>
+            <div class="interface-video-frame" data-interface-video-frame-wrap hidden>
               <iframe
                 data-interface-media-frame
                 src="https://player.vimeo.com/video/1190770780?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
@@ -884,9 +898,9 @@
             </div>
           </div>
           <div class="interface-media-actions">
-            <div class="interface-playback-status" data-interface-playback-status aria-label="Live playback status" aria-live="polite">
+            <div class="interface-playback-status" data-interface-playback-status aria-label="Showcase bay status" aria-live="polite">
               <span class="interface-playback-dot" aria-hidden="true"></span>
-              <span>Live Playback</span>
+              <span data-interface-media-status-text>Showcase Bay Active</span>
             </div>
             <button
               aria-pressed="false"
