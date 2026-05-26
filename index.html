@@ -801,7 +801,16 @@
     </div>
 
     <div class="interface-status-bar" aria-label="Interface status">
-      <span><i></i> Winterface System online</span>
+      <button
+        class="interface-system-toggle"
+        data-interface-system-toggle
+        type="button"
+        aria-pressed="true"
+        aria-label="Turn Winterface system offline"
+      >
+        <i aria-hidden="true"></i>
+        <span data-interface-system-status-text>Winterface System online</span>
+      </button>
       <span><i></i> <span data-interface-mode-label>Primary pathways active</span></span>
       <span><i></i> <span data-interface-count-label>6 pathways connected</span></span>
     </div>
