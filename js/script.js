@@ -1022,9 +1022,9 @@
       caseStudyPlayer: {
         set: 'media',
         number: '06',
-        nav: 'Secret Intel Player',
+        nav: 'Secret Intel',
         command: 'open_intel_player',
-        aliases: ['intel player', 'intel study player', 'project player', 'portfolio player', 'media player'],
+        aliases: ['intel player', 'intel study player', 'secret intel', 'secret', 'project player', 'portfolio player', 'media player'],
         kicker: 'Live Playback Layer',
         title: 'AI Course Design Walkthrough Player',
         copy: 'The Intel Player keeps the embedded walkthrough available as a focused playback layer inside the WInterface command system.',
