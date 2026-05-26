@@ -535,6 +535,9 @@
 
   const startupSound = document.querySelector('#startup-sound');
   const interactionSound = document.querySelector('#interaction-sound');
+  const interfaceOrbSound = document.querySelector('#interface-orb-sound');
+  const interfaceSubmitSound = document.querySelector('#interface-submit-sound');
+  const interfaceLaunchSound = document.querySelector('#interface-launch-sound');
   const soundToggle = document.querySelector('#sound-toggle');
   const soundToggleText = soundToggle ? soundToggle.querySelector('.sound-toggle-text') : null;
   const soundStatus = document.querySelector('#sound-status');
@@ -545,6 +548,9 @@
 
   const startupVolume = 0.10;
   const interactionVolume = 0.16;
+  const interfaceOrbVolume = 0.18;
+  const interfaceSubmitVolume = 0.18;
+  const interfaceLaunchVolume = 0.18;
 
   function getStoredSoundPreference() {
     try {
@@ -622,6 +628,21 @@
     playAudio(interactionSound, { volume: interactionVolume });
   }
 
+  function playInterfaceOrbSound() {
+    if (!soundEnabled || !startupPlayed) return;
+    playAudio(interfaceOrbSound, { volume: interfaceOrbVolume });
+  }
+
+  function playInterfaceSubmitSound() {
+    if (!soundEnabled || !startupPlayed) return;
+    playAudio(interfaceSubmitSound, { volume: interfaceSubmitVolume });
+  }
+
+  function playInterfaceLaunchSound() {
+    if (!soundEnabled || !startupPlayed) return;
+    playAudio(interfaceLaunchSound, { volume: interfaceLaunchVolume });
+  }
+
   function armStartupSound() {
     if (startupArmed || startupPlayed) return;
 
@@ -648,9 +669,12 @@
     });
   }
 
-  if (startupSound || interactionSound) {
+  if (startupSound || interactionSound || interfaceOrbSound || interfaceSubmitSound || interfaceLaunchSound) {
     prepareAudioElement(startupSound, startupVolume);
     prepareAudioElement(interactionSound, interactionVolume);
+    prepareAudioElement(interfaceOrbSound, interfaceOrbVolume);
+    prepareAudioElement(interfaceSubmitSound, interfaceSubmitVolume);
+    prepareAudioElement(interfaceLaunchSound, interfaceLaunchVolume);
     updateSoundControl();
 
     if (soundEnabled) {
@@ -670,6 +694,9 @@
       if (!soundEnabled) {
         stopAudio(startupSound);
         stopAudio(interactionSound);
+        stopAudio(interfaceOrbSound);
+        stopAudio(interfaceSubmitSound);
+        stopAudio(interfaceLaunchSound);
         return;
       }
 
@@ -680,7 +707,7 @@
   }
 
   const audioInteractionTargets = document.querySelectorAll(
-    '.button, .text-link, .footer-top-link, [data-nav-link], [data-hero-dot], [data-focus-dot], [data-interface-media-toggle], [data-interface-link]'
+    '.button, .text-link, .footer-top-link, [data-nav-link], [data-hero-dot], [data-focus-dot]'
   );
 
   audioInteractionTargets.forEach(target => {
@@ -1281,7 +1308,10 @@
 
     setButtons.forEach(button => {
       button.addEventListener('click', () => {
-        switchInterfaceSet(button.dataset.interfaceSetButton, { playSound: true });
+        if (typeof playInterfaceOrbSound === 'function') {
+          playInterfaceOrbSound();
+        }
+        switchInterfaceSet(button.dataset.interfaceSetButton, { playSound: false });
       });
     });
 
@@ -1312,7 +1342,10 @@
         event.preventDefault();
         const value = commandInput.value.trim();
         const match = findInterfaceMatch(value);
-        if (match) setInterfacePath(match, { playSound: true });
+        if (typeof playInterfaceSubmitSound === 'function') {
+          playInterfaceSubmitSound();
+        }
+        if (match) setInterfacePath(match, { playSound: false });
         else if (value) showInterfaceFallback(value);
       });
       commandInput.addEventListener('blur', () => {
@@ -1327,12 +1360,13 @@
 
     if (link) {
       link.addEventListener('click', event => {
+        if (typeof playInterfaceLaunchSound === 'function') {
+          playInterfaceLaunchSound();
+        }
+
         if (activeInterfaceKey === 'caseStudyPlayer') {
           event.preventDefault();
           toggleInterfaceMediaPlayback();
-          if (typeof playInteractionSound === 'function') {
-            playInteractionSound();
-          }
           return;
         }
 
