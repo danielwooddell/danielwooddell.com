@@ -1530,19 +1530,68 @@ main,
 }
 
 .card-number {
+  position: relative;
+  isolation: isolate;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 2.1rem;
   height: 2.1rem;
   margin-bottom: 1.4rem;
-  color: var(--cyan);
+  color: #7dd3fc;
   border-radius: 50%;
-  background: rgba(56, 189, 248, 0.08);
-  border: 1px solid rgba(56, 189, 248, 0.24);
+  background:
+    radial-gradient(circle at 35% 28%, rgba(248, 250, 252, 0.26), transparent 24%),
+    radial-gradient(circle at 50% 52%, rgba(56, 189, 248, 0.24), rgba(56, 189, 248, 0.075) 56%, rgba(5, 8, 22, 0.18) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.36);
   font-family: "Space Grotesk", sans-serif;
   font-weight: 800;
   font-size: 0.82rem;
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.55);
+  box-shadow:
+    inset 0 0 14px rgba(56, 189, 248, 0.16),
+    inset 0 0 26px rgba(139, 92, 246, 0.08),
+    0 0 16px rgba(56, 189, 248, 0.24),
+    0 0 34px rgba(56, 189, 248, 0.12);
+}
+
+.card-number::before,
+.card-number::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.card-number::before {
+  inset: -0.42rem;
+  z-index: -1;
+  background:
+    radial-gradient(circle, rgba(56, 189, 248, 0.28), rgba(56, 189, 248, 0.11) 42%, transparent 72%);
+  opacity: 0.78;
+  filter: blur(1px);
+}
+
+.card-number::after {
+  inset: -0.16rem;
+  border: 1px solid rgba(125, 211, 252, 0.18);
+  box-shadow:
+    0 0 18px rgba(56, 189, 248, 0.16),
+    inset 0 0 12px rgba(199, 210, 254, 0.08);
+}
+
+.capability-card:hover .card-number,
+.capability-card:focus-within .card-number {
+  color: #f8fafc;
+  border-color: rgba(125, 211, 252, 0.56);
+  background:
+    radial-gradient(circle at 35% 28%, rgba(248, 250, 252, 0.34), transparent 25%),
+    radial-gradient(circle at 50% 52%, rgba(56, 189, 248, 0.32), rgba(56, 189, 248, 0.12) 58%, rgba(5, 8, 22, 0.14) 100%);
+  box-shadow:
+    inset 0 0 16px rgba(56, 189, 248, 0.22),
+    inset 0 0 28px rgba(139, 92, 246, 0.10),
+    0 0 20px rgba(56, 189, 248, 0.34),
+    0 0 42px rgba(56, 189, 248, 0.18);
 }
 
 .card h3 {
@@ -1856,20 +1905,68 @@ main,
 }
 
 .process-card > span {
+  position: relative;
+  isolation: isolate;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 2.1rem;
   height: 2.1rem;
   margin-bottom: 1.45rem;
-  color: var(--cyan);
+  color: #7dd3fc;
   border-radius: 50%;
-  background: rgba(56, 189, 248, 0.08);
-  border: 1px solid rgba(56, 189, 248, 0.24);
+  background:
+    radial-gradient(circle at 35% 28%, rgba(248, 250, 252, 0.26), transparent 24%),
+    radial-gradient(circle at 50% 52%, rgba(56, 189, 248, 0.24), rgba(56, 189, 248, 0.075) 56%, rgba(5, 8, 22, 0.18) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.36);
   font-family: "Space Grotesk", sans-serif;
   font-weight: 800;
   font-size: 0.82rem;
-  box-shadow: 0 0 18px rgba(56, 189, 248, 0.10);
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.55);
+  box-shadow:
+    inset 0 0 14px rgba(56, 189, 248, 0.16),
+    inset 0 0 26px rgba(139, 92, 246, 0.08),
+    0 0 16px rgba(56, 189, 248, 0.24),
+    0 0 34px rgba(56, 189, 248, 0.12);
+}
+
+.process-card > span::before,
+.process-card > span::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.process-card > span::before {
+  inset: -0.42rem;
+  z-index: -1;
+  background:
+    radial-gradient(circle, rgba(56, 189, 248, 0.28), rgba(56, 189, 248, 0.11) 42%, transparent 72%);
+  opacity: 0.78;
+  filter: blur(1px);
+}
+
+.process-card > span::after {
+  inset: -0.16rem;
+  border: 1px solid rgba(125, 211, 252, 0.18);
+  box-shadow:
+    0 0 18px rgba(56, 189, 248, 0.16),
+    inset 0 0 12px rgba(199, 210, 254, 0.08);
+}
+
+.process-card:hover > span,
+.process-card:focus-within > span {
+  color: #f8fafc;
+  border-color: rgba(125, 211, 252, 0.56);
+  background:
+    radial-gradient(circle at 35% 28%, rgba(248, 250, 252, 0.34), transparent 25%),
+    radial-gradient(circle at 50% 52%, rgba(56, 189, 248, 0.32), rgba(56, 189, 248, 0.12) 58%, rgba(5, 8, 22, 0.14) 100%);
+  box-shadow:
+    inset 0 0 16px rgba(56, 189, 248, 0.22),
+    inset 0 0 28px rgba(139, 92, 246, 0.10),
+    0 0 20px rgba(56, 189, 248, 0.34),
+    0 0 42px rgba(56, 189, 248, 0.18);
 }
 
 .process-card h3 {
