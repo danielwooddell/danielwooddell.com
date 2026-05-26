@@ -937,7 +937,7 @@
         imageAlt: 'Teaching with Technology website screenshot',
         mediaKicker: 'Digital Support Ecosystem',
         mediaTitle: 'Teaching with Technology',
-        mediaCopy: 'A faculty-facing resource ecosystem for educational technology, AI guidance, accessibility support, and practical teaching workflows.'
+        mediaCopy: 'An educator-facing resource ecosystem for ed-tech, AI & accessibility guidance, and practical teaching workflows.'
       },
       videoWalkthroughs: {
         set: 'media',
@@ -975,7 +975,7 @@
         mediaType: 'image',
         image: 'assets/showcase/AI4CD.png',
         imageAlt: 'AI for Effective Course Design project screenshot',
-        mediaKicker: 'AI + Learning Design',
+        mediaKicker: 'AI in Learning Design',
         mediaTitle: 'AI for Effective Course Design',
         mediaCopy: 'A structured faculty-facing project for using AI to plan outcomes, activities, materials, and workflows.'
       },
