@@ -742,7 +742,7 @@
       },
       media: {
         label: 'Showcase Bay',
-        subtitle: 'Visual Modules',
+        subtitle: 'Media Modules',
         modeLabel: 'Showcase bay active',
         countLabel: '6 media modules connected',
         autoplay: false,
