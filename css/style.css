@@ -3643,14 +3643,14 @@ main,
   animation-delay: -1.4s;
 }
 
-/* Reduce the aggressive screenshot crop on Showcase Bay images 01-04. */
+/* Reduce the aggressive screenshot crop on Showcase Bay images 01-04 and anchor the previews to the top edge. */
 .interface-showcase-frame[data-showcase-key="mediaPreview"] img,
 .interface-showcase-frame[data-showcase-key="videoWalkthroughs"] img,
 .interface-showcase-frame[data-showcase-key="imageSystems"] img,
 .interface-showcase-frame[data-showcase-key="demoConsole"] img {
   object-fit: contain;
-  object-position: center center;
-  padding: clamp(0.45rem, 1.4vw, 0.85rem);
+  object-position: top center;
+  padding: 0 clamp(0.45rem, 1.4vw, 0.85rem) clamp(0.45rem, 1.4vw, 0.85rem);
   transform: scale(1);
 }
 
