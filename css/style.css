@@ -3155,6 +3155,7 @@ main,
   color: var(--text);
   font-family: "Space Grotesk", sans-serif;
   font-size: clamp(1.02rem, 1.44vw, 1.22rem);
+  font-weight: 800;
   line-height: 1.08;
   letter-spacing: -0.035em;
 }
