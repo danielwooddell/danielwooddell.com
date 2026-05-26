@@ -948,7 +948,7 @@
         kicker: 'Showcase Bay',
         title: 'Generative AI Hub Preview',
         copy: 'A visual module for the public-facing AI teaching support hub with prompting, tool comparisons, quick wins, and mission-aligned guidance.',
-        systems: ['Generative AI support', 'Prompting guidance', 'Mission-aware resource design'],
+        systems: ['Generative AI support', 'Prompting guidance', 'Mission-aware design'],
         primary: 'AI support becomes more credible when faculty can quickly see the system’s structure.',
         linkText: 'Launch Image',
         linkUrl: 'assets/showcase/GenAIhub.png',
