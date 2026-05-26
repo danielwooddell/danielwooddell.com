@@ -701,7 +701,8 @@
       }
 
       if (!startupPlayed) {
-        armStartupSound();
+        startupPlayed = true;
+        playAudio(startupSound, { volume: startupVolume });
       }
     });
   }
@@ -740,10 +741,10 @@
         keys: ['canvasBasics', 'allyAccess', 'teachingTech', 'etaAssistant', 'genaiPrompting', 'courseSystems']
       },
       media: {
-        label: 'Media Layer',
-        subtitle: 'Future Modules',
-        modeLabel: 'Media layer reserved',
-        countLabel: '6 media bays reserved',
+        label: 'Showcase Bay',
+        subtitle: 'Live Visual Modules',
+        modeLabel: 'Showcase bay active',
+        countLabel: '6 media modules connected',
         autoplay: false,
         keys: ['mediaPreview', 'videoWalkthroughs', 'imageSystems', 'demoConsole', 'workflowReplay', 'caseStudyPlayer']
       }
@@ -921,86 +922,120 @@
       mediaPreview: {
         set: 'media',
         number: '01',
-        nav: 'Media Bay',
-        command: 'reserve_media_preview_bay',
-        aliases: ['media', 'preview', 'screenshots', 'images', 'image', 'visuals'],
-        kicker: 'Future Media Module',
-        title: 'Reserved for Visual System Previews',
-        copy: 'This pathway is reserved for future screenshots, interface captures, and visual previews that can turn this command layer into a richer interactive showcase.',
-        systems: ['Screenshot modules', 'Project previews', 'Visual walkthroughs'],
-        primary: 'Future media can make the interface feel like a true project console. Mission critical.',
-        linkText: 'Media Bay Reserved',
-        linkUrl: '#interface'
+        nav: 'Tech Hub Screenshot',
+        command: 'open_teaching_with_technology_preview',
+        aliases: ['media', 'preview', 'screenshots', 'images', 'image', 'visuals', 'teaching with technology', 'twt'],
+        kicker: 'Showcase Bay',
+        title: 'Teaching with Technology Preview',
+        copy: 'The Showcase Bay now displays actual project visuals from the live portfolio package rather than placeholder future modules.',
+        systems: ['Live screenshot preview', 'Faculty support UX', 'Resource ecosystem design'],
+        primary: 'Visual evidence makes the portfolio feel more concrete and easier to scan.',
+        linkText: 'Launch Image',
+        linkUrl: 'assets/showcase/TwT.png',
+        mediaType: 'image',
+        image: 'assets/showcase/TwT.png',
+        imageAlt: 'Teaching with Technology website screenshot',
+        mediaKicker: 'Digital Support Ecosystem',
+        mediaTitle: 'Teaching with Technology',
+        mediaCopy: 'A faculty-facing resource ecosystem for educational technology, AI guidance, accessibility support, and practical teaching workflows.'
       },
       videoWalkthroughs: {
         set: 'media',
         number: '02',
-        nav: 'Video Bay',
-        command: 'reserve_video_walkthroughs',
-        aliases: ['video', 'videos', 'walkthrough', 'demo', 'player', 'embedded video'],
-        kicker: 'Future Video Layer',
-        title: 'Reserved for Embedded Walkthroughs',
-        copy: 'This pathway is reserved for future short demos, looping interface clips, and embedded walkthroughs that show systems in motion without leaving the page.',
-        systems: ['Embedded videos', 'Looping UI clips', 'Project demos'],
-        primary: 'Video should demonstrate system behavior without slowing the experience.',
-        linkText: 'Video Bay Reserved',
-        linkUrl: '#interface'
+        nav: 'GenAI Hub Screenshot',
+        command: 'open_genai_hub_preview',
+        aliases: ['video', 'videos', 'walkthrough', 'demo', 'player', 'embedded video', 'genai', 'ai hub', 'generative ai hub'],
+        kicker: 'Showcase Bay',
+        title: 'Generative AI Hub Preview',
+        copy: 'A visual module for the public-facing AI teaching support hub with prompting, tool comparisons, quick wins, and mission-aligned guidance.',
+        systems: ['Generative AI support', 'Prompting guidance', 'Mission-aware resource design'],
+        primary: 'AI support becomes more credible when faculty can quickly see the system’s structure.',
+        linkText: 'Launch Image',
+        linkUrl: 'assets/showcase/GenAIhub.png',
+        mediaType: 'image',
+        image: 'assets/showcase/GenAIhub.png',
+        imageAlt: 'Generative AI Hub website screenshot',
+        mediaKicker: 'Generative AI Strategy',
+        mediaTitle: 'Generative AI Hub',
+        mediaCopy: 'A practical AI teaching support environment for tool comparison, prompting, classroom use, examples, and responsible adoption.'
       },
       imageSystems: {
         set: 'media',
         number: '03',
-        nav: 'Showcase Bay',
-        command: 'reserve_showcase_layer',
-        aliases: ['showcase', 'gallery', 'case study media', 'portfolio media', 'pip boy', 'pipboy'],
-        kicker: 'Future Showcase Layer',
-        title: 'Reserved for Interactive Showcase Modules',
-        copy: 'This pathway is reserved for a future embedded media layer where screenshots, videos, and project modules can be explored from one focused interface.',
-        systems: ['Interactive player', 'Media modules', 'Expandable case studies'],
-        primary: 'The interface can evolve from navigation layer into immersive project console.',
-        linkText: 'Showcase Reserved',
-        linkUrl: '#interface'
+        nav: 'AI Design Screenshot',
+        command: 'open_ai_course_design_preview',
+        aliases: ['showcase', 'gallery', 'case study media', 'portfolio media', 'pip boy', 'pipboy', 'course design', 'ai4cd', 'ai in design'],
+        kicker: 'Showcase Bay',
+        title: 'AI for Effective Course Design Preview',
+        copy: 'A graduate instructional design project framed around helping faculty use AI as a planning partner while preserving educator judgment.',
+        systems: ['Course design workflow', 'AI-supported planning', 'Learning design strategy'],
+        primary: 'This module moves the media bay from reserved concept to working project console.',
+        linkText: 'Launch Image',
+        linkUrl: 'assets/showcase/AI4CD.png',
+        mediaType: 'image',
+        image: 'assets/showcase/AI4CD.png',
+        imageAlt: 'AI for Effective Course Design project screenshot',
+        mediaKicker: 'AI + Learning Design',
+        mediaTitle: 'AI for Effective Course Design',
+        mediaCopy: 'A structured faculty-facing project for using AI to plan outcomes, activities, materials, and workflows.'
       },
       demoConsole: {
         set: 'media',
         number: '04',
-        nav: 'Demo Console',
-        command: 'reserve_demo_console',
-        aliases: ['demo console', 'demo', 'interactive demo', 'system demo', 'live demo'],
-        kicker: 'Future Demo Console',
-        title: 'Reserved for Interactive System Demos',
-        copy: 'This pathway is reserved for future embedded demos that let visitors explore selected systems, workflows, and interface behaviors directly inside this command layer.',
-        systems: ['Interactive demos', 'System previews', 'Guided exploration'],
-        primary: 'A focused demo layer can show how the system works before users leave the page.',
-        linkText: 'Demo Reserved',
-        linkUrl: '#interface'
+        nav: 'ETA Screenshot',
+        command: 'open_eta_assistant_preview',
+        aliases: ['demo console', 'demo', 'interactive demo', 'system demo', 'live demo', 'eta', 'edtech assistant'],
+        kicker: 'Showcase Bay',
+        title: 'EdTech Assistant Preview',
+        copy: 'ETA functions as a conversational support layer for Canvas, supported educational technologies, accessibility workflows, and Teaching with Technology resources.',
+        systems: ['Custom GPT workflow', 'Support architecture', 'Always-available guidance'],
+        primary: 'The assistant works because it is connected to a real support ecosystem, not isolated as a novelty.',
+        linkText: 'Launch Image',
+        linkUrl: 'assets/showcase/ETA.png',
+        mediaType: 'image',
+        image: 'assets/showcase/ETA.png',
+        imageAlt: 'EdTech Assistant ETA project screenshot',
+        mediaKicker: 'AI Support Assistant',
+        mediaTitle: 'EdTech Assistant ETA',
+        mediaCopy: 'A custom GPT support layer for ed-tech questions, LMS workflows, accessibility guidance, and faculty-facing resources.'
       },
       workflowReplay: {
         set: 'media',
         number: '05',
-        nav: 'Workflow Replay',
-        command: 'reserve_workflow_replay',
-        aliases: ['workflow replay', 'replay', 'process video', 'workflow video', 'walkthrough replay'],
-        kicker: 'Future Workflow Replay',
-        title: 'Reserved for Workflow Walkthroughs',
-        copy: 'This pathway is reserved for future visual walkthroughs that show how support systems, AI workflows, and learning design processes move from problem to usable pathway.',
-        systems: ['Workflow sequences', 'Process walkthroughs', 'Before-after views'],
-        primary: 'Workflow media should make invisible design decisions easier to see and experience.',
-        linkText: 'Replay Reserved',
-        linkUrl: '#interface'
+        nav: 'The Creator',
+        command: 'open_creator_preview',
+        aliases: ['workflow replay', 'replay', 'creator','process video', 'workflow video', 'walkthrough replay', 'woodrow', 'woodrow wilson'],
+        kicker: 'Showcase Bay',
+        title: 'Creator Preview',
+        copy: 'A visual module reserved for the creator system asset included in the package, giving the Showcase Bay a fifth live media target.',
+        systems: ['Character interface asset', 'Visual system cue', 'Portfolio atmosphere'],
+        primary: 'A consistent media bay can carry both project evidence and site personality without breaking usability.',
+        linkText: 'Launch Image',
+        linkUrl: 'assets/showcase/Woodrow.png',
+        mediaType: 'image',
+        image: 'assets/showcase/Woodrow.png',
+        imageAlt: 'Creator visual asset',
+        mediaKicker: 'Interface Personality Layer',
+        mediaTitle: 'Daniel Wooddell',
+        mediaCopy: 'A visual identity asset that supports the site’s intelligent interface atmosphere.'
       },
       caseStudyPlayer: {
         set: 'media',
         number: '06',
-        nav: 'Case Player',
-        command: 'reserve_case_study_player',
-        aliases: ['case player', 'case study player', 'project player', 'portfolio player', 'media player'],
-        kicker: 'Future Case Study Player',
-        title: 'Reserved for Rich Project Playback',
-        copy: 'This pathway is reserved for a future player-style experience where project visuals, short clips, and focused explanations can be explored as connected case modules.',
-        systems: ['Project playback', 'Screenshot sequences', 'Narrated modules'],
-        primary: 'The future media layer can become the project console for the entire portfolio.',
-        linkText: 'Player Reserved',
-        linkUrl: '#interface'
+        nav: 'Secret Intel Player',
+        command: 'open_intel_player',
+        aliases: ['intel player', 'intel study player', 'project player', 'portfolio player', 'media player'],
+        kicker: 'Live Playback Layer',
+        title: 'AI Course Design Walkthrough Player',
+        copy: 'The Intel Player keeps the embedded walkthrough available as a focused playback layer inside the WInterface command system.',
+        systems: ['Embedded walkthrough', 'Project playback', 'Focused explanation'],
+        primary: 'The video layer should remain available without replacing the faster image-based showcase modules.',
+        linkText: 'Play Intel',
+        linkUrl: '#interface',
+        mediaType: 'video',
+        mediaKicker: 'Live Playback',
+        mediaTitle: 'AI Course Design Walkthrough',
+        mediaCopy: 'A player-style experience for viewing the project walkthrough from inside the interface.'
       }
     };
 
@@ -1021,6 +1056,13 @@
     const mediaPanel = interfaceSystem.querySelector('[data-interface-media-panel]');
     const mediaToggle = interfaceSystem.querySelector('[data-interface-media-toggle]');
     const mediaFrame = interfaceSystem.querySelector('[data-interface-media-frame]');
+    const videoFrameWrap = interfaceSystem.querySelector('[data-interface-video-frame-wrap]');
+    const showcaseFrame = interfaceSystem.querySelector('[data-interface-showcase-frame]');
+    const showcaseImage = interfaceSystem.querySelector('[data-interface-showcase-image]');
+    const showcaseKicker = interfaceSystem.querySelector('[data-interface-showcase-kicker]');
+    const showcaseTitle = interfaceSystem.querySelector('[data-interface-showcase-title]');
+    const showcaseCopy = interfaceSystem.querySelector('[data-interface-showcase-copy]');
+    const mediaStatusText = interfaceSystem.querySelector('[data-interface-media-status-text]');
     const playbackStatus = interfaceSystem.querySelector('[data-interface-playback-status]');
     let activeInterfaceSet = 'primary';
     let activeInterfaceKey = 'ai';
@@ -1117,7 +1159,7 @@
     }
 
     function updateInterfacePlaybackControl() {
-      if (!link || activeInterfaceKey !== 'caseStudyPlayer') return;
+      if (!link || !interfaceData[activeInterfaceKey] || interfaceData[activeInterfaceKey].mediaType !== 'video') return;
 
       link.textContent = interfaceMediaPlaying ? 'Pause Intel' : 'Play Intel';
       link.setAttribute('href', '#interface');
@@ -1137,7 +1179,7 @@
       link.removeAttribute('aria-pressed');
       link.removeAttribute('aria-label');
 
-      if (activeInterfaceKey === 'caseStudyPlayer') {
+      if (interfaceData[activeInterfaceKey] && interfaceData[activeInterfaceKey].mediaType === 'video') {
         updateInterfacePlaybackControl();
         return;
       }
@@ -1229,6 +1271,30 @@
       }
     }
 
+    function updateInterfaceMediaPanel(data) {
+      if (!data || !mediaPanel) return;
+      const isVideo = data.mediaType === 'video';
+      if (showcaseFrame) {
+        showcaseFrame.hidden = isVideo;
+        showcaseFrame.dataset.showcaseKey = activeInterfaceKey;
+      }
+      if (videoFrameWrap) videoFrameWrap.hidden = !isVideo;
+      if (mediaStatusText) mediaStatusText.textContent = isVideo ? 'Live Playback' : 'Showcase Bay Active';
+
+      if (!isVideo && showcaseImage) {
+        if (showcaseFrame && !prefersReducedMotion.matches) showcaseFrame.classList.add('is-switching');
+        window.setTimeout(() => {
+          showcaseImage.src = data.image || 'assets/showcase/TwT.png';
+          showcaseImage.alt = data.imageAlt || 'Selected portfolio showcase preview';
+          if (showcaseKicker) showcaseKicker.textContent = data.mediaKicker || data.kicker || 'Showcase Bay';
+          if (showcaseTitle) showcaseTitle.textContent = data.mediaTitle || data.title || 'Portfolio Preview';
+          if (showcaseCopy) showcaseCopy.textContent = data.mediaCopy || data.copy || '';
+          if (showcaseFrame) showcaseFrame.classList.remove('is-switching');
+        }, prefersReducedMotion.matches ? 0 : 120);
+        pauseInterfaceMedia();
+      }
+    }
+
     function setInterfaceMediaMode(enabled) {
       interfaceSystem.classList.toggle('interface-system-is-media', Boolean(enabled));
 
@@ -1253,7 +1319,8 @@
       }
 
       activeInterfaceKey = key;
-      setInterfaceMediaMode(key === 'caseStudyPlayer');
+      setInterfaceMediaMode(data.mediaType === 'image' || data.mediaType === 'video');
+      updateInterfaceMediaPanel(data);
       Array.from(interfaceSystem.querySelectorAll('[data-interface-path]')).forEach(button => {
         const isActive = button.dataset.interfacePath === key;
         button.classList.toggle('is-active', isActive);
@@ -1364,7 +1431,7 @@
           playInterfaceLaunchSound();
         }
 
-        if (activeInterfaceKey === 'caseStudyPlayer') {
+        if (interfaceData[activeInterfaceKey] && interfaceData[activeInterfaceKey].mediaType === 'video') {
           event.preventDefault();
           toggleInterfaceMediaPlayback();
           return;
