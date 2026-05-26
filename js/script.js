@@ -594,7 +594,7 @@
   }
 
   function playAudio(audio, options = {}) {
-    if (!audio || !soundEnabled) return;
+    if (!audio || !soundEnabled || document.body.classList.contains('winterface-offline')) return;
 
     const volume = typeof options.volume === 'number' ? options.volume : interactionVolume;
     audio.volume = volume;
@@ -723,6 +723,46 @@
   const interfaceSystem = document.querySelector('[data-interface-system]');
 
   if (interfaceSystem) {
+    const interfaceSystemToggle = interfaceSystem.querySelector('[data-interface-system-toggle]');
+    const interfaceSystemStatusText = interfaceSystem.querySelector('[data-interface-system-status-text]');
+    let winterfaceOnline = true;
+
+    function updateWinterfacePowerState() {
+      document.body.classList.toggle('winterface-offline', !winterfaceOnline);
+
+      if (interfaceSystemToggle) {
+        interfaceSystemToggle.setAttribute('aria-pressed', String(winterfaceOnline));
+        interfaceSystemToggle.setAttribute('aria-label', winterfaceOnline ? 'Turn Winterface system offline' : 'Turn Winterface system online');
+      }
+
+      if (interfaceSystemStatusText) {
+        interfaceSystemStatusText.textContent = winterfaceOnline ? 'Winterface System online' : 'Winterface System offline';
+      }
+
+      if (!winterfaceOnline) {
+        stopAudio(startupSound);
+        stopAudio(interactionSound);
+        stopAudio(interfaceOrbSound);
+        stopAudio(interfaceSubmitSound);
+        stopAudio(interfaceLaunchSound);
+      }
+    }
+
+    if (interfaceSystemToggle) {
+      interfaceSystemToggle.addEventListener('click', event => {
+        event.preventDefault();
+        event.stopPropagation();
+        winterfaceOnline = !winterfaceOnline;
+        updateWinterfacePowerState();
+
+        if (winterfaceOnline && typeof playInterfaceOrbSound === 'function') {
+          playInterfaceOrbSound();
+        }
+      });
+
+      updateWinterfacePowerState();
+    }
+
     const interfaceSets = {
       primary: {
         label: 'Active Pathways',
