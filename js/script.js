@@ -1015,7 +1015,7 @@
         mediaType: 'image',
         image: 'assets/showcase/Woodrow.png',
         imageAlt: 'Creator visual asset',
-        mediaKicker: 'Interface Personality Layer',
+        mediaKicker: 'WInterface Personality Layer',
         mediaTitle: 'Daniel Wooddell',
         mediaCopy: 'A visual identity asset that supports the site’s intelligent interface atmosphere.'
       },
