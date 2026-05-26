@@ -680,7 +680,7 @@
   }
 
   const audioInteractionTargets = document.querySelectorAll(
-    '.button, .text-link, .footer-top-link, [data-nav-link], [data-hero-dot], [data-focus-dot]'
+    '.button, .text-link, .footer-top-link, [data-nav-link], [data-hero-dot], [data-focus-dot], [data-interface-media-toggle], [data-interface-link]'
   );
 
   audioInteractionTargets.forEach(target => {
@@ -991,10 +991,15 @@
     const systems = interfaceSystem.querySelector('[data-interface-systems]');
     const primary = interfaceSystem.querySelector('[data-interface-primary]');
     const link = interfaceSystem.querySelector('[data-interface-link]');
+    const mediaPanel = interfaceSystem.querySelector('[data-interface-media-panel]');
+    const mediaToggle = interfaceSystem.querySelector('[data-interface-media-toggle]');
+    const mediaFrame = interfaceSystem.querySelector('[data-interface-media-frame]');
+    const playbackStatus = interfaceSystem.querySelector('[data-interface-playback-status]');
     let activeInterfaceSet = 'primary';
     let activeInterfaceKey = 'ai';
     let interfaceTimer = null;
     let interfacePaused = false;
+    let interfaceMediaPlaying = false;
 
     function getSetForKey(key) {
       return interfaceData[key] ? interfaceData[key].set : activeInterfaceSet;
@@ -1002,6 +1007,8 @@
 
     function renderInterfacePaths(setKey) {
       const set = interfaceSets[setKey] || interfaceSets.primary;
+      interfaceSystem.classList.remove('interface-system-set-primary', 'interface-system-set-operations', 'interface-system-set-media');
+      interfaceSystem.classList.add(`interface-system-set-${setKey}`);
       if (railLabel) railLabel.textContent = set.label;
       if (railSubtitle) railSubtitle.textContent = set.subtitle;
       if (modeLabel) modeLabel.textContent = set.modeLabel;
@@ -1082,8 +1089,32 @@
       return bestScore >= 12 ? bestKey : null;
     }
 
+    function updateInterfacePlaybackControl() {
+      if (!link || activeInterfaceKey !== 'caseStudyPlayer') return;
+
+      link.textContent = interfaceMediaPlaying ? 'Pause Intel' : 'Play Intel';
+      link.setAttribute('href', '#interface');
+      link.setAttribute('role', 'button');
+      link.setAttribute('aria-pressed', String(interfaceMediaPlaying));
+      link.setAttribute('aria-label', interfaceMediaPlaying ? 'Pause WInterface video playback' : 'Play WInterface video playback');
+      link.classList.add('interface-jump-link-media-control');
+      link.removeAttribute('target');
+      link.removeAttribute('rel');
+    }
+
     function updateInterfaceLink(data) {
       if (!link) return;
+
+      link.classList.remove('interface-jump-link-media-control');
+      link.removeAttribute('role');
+      link.removeAttribute('aria-pressed');
+      link.removeAttribute('aria-label');
+
+      if (activeInterfaceKey === 'caseStudyPlayer') {
+        updateInterfacePlaybackControl();
+        return;
+      }
+
       link.textContent = data.linkText;
       link.setAttribute('href', data.linkUrl);
       if (data.linkUrl.startsWith('#')) {
@@ -1106,6 +1137,84 @@
       }
     }
 
+
+
+    let interfaceVimeoPlayer = null;
+
+    function setInterfacePlaybackState(isPlaying) {
+      interfaceMediaPlaying = Boolean(isPlaying);
+
+      if (playbackStatus) {
+        playbackStatus.classList.toggle('interface-playback-is-playing', interfaceMediaPlaying);
+        playbackStatus.setAttribute('aria-label', interfaceMediaPlaying ? 'Live playback status: video playing' : 'Live playback status: video paused or idle');
+      }
+
+      updateInterfacePlaybackControl();
+    }
+
+    function pauseInterfaceMedia() {
+      if (interfaceVimeoPlayer && typeof interfaceVimeoPlayer.pause === 'function') {
+        interfaceVimeoPlayer.pause().catch(() => {
+          // Vimeo may reject pause calls before the player is ready or after iframe state changes.
+        });
+      }
+
+      setInterfacePlaybackState(false);
+    }
+
+    function toggleInterfaceMediaPlayback() {
+      if (!interfaceVimeoPlayer || activeInterfaceKey !== 'caseStudyPlayer') return;
+
+      const mediaAction = interfaceMediaPlaying ? interfaceVimeoPlayer.pause() : interfaceVimeoPlayer.play();
+
+      if (mediaAction && typeof mediaAction.catch === 'function') {
+        mediaAction.catch(() => {
+          // Vimeo may reject play/pause calls before the player is ready or when browser policies block playback.
+        });
+      }
+    }
+
+    if (mediaFrame && window.Vimeo && typeof window.Vimeo.Player === 'function') {
+      try {
+        interfaceVimeoPlayer = new window.Vimeo.Player(mediaFrame);
+        interfaceVimeoPlayer.on('play', () => setInterfacePlaybackState(true));
+        interfaceVimeoPlayer.on('pause', () => setInterfacePlaybackState(false));
+        interfaceVimeoPlayer.on('ended', () => setInterfacePlaybackState(false));
+      } catch (error) {
+        interfaceVimeoPlayer = null;
+        setInterfacePlaybackState(false);
+      }
+    } else {
+      setInterfacePlaybackState(false);
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        pauseInterfaceMedia();
+      }
+    });
+
+    function setInterfaceMediaExpanded(expanded) {
+      interfaceSystem.classList.toggle('interface-system-media-expanded', Boolean(expanded));
+      if (mediaToggle) {
+        mediaToggle.setAttribute('aria-pressed', String(Boolean(expanded)));
+        mediaToggle.textContent = expanded ? 'Collapse WInterface' : 'Expand WInterface';
+      }
+    }
+
+    function setInterfaceMediaMode(enabled) {
+      interfaceSystem.classList.toggle('interface-system-is-media', Boolean(enabled));
+
+      if (mediaPanel) {
+        mediaPanel.hidden = !enabled;
+      }
+
+      if (!enabled) {
+        setInterfaceMediaExpanded(false);
+        pauseInterfaceMedia();
+      }
+    }
+
     function setInterfacePath(key, options = {}) {
       const data = interfaceData[key];
       if (!data) return;
@@ -1117,6 +1226,7 @@
       }
 
       activeInterfaceKey = key;
+      setInterfaceMediaMode(key === 'caseStudyPlayer');
       Array.from(interfaceSystem.querySelectorAll('[data-interface-path]')).forEach(button => {
         const isActive = button.dataset.interfacePath === key;
         button.classList.toggle('is-active', isActive);
@@ -1175,6 +1285,16 @@
       });
     });
 
+    if (mediaToggle) {
+      mediaToggle.addEventListener('click', () => {
+        const isExpanded = interfaceSystem.classList.contains('interface-system-media-expanded');
+        setInterfaceMediaExpanded(!isExpanded);
+        if (typeof playInteractionSound === 'function') {
+          playInteractionSound();
+        }
+      });
+    }
+
     if (commandInput) {
       commandInput.addEventListener('focus', () => {
         interfacePaused = true;
@@ -1207,6 +1327,15 @@
 
     if (link) {
       link.addEventListener('click', event => {
+        if (activeInterfaceKey === 'caseStudyPlayer') {
+          event.preventDefault();
+          toggleInterfaceMediaPlayback();
+          if (typeof playInteractionSound === 'function') {
+            playInteractionSound();
+          }
+          return;
+        }
+
         const href = link.getAttribute('href');
         if (!href || !href.startsWith('#')) return;
         const target = document.getElementById(decodeURIComponent(href.slice(1)));
