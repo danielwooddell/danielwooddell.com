@@ -3070,10 +3070,10 @@ main,
   width: 0.54rem;
   height: 0.54rem;
   border-radius: 50%;
-  background: var(--cyan);
+  background: var(--pink);
   box-shadow:
-    0 0 12px rgba(56,189,248,0.88),
-    0 0 26px rgba(56,189,248,0.38);
+    0 0 12px rgba(236,72,153,0.88),
+    0 0 26px rgba(236,72,153,0.42);
   animation: interfacePlaybackPulse 1.7s ease-in-out infinite;
   transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
@@ -3433,4 +3433,293 @@ main,
   box-shadow:
     0 0 26px rgba(239,68,68,0.12),
     inset 0 0 24px rgba(56,189,248,0.035);
+}
+
+/* =========================
+   SHOWCASE BAY ENHANCEMENTS
+========================= */
+
+.case-study-visual {
+  position: relative;
+  margin: 0 0 1rem;
+  overflow: hidden;
+  border-radius: 22px;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.075), rgba(255,255,255,0.022)),
+    radial-gradient(circle at 18% 12%, rgba(56,189,248,0.16), transparent 42%);
+  box-shadow:
+    0 22px 52px rgba(0,0,0,0.22),
+    inset 0 0 30px rgba(255,255,255,0.025);
+}
+
+.case-study-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, transparent 62%, rgba(5,8,22,0.28)),
+    linear-gradient(90deg, rgba(56,189,248,0.12), transparent 24%, transparent 76%, rgba(139,92,246,0.1));
+  opacity: 0.85;
+}
+
+.case-study-visual img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: top center;
+  transform: scale(1.01);
+  transition: transform 0.34s ease, filter 0.34s ease;
+}
+
+.case-study-card:hover .case-study-visual img,
+.case-study-card:focus-within .case-study-visual img {
+  transform: scale(1.045);
+  filter: saturate(1.08) contrast(1.04);
+}
+
+.interface-showcase-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 22px;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.075), rgba(255,255,255,0.025)),
+    radial-gradient(circle at top left, rgba(56,189,248,0.18), transparent 44%),
+    rgba(5, 8, 22, 0.62);
+  border: 1px solid rgba(56,189,248,0.22);
+  box-shadow:
+    0 22px 55px rgba(0,0,0,0.30),
+    0 0 34px rgba(56,189,248,0.10),
+    inset 0 0 32px rgba(255,255,255,0.025);
+}
+
+.interface-showcase-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  object-fit: cover;
+  object-position: top center;
+  transform: scale(1.01);
+  transition: opacity 0.22s ease, transform 0.34s ease, filter 0.34s ease;
+}
+
+.interface-showcase-frame[data-showcase-key="workflowReplay"] img {
+  object-fit: contain;
+  object-position: center center;
+  padding: clamp(0.55rem, 1.8vw, 1rem);
+  transform: scale(1);
+}
+
+.interface-showcase-frame.is-switching img {
+  opacity: 0;
+  transform: scale(1.035) translateY(8px);
+}
+
+.interface-showcase-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, transparent 48%, rgba(5,8,22,0.82)),
+    linear-gradient(90deg, rgba(56,189,248,0.16), transparent 28%, transparent 72%, rgba(236,72,153,0.12));
+}
+
+.interface-showcase-caption {
+  position: absolute;
+  left: clamp(0.9rem, 2vw, 1.25rem);
+  right: clamp(0.9rem, 2vw, 1.25rem);
+  bottom: clamp(0.85rem, 2vw, 1.15rem);
+  z-index: 2;
+  display: grid;
+  gap: 0.24rem;
+  max-width: 720px;
+}
+
+.interface-showcase-caption span {
+  color: var(--cyan);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.interface-showcase-caption strong {
+  color: var(--text);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(1.25rem, 2.2vw, 2.1rem);
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
+.interface-showcase-caption p {
+  max-width: 680px;
+  color: var(--muted-strong);
+  font-size: 0.92rem;
+  line-height: 1.42;
+}
+
+.interface-video-frame[hidden],
+.interface-showcase-frame[hidden] {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .case-study-visual img,
+  .interface-showcase-frame {
+    aspect-ratio: 4 / 3;
+  }
+
+  .interface-showcase-caption p {
+    display: none;
+  }
+}
+
+/* Showcase Bay active status uses the pink visual signal. Video playback still switches the dot to red while playing. */
+.interface-system-set-media .interface-playback-status:not(.interface-playback-is-playing) {
+  border-color: rgba(236, 72, 153, 0.34);
+  box-shadow:
+    0 0 28px rgba(236, 72, 153, 0.13),
+    inset 0 0 24px rgba(236, 72, 153, 0.05);
+}
+
+.interface-system-set-media .interface-playback-status:not(.interface-playback-is-playing)::before {
+  background: linear-gradient(90deg, transparent, rgba(236, 72, 153, 0.24), rgba(139, 92, 246, 0.16), transparent);
+}
+
+/* =========================
+   FINAL POLISH: SYSTEM ORBS + SHOWCASE IMAGE FRAMING
+========================= */
+
+/* Make the online status indicator read as an active glowing system signal. */
+.interface-status-bar > span:nth-child(1) i {
+  position: relative;
+  width: 0.58rem;
+  height: 0.58rem;
+  background: var(--online-green);
+  box-shadow:
+    0 0 10px rgba(34,197,94,0.95),
+    0 0 24px rgba(34,197,94,0.56),
+    0 0 42px rgba(34,197,94,0.26);
+  animation: interfaceOnlineOrbPulse 2.65s ease-in-out infinite;
+}
+
+.interface-status-bar > span:nth-child(1) i::after {
+  content: "";
+  position: absolute;
+  inset: -0.42rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(34,197,94,0.30), rgba(34,197,94,0.12) 38%, transparent 70%);
+  opacity: 0.86;
+  transform: scale(0.88);
+  animation: interfaceOnlineHaloPulse 2.65s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Give every Live Systems bullet the same energetic treatment while keeping the existing cyan color. */
+.interface-system-list li::before {
+  width: 0.48rem;
+  height: 0.48rem;
+  top: 0.42rem;
+  background: var(--cyan);
+  box-shadow:
+    0 0 10px rgba(56,189,248,0.96),
+    0 0 22px rgba(56,189,248,0.56),
+    0 0 38px rgba(56,189,248,0.25);
+  animation: interfaceLiveSystemOrbPulse 3.1s ease-in-out infinite;
+}
+
+.interface-system-list li:nth-child(2)::before {
+  animation-delay: -0.7s;
+}
+
+.interface-system-list li:nth-child(3)::before {
+  animation-delay: -1.4s;
+}
+
+/* Reduce the aggressive screenshot crop on Showcase Bay images 01-04. */
+.interface-showcase-frame[data-showcase-key="mediaPreview"] img,
+.interface-showcase-frame[data-showcase-key="videoWalkthroughs"] img,
+.interface-showcase-frame[data-showcase-key="imageSystems"] img,
+.interface-showcase-frame[data-showcase-key="demoConsole"] img {
+  object-fit: contain;
+  object-position: center center;
+  padding: clamp(0.45rem, 1.4vw, 0.85rem);
+  transform: scale(1);
+}
+
+.interface-showcase-frame[data-showcase-key="mediaPreview"]::after,
+.interface-showcase-frame[data-showcase-key="videoWalkthroughs"]::after,
+.interface-showcase-frame[data-showcase-key="imageSystems"]::after,
+.interface-showcase-frame[data-showcase-key="demoConsole"]::after,
+.interface-showcase-frame[data-showcase-key="workflowReplay"]::after {
+  background:
+    linear-gradient(180deg, transparent 56%, rgba(5,8,22,0.76)),
+    linear-gradient(90deg, rgba(56,189,248,0.12), transparent 24%, transparent 76%, rgba(236,72,153,0.10));
+}
+
+@keyframes interfaceOnlineOrbPulse {
+  0%, 100% {
+    transform: scale(0.95);
+    opacity: 0.84;
+    box-shadow:
+      0 0 10px rgba(34,197,94,0.86),
+      0 0 22px rgba(34,197,94,0.48),
+      0 0 36px rgba(34,197,94,0.22);
+  }
+
+  50% {
+    transform: scale(1.12);
+    opacity: 1;
+    box-shadow:
+      0 0 13px rgba(34,197,94,1),
+      0 0 30px rgba(34,197,94,0.66),
+      0 0 52px rgba(34,197,94,0.32);
+  }
+}
+
+@keyframes interfaceOnlineHaloPulse {
+  0%, 100% {
+    transform: scale(0.82);
+    opacity: 0.44;
+  }
+
+  50% {
+    transform: scale(1.08);
+    opacity: 0.9;
+  }
+}
+
+@keyframes interfaceLiveSystemOrbPulse {
+  0%, 100% {
+    transform: scale(0.94);
+    opacity: 0.78;
+    box-shadow:
+      0 0 9px rgba(56,189,248,0.86),
+      0 0 20px rgba(56,189,248,0.48),
+      0 0 34px rgba(56,189,248,0.22);
+  }
+
+  50% {
+    transform: scale(1.12);
+    opacity: 1;
+    box-shadow:
+      0 0 12px rgba(56,189,248,1),
+      0 0 28px rgba(56,189,248,0.66),
+      0 0 48px rgba(56,189,248,0.32);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interface-status-bar > span:nth-child(1) i,
+  .interface-status-bar > span:nth-child(1) i::after,
+  .interface-system-list li::before {
+    animation: none;
+  }
 }
