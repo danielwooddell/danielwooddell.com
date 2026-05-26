@@ -1057,7 +1057,7 @@
         imageAlt: 'Creator visual asset',
         mediaKicker: 'WInterface Personality Layer',
         mediaTitle: 'Daniel Wooddell',
-        mediaCopy: 'A visual identity asset that supports the site’s intelligent interface atmosphere.'
+        mediaCopy: 'A visual identity asset that supports the site’s intelligent interface atmosphere. WInterface™ = (Wooddell’s + Interface) ...Daniel 🦇'
       },
       caseStudyPlayer: {
         set: 'media',
