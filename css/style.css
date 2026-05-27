@@ -4418,17 +4418,16 @@ body.winterface-offline .interface-status-bar > span:nth-child(3) i::after {
 }
 
 /* =========================
-   WINTERFACE FINAL SYNC PATCH
-   Preserves boxy-rounded media controls and restores Secret Intel red armed/live CTA only during active playback.
+   WINTERFACE MEDIA CONTROL BOX ALIGNMENT PATCH
+   Converts the two middle media controls to a boxy-rounded style and centers both labels.
 ========================= */
 
-/* Keep the two middle media controls in the preferred boxy-rounded style. */
 .interface-media-actions {
   display: grid !important;
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: stretch !important;
   justify-content: stretch !important;
-  gap: 0.85rem !important;
+  gap: 0.85rem;
 }
 
 .interface-playback-status,
@@ -4441,14 +4440,14 @@ body.winterface-offline .interface-status-bar > span:nth-child(3) i::after {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  width: 100% !important;
-  min-height: 54px !important;
-  padding: 0.9rem 1.15rem !important;
+  width: 100%;
+  min-height: 54px;
+  padding: 0.9rem 1.15rem;
   border-radius: 16px !important;
   text-align: center !important;
-  font-size: 0.76rem !important;
-  font-weight: 800 !important;
-  letter-spacing: 0.12em !important;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
 }
 
 .interface-playback-status span,
@@ -4457,12 +4456,12 @@ body.winterface-offline .interface-status-bar > span:nth-child(3) i::after {
 }
 
 .interface-playback-status {
-  gap: 0.55rem !important;
+  gap: 0.55rem;
 }
 
 .interface-playback-dot {
-  flex: 0 0 auto !important;
-  margin-right: 0 !important;
+  flex: 0 0 auto;
+  margin-right: 0;
 }
 
 .interface-playback-status:hover,
@@ -4471,48 +4470,155 @@ body.winterface-offline .interface-status-bar > span:nth-child(3) i::after {
   transform: translateY(-1px);
 }
 
-/* Restore the Secret Intel armed/live red CTA state after playback begins. */
-.interface-system-set-media .interface-jump-link.interface-jump-link-media-control[aria-pressed="true"] {
-  color: #fff7f7 !important;
-  border-color: rgba(239, 68, 68, 0.72) !important;
-  background:
-    linear-gradient(145deg, rgba(239, 68, 68, 0.24), rgba(236, 72, 153, 0.11)),
-    radial-gradient(circle at 22% 50%, rgba(239, 68, 68, 0.20), transparent 48%),
-    rgba(255, 255, 255, 0.052) !important;
-  box-shadow:
-    0 0 0 1px rgba(239, 68, 68, 0.16),
-    0 0 24px rgba(239, 68, 68, 0.24),
-    0 0 46px rgba(236, 72, 153, 0.15),
-    inset 0 0 30px rgba(239, 68, 68, 0.085) !important;
-}
-
-.interface-system-set-media .interface-jump-link.interface-jump-link-media-control[aria-pressed="true"]::before {
-  background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.34), rgba(236, 72, 153, 0.22), transparent) !important;
-  opacity: 0.66 !important;
-}
-
-.interface-system-set-media .interface-jump-link.interface-jump-link-media-control[aria-pressed="true"]:hover,
-.interface-system-set-media .interface-jump-link.interface-jump-link-media-control[aria-pressed="true"]:focus-visible {
-  color: #ffffff !important;
-  border-color: rgba(248, 113, 113, 0.86) !important;
-  background:
-    linear-gradient(145deg, rgba(239, 68, 68, 0.30), rgba(236, 72, 153, 0.14)),
-    radial-gradient(circle at 22% 50%, rgba(239, 68, 68, 0.24), transparent 48%),
-    rgba(255, 255, 255, 0.058) !important;
-  box-shadow:
-    0 0 0 1px rgba(239, 68, 68, 0.20),
-    0 0 30px rgba(239, 68, 68, 0.30),
-    0 0 56px rgba(236, 72, 153, 0.18),
-    inset 0 0 34px rgba(239, 68, 68, 0.10) !important;
-}
-
 @media (max-width: 640px) {
   .interface-media-actions {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: 1fr;
   }
 
   .interface-playback-status,
   .interface-media-toggle {
-    width: 100% !important;
+    width: 100%;
   }
+}
+
+
+/* =========================
+   WINTERFACE MICRO REFINEMENT PATCH
+   Adds button-like border treatment to the Online/Paused system toggle
+   and centers only the cyan kicker label in the middle interface response.
+========================= */
+
+/* Make the WInterface Online/Paused control read as a true button while keeping the green/red status orb logic intact. */
+.interface-system-toggle {
+  position: relative;
+  min-height: 2.35rem;
+  padding: 0.48rem 0.72rem;
+  border: 1px solid rgba(56, 189, 248, 0.34);
+  border-radius: 999px;
+  background:
+    linear-gradient(145deg, rgba(56, 189, 248, 0.105), rgba(139, 92, 246, 0.055)),
+    rgba(255, 255, 255, 0.035);
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.055),
+    0 0 18px rgba(56, 189, 248, 0.10),
+    inset 0 0 20px rgba(56, 189, 248, 0.035);
+  overflow: hidden;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    color 0.2s ease;
+}
+
+.interface-system-toggle::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.18), rgba(139, 92, 246, 0.12), transparent);
+  opacity: 0.38;
+  transform: translateX(-76%);
+  animation: interfacePlaybackSweep 4.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.interface-system-toggle > * {
+  position: relative;
+  z-index: 1;
+}
+
+.interface-system-toggle:hover,
+.interface-system-toggle:focus-visible {
+  transform: translateY(-1px);
+  border-color: rgba(56, 189, 248, 0.58);
+  background:
+    linear-gradient(145deg, rgba(56, 189, 248, 0.14), rgba(139, 92, 246, 0.075)),
+    rgba(255, 255, 255, 0.045);
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.085),
+    0 0 24px rgba(56, 189, 248, 0.16),
+    inset 0 0 24px rgba(56, 189, 248, 0.05);
+}
+
+body.winterface-offline .interface-system-toggle {
+  border-color: rgba(56, 189, 248, 0.34);
+  background:
+    linear-gradient(145deg, rgba(56, 189, 248, 0.09), rgba(239, 68, 68, 0.055)),
+    rgba(255, 255, 255, 0.035);
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.05),
+    0 0 18px rgba(56, 189, 248, 0.085),
+    inset 0 0 20px rgba(56, 189, 248, 0.03);
+}
+
+body.winterface-offline .interface-system-toggle:hover,
+body.winterface-offline .interface-system-toggle:focus-visible {
+  border-color: rgba(56, 189, 248, 0.56);
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.08),
+    0 0 22px rgba(56, 189, 248, 0.14),
+    0 0 30px rgba(239, 68, 68, 0.08),
+    inset 0 0 24px rgba(56, 189, 248, 0.045);
+}
+
+/* Center only the small cyan kicker label under the command line. Main title and body copy remain left-aligned. */
+.interface-response .panel-label,
+.interface-response [data-interface-kicker] {
+  align-self: center;
+  width: 100%;
+  max-width: 780px;
+  text-align: center;
+}
+
+.interface-response h3,
+.interface-response p:not(.panel-label) {
+  align-self: flex-start;
+  text-align: left;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interface-system-toggle::before {
+    animation: none !important;
+    opacity: 0.16;
+    transform: none;
+  }
+}
+
+/* =========================
+   WINTERFACE SECRET INTEL PLAYBACK RESTORE
+   Restores the red armed/live state only when the Secret Intel CTA is actively playing.
+   Keeps the normal CTA cyan when idle, paused, or on other modules.
+========================= */
+
+.interface-system-set-media .interface-jump-link.interface-jump-link-media-control[aria-pressed="true"] {
+  color: var(--text) !important;
+  border-color: rgba(239, 68, 68, 0.68) !important;
+  background:
+    linear-gradient(145deg, rgba(239, 68, 68, 0.20), rgba(236, 72, 153, 0.12)),
+    rgba(255, 255, 255, 0.052) !important;
+  box-shadow:
+    0 0 0 1px rgba(239, 68, 68, 0.12),
+    0 0 26px rgba(239, 68, 68, 0.24),
+    0 0 44px rgba(236, 72, 153, 0.16),
+    inset 0 0 28px rgba(239, 68, 68, 0.07) !important;
+}
+
+.interface-system-set-media .interface-jump-link.interface-jump-link-media-control[aria-pressed="true"]::before {
+  background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.32), rgba(236, 72, 153, 0.22), transparent) !important;
+  opacity: 0.58;
+}
+
+.interface-system-set-media .interface-jump-link.interface-jump-link-media-control[aria-pressed="true"]:hover,
+.interface-system-set-media .interface-jump-link.interface-jump-link-media-control[aria-pressed="true"]:focus-visible {
+  color: var(--text) !important;
+  border-color: rgba(248, 113, 113, 0.78) !important;
+  background:
+    linear-gradient(145deg, rgba(239, 68, 68, 0.24), rgba(236, 72, 153, 0.15)),
+    rgba(255, 255, 255, 0.058) !important;
+  box-shadow:
+    0 0 0 1px rgba(239, 68, 68, 0.16),
+    0 0 30px rgba(239, 68, 68, 0.30),
+    0 0 52px rgba(236, 72, 153, 0.18),
+    inset 0 0 30px rgba(239, 68, 68, 0.085) !important;
 }
