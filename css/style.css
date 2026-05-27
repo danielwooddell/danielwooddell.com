@@ -5207,3 +5207,35 @@ body.winterface-offline .interface-system-toggle:focus-visible {
     0 0 12px rgba(var(--interface-accent-rgb, 56, 189, 248), 0.12);
 }
 
+/* =========================
+   WINTERFACE LIVE SYSTEMS LIST INDENT PATCH
+   Slightly increases indentation for the Live Systems bullet list across all 18 WInterface cards.
+   CSS-only: no layout, HTML, or JavaScript changes.
+========================= */
+
+.interface-system-list {
+  padding-left: 0.28rem;
+}
+
+.interface-system-list li {
+  padding-left: 1.22rem;
+}
+
+.interface-system-list li::before {
+  left: 0.10rem;
+}
+
+@media (max-width: 640px) {
+  .interface-system-list {
+    padding-left: 0.18rem;
+  }
+
+  .interface-system-list li {
+    padding-left: 1.14rem;
+  }
+
+  .interface-system-list li::before {
+    left: 0.06rem;
+  }
+}
+
