@@ -4481,607 +4481,6 @@ body.winterface-offline .interface-status-bar > span:nth-child(3) i::after {
   }
 }
 
-
-/* =========================
-   WINTERFACE MICRO REFINEMENT PATCH
-   Adds button-like border treatment to the Online/Paused system toggle
-   and centers only the cyan kicker label in the middle interface response.
-========================= */
-
-/* Make the WInterface Online/Paused control read as a true button while keeping the green/red status orb logic intact. */
-.interface-system-toggle {
-  position: relative;
-  min-height: 2.35rem;
-  padding: 0.48rem 0.72rem;
-  border: 1px solid rgba(56, 189, 248, 0.34);
-  border-radius: 999px;
-  background:
-    linear-gradient(145deg, rgba(56, 189, 248, 0.105), rgba(139, 92, 246, 0.055)),
-    rgba(255, 255, 255, 0.035);
-  box-shadow:
-    0 0 0 1px rgba(56, 189, 248, 0.055),
-    0 0 18px rgba(56, 189, 248, 0.10),
-    inset 0 0 20px rgba(56, 189, 248, 0.035);
-  overflow: hidden;
-  transition:
-    transform 0.2s ease,
-    border-color 0.2s ease,
-    background 0.2s ease,
-    box-shadow 0.2s ease,
-    color 0.2s ease;
-}
-
-.interface-system-toggle::before {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.18), rgba(139, 92, 246, 0.12), transparent);
-  opacity: 0.38;
-  transform: translateX(-76%);
-  animation: interfacePlaybackSweep 4.8s ease-in-out infinite;
-  pointer-events: none;
-}
-
-.interface-system-toggle > * {
-  position: relative;
-  z-index: 1;
-}
-
-.interface-system-toggle:hover,
-.interface-system-toggle:focus-visible {
-  transform: translateY(-1px);
-  border-color: rgba(56, 189, 248, 0.58);
-  background:
-    linear-gradient(145deg, rgba(56, 189, 248, 0.14), rgba(139, 92, 246, 0.075)),
-    rgba(255, 255, 255, 0.045);
-  box-shadow:
-    0 0 0 1px rgba(56, 189, 248, 0.085),
-    0 0 24px rgba(56, 189, 248, 0.16),
-    inset 0 0 24px rgba(56, 189, 248, 0.05);
-}
-
-body.winterface-offline .interface-system-toggle {
-  border-color: rgba(56, 189, 248, 0.34);
-  background:
-    linear-gradient(145deg, rgba(56, 189, 248, 0.09), rgba(239, 68, 68, 0.055)),
-    rgba(255, 255, 255, 0.035);
-  box-shadow:
-    0 0 0 1px rgba(56, 189, 248, 0.05),
-    0 0 18px rgba(56, 189, 248, 0.085),
-    inset 0 0 20px rgba(56, 189, 248, 0.03);
-}
-
-body.winterface-offline .interface-system-toggle:hover,
-body.winterface-offline .interface-system-toggle:focus-visible {
-  border-color: rgba(56, 189, 248, 0.56);
-  box-shadow:
-    0 0 0 1px rgba(56, 189, 248, 0.08),
-    0 0 22px rgba(56, 189, 248, 0.14),
-    0 0 30px rgba(239, 68, 68, 0.08),
-    inset 0 0 24px rgba(56, 189, 248, 0.045);
-}
-
-/* Center only the small cyan kicker label under the command line. Main title and body copy remain left-aligned. */
-.interface-response .panel-label,
-.interface-response [data-interface-kicker] {
-  align-self: center;
-  width: 100%;
-  max-width: 780px;
-  text-align: center;
-}
-
-.interface-response h3,
-.interface-response p:not(.panel-label) {
-  align-self: flex-start;
-  text-align: left;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .interface-system-toggle::before {
-    animation: none !important;
-    opacity: 0.16;
-    transform: none;
-  }
-}
-
-/* =========================
-   WINTERFACE SECRET INTEL PLAYBACK RESTORE
-   Restores the red armed/live state only when the Secret Intel CTA is actively playing.
-   Keeps the normal CTA cyan when idle, paused, or on other modules.
-========================= */
-
-.interface-system-set-media .interface-jump-link.interface-jump-link-media-control[aria-pressed="true"] {
-  color: var(--text) !important;
-  border-color: rgba(239, 68, 68, 0.68) !important;
-  background:
-    linear-gradient(145deg, rgba(239, 68, 68, 0.20), rgba(236, 72, 153, 0.12)),
-    rgba(255, 255, 255, 0.052) !important;
-  box-shadow:
-    0 0 0 1px rgba(239, 68, 68, 0.12),
-    0 0 26px rgba(239, 68, 68, 0.24),
-    0 0 44px rgba(236, 72, 153, 0.16),
-    inset 0 0 28px rgba(239, 68, 68, 0.07) !important;
-}
-
-.interface-system-set-media .interface-jump-link.interface-jump-link-media-control[aria-pressed="true"]::before {
-  background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.32), rgba(236, 72, 153, 0.22), transparent) !important;
-  opacity: 0.58;
-}
-
-.interface-system-set-media .interface-jump-link.interface-jump-link-media-control[aria-pressed="true"]:hover,
-.interface-system-set-media .interface-jump-link.interface-jump-link-media-control[aria-pressed="true"]:focus-visible {
-  color: var(--text) !important;
-  border-color: rgba(248, 113, 113, 0.78) !important;
-  background:
-    linear-gradient(145deg, rgba(239, 68, 68, 0.24), rgba(236, 72, 153, 0.15)),
-    rgba(255, 255, 255, 0.058) !important;
-  box-shadow:
-    0 0 0 1px rgba(239, 68, 68, 0.16),
-    0 0 30px rgba(239, 68, 68, 0.30),
-    0 0 52px rgba(236, 72, 153, 0.18),
-    inset 0 0 30px rgba(239, 68, 68, 0.085) !important;
-}
-
-/* =========================
-   WINTERFACE SHOWCASE LABEL READABILITY PATCH
-   Adds a polished glass backing to image-card overlay labels for stronger contrast.
-========================= */
-
-.interface-showcase-caption span {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-self: start;
-  width: fit-content;
-  max-width: min(100%, 32rem);
-  min-height: 1.55rem;
-  padding: 0.28rem 0.58rem 0.28rem 0.72rem;
-  border-radius: 999px;
-  color: var(--cyan) !important;
-  background:
-    linear-gradient(145deg, rgba(5, 8, 22, 0.82), rgba(11, 16, 36, 0.62)),
-    radial-gradient(circle at 12% 50%, rgba(56, 189, 248, 0.16), transparent 58%);
-  border: 1px solid rgba(56, 189, 248, 0.34);
-  box-shadow:
-    0 0 0 1px rgba(5, 8, 22, 0.30),
-    0 0 18px rgba(56, 189, 248, 0.16),
-    inset 0 0 16px rgba(56, 189, 248, 0.055);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  text-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.82),
-    0 0 10px rgba(56, 189, 248, 0.36);
-}
-
-.interface-showcase-caption span::before {
-  content: "";
-  flex: 0 0 auto;
-  width: 0.38rem;
-  height: 0.38rem;
-  margin-right: 0.48rem;
-  border-radius: 50%;
-  background: var(--cyan);
-  box-shadow:
-    0 0 10px rgba(56, 189, 248, 0.88),
-    0 0 20px rgba(56, 189, 248, 0.36);
-}
-
-.interface-showcase-frame[data-showcase-key="mediaPreview"] .interface-showcase-caption span,
-.interface-showcase-frame[data-showcase-key="videoWalkthroughs"] .interface-showcase-caption span,
-.interface-showcase-frame[data-showcase-key="imageSystems"] .interface-showcase-caption span,
-.interface-showcase-frame[data-showcase-key="demoConsole"] .interface-showcase-caption span,
-.interface-showcase-frame[data-showcase-key="workflowReplay"] .interface-showcase-caption span {
-  color: var(--cyan) !important;
-}
-
-@media (max-width: 768px) {
-  .interface-showcase-caption span {
-    max-width: 100%;
-    padding: 0.26rem 0.52rem 0.26rem 0.62rem;
-    font-size: 0.62rem;
-    letter-spacing: 0.13em;
-  }
-
-  .interface-showcase-caption span::before {
-    width: 0.34rem;
-    height: 0.34rem;
-    margin-right: 0.4rem;
-  }
-}
-
-/* =========================
-   WINTERFACE BORDER CLARITY PATCH
-   Strengthens the command input and middle media-action card borders without changing layout or JS.
-========================= */
-
-/* Command input: brighter cyan boundary across every WInterface card/pathway. */
-.interface-command-line {
-  border-color: rgba(56, 189, 248, 0.66) !important;
-  background:
-    linear-gradient(145deg, rgba(255,255,255,0.078), rgba(255,255,255,0.034)),
-    radial-gradient(circle at left center, rgba(56,189,248,0.15), transparent 44%),
-    rgba(255,255,255,0.03) !important;
-  box-shadow:
-    0 0 0 1px rgba(56,189,248,0.16),
-    0 0 22px rgba(56,189,248,0.22),
-    0 0 44px rgba(56,189,248,0.08),
-    inset 0 0 0 1px rgba(199,210,254,0.055),
-    inset 0 0 30px rgba(56,189,248,0.078) !important;
-}
-
-.interface-command-line::after {
-  content: "";
-  position: absolute;
-  inset: 5px;
-  border-radius: 15px;
-  border: 1px solid rgba(125, 211, 252, 0.18);
-  box-shadow:
-    inset 0 0 14px rgba(56,189,248,0.055),
-    0 0 12px rgba(56,189,248,0.055);
-  pointer-events: none;
-}
-
-.interface-command-line:focus-within {
-  border-color: rgba(56,189,248,0.82) !important;
-  box-shadow:
-    0 0 0 1px rgba(56,189,248,0.22),
-    0 0 30px rgba(56,189,248,0.30),
-    0 0 58px rgba(56,189,248,0.11),
-    inset 0 0 0 1px rgba(199,210,254,0.075),
-    inset 0 0 38px rgba(56,189,248,0.095) !important;
-}
-
-/* Middle media action cards: more pronounced, boxy-rounded, professional border treatment. */
-.interface-playback-status,
-.interface-media-toggle,
-.interface-system-set-operations .interface-playback-status,
-.interface-system-set-operations .interface-media-toggle,
-.interface-system-set-media .interface-playback-status,
-.interface-system-set-media .interface-playback-status:not(.interface-playback-is-playing),
-.interface-system-set-media .interface-media-toggle {
-  border-width: 1px !important;
-  border-color: rgba(56,189,248,0.56) !important;
-  background:
-    linear-gradient(145deg, rgba(56,189,248,0.145), rgba(139,92,246,0.085)),
-    radial-gradient(circle at 12% 50%, rgba(56,189,248,0.10), transparent 42%),
-    rgba(255,255,255,0.045) !important;
-  box-shadow:
-    0 0 0 1px rgba(56,189,248,0.11),
-    0 0 24px rgba(56,189,248,0.17),
-    0 16px 36px rgba(0,0,0,0.20),
-    inset 0 0 0 1px rgba(199,210,254,0.045),
-    inset 0 0 26px rgba(56,189,248,0.060) !important;
-}
-
-.interface-playback-status::after,
-.interface-media-toggle::after {
-  content: "";
-  position: absolute;
-  inset: 5px;
-  border-radius: 11px;
-  border: 1px solid rgba(125, 211, 252, 0.16);
-  box-shadow: inset 0 0 14px rgba(56,189,248,0.045);
-  pointer-events: none;
-}
-
-/* Showcase Bay Active: let the state card keep its pink identity while using the stronger card boundary. */
-.interface-system-set-media .interface-playback-status:not(.interface-playback-is-playing) {
-  border-color: rgba(236,72,153,0.62) !important;
-  background:
-    linear-gradient(145deg, rgba(236,72,153,0.145), rgba(56,189,248,0.085)),
-    radial-gradient(circle at 12% 50%, rgba(236,72,153,0.12), transparent 42%),
-    rgba(255,255,255,0.045) !important;
-  box-shadow:
-    0 0 0 1px rgba(236,72,153,0.11),
-    0 0 24px rgba(236,72,153,0.19),
-    0 16px 36px rgba(0,0,0,0.20),
-    inset 0 0 0 1px rgba(255,255,255,0.045),
-    inset 0 0 26px rgba(236,72,153,0.058) !important;
-}
-
-.interface-system-set-media .interface-playback-status:not(.interface-playback-is-playing)::after {
-  border-color: rgba(255,138,198,0.19);
-  box-shadow: inset 0 0 14px rgba(236,72,153,0.050);
-}
-
-/* Expand/Collapse remains cyan to preserve the stable system-control hierarchy. */
-.interface-system-set-media .interface-media-toggle,
-.interface-system-set-operations .interface-media-toggle,
-.interface-media-toggle {
-  color: var(--text);
-  border-color: rgba(56,189,248,0.62) !important;
-}
-
-/* Hover/focus adds a controlled lift and stronger boundary without changing button geometry. */
-.interface-playback-status:hover,
-.interface-media-toggle:hover,
-.interface-media-toggle:focus-visible {
-  border-color: rgba(56,189,248,0.78) !important;
-  box-shadow:
-    0 0 0 1px rgba(56,189,248,0.16),
-    0 0 30px rgba(56,189,248,0.24),
-    0 18px 42px rgba(0,0,0,0.24),
-    inset 0 0 0 1px rgba(199,210,254,0.065),
-    inset 0 0 30px rgba(56,189,248,0.075) !important;
-}
-
-.interface-system-set-media .interface-playback-status:not(.interface-playback-is-playing):hover {
-  border-color: rgba(255,138,198,0.78) !important;
-  box-shadow:
-    0 0 0 1px rgba(236,72,153,0.16),
-    0 0 30px rgba(236,72,153,0.25),
-    0 18px 42px rgba(0,0,0,0.24),
-    inset 0 0 0 1px rgba(255,255,255,0.060),
-    inset 0 0 30px rgba(236,72,153,0.075) !important;
-}
-
-/* Preserve the Secret Intel red armed state as the final priority when actively playing. */
-.interface-system-set-media .interface-jump-link.interface-jump-link-media-control[aria-pressed="true"] {
-  border-color: rgba(239, 68, 68, 0.68) !important;
-}
-
-/* =========================
-   WINTERFACE PRIMARY PLAY CTA GLASS PATCH
-   Applies the premium glass-control treatment to the bottom-right Play CTA across all WInterface sections.
-   Keeps Secret Intel red armed/live state as the highest-priority override.
-========================= */
-
-/* Primary lower-right CTA: glass control treatment across all 18 sections. */
-.interface-jump-link,
-.interface-system-set-operations .interface-jump-link,
-.interface-system-set-media .interface-jump-link {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: 3.35rem;
-  padding: 0.96rem 1.08rem;
-  border-radius: 16px !important;
-  color: var(--cyan) !important;
-  text-align: center;
-  overflow: hidden;
-  border: 1px solid rgba(56, 189, 248, 0.62) !important;
-  background:
-    linear-gradient(145deg, rgba(56, 189, 248, 0.155), rgba(139, 92, 246, 0.085)),
-    radial-gradient(circle at 12% 50%, rgba(56, 189, 248, 0.12), transparent 44%),
-    rgba(255, 255, 255, 0.046) !important;
-  box-shadow:
-    0 0 0 1px rgba(56, 189, 248, 0.12),
-    0 0 26px rgba(56, 189, 248, 0.18),
-    0 16px 38px rgba(0, 0, 0, 0.22),
-    inset 0 0 0 1px rgba(199, 210, 254, 0.05),
-    inset 0 0 28px rgba(56, 189, 248, 0.064) !important;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-}
-
-/* Outer animated sweep stays restrained and cyan. */
-.interface-jump-link::before,
-.interface-system-set-operations .interface-jump-link::before,
-.interface-system-set-media .interface-jump-link::before {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  background: linear-gradient(90deg, transparent, rgba(56,189,248,0.24), rgba(139,92,246,0.15), transparent) !important;
-  opacity: 0.52;
-  transform: translateX(-76%);
-  animation: interfacePlaybackSweep 4.2s ease-in-out infinite;
-  pointer-events: none;
-}
-
-/* Inner glass edge, matching the middle media-control language. */
-.interface-jump-link::after {
-  content: "";
-  position: absolute;
-  inset: 5px;
-  border-radius: 11px;
-  border: 1px solid rgba(125, 211, 252, 0.17);
-  box-shadow:
-    inset 0 0 15px rgba(56, 189, 248, 0.048),
-    0 0 12px rgba(56, 189, 248, 0.045);
-  pointer-events: none;
-}
-
-/* Hover/focus: switch into armed red launch state for all primary CTAs. */
-.interface-jump-link:hover,
-.interface-jump-link:focus-visible,
-.interface-system-set-operations .interface-jump-link:hover,
-.interface-system-set-operations .interface-jump-link:focus-visible,
-.interface-system-set-media .interface-jump-link:hover,
-.interface-system-set-media .interface-jump-link:focus-visible {
-  transform: translateY(-2px);
-  color: var(--text) !important;
-  border-color: rgba(248, 113, 113, 0.84) !important;
-  background:
-    linear-gradient(145deg, rgba(239, 68, 68, 0.24), rgba(236, 72, 153, 0.15)),
-    radial-gradient(circle at 12% 50%, rgba(239, 68, 68, 0.16), transparent 44%),
-    rgba(255, 255, 255, 0.062) !important;
-  box-shadow:
-    0 0 0 1px rgba(239, 68, 68, 0.19),
-    0 0 36px rgba(239, 68, 68, 0.32),
-    0 0 56px rgba(236, 72, 153, 0.18),
-    0 18px 44px rgba(0, 0, 0, 0.27),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.065),
-    inset 0 0 34px rgba(239, 68, 68, 0.094) !important;
-}
-
-.interface-jump-link:hover::before,
-.interface-jump-link:focus-visible::before,
-.interface-system-set-operations .interface-jump-link:hover::before,
-.interface-system-set-operations .interface-jump-link:focus-visible::before,
-.interface-system-set-media .interface-jump-link:hover::before,
-.interface-system-set-media .interface-jump-link:focus-visible::before {
-  background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.34), rgba(236, 72, 153, 0.23), transparent) !important;
-  opacity: 0.64;
-}
-
-.interface-jump-link:hover::after,
-.interface-jump-link:focus-visible::after {
-  border-color: rgba(248, 113, 113, 0.20);
-  box-shadow:
-    inset 0 0 15px rgba(239, 68, 68, 0.055),
-    0 0 13px rgba(239, 68, 68, 0.052);
-}
-
-/* Pressed-but-not-Secret-Intel still stays within the cyan control system. */
-.interface-jump-link.interface-jump-link-media-control[aria-pressed="true"] {
-  color: var(--text) !important;
-  border-color: rgba(56, 189, 248, 0.72) !important;
-  background:
-    linear-gradient(145deg, rgba(56, 189, 248, 0.18), rgba(139, 92, 246, 0.095)),
-    radial-gradient(circle at 12% 50%, rgba(56, 189, 248, 0.13), transparent 44%),
-    rgba(255, 255, 255, 0.052) !important;
-  box-shadow:
-    0 0 0 1px rgba(56, 189, 248, 0.14),
-    0 0 30px rgba(56, 189, 248, 0.22),
-    0 16px 40px rgba(0, 0, 0, 0.23),
-    inset 0 0 0 1px rgba(199, 210, 254, 0.06),
-    inset 0 0 30px rgba(56, 189, 248, 0.075) !important;
-}
-
-/* Secret Intel active playback remains red and overrides the glass cyan CTA. */
-.interface-system-set-media .interface-jump-link.interface-jump-link-media-control[aria-pressed="true"] {
-  color: var(--text) !important;
-  border-color: rgba(239, 68, 68, 0.74) !important;
-  background:
-    linear-gradient(145deg, rgba(239, 68, 68, 0.22), rgba(236, 72, 153, 0.13)),
-    radial-gradient(circle at 12% 50%, rgba(239, 68, 68, 0.14), transparent 44%),
-    rgba(255, 255, 255, 0.056) !important;
-  box-shadow:
-    0 0 0 1px rgba(239, 68, 68, 0.16),
-    0 0 30px rgba(239, 68, 68, 0.28),
-    0 0 48px rgba(236, 72, 153, 0.17),
-    0 16px 40px rgba(0, 0, 0, 0.23),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.055),
-    inset 0 0 30px rgba(239, 68, 68, 0.082) !important;
-}
-
-.interface-system-set-media .interface-jump-link.interface-jump-link-media-control[aria-pressed="true"]::before {
-  background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.34), rgba(236, 72, 153, 0.23), transparent) !important;
-  opacity: 0.62;
-}
-
-.interface-system-set-media .interface-jump-link.interface-jump-link-media-control[aria-pressed="true"]::after {
-  border-color: rgba(248, 113, 113, 0.20);
-  box-shadow:
-    inset 0 0 15px rgba(239, 68, 68, 0.055),
-    0 0 13px rgba(239, 68, 68, 0.052);
-}
-
-.interface-system-set-media .interface-jump-link.interface-jump-link-media-control[aria-pressed="true"]:hover,
-.interface-system-set-media .interface-jump-link.interface-jump-link-media-control[aria-pressed="true"]:focus-visible {
-  border-color: rgba(248, 113, 113, 0.84) !important;
-  background:
-    linear-gradient(145deg, rgba(239, 68, 68, 0.26), rgba(236, 72, 153, 0.16)),
-    radial-gradient(circle at 12% 50%, rgba(239, 68, 68, 0.17), transparent 44%),
-    rgba(255, 255, 255, 0.062) !important;
-  box-shadow:
-    0 0 0 1px rgba(239, 68, 68, 0.19),
-    0 0 36px rgba(239, 68, 68, 0.34),
-    0 0 58px rgba(236, 72, 153, 0.20),
-    0 18px 44px rgba(0, 0, 0, 0.27),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.065),
-    inset 0 0 34px rgba(239, 68, 68, 0.095) !important;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .interface-jump-link::before {
-    animation: none !important;
-    opacity: 0.18;
-    transform: none;
-  }
-}
-
-/* =========================
-   WINTERFACE MEDIA FRAME EDGE REFINEMENT PATCH
-   Adds a restrained cyan rim-light to Showcase image frames and embedded video windows.
-   This keeps media surfaces cinematic while improving visual separation from the glass panel.
-========================= */
-
-/* Applies to the embedded video window and all Showcase Bay image cards. */
-.interface-video-frame,
-.interface-showcase-frame {
-  border-color: rgba(56, 189, 248, 0.46) !important;
-  box-shadow:
-    0 0 0 1px rgba(56, 189, 248, 0.075),
-    0 22px 55px rgba(0, 0, 0, 0.30),
-    0 0 30px rgba(56, 189, 248, 0.145),
-    0 0 54px rgba(56, 189, 248, 0.055),
-    inset 0 0 0 1px rgba(199, 210, 254, 0.040),
-    inset 0 0 34px rgba(56, 189, 248, 0.040) !important;
-}
-
-/* Adds a soft exterior rim without making media frames compete with controls. */
-.interface-media-frame-shell::before {
-  inset: -2px;
-  background:
-    linear-gradient(135deg,
-      rgba(56, 189, 248, 0.34),
-      rgba(139, 92, 246, 0.18),
-      rgba(236, 72, 153, 0.10)
-    ) !important;
-  opacity: 0.64;
-  box-shadow:
-    0 0 26px rgba(56, 189, 248, 0.09),
-    0 0 44px rgba(139, 92, 246, 0.055);
-}
-
-/* Subtle top-edge highlight for image cards only. */
-.interface-showcase-frame::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  border-radius: inherit;
-  pointer-events: none;
-  background:
-    linear-gradient(180deg, rgba(125, 211, 252, 0.14), transparent 18%),
-    linear-gradient(90deg, rgba(56, 189, 248, 0.10), transparent 28%, transparent 72%, rgba(139, 92, 246, 0.08));
-  opacity: 0.58;
-  mix-blend-mode: screen;
-}
-
-/* The video frame uses a lighter overlay so the embedded player UI stays clean. */
-.interface-video-frame::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  border-radius: inherit;
-  pointer-events: none;
-  background:
-    linear-gradient(180deg, rgba(125, 211, 252, 0.10), transparent 16%),
-    linear-gradient(90deg, rgba(56, 189, 248, 0.075), transparent 26%, transparent 74%, rgba(139, 92, 246, 0.055));
-  opacity: 0.46;
-  mix-blend-mode: screen;
-}
-
-/* Slightly clearer media edge when expanded, but still below CTA intensity. */
-.interface-system-media-expanded .interface-video-frame {
-  border-color: rgba(56, 189, 248, 0.52) !important;
-  box-shadow:
-    0 0 0 1px rgba(56, 189, 248, 0.090),
-    0 24px 62px rgba(0, 0, 0, 0.32),
-    0 0 34px rgba(56, 189, 248, 0.16),
-    0 0 62px rgba(56, 189, 248, 0.065),
-    inset 0 0 0 1px rgba(199, 210, 254, 0.048),
-    inset 0 0 38px rgba(56, 189, 248, 0.045) !important;
-}
-
-.interface-system-media-expanded .interface-media-frame-shell::before {
-  opacity: 0.72;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .interface-video-frame::before,
-  .interface-showcase-frame::before {
-    mix-blend-mode: normal;
-  }
-}
-
 /* =========================
    WINTERFACE STATUS TELEMETRY CAPSULE PATCH
    Gives the center and right WInterface status indicators a subtle capsule treatment.
@@ -5203,43 +4602,193 @@ body.winterface-offline .interface-system-toggle:focus-visible {
 }
 
 /* =========================
-   WINTERFACE SIDE PANEL HEADING SCALE PATCH
-   Slightly increases Primary Signal and Live Systems label size while preventing mobile wrapping.
-   CSS-only: no HTML or JavaScript changes.
+   WINTERFACE SIGNAL DETAIL TELEMETRY PATCH
+   Adds a subtle lower telemetry readout to the first 12 WInterface cards.
+   Showcase Bay/media modules stay unchanged because they use the media panel.
 ========================= */
 
-.interface-output-label,
-.interface-system-set-operations .interface-output-label,
-.interface-system-set-media .interface-output-label {
-  font-size: clamp(0.72rem, 0.82vw, 0.78rem) !important;
-  letter-spacing: 0.145em;
-  line-height: 1.05;
-  white-space: nowrap;
-  max-width: 100%;
+.interface-signal-detail {
+  width: 100%;
+  max-width: 780px;
+  margin-top: auto;
+  padding-top: clamp(1rem, 2.4vw, 2.3rem);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.68rem;
 }
 
-/* Keep the label readable and single-line on narrow screens. */
-@media (max-width: 768px) {
-  .interface-output-label,
-  .interface-system-set-operations .interface-output-label,
-  .interface-system-set-media .interface-output-label {
-    font-size: clamp(0.68rem, 2.35vw, 0.74rem) !important;
-    letter-spacing: 0.13em;
+.interface-signal-detail[hidden] {
+  display: none !important;
+}
+
+.interface-signal-chip {
+  position: relative;
+  min-height: 5.35rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.38rem;
+  padding: 0.78rem 0.82rem 0.8rem;
+  border-radius: 16px;
+  border: 1px solid rgba(56, 189, 248, 0.26);
+  background:
+    linear-gradient(145deg, rgba(56, 189, 248, 0.075), rgba(139, 92, 246, 0.042)),
+    radial-gradient(circle at 12% 24%, rgba(56, 189, 248, 0.10), transparent 46%),
+    rgba(255, 255, 255, 0.032);
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.035),
+    0 14px 34px rgba(0, 0, 0, 0.18),
+    0 0 20px rgba(56, 189, 248, 0.070),
+    inset 0 0 18px rgba(56, 189, 248, 0.030);
+  overflow: hidden;
+}
+
+.interface-signal-chip::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.12), rgba(139, 92, 246, 0.07), transparent);
+  opacity: 0.32;
+  transform: translateX(-76%);
+  animation: interfacePlaybackSweep 5.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.interface-signal-chip::after {
+  content: "";
+  position: absolute;
+  left: 0.82rem;
+  top: 0.82rem;
+  width: 0.36rem;
+  height: 0.36rem;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow:
+    0 0 10px rgba(56, 189, 248, 0.84),
+    0 0 20px rgba(56, 189, 248, 0.28);
+  pointer-events: none;
+}
+
+.interface-signal-chip span,
+.interface-signal-chip strong {
+  position: relative;
+  z-index: 1;
+}
+
+.interface-signal-chip span {
+  display: block;
+  padding-left: 0.74rem;
+  color: var(--cyan);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(0.56rem, 0.72vw, 0.64rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: 0.145em;
+  text-transform: uppercase;
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.72),
+    0 0 10px rgba(56, 189, 248, 0.30);
+}
+
+.interface-signal-chip strong {
+  display: block;
+  color: var(--muted-strong);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(0.82rem, 1.05vw, 0.98rem);
+  font-weight: 850;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+}
+
+.interface-system-is-media .interface-signal-detail {
+  display: none !important;
+}
+
+.interface-response[data-interface-response] {
+  gap: 0;
+}
+
+.interface-response p:not(.panel-label) {
+  margin-bottom: 0;
+}
+
+@media (max-width: 1100px) {
+  .interface-signal-detail {
+    margin-top: 1.2rem;
+    padding-top: 0;
   }
 }
 
-@media (max-width: 420px) {
-  .interface-output-label,
-  .interface-system-set-operations .interface-output-label,
-  .interface-system-set-media .interface-output-label {
-    font-size: 0.66rem !important;
-    letter-spacing: 0.105em;
+@media (max-width: 768px) {
+  .interface-signal-detail {
+    grid-template-columns: 1fr;
+    gap: 0.52rem;
+    margin-top: 1.1rem;
+  }
+
+  .interface-signal-chip {
+    min-height: 4.25rem;
+    padding: 0.68rem 0.78rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .interface-signal-chip span {
+    font-size: 0.56rem;
+    letter-spacing: 0.12em;
+  }
+
+  .interface-signal-chip strong {
+    font-size: 0.86rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interface-signal-chip::before {
+    animation: none !important;
+    opacity: 0.14;
+    transform: none;
   }
 }
 
 /* =========================
-   WINTERFACE SIDE PANEL HEADING SCALE PLUS PATCH
-   Increases Primary Signal and Live Systems labels one step further while preserving mobile nowrap protection.
+   WINTERFACE SIGNAL DETAIL PROFESSIONAL COPY REFINEMENT
+   Refines the telemetry chip typography for the Problem / Method / Result model.
+========================= */
+
+.interface-signal-chip {
+  min-height: 5rem;
+  justify-content: flex-start;
+  padding-top: 0.92rem;
+}
+
+.interface-signal-chip span {
+  font-size: clamp(0.58rem, 0.72vw, 0.65rem);
+  letter-spacing: 0.155em;
+}
+
+.interface-signal-chip strong {
+  max-width: 13.5rem;
+  font-size: clamp(0.86rem, 1.02vw, 0.98rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 768px) {
+  .interface-signal-chip {
+    min-height: 4.15rem;
+    justify-content: center;
+  }
+
+  .interface-signal-chip strong {
+    max-width: none;
+  }
+}
+
+/* =========================
+   WINTERFACE RIGHT PANEL HEADING AND LIVE SYSTEMS RESTORE PATCH
+   Restores larger Primary Signal / Live Systems labels and the prior Live Systems list indentation.
    CSS-only: no HTML or JavaScript changes.
 ========================= */
 
@@ -5247,13 +4796,29 @@ body.winterface-offline .interface-system-toggle:focus-visible {
 .interface-system-set-operations .interface-output-label,
 .interface-system-set-media .interface-output-label {
   font-size: clamp(0.78rem, 0.92vw, 0.86rem) !important;
+  font-weight: 950 !important;
   letter-spacing: 0.145em !important;
   line-height: 1.05;
   white-space: nowrap;
-  max-width: 100%;
+  color: var(--cyan) !important;
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.72),
+    0 0 11px rgba(56, 189, 248, 0.50),
+    0 0 22px rgba(56, 189, 248, 0.18);
 }
 
-/* Tablet and stacked layouts keep the headings larger but controlled. */
+.interface-system-list {
+  padding-left: 0.28rem;
+}
+
+.interface-system-list li {
+  padding-left: 1.22rem;
+}
+
+.interface-system-list li::before {
+  left: 0.10rem;
+}
+
 @media (max-width: 768px) {
   .interface-output-label,
   .interface-system-set-operations .interface-output-label,
@@ -5263,13 +4828,1031 @@ body.winterface-offline .interface-system-toggle:focus-visible {
   }
 }
 
-/* Very narrow screens prioritize single-line readability over extra scale. */
+@media (max-width: 640px) {
+  .interface-system-list {
+    padding-left: 0.18rem;
+  }
+
+  .interface-system-list li {
+    padding-left: 1.14rem;
+  }
+
+  .interface-system-list li::before {
+    left: 0.06rem;
+  }
+}
+
 @media (max-width: 420px) {
   .interface-output-label,
   .interface-system-set-operations .interface-output-label,
   .interface-system-set-media .interface-output-label {
     font-size: 0.70rem !important;
     letter-spacing: 0.095em !important;
+  }
+}
+
+/* =========================
+   WINTERFACE SIGNAL DETAIL CHIP HOVER PATCH
+   Adds controlled hover/focus bounce effects to the new Problem / Method / Result telemetry chips.
+   CSS-only: no HTML or JavaScript changes.
+========================= */
+
+.interface-signal-chip {
+  transform: translateY(0) scale(1);
+  transition:
+    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.22s ease,
+    background 0.22s ease,
+    box-shadow 0.22s ease;
+  will-change: transform;
+}
+
+.interface-signal-chip:hover,
+.interface-signal-chip:focus-within {
+  transform: translateY(-6px) scale(1.018);
+  border-color: rgba(56, 189, 248, 0.58);
+  background:
+    linear-gradient(145deg, rgba(56, 189, 248, 0.115), rgba(139, 92, 246, 0.065)),
+    radial-gradient(circle at 12% 24%, rgba(56, 189, 248, 0.145), transparent 48%),
+    rgba(255, 255, 255, 0.048);
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.095),
+    0 20px 42px rgba(0, 0, 0, 0.22),
+    0 0 28px rgba(56, 189, 248, 0.16),
+    0 0 46px rgba(139, 92, 246, 0.085),
+    inset 0 0 22px rgba(56, 189, 248, 0.045);
+}
+
+.interface-signal-chip:hover::before,
+.interface-signal-chip:focus-within::before {
+  opacity: 0.52;
+}
+
+.interface-signal-chip:hover::after,
+.interface-signal-chip:focus-within::after {
+  box-shadow:
+    0 0 12px rgba(56, 189, 248, 0.98),
+    0 0 26px rgba(56, 189, 248, 0.42),
+    0 0 42px rgba(56, 189, 248, 0.18);
+}
+
+.interface-signal-chip:hover span,
+.interface-signal-chip:focus-within span {
+  color: #7dd3fc;
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.78),
+    0 0 12px rgba(56, 189, 248, 0.46);
+}
+
+.interface-signal-chip:hover strong,
+.interface-signal-chip:focus-within strong {
+  color: var(--text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interface-signal-chip,
+  .interface-signal-chip:hover,
+  .interface-signal-chip:focus-within {
+    transform: none !important;
+    transition:
+      border-color 0.01s linear,
+      background 0.01s linear,
+      box-shadow 0.01s linear;
+    will-change: auto;
+  }
+}
+
+/* =========================
+   WINTERFACE OPERATIONAL TELEMETRY PURPLE ORB PATCH
+   Changes the Problem / Method / Result telemetry chip orbs to purple in Operational Layer mode.
+   CSS-only: no HTML or JavaScript changes.
+========================= */
+
+.interface-system-set-operations .interface-signal-chip {
+  border-color: rgba(139, 92, 246, 0.30);
+  background:
+    linear-gradient(145deg, rgba(139, 92, 246, 0.085), rgba(56, 189, 248, 0.038)),
+    radial-gradient(circle at 12% 24%, rgba(139, 92, 246, 0.13), transparent 46%),
+    rgba(255, 255, 255, 0.032);
+  box-shadow:
+    0 0 0 1px rgba(139, 92, 246, 0.040),
+    0 14px 34px rgba(0, 0, 0, 0.18),
+    0 0 20px rgba(139, 92, 246, 0.080),
+    inset 0 0 18px rgba(139, 92, 246, 0.032);
+}
+
+.interface-system-set-operations .interface-signal-chip::before {
+  background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.13), rgba(56, 189, 248, 0.07), transparent);
+}
+
+.interface-system-set-operations .interface-signal-chip::after {
+  background: var(--violet);
+  box-shadow:
+    0 0 10px rgba(139, 92, 246, 0.88),
+    0 0 22px rgba(139, 92, 246, 0.34);
+}
+
+.interface-system-set-operations .interface-signal-chip span {
+  color: var(--violet);
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.72),
+    0 0 10px rgba(139, 92, 246, 0.36);
+}
+
+.interface-system-set-operations .interface-signal-chip:hover,
+.interface-system-set-operations .interface-signal-chip:focus-within {
+  border-color: rgba(139, 92, 246, 0.64);
+  background:
+    linear-gradient(145deg, rgba(139, 92, 246, 0.135), rgba(56, 189, 248, 0.060)),
+    radial-gradient(circle at 12% 24%, rgba(139, 92, 246, 0.18), transparent 48%),
+    rgba(255, 255, 255, 0.048);
+  box-shadow:
+    0 0 0 1px rgba(139, 92, 246, 0.105),
+    0 20px 42px rgba(0, 0, 0, 0.22),
+    0 0 30px rgba(139, 92, 246, 0.18),
+    0 0 46px rgba(56, 189, 248, 0.070),
+    inset 0 0 22px rgba(139, 92, 246, 0.052);
+}
+
+.interface-system-set-operations .interface-signal-chip:hover::after,
+.interface-system-set-operations .interface-signal-chip:focus-within::after {
+  box-shadow:
+    0 0 12px rgba(139, 92, 246, 1),
+    0 0 28px rgba(139, 92, 246, 0.48),
+    0 0 44px rgba(139, 92, 246, 0.22);
+}
+
+.interface-system-set-operations .interface-signal-chip:hover span,
+.interface-system-set-operations .interface-signal-chip:focus-within span {
+  color: #a78bfa;
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.78),
+    0 0 12px rgba(139, 92, 246, 0.50);
+}
+
+/* =========================
+   WINTERFACE BOTTOM RIGHT CTA BOXY GLASS RESTORE PATCH
+   Restores the bottom-right WInterface launch button to the approved boxy-round glass style.
+   Keeps Secret Intel / Pause Intel special red active behavior intact.
+   CSS-only: no HTML or JavaScript changes.
+========================= */
+
+.interface-jump-link {
+  min-height: 3.15rem;
+  padding: 0.9rem 1rem;
+  border-radius: 16px !important;
+  color: var(--cyan);
+  text-align: center;
+  background:
+    linear-gradient(145deg, rgba(56, 189, 248, 0.14), rgba(139, 92, 246, 0.085)),
+    radial-gradient(circle at 18% 18%, rgba(56, 189, 248, 0.10), transparent 42%),
+    rgba(255, 255, 255, 0.048);
+  border: 1px solid rgba(56, 189, 248, 0.34);
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.035),
+    0 14px 34px rgba(0, 0, 0, 0.22),
+    0 0 28px rgba(56, 189, 248, 0.13),
+    inset 0 0 24px rgba(56, 189, 248, 0.045);
+  backdrop-filter: blur(18px);
+}
+
+.interface-jump-link::before {
+  border-radius: inherit;
+  opacity: 0.50;
+  background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.22), rgba(139, 92, 246, 0.16), transparent);
+}
+
+.interface-jump-link:hover,
+.interface-jump-link:focus-visible {
+  transform: translateY(-2px);
+  color: var(--text);
+  border-color: rgba(239, 68, 68, 0.62);
+  background:
+    linear-gradient(145deg, rgba(239, 68, 68, 0.19), rgba(236, 72, 153, 0.105)),
+    radial-gradient(circle at 18% 18%, rgba(239, 68, 68, 0.13), transparent 44%),
+    rgba(255, 255, 255, 0.055);
+  box-shadow:
+    0 0 0 1px rgba(239, 68, 68, 0.070),
+    0 16px 38px rgba(0, 0, 0, 0.25),
+    0 0 32px rgba(239, 68, 68, 0.17),
+    0 0 46px rgba(236, 72, 153, 0.10),
+    inset 0 0 28px rgba(239, 68, 68, 0.055);
+}
+
+/* Preserve the Secret Intel active/paused red effect while keeping the boxy-round shape. */
+.interface-jump-link.interface-jump-link-media-control[aria-pressed="true"] {
+  border-radius: 16px !important;
+  color: var(--text);
+  border-color: rgba(239, 68, 68, 0.48);
+  background:
+    linear-gradient(145deg, rgba(239, 68, 68, 0.18), rgba(236, 72, 153, 0.105)),
+    radial-gradient(circle at 18% 18%, rgba(239, 68, 68, 0.12), transparent 44%),
+    rgba(255, 255, 255, 0.050);
+  box-shadow:
+    0 0 0 1px rgba(239, 68, 68, 0.060),
+    0 16px 38px rgba(0, 0, 0, 0.24),
+    0 0 30px rgba(239, 68, 68, 0.16),
+    0 0 46px rgba(236, 72, 153, 0.10),
+    inset 0 0 26px rgba(239, 68, 68, 0.055);
+}
+
+.interface-jump-link.interface-jump-link-media-control[aria-pressed="true"]::before {
+  background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.26), rgba(236, 72, 153, 0.18), transparent);
+}
+
+/* Keep the launch button comfortable on mobile without reverting to a pill shape. */
+@media (max-width: 640px) {
+  .interface-jump-link {
+    border-radius: 16px !important;
+  }
+}
+
+/* =========================
+   WINTERFACE BOTTOM RIGHT CTA RED HOVER FORCE PATCH
+   Restores the approved red hover behavior on the bottom-right WInterface launch button.
+   Uses explicit priority because earlier button/background rules can otherwise win in the cascade.
+   CSS-only: no HTML or JavaScript changes.
+========================= */
+
+.interface-jump-link:hover,
+.interface-jump-link:focus-visible,
+.interface-jump-link.interface-jump-link-media-control:hover,
+.interface-jump-link.interface-jump-link-media-control:focus-visible,
+.interface-jump-link.interface-jump-link-media-control[aria-pressed="false"]:hover,
+.interface-jump-link.interface-jump-link-media-control[aria-pressed="false"]:focus-visible {
+  transform: translateY(-2px) !important;
+  color: var(--text) !important;
+  border-color: rgba(239, 68, 68, 0.68) !important;
+  background:
+    linear-gradient(145deg, rgba(239, 68, 68, 0.22), rgba(236, 72, 153, 0.13)),
+    radial-gradient(circle at 18% 18%, rgba(239, 68, 68, 0.16), transparent 44%),
+    rgba(255, 255, 255, 0.058) !important;
+  box-shadow:
+    0 0 0 1px rgba(239, 68, 68, 0.085),
+    0 16px 38px rgba(0, 0, 0, 0.25),
+    0 0 34px rgba(239, 68, 68, 0.22),
+    0 0 52px rgba(236, 72, 153, 0.13),
+    inset 0 0 30px rgba(239, 68, 68, 0.065) !important;
+}
+
+.interface-jump-link:hover::before,
+.interface-jump-link:focus-visible::before,
+.interface-jump-link.interface-jump-link-media-control:hover::before,
+.interface-jump-link.interface-jump-link-media-control:focus-visible::before,
+.interface-jump-link.interface-jump-link-media-control[aria-pressed="false"]:hover::before,
+.interface-jump-link.interface-jump-link-media-control[aria-pressed="false"]:focus-visible::before {
+  background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.30), rgba(236, 72, 153, 0.20), transparent) !important;
+  opacity: 0.62 !important;
+}
+
+/* Keep Pause Intel red even when not hovering. */
+.interface-jump-link.interface-jump-link-media-control[aria-pressed="true"] {
+  border-radius: 16px !important;
+  color: var(--text) !important;
+  border-color: rgba(239, 68, 68, 0.52) !important;
+  background:
+    linear-gradient(145deg, rgba(239, 68, 68, 0.20), rgba(236, 72, 153, 0.12)),
+    radial-gradient(circle at 18% 18%, rgba(239, 68, 68, 0.14), transparent 44%),
+    rgba(255, 255, 255, 0.052) !important;
+  box-shadow:
+    0 0 0 1px rgba(239, 68, 68, 0.070),
+    0 16px 38px rgba(0, 0, 0, 0.24),
+    0 0 32px rgba(239, 68, 68, 0.18),
+    0 0 48px rgba(236, 72, 153, 0.12),
+    inset 0 0 28px rgba(239, 68, 68, 0.065) !important;
+}
+
+/* =========================
+   WINTERFACE TELEMETRY CONTROL SURFACE PATCH
+   Converts the Problem / Method / Result telemetry chips into abstract controller-style control surfaces.
+   Chip 1 = left analog control, Chip 2 = precision analog control, Chip 3 = action button.
+   CSS-only: no HTML or JavaScript changes.
+========================= */
+
+.interface-signal-detail {
+  perspective: 1100px;
+}
+
+.interface-signal-chip {
+  isolation: isolate;
+  overflow: hidden;
+  padding-top: 0.88rem;
+  padding-left: 0.92rem;
+}
+
+/* Reposition the label/value so the control hardware reads as intentional, not decorative clutter. */
+.interface-signal-chip span {
+  padding-left: 2.55rem;
+}
+
+.interface-signal-chip strong {
+  margin-top: 0.08rem;
+}
+
+/* Shared hardware node foundation. */
+.interface-signal-chip::after {
+  left: 0.9rem;
+  top: 0.78rem;
+  width: 1.68rem;
+  height: 1.68rem;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 34% 28%, rgba(248, 250, 252, 0.38), transparent 22%),
+    radial-gradient(circle at 50% 52%, rgba(56, 189, 248, 0.44), rgba(56, 189, 248, 0.16) 43%, rgba(5, 8, 22, 0.68) 69%),
+    rgba(5, 8, 22, 0.52);
+  border: 1px solid rgba(125, 211, 252, 0.52);
+  box-shadow:
+    inset 0 0 9px rgba(248, 250, 252, 0.12),
+    inset 0 -6px 12px rgba(0, 0, 0, 0.36),
+    0 0 12px rgba(56, 189, 248, 0.64),
+    0 0 28px rgba(56, 189, 248, 0.22);
+  transform: translate3d(0, 0, 0);
+  transition:
+    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.22s ease,
+    border-color 0.22s ease,
+    background 0.22s ease;
+}
+
+/* The sweep layer becomes a recessed control plate behind the stick/button. */
+.interface-signal-chip::before {
+  inset: 0.47rem auto auto 0.55rem;
+  width: 2.42rem;
+  height: 2.42rem;
+  border-radius: 50%;
+  opacity: 0.76;
+  transform: none;
+  animation: none;
+  background:
+    radial-gradient(circle at 50% 50%, transparent 31%, rgba(56, 189, 248, 0.20) 32%, transparent 35%),
+    radial-gradient(circle at 50% 50%, transparent 52%, rgba(56, 189, 248, 0.16) 53%, transparent 56%),
+    conic-gradient(from 40deg, transparent 0 10%, rgba(56, 189, 248, 0.16) 10% 13%, transparent 13% 37%, rgba(56, 189, 248, 0.12) 37% 40%, transparent 40% 64%, rgba(139, 92, 246, 0.14) 64% 67%, transparent 67% 100%);
+  border: 1px solid rgba(56, 189, 248, 0.20);
+  box-shadow:
+    inset 0 0 14px rgba(56, 189, 248, 0.045),
+    0 0 18px rgba(56, 189, 248, 0.075);
+}
+
+/* Problem = left analog stick. Slightly offset to feel like navigation/control input. */
+.interface-signal-chip:nth-child(1)::after {
+  transform: translate3d(-1px, 1px, 0);
+}
+
+.interface-signal-chip:nth-child(1):hover::after,
+.interface-signal-chip:nth-child(1):focus-within::after {
+  transform: translate3d(-3px, -2px, 0) scale(1.05);
+}
+
+/* Method = precision stick with tighter targeting geometry. */
+.interface-signal-chip:nth-child(2)::before {
+  background:
+    radial-gradient(circle at 50% 50%, transparent 24%, rgba(56, 189, 248, 0.22) 25%, transparent 28%),
+    radial-gradient(circle at 50% 50%, transparent 46%, rgba(56, 189, 248, 0.18) 47%, transparent 50%),
+    conic-gradient(from 0deg, rgba(56, 189, 248, 0.16) 0 2%, transparent 2% 23%, rgba(56, 189, 248, 0.16) 23% 25%, transparent 25% 48%, rgba(139, 92, 246, 0.16) 48% 50%, transparent 50% 73%, rgba(56, 189, 248, 0.16) 73% 75%, transparent 75% 100%);
+}
+
+.interface-signal-chip:nth-child(2)::after {
+  width: 1.48rem;
+  height: 1.48rem;
+  left: 1rem;
+  top: 0.88rem;
+  background:
+    radial-gradient(circle at 38% 30%, rgba(248, 250, 252, 0.42), transparent 22%),
+    radial-gradient(circle at 50% 52%, rgba(56, 189, 248, 0.50), rgba(56, 189, 248, 0.18) 42%, rgba(5, 8, 22, 0.70) 69%);
+}
+
+.interface-signal-chip:nth-child(2):hover::after,
+.interface-signal-chip:nth-child(2):focus-within::after {
+  transform: translate3d(3px, -2px, 0) scale(1.055);
+}
+
+/* Result = tactical action button, flatter and more illuminated than the analog sticks. */
+.interface-signal-chip:nth-child(3)::before {
+  background:
+    radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.10), transparent 33%),
+    conic-gradient(from 18deg, rgba(56, 189, 248, 0.24) 0 9%, transparent 9% 18%, rgba(139, 92, 246, 0.18) 18% 27%, transparent 27% 44%, rgba(56, 189, 248, 0.20) 44% 53%, transparent 53% 68%, rgba(139, 92, 246, 0.16) 68% 78%, transparent 78% 100%);
+  border-color: rgba(56, 189, 248, 0.28);
+}
+
+.interface-signal-chip:nth-child(3)::after {
+  width: 1.74rem;
+  height: 1.74rem;
+  left: 0.86rem;
+  top: 0.76rem;
+  background:
+    radial-gradient(circle at 38% 28%, rgba(248, 250, 252, 0.50), transparent 22%),
+    radial-gradient(circle at 50% 54%, rgba(56, 189, 248, 0.56), rgba(56, 189, 248, 0.22) 44%, rgba(5, 8, 22, 0.62) 73%);
+  box-shadow:
+    inset 0 0 10px rgba(248, 250, 252, 0.14),
+    inset 0 -7px 13px rgba(0, 0, 0, 0.34),
+    0 0 15px rgba(56, 189, 248, 0.72),
+    0 0 34px rgba(56, 189, 248, 0.27);
+}
+
+.interface-signal-chip:nth-child(3):hover::after,
+.interface-signal-chip:nth-child(3):focus-within::after {
+  transform: translate3d(0, -2px, 0) scale(1.09);
+  box-shadow:
+    inset 0 0 12px rgba(248, 250, 252, 0.18),
+    inset 0 -7px 13px rgba(0, 0, 0, 0.30),
+    0 0 18px rgba(56, 189, 248, 0.92),
+    0 0 42px rgba(56, 189, 248, 0.34),
+    0 0 64px rgba(139, 92, 246, 0.16);
+}
+
+/* Subtle directional grooves inside each chip. */
+.interface-signal-chip span::before,
+.interface-signal-chip span::after {
+  content: "";
+  position: absolute;
+  left: 0.06rem;
+  top: 0.42rem;
+  width: 2.34rem;
+  height: 1px;
+  border-radius: 999px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.32), transparent);
+  opacity: 0.54;
+  transform: rotate(0deg);
+}
+
+.interface-signal-chip span::after {
+  transform: rotate(90deg);
+  opacity: 0.36;
+}
+
+/* Hardware response on hover. */
+.interface-signal-chip:hover::before,
+.interface-signal-chip:focus-within::before {
+  opacity: 0.96;
+  border-color: rgba(56, 189, 248, 0.38);
+  box-shadow:
+    inset 0 0 17px rgba(56, 189, 248, 0.075),
+    0 0 24px rgba(56, 189, 248, 0.14);
+}
+
+.interface-signal-chip:hover span::before,
+.interface-signal-chip:focus-within span::before,
+.interface-signal-chip:hover span::after,
+.interface-signal-chip:focus-within span::after {
+  opacity: 0.72;
+}
+
+/* Operational Layer uses purple control hardware to match the mode theme. */
+.interface-system-set-operations .interface-signal-chip::before {
+  border-color: rgba(139, 92, 246, 0.24);
+  background:
+    radial-gradient(circle at 50% 50%, transparent 31%, rgba(139, 92, 246, 0.22) 32%, transparent 35%),
+    radial-gradient(circle at 50% 50%, transparent 52%, rgba(139, 92, 246, 0.16) 53%, transparent 56%),
+    conic-gradient(from 40deg, transparent 0 10%, rgba(139, 92, 246, 0.18) 10% 13%, transparent 13% 37%, rgba(139, 92, 246, 0.13) 37% 40%, transparent 40% 64%, rgba(56, 189, 248, 0.13) 64% 67%, transparent 67% 100%);
+  box-shadow:
+    inset 0 0 14px rgba(139, 92, 246, 0.055),
+    0 0 18px rgba(139, 92, 246, 0.080);
+}
+
+.interface-system-set-operations .interface-signal-chip::after {
+  background:
+    radial-gradient(circle at 34% 28%, rgba(248, 250, 252, 0.38), transparent 22%),
+    radial-gradient(circle at 50% 52%, rgba(139, 92, 246, 0.52), rgba(139, 92, 246, 0.20) 43%, rgba(5, 8, 22, 0.68) 69%),
+    rgba(5, 8, 22, 0.52);
+  border-color: rgba(167, 139, 250, 0.56);
+  box-shadow:
+    inset 0 0 9px rgba(248, 250, 252, 0.12),
+    inset 0 -6px 12px rgba(0, 0, 0, 0.36),
+    0 0 12px rgba(139, 92, 246, 0.70),
+    0 0 30px rgba(139, 92, 246, 0.26);
+}
+
+.interface-system-set-operations .interface-signal-chip:nth-child(2)::before {
+  background:
+    radial-gradient(circle at 50% 50%, transparent 24%, rgba(139, 92, 246, 0.24) 25%, transparent 28%),
+    radial-gradient(circle at 50% 50%, transparent 46%, rgba(139, 92, 246, 0.18) 47%, transparent 50%),
+    conic-gradient(from 0deg, rgba(139, 92, 246, 0.18) 0 2%, transparent 2% 23%, rgba(139, 92, 246, 0.18) 23% 25%, transparent 25% 48%, rgba(56, 189, 248, 0.15) 48% 50%, transparent 50% 73%, rgba(139, 92, 246, 0.18) 73% 75%, transparent 75% 100%);
+}
+
+.interface-system-set-operations .interface-signal-chip:nth-child(3)::before {
+  background:
+    radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.12), transparent 33%),
+    conic-gradient(from 18deg, rgba(139, 92, 246, 0.26) 0 9%, transparent 9% 18%, rgba(56, 189, 248, 0.16) 18% 27%, transparent 27% 44%, rgba(139, 92, 246, 0.22) 44% 53%, transparent 53% 68%, rgba(56, 189, 248, 0.14) 68% 78%, transparent 78% 100%);
+}
+
+.interface-system-set-operations .interface-signal-chip span::before,
+.interface-system-set-operations .interface-signal-chip span::after {
+  background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.38), transparent);
+}
+
+.interface-system-set-operations .interface-signal-chip:hover::before,
+.interface-system-set-operations .interface-signal-chip:focus-within::before {
+  border-color: rgba(139, 92, 246, 0.44);
+  box-shadow:
+    inset 0 0 17px rgba(139, 92, 246, 0.085),
+    0 0 26px rgba(139, 92, 246, 0.17);
+}
+
+/* Keep the controller hardware from crowding smaller mobile cards. */
+@media (max-width: 768px) {
+  .interface-signal-chip {
+    padding-top: 0.74rem;
+  }
+
+  .interface-signal-chip span {
+    padding-left: 2.38rem;
+  }
+
+  .interface-signal-chip::before {
+    width: 2.22rem;
+    height: 2.22rem;
+    left: 0.52rem;
+    top: 0.46rem;
+  }
+
+  .interface-signal-chip::after {
+    width: 1.48rem;
+    height: 1.48rem;
+    left: 0.89rem;
+    top: 0.82rem;
+  }
+
+  .interface-signal-chip:nth-child(2)::after {
+    width: 1.34rem;
+    height: 1.34rem;
+    left: 0.96rem;
+    top: 0.89rem;
+  }
+
+  .interface-signal-chip:nth-child(3)::after {
+    width: 1.52rem;
+    height: 1.52rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interface-signal-chip::before,
+  .interface-signal-chip::after,
+  .interface-signal-chip:hover::after,
+  .interface-signal-chip:focus-within::after {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* =========================
+   WINTERFACE ALL BOTTOM RIGHT CTA RED HOVER FINAL PATCH
+   Forces every bottom-right WInterface CTA across all 18 modules to use the same red hover treatment.
+   This intentionally overrides cyan, purple, and pink contextual hover states.
+   CSS-only: no HTML or JavaScript changes.
+========================= */
+
+.interface-shell .interface-side-panel .interface-jump-link:hover,
+.interface-shell .interface-side-panel .interface-jump-link:focus-visible,
+.interface-shell .interface-side-panel .interface-jump-link.interface-jump-link-media-control:hover,
+.interface-shell .interface-side-panel .interface-jump-link.interface-jump-link-media-control:focus-visible,
+.interface-shell .interface-side-panel .interface-jump-link.interface-jump-link-media-control[aria-pressed="false"]:hover,
+.interface-shell .interface-side-panel .interface-jump-link.interface-jump-link-media-control[aria-pressed="false"]:focus-visible,
+.interface-system-set-primary .interface-side-panel .interface-jump-link:hover,
+.interface-system-set-primary .interface-side-panel .interface-jump-link:focus-visible,
+.interface-system-set-operations .interface-side-panel .interface-jump-link:hover,
+.interface-system-set-operations .interface-side-panel .interface-jump-link:focus-visible,
+.interface-system-set-media .interface-side-panel .interface-jump-link:hover,
+.interface-system-set-media .interface-side-panel .interface-jump-link:focus-visible {
+  transform: translateY(-2px) !important;
+  color: var(--text) !important;
+  border-color: rgba(239, 68, 68, 0.72) !important;
+  background:
+    linear-gradient(145deg, rgba(239, 68, 68, 0.24), rgba(236, 72, 153, 0.14)),
+    radial-gradient(circle at 18% 18%, rgba(239, 68, 68, 0.18), transparent 44%),
+    rgba(255, 255, 255, 0.060) !important;
+  box-shadow:
+    0 0 0 1px rgba(239, 68, 68, 0.095),
+    0 16px 38px rgba(0, 0, 0, 0.25),
+    0 0 36px rgba(239, 68, 68, 0.24),
+    0 0 54px rgba(236, 72, 153, 0.14),
+    inset 0 0 30px rgba(239, 68, 68, 0.070) !important;
+}
+
+.interface-shell .interface-side-panel .interface-jump-link:hover::before,
+.interface-shell .interface-side-panel .interface-jump-link:focus-visible::before,
+.interface-shell .interface-side-panel .interface-jump-link.interface-jump-link-media-control:hover::before,
+.interface-shell .interface-side-panel .interface-jump-link.interface-jump-link-media-control:focus-visible::before,
+.interface-system-set-primary .interface-side-panel .interface-jump-link:hover::before,
+.interface-system-set-primary .interface-side-panel .interface-jump-link:focus-visible::before,
+.interface-system-set-operations .interface-side-panel .interface-jump-link:hover::before,
+.interface-system-set-operations .interface-side-panel .interface-jump-link:focus-visible::before,
+.interface-system-set-media .interface-side-panel .interface-jump-link:hover::before,
+.interface-system-set-media .interface-side-panel .interface-jump-link:focus-visible::before {
+  background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.32), rgba(236, 72, 153, 0.22), transparent) !important;
+  opacity: 0.66 !important;
+}
+
+/* Keep active Pause Intel red even when not hovered. */
+.interface-shell .interface-side-panel .interface-jump-link.interface-jump-link-media-control[aria-pressed="true"] {
+  border-radius: 16px !important;
+  color: var(--text) !important;
+  border-color: rgba(239, 68, 68, 0.54) !important;
+  background:
+    linear-gradient(145deg, rgba(239, 68, 68, 0.20), rgba(236, 72, 153, 0.12)),
+    radial-gradient(circle at 18% 18%, rgba(239, 68, 68, 0.14), transparent 44%),
+    rgba(255, 255, 255, 0.052) !important;
+  box-shadow:
+    0 0 0 1px rgba(239, 68, 68, 0.074),
+    0 16px 38px rgba(0, 0, 0, 0.24),
+    0 0 32px rgba(239, 68, 68, 0.18),
+    0 0 48px rgba(236, 72, 153, 0.12),
+    inset 0 0 28px rgba(239, 68, 68, 0.065) !important;
+}
+
+
+
+
+/* =========================
+   WINTERFACE CENTERED CONTROL SURFACE ALIGNMENT PATCH
+   Centers the control orbs and stacks the telemetry text beneath them for improved readability.
+   Preserves all existing control-surface hover and lighting effects.
+   CSS-only: no HTML or JavaScript changes.
+========================= */
+
+.interface-signal-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  padding:
+    4.25rem
+    1rem
+    1rem
+    1rem;
+}
+
+/* Center the control ring hardware. */
+.interface-signal-chip::before {
+  left: 50%;
+  top: 0.42rem;
+  transform: translateX(-50%);
+}
+
+/* Center the orb itself. */
+.interface-signal-chip::after {
+  left: 50% !important;
+  top: 0.78rem;
+  transform: translateX(-50%) translate3d(0, 0, 0);
+}
+
+/* Preserve unique hover motion characteristics per chip. */
+.interface-signal-chip:nth-child(1):hover::after,
+.interface-signal-chip:nth-child(1):focus-within::after {
+  transform: translateX(calc(-50% - 3px)) translateY(-2px) scale(1.05);
+}
+
+.interface-signal-chip:nth-child(2):hover::after,
+.interface-signal-chip:nth-child(2):focus-within::after {
+  transform: translateX(calc(-50% + 3px)) translateY(-2px) scale(1.055);
+}
+
+.interface-signal-chip:nth-child(3):hover::after,
+.interface-signal-chip:nth-child(3):focus-within::after {
+  transform: translateX(-50%) translateY(-2px) scale(1.09);
+}
+
+/* Remove left-aligned spacing from previous layout. */
+.interface-signal-chip span {
+  padding-left: 0 !important;
+  margin-top: 0.18rem;
+  justify-content: center;
+  text-align: center;
+}
+
+.interface-signal-chip strong {
+  margin-top: 0.42rem;
+  max-width: 12.5rem;
+  text-align: center;
+  line-height: 1.12;
+}
+
+/* Center the directional grooves beneath the orb. */
+.interface-signal-chip span::before,
+.interface-signal-chip span::after {
+  left: 50%;
+  top: -1.92rem;
+  width: 2.3rem;
+  transform-origin: center;
+}
+
+.interface-signal-chip span::before {
+  transform: translateX(-50%) rotate(0deg);
+}
+
+.interface-signal-chip span::after {
+  transform: translateX(-50%) rotate(90deg);
+}
+
+/* Restore centered sizing consistency for chip variants. */
+.interface-signal-chip:nth-child(2)::after {
+  left: 50% !important;
+}
+
+.interface-signal-chip:nth-child(3)::after {
+  left: 50% !important;
+}
+
+/* Improve visual breathing room on mobile. */
+@media (max-width: 768px) {
+  .interface-signal-chip {
+    padding:
+      3.95rem
+      0.82rem
+      0.88rem
+      0.82rem;
+  }
+
+  .interface-signal-chip strong {
+    max-width: 10.5rem;
+    font-size: 0.88rem;
+  }
+
+  .interface-signal-chip span::before,
+  .interface-signal-chip span::after {
+    top: -1.78rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .interface-signal-chip {
+    min-height: 8.4rem;
+  }
+}
+
+/* =========================
+   WINTERFACE TELEMETRY NORMALIZED TRIAD COLOR PATCH
+   Normalizes all three control orbs and gives Problem / Method / Result distinct tactical colors.
+   Problem = cyan, Method = violet, Result = magenta-red.
+   CSS-only: no HTML or JavaScript changes.
+========================= */
+
+/* Normalize all three control modules. */
+.interface-signal-chip,
+.interface-signal-chip:nth-child(1),
+.interface-signal-chip:nth-child(2),
+.interface-signal-chip:nth-child(3) {
+  min-height: 8.55rem;
+  padding: 4.35rem 1rem 1rem;
+}
+
+/* Every card gets the same control ring position and size. */
+.interface-signal-chip::before,
+.interface-signal-chip:nth-child(1)::before,
+.interface-signal-chip:nth-child(2)::before,
+.interface-signal-chip:nth-child(3)::before {
+  left: 50% !important;
+  top: 0.46rem !important;
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+  transform: translateX(-50%) !important;
+  border-radius: 50%;
+}
+
+/* Every orb gets the same resting position and size. */
+.interface-signal-chip::after,
+.interface-signal-chip:nth-child(1)::after,
+.interface-signal-chip:nth-child(2)::after,
+.interface-signal-chip:nth-child(3)::after {
+  left: 50% !important;
+  top: 0.88rem !important;
+  width: 1.66rem !important;
+  height: 1.66rem !important;
+  transform: translateX(-50%) translateY(0) scale(1) !important;
+  border-radius: 50%;
+}
+
+/* Uniform hover behavior: no drifting off-center. */
+.interface-signal-chip:hover::after,
+.interface-signal-chip:focus-within::after,
+.interface-signal-chip:nth-child(1):hover::after,
+.interface-signal-chip:nth-child(1):focus-within::after,
+.interface-signal-chip:nth-child(2):hover::after,
+.interface-signal-chip:nth-child(2):focus-within::after,
+.interface-signal-chip:nth-child(3):hover::after,
+.interface-signal-chip:nth-child(3):focus-within::after {
+  transform: translateX(-50%) translateY(-3px) scale(1.075) !important;
+}
+
+/* Base centered text rhythm. */
+.interface-signal-chip span,
+.interface-signal-chip strong {
+  text-align: center;
+}
+
+.interface-signal-chip span {
+  margin-top: 0.08rem;
+}
+
+.interface-signal-chip strong {
+  max-width: 12.75rem;
+}
+
+/* =========================
+   CARD 1: PROBLEM / CYAN
+========================= */
+
+.interface-signal-chip:nth-child(1) {
+  border-color: rgba(56, 189, 248, 0.34);
+  background:
+    linear-gradient(145deg, rgba(56, 189, 248, 0.105), rgba(14, 165, 233, 0.045)),
+    radial-gradient(circle at 50% 16%, rgba(56, 189, 248, 0.18), transparent 45%),
+    rgba(255, 255, 255, 0.034);
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.045),
+    0 14px 34px rgba(0, 0, 0, 0.18),
+    0 0 24px rgba(56, 189, 248, 0.105),
+    inset 0 0 18px rgba(56, 189, 248, 0.034);
+}
+
+.interface-signal-chip:nth-child(1)::before {
+  border-color: rgba(56, 189, 248, 0.30);
+  background:
+    radial-gradient(circle at 50% 50%, transparent 31%, rgba(56, 189, 248, 0.24) 32%, transparent 35%),
+    radial-gradient(circle at 50% 50%, transparent 52%, rgba(56, 189, 248, 0.18) 53%, transparent 56%),
+    conic-gradient(from 40deg, transparent 0 10%, rgba(56, 189, 248, 0.20) 10% 13%, transparent 13% 37%, rgba(56, 189, 248, 0.15) 37% 40%, transparent 40% 64%, rgba(125, 211, 252, 0.16) 64% 67%, transparent 67% 100%);
+  box-shadow:
+    inset 0 0 14px rgba(56, 189, 248, 0.075),
+    0 0 22px rgba(56, 189, 248, 0.12);
+}
+
+.interface-signal-chip:nth-child(1)::after {
+  background:
+    radial-gradient(circle at 34% 28%, rgba(248, 250, 252, 0.42), transparent 22%),
+    radial-gradient(circle at 50% 52%, rgba(56, 189, 248, 0.54), rgba(56, 189, 248, 0.20) 43%, rgba(5, 8, 22, 0.68) 69%),
+    rgba(5, 8, 22, 0.52);
+  border-color: rgba(125, 211, 252, 0.58);
+  box-shadow:
+    inset 0 0 9px rgba(248, 250, 252, 0.12),
+    inset 0 -6px 12px rgba(0, 0, 0, 0.36),
+    0 0 14px rgba(56, 189, 248, 0.76),
+    0 0 32px rgba(56, 189, 248, 0.28);
+}
+
+.interface-signal-chip:nth-child(1) span {
+  color: #67e8f9;
+}
+
+/* =========================
+   CARD 2: METHOD / VIOLET
+========================= */
+
+.interface-signal-chip:nth-child(2) {
+  border-color: rgba(139, 92, 246, 0.38);
+  background:
+    linear-gradient(145deg, rgba(139, 92, 246, 0.115), rgba(99, 102, 241, 0.050)),
+    radial-gradient(circle at 50% 16%, rgba(139, 92, 246, 0.20), transparent 45%),
+    rgba(255, 255, 255, 0.034);
+  box-shadow:
+    0 0 0 1px rgba(139, 92, 246, 0.052),
+    0 14px 34px rgba(0, 0, 0, 0.18),
+    0 0 24px rgba(139, 92, 246, 0.12),
+    inset 0 0 18px rgba(139, 92, 246, 0.040);
+}
+
+.interface-signal-chip:nth-child(2)::before {
+  border-color: rgba(139, 92, 246, 0.34);
+  background:
+    radial-gradient(circle at 50% 50%, transparent 31%, rgba(139, 92, 246, 0.26) 32%, transparent 35%),
+    radial-gradient(circle at 50% 50%, transparent 52%, rgba(139, 92, 246, 0.18) 53%, transparent 56%),
+    conic-gradient(from 40deg, transparent 0 10%, rgba(139, 92, 246, 0.22) 10% 13%, transparent 13% 37%, rgba(139, 92, 246, 0.16) 37% 40%, transparent 40% 64%, rgba(167, 139, 250, 0.18) 64% 67%, transparent 67% 100%);
+  box-shadow:
+    inset 0 0 14px rgba(139, 92, 246, 0.080),
+    0 0 22px rgba(139, 92, 246, 0.14);
+}
+
+.interface-signal-chip:nth-child(2)::after {
+  background:
+    radial-gradient(circle at 34% 28%, rgba(248, 250, 252, 0.42), transparent 22%),
+    radial-gradient(circle at 50% 52%, rgba(139, 92, 246, 0.58), rgba(139, 92, 246, 0.22) 43%, rgba(5, 8, 22, 0.68) 69%),
+    rgba(5, 8, 22, 0.52);
+  border-color: rgba(167, 139, 250, 0.62);
+  box-shadow:
+    inset 0 0 9px rgba(248, 250, 252, 0.12),
+    inset 0 -6px 12px rgba(0, 0, 0, 0.36),
+    0 0 14px rgba(139, 92, 246, 0.78),
+    0 0 34px rgba(139, 92, 246, 0.30);
+}
+
+.interface-signal-chip:nth-child(2) span {
+  color: #a78bfa;
+}
+
+/* =========================
+   CARD 3: RESULT / MAGENTA-RED
+========================= */
+
+.interface-signal-chip:nth-child(3) {
+  border-color: rgba(236, 72, 153, 0.38);
+  background:
+    linear-gradient(145deg, rgba(236, 72, 153, 0.115), rgba(239, 68, 68, 0.050)),
+    radial-gradient(circle at 50% 16%, rgba(236, 72, 153, 0.20), transparent 45%),
+    rgba(255, 255, 255, 0.034);
+  box-shadow:
+    0 0 0 1px rgba(236, 72, 153, 0.052),
+    0 14px 34px rgba(0, 0, 0, 0.18),
+    0 0 24px rgba(236, 72, 153, 0.12),
+    inset 0 0 18px rgba(236, 72, 153, 0.040);
+}
+
+.interface-signal-chip:nth-child(3)::before {
+  border-color: rgba(236, 72, 153, 0.34);
+  background:
+    radial-gradient(circle at 50% 50%, transparent 31%, rgba(236, 72, 153, 0.26) 32%, transparent 35%),
+    radial-gradient(circle at 50% 50%, transparent 52%, rgba(239, 68, 68, 0.18) 53%, transparent 56%),
+    conic-gradient(from 40deg, transparent 0 10%, rgba(236, 72, 153, 0.22) 10% 13%, transparent 13% 37%, rgba(239, 68, 68, 0.16) 37% 40%, transparent 40% 64%, rgba(251, 113, 133, 0.18) 64% 67%, transparent 67% 100%);
+  box-shadow:
+    inset 0 0 14px rgba(236, 72, 153, 0.080),
+    0 0 22px rgba(236, 72, 153, 0.14);
+}
+
+.interface-signal-chip:nth-child(3)::after {
+  background:
+    radial-gradient(circle at 34% 28%, rgba(248, 250, 252, 0.44), transparent 22%),
+    radial-gradient(circle at 50% 52%, rgba(236, 72, 153, 0.58), rgba(239, 68, 68, 0.22) 43%, rgba(5, 8, 22, 0.68) 69%),
+    rgba(5, 8, 22, 0.52);
+  border-color: rgba(251, 113, 133, 0.62);
+  box-shadow:
+    inset 0 0 9px rgba(248, 250, 252, 0.12),
+    inset 0 -6px 12px rgba(0, 0, 0, 0.36),
+    0 0 14px rgba(236, 72, 153, 0.78),
+    0 0 34px rgba(239, 68, 68, 0.30);
+}
+
+.interface-signal-chip:nth-child(3) span {
+  color: #fb7185;
+}
+
+/* Hover keeps each card's color identity. */
+.interface-signal-chip:nth-child(1):hover,
+.interface-signal-chip:nth-child(1):focus-within {
+  border-color: rgba(56, 189, 248, 0.64);
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.095),
+    0 20px 42px rgba(0, 0, 0, 0.22),
+    0 0 32px rgba(56, 189, 248, 0.19),
+    inset 0 0 22px rgba(56, 189, 248, 0.055);
+}
+
+.interface-signal-chip:nth-child(2):hover,
+.interface-signal-chip:nth-child(2):focus-within {
+  border-color: rgba(139, 92, 246, 0.68);
+  box-shadow:
+    0 0 0 1px rgba(139, 92, 246, 0.105),
+    0 20px 42px rgba(0, 0, 0, 0.22),
+    0 0 34px rgba(139, 92, 246, 0.21),
+    inset 0 0 22px rgba(139, 92, 246, 0.060);
+}
+
+.interface-signal-chip:nth-child(3):hover,
+.interface-signal-chip:nth-child(3):focus-within {
+  border-color: rgba(236, 72, 153, 0.68);
+  box-shadow:
+    0 0 0 1px rgba(236, 72, 153, 0.105),
+    0 20px 42px rgba(0, 0, 0, 0.22),
+    0 0 34px rgba(236, 72, 153, 0.21),
+    0 0 50px rgba(239, 68, 68, 0.10),
+    inset 0 0 22px rgba(236, 72, 153, 0.060);
+}
+
+/* On Operational Layer, keep the cards distinct but tune the set slightly darker and more violet-forward. */
+.interface-system-set-operations .interface-signal-chip:nth-child(1) {
+  border-color: rgba(56, 189, 248, 0.30);
+}
+
+.interface-system-set-operations .interface-signal-chip:nth-child(2) {
+  border-color: rgba(139, 92, 246, 0.44);
+}
+
+.interface-system-set-operations .interface-signal-chip:nth-child(3) {
+  border-color: rgba(236, 72, 153, 0.42);
+}
+
+@media (max-width: 768px) {
+  .interface-signal-chip,
+  .interface-signal-chip:nth-child(1),
+  .interface-signal-chip:nth-child(2),
+  .interface-signal-chip:nth-child(3) {
+    min-height: 8.1rem;
+    padding-top: 4.08rem;
+  }
+
+  .interface-signal-chip::before,
+  .interface-signal-chip:nth-child(1)::before,
+  .interface-signal-chip:nth-child(2)::before,
+  .interface-signal-chip:nth-child(3)::before {
+    width: 2.28rem !important;
+    height: 2.28rem !important;
+  }
+
+  .interface-signal-chip::after,
+  .interface-signal-chip:nth-child(1)::after,
+  .interface-signal-chip:nth-child(2)::after,
+  .interface-signal-chip:nth-child(3)::after {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
   }
 }
 
