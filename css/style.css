@@ -3938,3 +3938,75 @@ body.winterface-offline .interactive-card::after {
     animation: none !important;
   }
 }
+
+/* =========================
+   FINAL STATUS ORB POLISH
+   Gives the third WInterface status indicator the same pulse behavior as the online orb while preserving its contextual color.
+========================= */
+
+.interface-status-bar > span:nth-child(3) i {
+  position: relative;
+  width: 0.58rem;
+  height: 0.58rem;
+  animation: interfaceStatusOrbPulse 2.65s ease-in-out infinite;
+}
+
+.interface-status-bar > span:nth-child(3) i::after {
+  content: "";
+  position: absolute;
+  inset: -0.42rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, currentColor 0%, currentColor 38%, transparent 70%);
+  opacity: 0.18;
+  transform: scale(0.88);
+  animation: interfaceStatusHaloPulse 2.65s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.interface-status-bar > span:nth-child(3) i {
+  color: var(--cyan);
+}
+
+.interface-system-set-operations .interface-status-bar > span:nth-child(3) i {
+  color: var(--violet);
+}
+
+.interface-system-set-media .interface-status-bar > span:nth-child(3) i {
+  color: var(--pink);
+}
+
+body.winterface-offline .interface-status-bar > span:nth-child(3) i,
+body.winterface-offline .interface-status-bar > span:nth-child(3) i::after {
+  animation: none !important;
+}
+
+@keyframes interfaceStatusOrbPulse {
+  0%, 100% {
+    transform: scale(0.95);
+    opacity: 0.84;
+  }
+
+  50% {
+    transform: scale(1.12);
+    opacity: 1;
+  }
+}
+
+@keyframes interfaceStatusHaloPulse {
+  0%, 100% {
+    transform: scale(0.82);
+    opacity: 0.18;
+  }
+
+  50% {
+    transform: scale(1.08);
+    opacity: 0.34;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interface-status-bar > span:nth-child(3) i,
+  .interface-status-bar > span:nth-child(3) i::after {
+    animation: none !important;
+  }
+}
