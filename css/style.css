@@ -5856,3 +5856,192 @@ body.winterface-offline .interface-status-bar > span:nth-child(3) i::after {
   }
 }
 
+/* =========================
+   WINTERFACE SYSTEM ONLINE OVAL RESTORE PATCH
+   Restores the premium oval capsule styling for the top-left WInterface System Online indicator.
+   CSS-only: no HTML or JavaScript changes.
+========================= */
+
+.interface-status-pill,
+.interface-status-online,
+.interface-system-online,
+.interface-status-bar .interface-status-primary,
+.interface-status-bar > .interface-status-pill:first-child {
+  position: relative;
+  min-height: 2.15rem;
+  padding: 0.48rem 1rem;
+  border-radius: 999px !important;
+  border: 1px solid rgba(56, 189, 248, 0.34);
+  background:
+    linear-gradient(145deg, rgba(56, 189, 248, 0.10), rgba(139, 92, 246, 0.05)),
+    radial-gradient(circle at 12% 50%, rgba(74, 222, 128, 0.18), transparent 42%),
+    rgba(255, 255, 255, 0.03);
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.04),
+    0 0 22px rgba(56, 189, 248, 0.10),
+    inset 0 0 18px rgba(56, 189, 248, 0.025);
+  overflow: hidden;
+  backdrop-filter: blur(16px);
+}
+
+.interface-status-pill::before,
+.interface-status-online::before,
+.interface-system-online::before,
+.interface-status-bar .interface-status-primary::before,
+.interface-status-bar > .interface-status-pill:first-child::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(56, 189, 248, 0.14),
+    rgba(139, 92, 246, 0.08),
+    transparent
+  );
+  opacity: 0.42;
+  transform: translateX(-72%);
+  animation: interfacePlaybackSweep 5.4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.interface-status-pill > *,
+.interface-status-online > *,
+.interface-system-online > *,
+.interface-status-bar .interface-status-primary > *,
+.interface-status-bar > .interface-status-pill:first-child > * {
+  position: relative;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interface-status-pill::before,
+  .interface-status-online::before,
+  .interface-system-online::before,
+  .interface-status-bar .interface-status-primary::before,
+  .interface-status-bar > .interface-status-pill:first-child::before {
+    animation: none !important;
+    transform: none;
+    opacity: 0.18;
+  }
+}
+
+/* =========================
+   WINTERFACE SYSTEM TOGGLE TRUE OVAL RESTORE PATCH
+   Corrects the actual WInterface System Online/Paused control selector.
+   Restores the visible oval border around the full top-left system status button.
+   CSS-only: no HTML or JavaScript changes.
+========================= */
+
+.interface-status-bar .interface-system-toggle,
+.interface-system-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.58rem;
+  min-height: 2.18rem;
+  padding: 0.50rem 1.05rem;
+  border-radius: 999px !important;
+  color: var(--muted-strong);
+  border: 1px solid rgba(56, 189, 248, 0.42) !important;
+  background:
+    linear-gradient(145deg, rgba(56, 189, 248, 0.125), rgba(139, 92, 246, 0.060)),
+    radial-gradient(circle at 13% 50%, rgba(74, 222, 128, 0.22), transparent 43%),
+    rgba(255, 255, 255, 0.035) !important;
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.052),
+    0 0 24px rgba(56, 189, 248, 0.135),
+    0 0 38px rgba(139, 92, 246, 0.065),
+    inset 0 0 20px rgba(56, 189, 248, 0.032) !important;
+  overflow: hidden;
+  backdrop-filter: blur(16px);
+}
+
+.interface-status-bar .interface-system-toggle::before,
+.interface-system-toggle::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(56, 189, 248, 0.18),
+    rgba(139, 92, 246, 0.10),
+    transparent
+  );
+  opacity: 0.46;
+  transform: translateX(-72%);
+  animation: interfacePlaybackSweep 5.4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.interface-status-bar .interface-system-toggle > *,
+.interface-system-toggle > * {
+  position: relative;
+  z-index: 1;
+}
+
+.interface-status-bar .interface-system-toggle i,
+.interface-system-toggle i {
+  width: 0.62rem;
+  height: 0.62rem;
+  border-radius: 50%;
+  background: var(--online-green);
+  box-shadow:
+    0 0 10px rgba(34, 197, 94, 0.96),
+    0 0 24px rgba(34, 197, 94, 0.56),
+    0 0 42px rgba(34, 197, 94, 0.24);
+}
+
+.interface-system-toggle[aria-pressed="false"] {
+  border-color: rgba(239, 68, 68, 0.46) !important;
+  background:
+    linear-gradient(145deg, rgba(239, 68, 68, 0.13), rgba(236, 72, 153, 0.060)),
+    radial-gradient(circle at 13% 50%, rgba(239, 68, 68, 0.18), transparent 43%),
+    rgba(255, 255, 255, 0.035) !important;
+  box-shadow:
+    0 0 0 1px rgba(239, 68, 68, 0.052),
+    0 0 24px rgba(239, 68, 68, 0.13),
+    0 0 38px rgba(236, 72, 153, 0.065),
+    inset 0 0 20px rgba(239, 68, 68, 0.032) !important;
+}
+
+.interface-system-toggle[aria-pressed="false"] i {
+  background: #ef4444;
+  box-shadow:
+    0 0 10px rgba(239, 68, 68, 0.96),
+    0 0 24px rgba(239, 68, 68, 0.56),
+    0 0 42px rgba(236, 72, 153, 0.24);
+}
+
+.interface-system-toggle:hover,
+.interface-system-toggle:focus-visible {
+  transform: translateY(-1px);
+  border-color: rgba(56, 189, 248, 0.62) !important;
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.075),
+    0 0 28px rgba(56, 189, 248, 0.18),
+    0 0 44px rgba(139, 92, 246, 0.085),
+    inset 0 0 22px rgba(56, 189, 248, 0.045) !important;
+}
+
+@media (max-width: 640px) {
+  .interface-status-bar .interface-system-toggle,
+  .interface-system-toggle {
+    min-height: 2.02rem;
+    padding: 0.42rem 0.78rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interface-status-bar .interface-system-toggle::before,
+  .interface-system-toggle::before {
+    animation: none !important;
+    transform: none;
+    opacity: 0.18;
+  }
+}
+
