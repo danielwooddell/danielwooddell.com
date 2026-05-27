@@ -4024,3 +4024,395 @@ body.winterface-offline .interface-status-bar > span:nth-child(3) i::after {
   }
 }
 
+
+
+/* =========================
+   WINTERFACE CONTEXTUAL BAY ACCENTS
+   Syncs module card borders and numbered circles to the active bay color.
+   Active Pathways = cyan, Operational Layer = violet, Showcase Bay = pink.
+========================= */
+
+.interface-shell {
+  --interface-accent: var(--cyan);
+  --interface-accent-rgb: 56, 189, 248;
+}
+
+.interface-system-set-operations {
+  --interface-accent: var(--violet);
+  --interface-accent-rgb: 139, 92, 246;
+}
+
+.interface-system-set-media {
+  --interface-accent: var(--pink);
+  --interface-accent-rgb: 236, 72, 153;
+}
+
+/* Module cards use a subtle version of the active bay color by default. */
+.interface-path {
+  border-color: rgba(var(--interface-accent-rgb), 0.22);
+  background:
+    linear-gradient(145deg, rgba(var(--interface-accent-rgb), 0.055), rgba(255,255,255,0.035)),
+    rgba(255,255,255,0.035);
+}
+
+.interface-path:hover,
+.interface-path:focus-visible,
+.interface-path.is-active {
+  color: var(--text);
+  border-color: rgba(var(--interface-accent-rgb), 0.58);
+  background:
+    linear-gradient(145deg, rgba(var(--interface-accent-rgb), 0.13), rgba(255,255,255,0.045)),
+    rgba(var(--interface-accent-rgb), 0.075);
+  box-shadow:
+    0 0 22px rgba(var(--interface-accent-rgb), 0.14),
+    inset 0 0 24px rgba(var(--interface-accent-rgb), 0.035);
+}
+
+/* Numbered circles inherit the same active bay color. */
+.interface-path span {
+  color: var(--interface-accent);
+  background: rgba(var(--interface-accent-rgb), 0.07);
+  border-color: rgba(var(--interface-accent-rgb), 0.34);
+  box-shadow:
+    inset 0 0 14px rgba(var(--interface-accent-rgb), 0.08),
+    0 0 16px rgba(var(--interface-accent-rgb), 0.10);
+}
+
+.interface-path span::before {
+  border-color: rgba(var(--interface-accent-rgb), 0.18);
+}
+
+.interface-path span::after {
+  border-color: rgba(var(--interface-accent-rgb), 0.16);
+}
+
+.interface-path:hover span,
+.interface-path:focus-visible span,
+.interface-path.is-active span {
+  color: #f8fafc;
+  border-color: rgba(var(--interface-accent-rgb), 0.66);
+  background: rgba(var(--interface-accent-rgb), 0.16);
+  box-shadow:
+    inset 0 0 16px rgba(var(--interface-accent-rgb), 0.15),
+    0 0 20px rgba(var(--interface-accent-rgb), 0.26),
+    0 0 38px rgba(var(--interface-accent-rgb), 0.13);
+}
+
+.interface-path:hover span::before,
+.interface-path:focus-visible span::before,
+.interface-path.is-active span::before {
+  border-color: rgba(var(--interface-accent-rgb), 0.44);
+  box-shadow: 0 0 18px rgba(var(--interface-accent-rgb), 0.16);
+}
+
+/* Keep the rail labels aligned with the active bay without changing layout. */
+.interface-rail-label,
+.interface-output-label {
+  color: var(--interface-accent);
+}
+
+/* Match the command prefix and input caret to the active bay for a subtle cohesive cue. */
+.interface-command-prefix,
+.interface-showcase-caption span {
+  color: var(--interface-accent);
+}
+
+.interface-command-line {
+  border-color: rgba(var(--interface-accent-rgb), 0.24);
+  box-shadow:
+    0 0 30px rgba(var(--interface-accent-rgb), 0.08),
+    inset 0 0 28px rgba(var(--interface-accent-rgb), 0.035);
+}
+
+.interface-command-line:focus-within {
+  border-color: rgba(var(--interface-accent-rgb), 0.64);
+  box-shadow:
+    0 0 34px rgba(var(--interface-accent-rgb), 0.15),
+    inset 0 0 34px rgba(var(--interface-accent-rgb), 0.055);
+}
+
+.interface-cursor {
+  background: var(--interface-accent);
+  box-shadow: 0 0 18px rgba(var(--interface-accent-rgb), 0.70);
+}
+
+/* =========================
+   WINTERFACE REFINEMENT PATCH
+   Contextual rail borders with stable cyan core controls.
+========================= */
+
+/* Core WInterface color logic:
+   - contextual colors apply to rail/module state indicators
+   - cyan remains the stable system color for command, CTA, output, and readable content */
+.interface-section {
+  --interface-accent-rgb: 56, 189, 248;
+  --interface-accent: var(--cyan);
+  --interface-accent-text: #7dd3fc;
+  --interface-accent-soft: rgba(56, 189, 248, 0.095);
+  --interface-accent-border: rgba(56, 189, 248, 0.48);
+  --interface-accent-border-strong: rgba(56, 189, 248, 0.62);
+  --interface-accent-glow: rgba(56, 189, 248, 0.22);
+}
+
+.interface-system-set-operations {
+  --interface-accent-rgb: 139, 92, 246;
+  --interface-accent: var(--violet);
+  --interface-accent-text: #b79cff;
+  --interface-accent-soft: rgba(139, 92, 246, 0.105);
+  --interface-accent-border: rgba(139, 92, 246, 0.52);
+  --interface-accent-border-strong: rgba(167, 139, 250, 0.68);
+  --interface-accent-glow: rgba(139, 92, 246, 0.24);
+}
+
+.interface-system-set-media {
+  --interface-accent-rgb: 236, 72, 153;
+  --interface-accent: var(--pink);
+  --interface-accent-text: #ff8ac6;
+  --interface-accent-soft: rgba(236, 72, 153, 0.105);
+  --interface-accent-border: rgba(236, 72, 153, 0.52);
+  --interface-accent-border-strong: rgba(255, 138, 198, 0.68);
+  --interface-accent-glow: rgba(236, 72, 153, 0.24);
+}
+
+/* Active module/pathway card borders inherit only the current bay accent. */
+.interface-path:hover,
+.interface-path:focus-visible,
+.interface-path.is-active {
+  border-color: var(--interface-accent-border);
+  background:
+    linear-gradient(145deg, var(--interface-accent-soft), rgba(255,255,255,0.045)),
+    rgba(255,255,255,0.035);
+  box-shadow:
+    0 0 0 1px rgba(var(--interface-accent-rgb), 0.045),
+    0 0 22px var(--interface-accent-glow),
+    inset 0 0 22px rgba(var(--interface-accent-rgb), 0.035);
+}
+
+/* Numbered pathway/module circles inherit the bay accent but keep stronger numeral readability. */
+.interface-path span {
+  color: var(--interface-accent-text);
+  font-weight: 900;
+  letter-spacing: 0.01em;
+  text-shadow:
+    0 1px 2px rgba(0,0,0,0.62),
+    0 0 9px rgba(var(--interface-accent-rgb), 0.52);
+  background:
+    radial-gradient(circle at 36% 28%, rgba(248,250,252,0.24), transparent 25%),
+    radial-gradient(circle at 50% 52%, rgba(var(--interface-accent-rgb),0.18), rgba(var(--interface-accent-rgb),0.065) 58%, rgba(5,8,22,0.20) 100%);
+  border-color: rgba(var(--interface-accent-rgb), 0.32);
+  box-shadow:
+    inset 0 0 12px rgba(var(--interface-accent-rgb), 0.10),
+    0 0 14px rgba(var(--interface-accent-rgb), 0.13);
+}
+
+.interface-path span::before {
+  border-color: rgba(var(--interface-accent-rgb), 0.22);
+  opacity: 0.48;
+}
+
+.interface-path span::after {
+  border-color: rgba(248, 250, 252, 0.13);
+}
+
+.interface-path:hover span,
+.interface-path:focus-visible span,
+.interface-path.is-active span {
+  color: #f8fafc;
+  border-color: var(--interface-accent-border-strong);
+  background:
+    radial-gradient(circle at 36% 28%, rgba(248,250,252,0.30), transparent 25%),
+    radial-gradient(circle at 50% 52%, rgba(var(--interface-accent-rgb),0.28), rgba(var(--interface-accent-rgb),0.11) 58%, rgba(5,8,22,0.16) 100%);
+  text-shadow:
+    0 1px 2px rgba(0,0,0,0.72),
+    0 0 10px rgba(var(--interface-accent-rgb), 0.66);
+  box-shadow:
+    inset 0 0 15px rgba(var(--interface-accent-rgb), 0.17),
+    0 0 18px rgba(var(--interface-accent-rgb), 0.25),
+    0 0 34px rgba(var(--interface-accent-rgb), 0.13);
+}
+
+.interface-path:hover span::before,
+.interface-path:focus-visible span::before,
+.interface-path.is-active span::before {
+  border-color: rgba(var(--interface-accent-rgb), 0.40);
+  opacity: 0.55;
+  box-shadow:
+    0 0 16px rgba(var(--interface-accent-rgb), 0.16);
+}
+
+/* Keep core command input permanently cyan for readability and hierarchy. */
+.interface-command-line {
+  position: relative;
+  overflow: hidden;
+  border-color: rgba(56,189,248,0.42) !important;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.072), rgba(255,255,255,0.032)),
+    radial-gradient(circle at left center, rgba(56,189,248,0.11), transparent 42%),
+    rgba(255,255,255,0.028) !important;
+  box-shadow:
+    0 0 0 1px rgba(56,189,248,0.08),
+    0 0 24px rgba(56,189,248,0.16),
+    inset 0 0 28px rgba(56,189,248,0.062) !important;
+}
+
+.interface-command-line::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent, rgba(56,189,248,0.22), rgba(139,92,246,0.12), transparent);
+  opacity: 0.42;
+  transform: translateX(-78%);
+  animation: interfaceCommandLineSweep 5.4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.interface-command-line > * {
+  position: relative;
+  z-index: 1;
+}
+
+.interface-command-line:focus-within {
+  border-color: rgba(56,189,248,0.72) !important;
+  box-shadow:
+    0 0 0 1px rgba(56,189,248,0.14),
+    0 0 32px rgba(56,189,248,0.24),
+    inset 0 0 36px rgba(56,189,248,0.09) !important;
+}
+
+.interface-command-prefix,
+.interface-cursor {
+  color: var(--cyan) !important;
+}
+
+.interface-cursor {
+  background: var(--cyan) !important;
+  box-shadow: 0 0 18px rgba(56,189,248,0.70) !important;
+}
+
+/* Keep right-side system output and media-content text in the stable cyan/white palette. */
+.interface-output-label,
+.interface-showcase-caption span,
+.interface-response .panel-label,
+.interface-system-set-operations .interface-output-label,
+.interface-system-set-media .interface-output-label,
+.interface-system-set-operations .interface-showcase-caption span,
+.interface-system-set-media .interface-showcase-caption span,
+.interface-system-set-operations .interface-response .panel-label,
+.interface-system-set-media .interface-response .panel-label {
+  color: var(--cyan) !important;
+}
+
+.interface-system-list li::before,
+.interface-system-set-operations .interface-system-list li::before,
+.interface-system-set-media .interface-system-list li::before {
+  background: var(--cyan) !important;
+  box-shadow:
+    0 0 10px rgba(56,189,248,0.96),
+    0 0 22px rgba(56,189,248,0.56),
+    0 0 38px rgba(56,189,248,0.25) !important;
+}
+
+.interface-system-list li,
+.interface-showcase-caption p,
+.interface-response p:not(.panel-label) {
+  color: var(--muted-strong);
+}
+
+/* Keep the far-right CTA/player button permanently cyan, with the same stronger border language as the command line. */
+.interface-jump-link,
+.interface-system-set-operations .interface-jump-link,
+.interface-system-set-media .interface-jump-link {
+  color: var(--cyan) !important;
+  border-color: rgba(56,189,248,0.42) !important;
+  background:
+    linear-gradient(145deg, rgba(56,189,248,0.14), rgba(139,92,246,0.075)),
+    rgba(255,255,255,0.045) !important;
+  box-shadow:
+    0 0 0 1px rgba(56,189,248,0.08),
+    0 0 24px rgba(56,189,248,0.15),
+    inset 0 0 26px rgba(56,189,248,0.055) !important;
+}
+
+.interface-jump-link::before,
+.interface-system-set-operations .interface-jump-link::before,
+.interface-system-set-media .interface-jump-link::before {
+  background: linear-gradient(90deg, transparent, rgba(56,189,248,0.22), rgba(139,92,246,0.13), transparent) !important;
+  opacity: 0.48;
+}
+
+.interface-jump-link:hover,
+.interface-jump-link:focus-visible,
+.interface-system-set-operations .interface-jump-link:hover,
+.interface-system-set-operations .interface-jump-link:focus-visible,
+.interface-system-set-media .interface-jump-link:hover,
+.interface-system-set-media .interface-jump-link:focus-visible {
+  color: var(--text) !important;
+  border-color: rgba(56,189,248,0.68) !important;
+  background:
+    linear-gradient(145deg, rgba(56,189,248,0.18), rgba(139,92,246,0.10)),
+    rgba(255,255,255,0.055) !important;
+  box-shadow:
+    0 0 0 1px rgba(56,189,248,0.12),
+    0 0 32px rgba(56,189,248,0.21),
+    inset 0 0 30px rgba(56,189,248,0.07) !important;
+}
+
+/* Keep video-control pressed state cyan/white, not red/pink, so the right-side CTA stays visually stable. */
+.interface-jump-link.interface-jump-link-media-control[aria-pressed="true"] {
+  color: var(--text) !important;
+  border-color: rgba(56,189,248,0.56) !important;
+  background:
+    linear-gradient(145deg, rgba(56,189,248,0.16), rgba(139,92,246,0.09)),
+    rgba(255,255,255,0.052) !important;
+  box-shadow:
+    0 0 0 1px rgba(56,189,248,0.10),
+    0 0 28px rgba(56,189,248,0.18),
+    inset 0 0 26px rgba(56,189,248,0.062) !important;
+}
+
+/* Keep the media/player controls cyan; the bay color is expressed through the left rail only. */
+.interface-media-toggle,
+.interface-system-set-operations .interface-media-toggle,
+.interface-system-set-media .interface-media-toggle,
+.interface-playback-status,
+.interface-system-set-operations .interface-playback-status,
+.interface-system-set-media .interface-playback-status:not(.interface-playback-is-playing) {
+  color: var(--text);
+  border-color: rgba(56,189,248,0.34) !important;
+  background:
+    linear-gradient(145deg, rgba(56,189,248,0.13), rgba(139,92,246,0.075)),
+    rgba(255,255,255,0.045) !important;
+  box-shadow:
+    0 0 28px rgba(56,189,248,0.12),
+    inset 0 0 24px rgba(56,189,248,0.045) !important;
+}
+
+.interface-media-toggle::before,
+.interface-system-set-media .interface-playback-status:not(.interface-playback-is-playing)::before {
+  background: linear-gradient(90deg, transparent, rgba(56,189,248,0.22), rgba(139,92,246,0.16), transparent) !important;
+}
+
+@keyframes interfaceCommandLineSweep {
+  0%, 100% {
+    transform: translateX(-82%);
+    opacity: 0;
+  }
+
+  28%, 72% {
+    opacity: 0.46;
+  }
+
+  50% {
+    transform: translateX(82%);
+    opacity: 0.32;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interface-command-line::before {
+    animation: none !important;
+    opacity: 0.18;
+    transform: none;
+  }
+}
