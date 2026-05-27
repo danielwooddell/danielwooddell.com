@@ -2819,16 +2819,19 @@ main,
 .interface-set-button.is-active span {
   background: var(--cyan);
   box-shadow: 0 0 16px rgba(56,189,248,0.72), 0 0 34px rgba(139,92,246,0.20);
+  animation: interfaceActiveOrbPulse 2.65s ease-in-out infinite;
 }
 
 .interface-set-button:nth-child(2).is-active span {
   background: var(--violet);
   box-shadow: 0 0 16px rgba(139,92,246,0.68), 0 0 34px rgba(56,189,248,0.16);
+  animation: interfaceActiveOrbPulse 2.65s ease-in-out infinite;
 }
 
 .interface-set-button:nth-child(3).is-active span {
   background: var(--pink);
   box-shadow: 0 0 16px rgba(236,72,153,0.68), 0 0 34px rgba(56,189,248,0.16);
+  animation: interfaceActiveOrbPulse 2.65s ease-in-out infinite;
 }
 
 .interface-path-list {
@@ -3334,6 +3337,18 @@ main,
   box-shadow:
     0 0 32px rgba(56,189,248,0.15),
     inset 0 0 28px rgba(56,189,248,0.05);
+}
+
+@keyframes interfaceActiveOrbPulse {
+  0%, 100% {
+    transform: scale(0.95);
+    opacity: 0.84;
+  }
+
+  50% {
+    transform: scale(1.12);
+    opacity: 1;
+  }
 }
 
 @keyframes interfaceSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -3940,14 +3955,15 @@ body.winterface-offline .interactive-card::after {
 }
 
 /* =========================
-   FINAL STATUS ORB POLISH
-   Gives the third WInterface status indicator the same pulse behavior as the online orb while preserving its contextual color.
+   RIGHT STATUS ORB POLISH
+   Keeps the module-count status orb glowing/pulsing with its contextual color while WInterface is online.
 ========================= */
 
 .interface-status-bar > span:nth-child(3) i {
   position: relative;
   width: 0.58rem;
   height: 0.58rem;
+  color: var(--cyan);
   animation: interfaceStatusOrbPulse 2.65s ease-in-out infinite;
 }
 
@@ -3961,10 +3977,6 @@ body.winterface-offline .interactive-card::after {
   transform: scale(0.88);
   animation: interfaceStatusHaloPulse 2.65s ease-in-out infinite;
   pointer-events: none;
-}
-
-.interface-status-bar > span:nth-child(3) i {
-  color: var(--cyan);
 }
 
 .interface-system-set-operations .interface-status-bar > span:nth-child(3) i {
@@ -4005,8 +4017,10 @@ body.winterface-offline .interface-status-bar > span:nth-child(3) i::after {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .interface-set-button.is-active span,
   .interface-status-bar > span:nth-child(3) i,
   .interface-status-bar > span:nth-child(3) i::after {
     animation: none !important;
   }
 }
+
