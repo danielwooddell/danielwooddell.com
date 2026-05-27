@@ -4996,246 +4996,209 @@ body.winterface-offline .interface-system-toggle:focus-visible {
 }
 
 /* =========================
-   WINTERFACE HEADING VISIBILITY STABLE PATCH
-   Strengthens key WInterface headings while preventing rail-header wrapping.
-   Built from the last stable live CSS.
+   WINTERFACE MEDIA FRAME EDGE REFINEMENT PATCH
+   Adds a restrained cyan rim-light to Showcase image frames and embedded video windows.
+   This keeps media surfaces cinematic while improving visual separation from the glass panel.
 ========================= */
 
-/* Left rail mode heading: Showcase Bay, Operational Layer, Active Pathways.
-   Kept compact enough to avoid wrapping next to the mode orbs on desktop. */
-.interface-rail-label,
-.interface-system-set-operations .interface-rail-label,
-.interface-system-set-media .interface-rail-label {
-  white-space: nowrap;
-  font-weight: 950 !important;
-  font-size: 0.63rem !important;
-  letter-spacing: 0.105em !important;
-  line-height: 1.05;
-  color: var(--interface-accent, var(--cyan)) !important;
-  text-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.74),
-    0 0 10px rgba(var(--interface-accent-rgb, 56, 189, 248), 0.52),
-    0 0 20px rgba(var(--interface-accent-rgb, 56, 189, 248), 0.20);
-}
-
-/* Right-panel labels: Primary Signal and Live Systems.
-   These stay cyan for readability and system consistency. */
-.interface-output-label,
-.interface-system-set-operations .interface-output-label,
-.interface-system-set-media .interface-output-label {
-  white-space: nowrap;
-  font-weight: 950 !important;
-  font-size: 0.69rem !important;
-  letter-spacing: 0.155em !important;
-  line-height: 1.05;
-  color: var(--cyan) !important;
-  text-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.72),
-    0 0 11px rgba(56, 189, 248, 0.50),
-    0 0 22px rgba(56, 189, 248, 0.18);
-}
-
-/* Middle response kicker under the command bar.
-   Stronger, centered, and still secondary to the main title. */
-.interface-response .panel-label,
-.interface-response [data-interface-kicker],
-.interface-system-set-operations .interface-response .panel-label,
-.interface-system-set-media .interface-response .panel-label {
-  align-self: center;
-  width: 100%;
-  max-width: 780px;
-  text-align: center;
-  white-space: normal;
-  font-weight: 950 !important;
-  font-size: 0.76rem !important;
-  letter-spacing: 0.17em !important;
-  line-height: 1.15;
-  color: var(--cyan) !important;
-  text-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.74),
-    0 0 12px rgba(56, 189, 248, 0.52),
-    0 0 24px rgba(56, 189, 248, 0.18);
-}
-
-/* Top system status labels, including the Online/Paused control and mode/status text. */
-.interface-status-bar,
-.interface-status-bar span,
-.interface-status-bar button,
-.interface-system-toggle {
-  font-weight: 950 !important;
-  text-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.68),
-    0 0 10px rgba(56, 189, 248, 0.24);
-}
-
-.interface-status-bar span,
-.interface-status-bar button,
-.interface-system-toggle {
-  white-space: nowrap;
-}
-
-/* Keep subtitle intentionally secondary so the strengthened mode label does not make the rail feel cramped. */
-.interface-rail-subtitle {
-  font-weight: 760 !important;
-  letter-spacing: 0.035em;
-  opacity: 0.84;
-}
-
-/* Desktop safeguard: keep the left rail header from forcing mode labels into two lines. */
-@media (min-width: 1101px) {
-  .interface-rail-header {
-    gap: 0.52rem;
-  }
-
-  .interface-set-controls {
-    gap: 0.28rem;
-  }
-
-  .interface-set-button {
-    width: 1.18rem;
-    height: 1.18rem;
-  }
-
-  .interface-set-button span {
-    inset: 0.32rem;
-  }
-}
-
-/* Tablet and mobile can relax slightly while preserving readability. */
-@media (max-width: 1100px) {
-  .interface-rail-label {
-    font-size: 0.66rem !important;
-    letter-spacing: 0.13em !important;
-  }
-}
-
-@media (max-width: 640px) {
-  .interface-output-label,
-  .interface-response .panel-label,
-  .interface-response [data-interface-kicker] {
-    letter-spacing: 0.135em !important;
-  }
-}
-
-/* =========================
-   WINTERFACE LEFT NAV NODE ENERGY PATCH
-   Adds a controlled glow increase to the left-nav module cards and numbered node circles.
-   No layout, sizing, HTML, or JavaScript changes.
-========================= */
-
-/* Subtle card-surface energy only in the WInterface left rail. */
-.interface-path {
+/* Applies to the embedded video window and all Showcase Bay image cards. */
+.interface-video-frame,
+.interface-showcase-frame {
+  border-color: rgba(56, 189, 248, 0.46) !important;
   box-shadow:
-    0 0 0 1px rgba(var(--interface-accent-rgb, 56, 189, 248), 0.045),
-    0 0 16px rgba(var(--interface-accent-rgb, 56, 189, 248), 0.080),
-    inset 0 0 20px rgba(var(--interface-accent-rgb, 56, 189, 248), 0.030);
+    0 0 0 1px rgba(56, 189, 248, 0.075),
+    0 22px 55px rgba(0, 0, 0, 0.30),
+    0 0 30px rgba(56, 189, 248, 0.145),
+    0 0 54px rgba(56, 189, 248, 0.055),
+    inset 0 0 0 1px rgba(199, 210, 254, 0.040),
+    inset 0 0 34px rgba(56, 189, 248, 0.040) !important;
 }
 
-/* More concentrated electrical energy in the numbered node, without changing geometry. */
-.interface-path span {
-  text-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.74),
-    0 0 10px rgba(var(--interface-accent-rgb, 56, 189, 248), 0.68),
-    0 0 18px rgba(var(--interface-accent-rgb, 56, 189, 248), 0.28);
+/* Adds a soft exterior rim without making media frames compete with controls. */
+.interface-media-frame-shell::before {
+  inset: -2px;
   background:
-    radial-gradient(circle at 36% 28%, rgba(248, 250, 252, 0.32), transparent 25%),
-    radial-gradient(circle at 50% 52%, rgba(var(--interface-accent-rgb, 56, 189, 248), 0.24), rgba(var(--interface-accent-rgb, 56, 189, 248), 0.085) 58%, rgba(5, 8, 22, 0.20) 100%);
-  border-color: rgba(var(--interface-accent-rgb, 56, 189, 248), 0.42);
+    linear-gradient(135deg,
+      rgba(56, 189, 248, 0.34),
+      rgba(139, 92, 246, 0.18),
+      rgba(236, 72, 153, 0.10)
+    ) !important;
+  opacity: 0.64;
   box-shadow:
-    inset 0 0 15px rgba(var(--interface-accent-rgb, 56, 189, 248), 0.16),
-    inset 0 0 26px rgba(248, 250, 252, 0.035),
-    0 0 18px rgba(var(--interface-accent-rgb, 56, 189, 248), 0.22),
-    0 0 34px rgba(var(--interface-accent-rgb, 56, 189, 248), 0.10);
+    0 0 26px rgba(56, 189, 248, 0.09),
+    0 0 44px rgba(139, 92, 246, 0.055);
 }
 
-.interface-path span::before {
-  border-color: rgba(var(--interface-accent-rgb, 56, 189, 248), 0.32);
-  opacity: 0.68;
-  box-shadow:
-    0 0 16px rgba(var(--interface-accent-rgb, 56, 189, 248), 0.15),
-    inset 0 0 10px rgba(var(--interface-accent-rgb, 56, 189, 248), 0.055);
-}
-
-.interface-path span::after {
-  border-color: rgba(248, 250, 252, 0.18);
-  box-shadow:
-    inset 0 0 10px rgba(var(--interface-accent-rgb, 56, 189, 248), 0.08),
-    0 0 10px rgba(var(--interface-accent-rgb, 56, 189, 248), 0.08);
-}
-
-/* Active and hover states get a tighter, brighter node response. */
-.interface-path:hover,
-.interface-path:focus-visible,
-.interface-path.is-active {
-  box-shadow:
-    0 0 0 1px rgba(var(--interface-accent-rgb, 56, 189, 248), 0.070),
-    0 0 24px rgba(var(--interface-accent-rgb, 56, 189, 248), 0.20),
-    0 0 42px rgba(var(--interface-accent-rgb, 56, 189, 248), 0.085),
-    inset 0 0 24px rgba(var(--interface-accent-rgb, 56, 189, 248), 0.050);
-}
-
-.interface-path:hover span,
-.interface-path:focus-visible span,
-.interface-path.is-active span {
-  border-color: rgba(var(--interface-accent-rgb, 56, 189, 248), 0.76);
+/* Subtle top-edge highlight for image cards only. */
+.interface-showcase-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  pointer-events: none;
   background:
-    radial-gradient(circle at 36% 28%, rgba(248, 250, 252, 0.38), transparent 25%),
-    radial-gradient(circle at 50% 52%, rgba(var(--interface-accent-rgb, 56, 189, 248), 0.34), rgba(var(--interface-accent-rgb, 56, 189, 248), 0.14) 58%, rgba(5, 8, 22, 0.16) 100%);
-  box-shadow:
-    inset 0 0 18px rgba(var(--interface-accent-rgb, 56, 189, 248), 0.22),
-    inset 0 0 30px rgba(248, 250, 252, 0.045),
-    0 0 22px rgba(var(--interface-accent-rgb, 56, 189, 248), 0.34),
-    0 0 44px rgba(var(--interface-accent-rgb, 56, 189, 248), 0.17);
+    linear-gradient(180deg, rgba(125, 211, 252, 0.14), transparent 18%),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.10), transparent 28%, transparent 72%, rgba(139, 92, 246, 0.08));
+  opacity: 0.58;
+  mix-blend-mode: screen;
 }
 
-.interface-path:hover span::before,
-.interface-path:focus-visible span::before,
-.interface-path.is-active span::before {
-  border-color: rgba(var(--interface-accent-rgb, 56, 189, 248), 0.54);
+/* The video frame uses a lighter overlay so the embedded player UI stays clean. */
+.interface-video-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(125, 211, 252, 0.10), transparent 16%),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.075), transparent 26%, transparent 74%, rgba(139, 92, 246, 0.055));
+  opacity: 0.46;
+  mix-blend-mode: screen;
+}
+
+/* Slightly clearer media edge when expanded, but still below CTA intensity. */
+.interface-system-media-expanded .interface-video-frame {
+  border-color: rgba(56, 189, 248, 0.52) !important;
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.090),
+    0 24px 62px rgba(0, 0, 0, 0.32),
+    0 0 34px rgba(56, 189, 248, 0.16),
+    0 0 62px rgba(56, 189, 248, 0.065),
+    inset 0 0 0 1px rgba(199, 210, 254, 0.048),
+    inset 0 0 38px rgba(56, 189, 248, 0.045) !important;
+}
+
+.interface-system-media-expanded .interface-media-frame-shell::before {
   opacity: 0.72;
-  box-shadow:
-    0 0 20px rgba(var(--interface-accent-rgb, 56, 189, 248), 0.23),
-    inset 0 0 12px rgba(var(--interface-accent-rgb, 56, 189, 248), 0.075);
 }
 
-.interface-path:hover span::after,
-.interface-path:focus-visible span::after,
-.interface-path.is-active span::after {
-  border-color: rgba(248, 250, 252, 0.25);
-  box-shadow:
-    inset 0 0 12px rgba(var(--interface-accent-rgb, 56, 189, 248), 0.12),
-    0 0 12px rgba(var(--interface-accent-rgb, 56, 189, 248), 0.12);
+@media (prefers-reduced-motion: reduce) {
+  .interface-video-frame::before,
+  .interface-showcase-frame::before {
+    mix-blend-mode: normal;
+  }
 }
 
 /* =========================
-   WINTERFACE LIVE SYSTEMS LIST INDENT PATCH
-   Slightly increases indentation for the Live Systems bullet list across all 18 WInterface cards.
-   CSS-only: no layout, HTML, or JavaScript changes.
+   WINTERFACE STATUS TELEMETRY CAPSULE PATCH
+   Gives the center and right WInterface status indicators a subtle capsule treatment.
+   Keeps the Online/Paused control visually primary.
+   CSS-only: no HTML or JavaScript changes.
 ========================= */
 
-.interface-system-list {
-  padding-left: 0.28rem;
+/* Secondary telemetry chips: mode status and connected-path count. */
+.interface-status-bar > span {
+  position: relative;
+  min-height: 2.05rem;
+  padding: 0.42rem 0.72rem;
+  border-radius: 999px;
+  border: 1px solid rgba(56, 189, 248, 0.16);
+  background:
+    linear-gradient(145deg, rgba(56, 189, 248, 0.055), rgba(139, 92, 246, 0.035)),
+    rgba(255, 255, 255, 0.026);
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.026),
+    0 0 14px rgba(56, 189, 248, 0.060),
+    inset 0 0 16px rgba(56, 189, 248, 0.020);
+  overflow: hidden;
 }
 
-.interface-system-list li {
-  padding-left: 1.22rem;
+/* Keep the center indicator intentionally lighter than the Online capsule. */
+.interface-status-bar > span:nth-of-type(1) {
+  border-color: rgba(56, 189, 248, 0.14);
+  background:
+    linear-gradient(145deg, rgba(56, 189, 248, 0.045), rgba(139, 92, 246, 0.028)),
+    rgba(255, 255, 255, 0.020);
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.020),
+    0 0 12px rgba(56, 189, 248, 0.048),
+    inset 0 0 14px rgba(56, 189, 248, 0.018);
 }
 
-.interface-system-list li::before {
-  left: 0.10rem;
+/* Give the right metric chip slightly more presence because it represents a count/readout. */
+.interface-status-bar > span:nth-of-type(2) {
+  border-color: rgba(56, 189, 248, 0.22);
+  background:
+    linear-gradient(145deg, rgba(56, 189, 248, 0.070), rgba(139, 92, 246, 0.040)),
+    radial-gradient(circle at 12% 50%, rgba(56, 189, 248, 0.075), transparent 52%),
+    rgba(255, 255, 255, 0.028);
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.034),
+    0 0 18px rgba(56, 189, 248, 0.090),
+    inset 0 0 18px rgba(56, 189, 248, 0.026);
+}
+
+/* Subtle inner glass pass across the secondary chips. */
+.interface-status-bar > span::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.095), rgba(139, 92, 246, 0.060), transparent);
+  opacity: 0.34;
+  transform: translateX(-76%);
+  animation: interfacePlaybackSweep 5.2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.interface-status-bar > span > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Contextualize the secondary chips by active bay without overpowering the main Online control. */
+.interface-system-set-operations .interface-status-bar > span {
+  border-color: rgba(139, 92, 246, 0.20);
+  background:
+    linear-gradient(145deg, rgba(139, 92, 246, 0.060), rgba(56, 189, 248, 0.026)),
+    rgba(255, 255, 255, 0.024);
+  box-shadow:
+    0 0 0 1px rgba(139, 92, 246, 0.028),
+    0 0 15px rgba(139, 92, 246, 0.075),
+    inset 0 0 16px rgba(139, 92, 246, 0.022);
+}
+
+.interface-system-set-operations .interface-status-bar > span::before {
+  background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.11), rgba(56, 189, 248, 0.06), transparent);
+}
+
+.interface-system-set-media .interface-status-bar > span {
+  border-color: rgba(236, 72, 153, 0.20);
+  background:
+    linear-gradient(145deg, rgba(236, 72, 153, 0.060), rgba(56, 189, 248, 0.026)),
+    rgba(255, 255, 255, 0.024);
+  box-shadow:
+    0 0 0 1px rgba(236, 72, 153, 0.028),
+    0 0 15px rgba(236, 72, 153, 0.075),
+    inset 0 0 16px rgba(236, 72, 153, 0.022);
+}
+
+.interface-system-set-media .interface-status-bar > span::before {
+  background: linear-gradient(90deg, transparent, rgba(236, 72, 153, 0.11), rgba(56, 189, 248, 0.06), transparent);
+}
+
+/* Preserve responsive wrapping behavior by keeping the chips compact on smaller screens. */
+@media (max-width: 768px) {
+  .interface-status-bar > span {
+    min-height: 1.95rem;
+    padding: 0.38rem 0.62rem;
+  }
 }
 
 @media (max-width: 640px) {
-  .interface-system-list {
-    padding-left: 0.18rem;
+  .interface-status-bar > span {
+    padding: 0.36rem 0.54rem;
   }
+}
 
-  .interface-system-list li {
-    padding-left: 1.14rem;
-  }
-
-  .interface-system-list li::before {
-    left: 0.06rem;
+@media (prefers-reduced-motion: reduce) {
+  .interface-status-bar > span::before {
+    animation: none !important;
+    opacity: 0.16;
+    transform: none;
   }
 }
 
