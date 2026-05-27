@@ -5202,3 +5202,74 @@ body.winterface-offline .interface-system-toggle:focus-visible {
   }
 }
 
+/* =========================
+   WINTERFACE SIDE PANEL HEADING SCALE PATCH
+   Slightly increases Primary Signal and Live Systems label size while preventing mobile wrapping.
+   CSS-only: no HTML or JavaScript changes.
+========================= */
+
+.interface-output-label,
+.interface-system-set-operations .interface-output-label,
+.interface-system-set-media .interface-output-label {
+  font-size: clamp(0.72rem, 0.82vw, 0.78rem) !important;
+  letter-spacing: 0.145em;
+  line-height: 1.05;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+/* Keep the label readable and single-line on narrow screens. */
+@media (max-width: 768px) {
+  .interface-output-label,
+  .interface-system-set-operations .interface-output-label,
+  .interface-system-set-media .interface-output-label {
+    font-size: clamp(0.68rem, 2.35vw, 0.74rem) !important;
+    letter-spacing: 0.13em;
+  }
+}
+
+@media (max-width: 420px) {
+  .interface-output-label,
+  .interface-system-set-operations .interface-output-label,
+  .interface-system-set-media .interface-output-label {
+    font-size: 0.66rem !important;
+    letter-spacing: 0.105em;
+  }
+}
+
+/* =========================
+   WINTERFACE SIDE PANEL HEADING SCALE PLUS PATCH
+   Increases Primary Signal and Live Systems labels one step further while preserving mobile nowrap protection.
+   CSS-only: no HTML or JavaScript changes.
+========================= */
+
+.interface-output-label,
+.interface-system-set-operations .interface-output-label,
+.interface-system-set-media .interface-output-label {
+  font-size: clamp(0.78rem, 0.92vw, 0.86rem) !important;
+  letter-spacing: 0.145em !important;
+  line-height: 1.05;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+/* Tablet and stacked layouts keep the headings larger but controlled. */
+@media (max-width: 768px) {
+  .interface-output-label,
+  .interface-system-set-operations .interface-output-label,
+  .interface-system-set-media .interface-output-label {
+    font-size: clamp(0.73rem, 2.65vw, 0.80rem) !important;
+    letter-spacing: 0.125em !important;
+  }
+}
+
+/* Very narrow screens prioritize single-line readability over extra scale. */
+@media (max-width: 420px) {
+  .interface-output-label,
+  .interface-system-set-operations .interface-output-label,
+  .interface-system-set-media .interface-output-label {
+    font-size: 0.70rem !important;
+    letter-spacing: 0.095em !important;
+  }
+}
+
