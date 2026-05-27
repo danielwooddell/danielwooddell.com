@@ -1079,6 +1079,69 @@
       }
     };
 
+    const interfaceTelemetryMap = {
+      ai: [
+        { label: 'Problem', value: 'Unclear AI adoption' },
+        { label: 'Method', value: 'Practical guidance' },
+        { label: 'Result', value: 'Useful faculty workflows' }
+      ],
+      learning: [
+        { label: 'Problem', value: 'Disconnected course pieces' },
+        { label: 'Method', value: 'Learning pathway design' },
+        { label: 'Result', value: 'Clear instructional flow' }
+      ],
+      accessibility: [
+        { label: 'Problem', value: 'Barriers in digital content' },
+        { label: 'Method', value: 'Inclusive workflow design' },
+        { label: 'Result', value: 'Better learner access' }
+      ],
+      support: [
+        { label: 'Problem', value: 'Repeated support questions' },
+        { label: 'Method', value: 'Resource architecture' },
+        { label: 'Result', value: 'Scalable guidance' }
+      ],
+      workflow: [
+        { label: 'Problem', value: 'Complex tool pathways' },
+        { label: 'Method', value: 'Workflow analysis' },
+        { label: 'Result', value: 'Easier user decisions' }
+      ],
+      human: [
+        { label: 'Problem', value: 'Technology without context' },
+        { label: 'Method', value: 'Human-centered review' },
+        { label: 'Result', value: 'More trusted systems' }
+      ],
+      canvasBasics: [
+        { label: 'Problem', value: 'LMS uncertainty' },
+        { label: 'Method', value: 'Structured onboarding' },
+        { label: 'Result', value: 'Confident course setup' }
+      ],
+      allyAccess: [
+        { label: 'Problem', value: 'Hidden accessibility issues' },
+        { label: 'Method', value: 'Ally-informed review' },
+        { label: 'Result', value: 'Improved course access' }
+      ],
+      teachingTech: [
+        { label: 'Problem', value: 'Scattered tool guidance' },
+        { label: 'Method', value: 'Public resource hub' },
+        { label: 'Result', value: 'Faster tool discovery' }
+      ],
+      etaAssistant: [
+        { label: 'Problem', value: 'Support outside office hours' },
+        { label: 'Method', value: 'Custom GPT assistant' },
+        { label: 'Result', value: 'On-demand guidance' }
+      ],
+      genaiPrompting: [
+        { label: 'Problem', value: 'Inconsistent AI outputs' },
+        { label: 'Method', value: 'Prompt structure' },
+        { label: 'Result', value: 'More reviewable drafts' }
+      ],
+      courseSystems: [
+        { label: 'Problem', value: 'Course planning complexity' },
+        { label: 'Method', value: 'AI-supported design' },
+        { label: 'Result', value: 'Aligned course decisions' }
+      ]
+    };
+
     const pathList = interfaceSystem.querySelector('[data-interface-path-list]');
     const setButtons = Array.from(interfaceSystem.querySelectorAll('[data-interface-set-button]'));
     const railLabel = interfaceSystem.querySelector('[data-interface-rail-label]');
@@ -1090,6 +1153,7 @@
     const kicker = interfaceSystem.querySelector('[data-interface-kicker]');
     const title = interfaceSystem.querySelector('[data-interface-title]');
     const copy = interfaceSystem.querySelector('[data-interface-copy]');
+    const telemetry = interfaceSystem.querySelector('[data-interface-telemetry]');
     const systems = interfaceSystem.querySelector('[data-interface-systems]');
     const primary = interfaceSystem.querySelector('[data-interface-primary]');
     const link = interfaceSystem.querySelector('[data-interface-link]');
@@ -1297,6 +1361,37 @@
 
 
 
+    function escapeInterfaceHTML(value) {
+      return String(value || '').replace(/[&<>"']/g, character => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      }[character]));
+    }
+
+    function updateInterfaceTelemetry(key) {
+      if (!telemetry) return;
+
+      const items = interfaceTelemetryMap[key];
+
+      if (!Array.isArray(items) || !items.length) {
+        telemetry.hidden = true;
+        telemetry.innerHTML = '';
+        return;
+      }
+
+      telemetry.hidden = false;
+      telemetry.innerHTML = items.map(item => `
+        <div class="interface-signal-chip">
+          <span>${escapeInterfaceHTML(item.label)}</span>
+          <strong>${escapeInterfaceHTML(item.value)}</strong>
+        </div>
+      `).join('');
+    }
+
+
     let interfaceVimeoPlayer = null;
 
     function setInterfacePlaybackState(isPlaying) {
@@ -1425,6 +1520,7 @@
         if (kicker) kicker.textContent = data.kicker;
         if (title) title.textContent = data.title;
         if (copy) copy.textContent = data.copy;
+        updateInterfaceTelemetry(key);
         if (primary) primary.textContent = data.primary;
         updateSystemsList(data);
         updateInterfaceLink(data);
@@ -1444,6 +1540,7 @@
         if (kicker) kicker.textContent = 'Command Routing';
         if (title) title.textContent = 'No Exact Pathway Found';
         if (copy) copy.textContent = `The interface did not find a direct pathway for "${value}". Try AI, Canvas, Ally, accessibility, workflow, support, learning design, ETA, video, or media.`;
+        updateInterfaceTelemetry(null);
         if (primary) primary.textContent = 'A good system should fail clearly, then help the user recover.';
         updateSystemsList({ systems: ['Try: AI systems', 'Try: Canvas Basics', 'Try: media preview'] });
         updateInterfaceLink({ linkText: 'Launch Workflows', linkUrl: '#projects' });
