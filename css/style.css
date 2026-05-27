@@ -4690,3 +4690,308 @@ body.winterface-offline .interface-system-toggle:focus-visible {
   }
 }
 
+/* =========================
+   WINTERFACE BORDER CLARITY PATCH
+   Strengthens the command input and middle media-action card borders without changing layout or JS.
+========================= */
+
+/* Command input: brighter cyan boundary across every WInterface card/pathway. */
+.interface-command-line {
+  border-color: rgba(56, 189, 248, 0.66) !important;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.078), rgba(255,255,255,0.034)),
+    radial-gradient(circle at left center, rgba(56,189,248,0.15), transparent 44%),
+    rgba(255,255,255,0.03) !important;
+  box-shadow:
+    0 0 0 1px rgba(56,189,248,0.16),
+    0 0 22px rgba(56,189,248,0.22),
+    0 0 44px rgba(56,189,248,0.08),
+    inset 0 0 0 1px rgba(199,210,254,0.055),
+    inset 0 0 30px rgba(56,189,248,0.078) !important;
+}
+
+.interface-command-line::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 15px;
+  border: 1px solid rgba(125, 211, 252, 0.18);
+  box-shadow:
+    inset 0 0 14px rgba(56,189,248,0.055),
+    0 0 12px rgba(56,189,248,0.055);
+  pointer-events: none;
+}
+
+.interface-command-line:focus-within {
+  border-color: rgba(56,189,248,0.82) !important;
+  box-shadow:
+    0 0 0 1px rgba(56,189,248,0.22),
+    0 0 30px rgba(56,189,248,0.30),
+    0 0 58px rgba(56,189,248,0.11),
+    inset 0 0 0 1px rgba(199,210,254,0.075),
+    inset 0 0 38px rgba(56,189,248,0.095) !important;
+}
+
+/* Middle media action cards: more pronounced, boxy-rounded, professional border treatment. */
+.interface-playback-status,
+.interface-media-toggle,
+.interface-system-set-operations .interface-playback-status,
+.interface-system-set-operations .interface-media-toggle,
+.interface-system-set-media .interface-playback-status,
+.interface-system-set-media .interface-playback-status:not(.interface-playback-is-playing),
+.interface-system-set-media .interface-media-toggle {
+  border-width: 1px !important;
+  border-color: rgba(56,189,248,0.56) !important;
+  background:
+    linear-gradient(145deg, rgba(56,189,248,0.145), rgba(139,92,246,0.085)),
+    radial-gradient(circle at 12% 50%, rgba(56,189,248,0.10), transparent 42%),
+    rgba(255,255,255,0.045) !important;
+  box-shadow:
+    0 0 0 1px rgba(56,189,248,0.11),
+    0 0 24px rgba(56,189,248,0.17),
+    0 16px 36px rgba(0,0,0,0.20),
+    inset 0 0 0 1px rgba(199,210,254,0.045),
+    inset 0 0 26px rgba(56,189,248,0.060) !important;
+}
+
+.interface-playback-status::after,
+.interface-media-toggle::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 11px;
+  border: 1px solid rgba(125, 211, 252, 0.16);
+  box-shadow: inset 0 0 14px rgba(56,189,248,0.045);
+  pointer-events: none;
+}
+
+/* Showcase Bay Active: let the state card keep its pink identity while using the stronger card boundary. */
+.interface-system-set-media .interface-playback-status:not(.interface-playback-is-playing) {
+  border-color: rgba(236,72,153,0.62) !important;
+  background:
+    linear-gradient(145deg, rgba(236,72,153,0.145), rgba(56,189,248,0.085)),
+    radial-gradient(circle at 12% 50%, rgba(236,72,153,0.12), transparent 42%),
+    rgba(255,255,255,0.045) !important;
+  box-shadow:
+    0 0 0 1px rgba(236,72,153,0.11),
+    0 0 24px rgba(236,72,153,0.19),
+    0 16px 36px rgba(0,0,0,0.20),
+    inset 0 0 0 1px rgba(255,255,255,0.045),
+    inset 0 0 26px rgba(236,72,153,0.058) !important;
+}
+
+.interface-system-set-media .interface-playback-status:not(.interface-playback-is-playing)::after {
+  border-color: rgba(255,138,198,0.19);
+  box-shadow: inset 0 0 14px rgba(236,72,153,0.050);
+}
+
+/* Expand/Collapse remains cyan to preserve the stable system-control hierarchy. */
+.interface-system-set-media .interface-media-toggle,
+.interface-system-set-operations .interface-media-toggle,
+.interface-media-toggle {
+  color: var(--text);
+  border-color: rgba(56,189,248,0.62) !important;
+}
+
+/* Hover/focus adds a controlled lift and stronger boundary without changing button geometry. */
+.interface-playback-status:hover,
+.interface-media-toggle:hover,
+.interface-media-toggle:focus-visible {
+  border-color: rgba(56,189,248,0.78) !important;
+  box-shadow:
+    0 0 0 1px rgba(56,189,248,0.16),
+    0 0 30px rgba(56,189,248,0.24),
+    0 18px 42px rgba(0,0,0,0.24),
+    inset 0 0 0 1px rgba(199,210,254,0.065),
+    inset 0 0 30px rgba(56,189,248,0.075) !important;
+}
+
+.interface-system-set-media .interface-playback-status:not(.interface-playback-is-playing):hover {
+  border-color: rgba(255,138,198,0.78) !important;
+  box-shadow:
+    0 0 0 1px rgba(236,72,153,0.16),
+    0 0 30px rgba(236,72,153,0.25),
+    0 18px 42px rgba(0,0,0,0.24),
+    inset 0 0 0 1px rgba(255,255,255,0.060),
+    inset 0 0 30px rgba(236,72,153,0.075) !important;
+}
+
+/* Preserve the Secret Intel red armed state as the final priority when actively playing. */
+.interface-system-set-media .interface-jump-link.interface-jump-link-media-control[aria-pressed="true"] {
+  border-color: rgba(239, 68, 68, 0.68) !important;
+}
+
+/* =========================
+   WINTERFACE PRIMARY PLAY CTA GLASS PATCH
+   Applies the premium glass-control treatment to the bottom-right Play CTA across all WInterface sections.
+   Keeps Secret Intel red armed/live state as the highest-priority override.
+========================= */
+
+/* Primary lower-right CTA: glass control treatment across all 18 sections. */
+.interface-jump-link,
+.interface-system-set-operations .interface-jump-link,
+.interface-system-set-media .interface-jump-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 3.35rem;
+  padding: 0.96rem 1.08rem;
+  border-radius: 16px !important;
+  color: var(--cyan) !important;
+  text-align: center;
+  overflow: hidden;
+  border: 1px solid rgba(56, 189, 248, 0.62) !important;
+  background:
+    linear-gradient(145deg, rgba(56, 189, 248, 0.155), rgba(139, 92, 246, 0.085)),
+    radial-gradient(circle at 12% 50%, rgba(56, 189, 248, 0.12), transparent 44%),
+    rgba(255, 255, 255, 0.046) !important;
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.12),
+    0 0 26px rgba(56, 189, 248, 0.18),
+    0 16px 38px rgba(0, 0, 0, 0.22),
+    inset 0 0 0 1px rgba(199, 210, 254, 0.05),
+    inset 0 0 28px rgba(56, 189, 248, 0.064) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* Outer animated sweep stays restrained and cyan. */
+.interface-jump-link::before,
+.interface-system-set-operations .interface-jump-link::before,
+.interface-system-set-media .interface-jump-link::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent, rgba(56,189,248,0.24), rgba(139,92,246,0.15), transparent) !important;
+  opacity: 0.52;
+  transform: translateX(-76%);
+  animation: interfacePlaybackSweep 4.2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Inner glass edge, matching the middle media-control language. */
+.interface-jump-link::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 11px;
+  border: 1px solid rgba(125, 211, 252, 0.17);
+  box-shadow:
+    inset 0 0 15px rgba(56, 189, 248, 0.048),
+    0 0 12px rgba(56, 189, 248, 0.045);
+  pointer-events: none;
+}
+
+/* Hover/focus: switch into armed red launch state for all primary CTAs. */
+.interface-jump-link:hover,
+.interface-jump-link:focus-visible,
+.interface-system-set-operations .interface-jump-link:hover,
+.interface-system-set-operations .interface-jump-link:focus-visible,
+.interface-system-set-media .interface-jump-link:hover,
+.interface-system-set-media .interface-jump-link:focus-visible {
+  transform: translateY(-2px);
+  color: var(--text) !important;
+  border-color: rgba(248, 113, 113, 0.84) !important;
+  background:
+    linear-gradient(145deg, rgba(239, 68, 68, 0.24), rgba(236, 72, 153, 0.15)),
+    radial-gradient(circle at 12% 50%, rgba(239, 68, 68, 0.16), transparent 44%),
+    rgba(255, 255, 255, 0.062) !important;
+  box-shadow:
+    0 0 0 1px rgba(239, 68, 68, 0.19),
+    0 0 36px rgba(239, 68, 68, 0.32),
+    0 0 56px rgba(236, 72, 153, 0.18),
+    0 18px 44px rgba(0, 0, 0, 0.27),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.065),
+    inset 0 0 34px rgba(239, 68, 68, 0.094) !important;
+}
+
+.interface-jump-link:hover::before,
+.interface-jump-link:focus-visible::before,
+.interface-system-set-operations .interface-jump-link:hover::before,
+.interface-system-set-operations .interface-jump-link:focus-visible::before,
+.interface-system-set-media .interface-jump-link:hover::before,
+.interface-system-set-media .interface-jump-link:focus-visible::before {
+  background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.34), rgba(236, 72, 153, 0.23), transparent) !important;
+  opacity: 0.64;
+}
+
+.interface-jump-link:hover::after,
+.interface-jump-link:focus-visible::after {
+  border-color: rgba(248, 113, 113, 0.20);
+  box-shadow:
+    inset 0 0 15px rgba(239, 68, 68, 0.055),
+    0 0 13px rgba(239, 68, 68, 0.052);
+}
+
+/* Pressed-but-not-Secret-Intel still stays within the cyan control system. */
+.interface-jump-link.interface-jump-link-media-control[aria-pressed="true"] {
+  color: var(--text) !important;
+  border-color: rgba(56, 189, 248, 0.72) !important;
+  background:
+    linear-gradient(145deg, rgba(56, 189, 248, 0.18), rgba(139, 92, 246, 0.095)),
+    radial-gradient(circle at 12% 50%, rgba(56, 189, 248, 0.13), transparent 44%),
+    rgba(255, 255, 255, 0.052) !important;
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.14),
+    0 0 30px rgba(56, 189, 248, 0.22),
+    0 16px 40px rgba(0, 0, 0, 0.23),
+    inset 0 0 0 1px rgba(199, 210, 254, 0.06),
+    inset 0 0 30px rgba(56, 189, 248, 0.075) !important;
+}
+
+/* Secret Intel active playback remains red and overrides the glass cyan CTA. */
+.interface-system-set-media .interface-jump-link.interface-jump-link-media-control[aria-pressed="true"] {
+  color: var(--text) !important;
+  border-color: rgba(239, 68, 68, 0.74) !important;
+  background:
+    linear-gradient(145deg, rgba(239, 68, 68, 0.22), rgba(236, 72, 153, 0.13)),
+    radial-gradient(circle at 12% 50%, rgba(239, 68, 68, 0.14), transparent 44%),
+    rgba(255, 255, 255, 0.056) !important;
+  box-shadow:
+    0 0 0 1px rgba(239, 68, 68, 0.16),
+    0 0 30px rgba(239, 68, 68, 0.28),
+    0 0 48px rgba(236, 72, 153, 0.17),
+    0 16px 40px rgba(0, 0, 0, 0.23),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.055),
+    inset 0 0 30px rgba(239, 68, 68, 0.082) !important;
+}
+
+.interface-system-set-media .interface-jump-link.interface-jump-link-media-control[aria-pressed="true"]::before {
+  background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.34), rgba(236, 72, 153, 0.23), transparent) !important;
+  opacity: 0.62;
+}
+
+.interface-system-set-media .interface-jump-link.interface-jump-link-media-control[aria-pressed="true"]::after {
+  border-color: rgba(248, 113, 113, 0.20);
+  box-shadow:
+    inset 0 0 15px rgba(239, 68, 68, 0.055),
+    0 0 13px rgba(239, 68, 68, 0.052);
+}
+
+.interface-system-set-media .interface-jump-link.interface-jump-link-media-control[aria-pressed="true"]:hover,
+.interface-system-set-media .interface-jump-link.interface-jump-link-media-control[aria-pressed="true"]:focus-visible {
+  border-color: rgba(248, 113, 113, 0.84) !important;
+  background:
+    linear-gradient(145deg, rgba(239, 68, 68, 0.26), rgba(236, 72, 153, 0.16)),
+    radial-gradient(circle at 12% 50%, rgba(239, 68, 68, 0.17), transparent 44%),
+    rgba(255, 255, 255, 0.062) !important;
+  box-shadow:
+    0 0 0 1px rgba(239, 68, 68, 0.19),
+    0 0 36px rgba(239, 68, 68, 0.34),
+    0 0 58px rgba(236, 72, 153, 0.20),
+    0 18px 44px rgba(0, 0, 0, 0.27),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.065),
+    inset 0 0 34px rgba(239, 68, 68, 0.095) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interface-jump-link::before {
+    animation: none !important;
+    opacity: 0.18;
+    transform: none;
+  }
+}
+
