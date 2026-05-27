@@ -1109,6 +1109,55 @@
     let interfaceTimer = null;
     let interfacePaused = false;
     let interfaceMediaPlaying = false;
+    const routeTokens = [
+      {
+        token: '3a9cead089fd87a9f599b65b29568c3900362c4dd5f588536f35d2ca342ec9b4',
+        target: 'aHR0cHM6Ly93d3cueW91dHViZS5jb20vZW1iZWQvU0Q0eVJEWTltZWs/c2k9LUR6QlNWRU9IX3IwbmlSYQ=='
+      },
+      {
+        token: '028cde6cdad3c76b3229c879d0ab8319d9faa4417d1c9587e79bfb57d0b539ca',
+        target: 'aHR0cHM6Ly93d3cueW91dHViZS5jb20vZW1iZWQvaXBPU3JRTnJwMVU/c2k9RzhWQ0xzbm5haVV3NFhJcA=='
+      }
+    ];
+
+    async function digestRouteInput(value) {
+      if (!window.crypto || !window.crypto.subtle || !window.TextEncoder) return '';
+
+      const inputBuffer = new TextEncoder().encode(String(value || '').trim());
+      const hashBuffer = await window.crypto.subtle.digest('SHA-256', inputBuffer);
+      return Array.from(new Uint8Array(hashBuffer))
+        .map(byte => byte.toString(16).padStart(2, '0'))
+        .join('');
+    }
+
+    function decodeRouteTarget(value) {
+      try {
+        return window.atob(value);
+      } catch (error) {
+        return '';
+      }
+    }
+
+    async function applyMediaRoute(value) {
+      if (activeInterfaceKey !== 'caseStudyPlayer' || !mediaFrame) return false;
+
+      const routeHash = await digestRouteInput(value);
+      const route = routeTokens.find(item => item.token === routeHash);
+      if (!route) return false;
+
+      const nextSource = decodeRouteTarget(route.target);
+      if (!nextSource) return false;
+
+      mediaFrame.src = nextSource;
+      setInterfacePlaybackState(false);
+
+      if (commandInput) {
+        commandInput.value = interfaceData.caseStudyPlayer.command;
+      }
+
+      return true;
+    }
+
 
     function getSetForKey(key) {
       return interfaceData[key] ? interfaceData[key].set : activeInterfaceSet;
@@ -1439,23 +1488,34 @@
         commandInput.select();
       });
       commandInput.addEventListener('input', () => {
+        if (activeInterfaceSet === 'media') return;
+
         const match = findInterfaceMatch(commandInput.value);
         if (match && match !== activeInterfaceKey) {
           setInterfacePath(match, { updateCommand: false });
         }
       });
-      commandInput.addEventListener('keydown', event => {
+      commandInput.addEventListener('keydown', async event => {
         if (event.key !== 'Enter') return;
         event.preventDefault();
         const value = commandInput.value.trim();
-        const match = findInterfaceMatch(value);
         if (typeof playInterfaceSubmitSound === 'function') {
           playInterfaceSubmitSound();
         }
+
+        if (await applyMediaRoute(value)) return;
+
+        const match = findInterfaceMatch(value);
         if (match) setInterfacePath(match, { playSound: false });
         else if (value) showInterfaceFallback(value);
       });
       commandInput.addEventListener('blur', () => {
+        if (activeInterfaceSet === 'media') {
+          interfacePaused = false;
+          startInterfaceAutoplay();
+          return;
+        }
+
         const value = commandInput.value.trim();
         const match = findInterfaceMatch(value);
         if (match) setInterfacePath(match);
