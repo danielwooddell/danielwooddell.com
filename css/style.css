@@ -4416,3 +4416,68 @@ body.winterface-offline .interface-status-bar > span:nth-child(3) i::after {
     transform: none;
   }
 }
+
+/* =========================
+   WINTERFACE MEDIA CONTROL BOX ALIGNMENT PATCH
+   Converts the two middle media controls to a boxy-rounded style and centers both labels.
+========================= */
+
+.interface-media-actions {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch !important;
+  justify-content: stretch !important;
+  gap: 0.85rem;
+}
+
+.interface-playback-status,
+.interface-media-toggle,
+.interface-system-set-operations .interface-playback-status,
+.interface-system-set-operations .interface-media-toggle,
+.interface-system-set-media .interface-playback-status,
+.interface-system-set-media .interface-playback-status:not(.interface-playback-is-playing),
+.interface-system-set-media .interface-media-toggle {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100%;
+  min-height: 54px;
+  padding: 0.9rem 1.15rem;
+  border-radius: 16px !important;
+  text-align: center !important;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.interface-playback-status span,
+.interface-media-toggle span {
+  text-align: center !important;
+}
+
+.interface-playback-status {
+  gap: 0.55rem;
+}
+
+.interface-playback-dot {
+  flex: 0 0 auto;
+  margin-right: 0;
+}
+
+.interface-playback-status:hover,
+.interface-media-toggle:hover,
+.interface-media-toggle:focus-visible {
+  transform: translateY(-1px);
+}
+
+@media (max-width: 640px) {
+  .interface-media-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .interface-playback-status,
+  .interface-media-toggle {
+    width: 100%;
+  }
+}
+
