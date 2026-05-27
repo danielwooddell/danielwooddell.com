@@ -4418,16 +4418,17 @@ body.winterface-offline .interface-status-bar > span:nth-child(3) i::after {
 }
 
 /* =========================
-   WINTERFACE MEDIA CONTROL BOX ALIGNMENT PATCH
-   Converts the two middle media controls to a boxy-rounded style and centers both labels.
+   WINTERFACE FINAL SYNC PATCH
+   Preserves boxy-rounded media controls and restores Secret Intel red armed/live CTA only during active playback.
 ========================= */
 
+/* Keep the two middle media controls in the preferred boxy-rounded style. */
 .interface-media-actions {
   display: grid !important;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   align-items: stretch !important;
   justify-content: stretch !important;
-  gap: 0.85rem;
+  gap: 0.85rem !important;
 }
 
 .interface-playback-status,
@@ -4440,14 +4441,14 @@ body.winterface-offline .interface-status-bar > span:nth-child(3) i::after {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  width: 100%;
-  min-height: 54px;
-  padding: 0.9rem 1.15rem;
+  width: 100% !important;
+  min-height: 54px !important;
+  padding: 0.9rem 1.15rem !important;
   border-radius: 16px !important;
   text-align: center !important;
-  font-size: 0.76rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
+  font-size: 0.76rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.12em !important;
 }
 
 .interface-playback-status span,
@@ -4456,12 +4457,12 @@ body.winterface-offline .interface-status-bar > span:nth-child(3) i::after {
 }
 
 .interface-playback-status {
-  gap: 0.55rem;
+  gap: 0.55rem !important;
 }
 
 .interface-playback-dot {
-  flex: 0 0 auto;
-  margin-right: 0;
+  flex: 0 0 auto !important;
+  margin-right: 0 !important;
 }
 
 .interface-playback-status:hover,
@@ -4470,14 +4471,48 @@ body.winterface-offline .interface-status-bar > span:nth-child(3) i::after {
   transform: translateY(-1px);
 }
 
+/* Restore the Secret Intel armed/live red CTA state after playback begins. */
+.interface-system-set-media .interface-jump-link.interface-jump-link-media-control[aria-pressed="true"] {
+  color: #fff7f7 !important;
+  border-color: rgba(239, 68, 68, 0.72) !important;
+  background:
+    linear-gradient(145deg, rgba(239, 68, 68, 0.24), rgba(236, 72, 153, 0.11)),
+    radial-gradient(circle at 22% 50%, rgba(239, 68, 68, 0.20), transparent 48%),
+    rgba(255, 255, 255, 0.052) !important;
+  box-shadow:
+    0 0 0 1px rgba(239, 68, 68, 0.16),
+    0 0 24px rgba(239, 68, 68, 0.24),
+    0 0 46px rgba(236, 72, 153, 0.15),
+    inset 0 0 30px rgba(239, 68, 68, 0.085) !important;
+}
+
+.interface-system-set-media .interface-jump-link.interface-jump-link-media-control[aria-pressed="true"]::before {
+  background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.34), rgba(236, 72, 153, 0.22), transparent) !important;
+  opacity: 0.66 !important;
+}
+
+.interface-system-set-media .interface-jump-link.interface-jump-link-media-control[aria-pressed="true"]:hover,
+.interface-system-set-media .interface-jump-link.interface-jump-link-media-control[aria-pressed="true"]:focus-visible {
+  color: #ffffff !important;
+  border-color: rgba(248, 113, 113, 0.86) !important;
+  background:
+    linear-gradient(145deg, rgba(239, 68, 68, 0.30), rgba(236, 72, 153, 0.14)),
+    radial-gradient(circle at 22% 50%, rgba(239, 68, 68, 0.24), transparent 48%),
+    rgba(255, 255, 255, 0.058) !important;
+  box-shadow:
+    0 0 0 1px rgba(239, 68, 68, 0.20),
+    0 0 30px rgba(239, 68, 68, 0.30),
+    0 0 56px rgba(236, 72, 153, 0.18),
+    inset 0 0 34px rgba(239, 68, 68, 0.10) !important;
+}
+
 @media (max-width: 640px) {
   .interface-media-actions {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
   }
 
   .interface-playback-status,
   .interface-media-toggle {
-    width: 100%;
+    width: 100% !important;
   }
 }
-
