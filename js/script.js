@@ -991,7 +991,7 @@
         kicker: 'Showcase Bay',
         title: 'Teaching with Technology Preview',
         copy: 'The Showcase Bay now displays actual project visuals from the live portfolio package rather than placeholder future modules.',
-        systems: ['Live screenshot preview', 'Faculty support UX', 'Resource ecosystem design'],
+        systems: ['Live screenshot preview', 'Educator support UX', 'Resource ecosystem design'],
         primary: 'Visual evidence makes the portfolio feel more concrete and easier to scan.',
         linkText: 'Launch Image',
         linkUrl: 'assets/showcase/TwT.png',
@@ -1012,7 +1012,7 @@
         title: 'Generative AI Hub Preview',
         copy: 'A visual module for the public-facing AI teaching support hub with prompting, tool comparisons, quick wins, and mission-aligned guidance.',
         systems: ['Generative AI support', 'Prompting guidance', 'Mission-aware design'],
-        primary: 'AI support becomes more credible when faculty can quickly see the system’s structure.',
+        primary: 'AI support becomes more credible when educators can quickly see the system’s structure.',
         linkText: 'Launch Image',
         linkUrl: 'assets/showcase/GenAIhub.png',
         mediaType: 'image',
@@ -1060,7 +1060,7 @@
         imageAlt: 'EdTech Assistant ETA project screenshot',
         mediaKicker: 'AI Support Assistant',
         mediaTitle: 'EdTech Assistant ETA',
-        mediaCopy: 'A custom GPT support layer for ed-tech questions, LMS workflows, accessibility guidance, and faculty-facing resources.'
+        mediaCopy: 'A custom GPT support layer for ed-tech questions, LMS workflows, accessibility guidance, & educator-facing resources.'
       },
       workflowReplay: {
         set: 'media',
