@@ -6045,3 +6045,150 @@ body.winterface-offline .interface-status-bar > span:nth-child(3) i::after {
   }
 }
 
+/* =========================
+   WINTERFACE PREMIUM GLASS BUTTON BORDER RESTORE PATCH
+   Restores the stronger glass depth, cyan border glow, and layered inner lighting
+   on Live Playback, Expand WInterface, and the bottom-right WInterface CTA.
+   CSS-only: no HTML or JavaScript changes.
+========================= */
+
+.interface-media-actions .interface-playback-status,
+.interface-media-actions .interface-media-toggle,
+.interface-shell .interface-side-panel .interface-jump-link {
+  position: relative;
+  border-radius: 16px !important;
+  border: 1px solid rgba(56, 189, 248, 0.48) !important;
+  background:
+    linear-gradient(145deg, rgba(56, 189, 248, 0.17), rgba(139, 92, 246, 0.095)),
+    radial-gradient(circle at 18% 12%, rgba(125, 211, 252, 0.13), transparent 44%),
+    radial-gradient(circle at 88% 92%, rgba(139, 92, 246, 0.10), transparent 46%),
+    rgba(255, 255, 255, 0.055) !important;
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.105),
+    0 16px 38px rgba(0, 0, 0, 0.24),
+    0 0 28px rgba(56, 189, 248, 0.18),
+    0 0 52px rgba(139, 92, 246, 0.075),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.055),
+    inset 0 0 30px rgba(56, 189, 248, 0.062) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  overflow: hidden;
+}
+
+.interface-media-actions .interface-playback-status::before,
+.interface-media-actions .interface-media-toggle::before,
+.interface-shell .interface-side-panel .interface-jump-link::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background:
+    linear-gradient(90deg, transparent, rgba(125, 211, 252, 0.32), rgba(139, 92, 246, 0.18), transparent) !important;
+  opacity: 0.64 !important;
+  transform: translateX(-76%);
+  animation: interfacePlaybackSweep 4.2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.interface-media-actions .interface-playback-status::after,
+.interface-media-actions .interface-media-toggle::after,
+.interface-shell .interface-side-panel .interface-jump-link::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.060);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.070),
+    inset 0 -1px 0 rgba(56, 189, 248, 0.055);
+  pointer-events: none;
+}
+
+.interface-media-actions .interface-playback-status > *,
+.interface-media-actions .interface-media-toggle > *,
+.interface-shell .interface-side-panel .interface-jump-link > * {
+  position: relative;
+  z-index: 1;
+}
+
+.interface-media-actions .interface-playback-status:hover,
+.interface-media-actions .interface-playback-status:focus-visible,
+.interface-media-actions .interface-media-toggle:hover,
+.interface-media-actions .interface-media-toggle:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(56, 189, 248, 0.72) !important;
+  background:
+    linear-gradient(145deg, rgba(56, 189, 248, 0.21), rgba(139, 92, 246, 0.125)),
+    radial-gradient(circle at 18% 12%, rgba(125, 211, 252, 0.17), transparent 44%),
+    radial-gradient(circle at 88% 92%, rgba(139, 92, 246, 0.13), transparent 46%),
+    rgba(255, 255, 255, 0.065) !important;
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.14),
+    0 18px 42px rgba(0, 0, 0, 0.26),
+    0 0 34px rgba(56, 189, 248, 0.24),
+    0 0 60px rgba(139, 92, 246, 0.10),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.070),
+    inset 0 0 34px rgba(56, 189, 248, 0.080) !important;
+}
+
+/* Preserve the requested all-red hover behavior on every bottom-right WInterface CTA. */
+.interface-shell .interface-side-panel .interface-jump-link:hover,
+.interface-shell .interface-side-panel .interface-jump-link:focus-visible,
+.interface-shell .interface-side-panel .interface-jump-link.interface-jump-link-media-control:hover,
+.interface-shell .interface-side-panel .interface-jump-link.interface-jump-link-media-control:focus-visible,
+.interface-shell .interface-side-panel .interface-jump-link.interface-jump-link-media-control[aria-pressed="false"]:hover,
+.interface-shell .interface-side-panel .interface-jump-link.interface-jump-link-media-control[aria-pressed="false"]:focus-visible,
+.interface-system-set-primary .interface-side-panel .interface-jump-link:hover,
+.interface-system-set-primary .interface-side-panel .interface-jump-link:focus-visible,
+.interface-system-set-operations .interface-side-panel .interface-jump-link:hover,
+.interface-system-set-operations .interface-side-panel .interface-jump-link:focus-visible,
+.interface-system-set-media .interface-side-panel .interface-jump-link:hover,
+.interface-system-set-media .interface-side-panel .interface-jump-link:focus-visible {
+  transform: translateY(-2px) !important;
+  color: var(--text) !important;
+  border-color: rgba(239, 68, 68, 0.72) !important;
+  background:
+    linear-gradient(145deg, rgba(239, 68, 68, 0.24), rgba(236, 72, 153, 0.14)),
+    radial-gradient(circle at 18% 18%, rgba(239, 68, 68, 0.18), transparent 44%),
+    rgba(255, 255, 255, 0.062) !important;
+  box-shadow:
+    0 0 0 1px rgba(239, 68, 68, 0.105),
+    0 18px 42px rgba(0, 0, 0, 0.26),
+    0 0 38px rgba(239, 68, 68, 0.25),
+    0 0 56px rgba(236, 72, 153, 0.15),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.060),
+    inset 0 0 32px rgba(239, 68, 68, 0.075) !important;
+}
+
+.interface-shell .interface-side-panel .interface-jump-link:hover::before,
+.interface-shell .interface-side-panel .interface-jump-link:focus-visible::before,
+.interface-shell .interface-side-panel .interface-jump-link.interface-jump-link-media-control:hover::before,
+.interface-shell .interface-side-panel .interface-jump-link.interface-jump-link-media-control:focus-visible::before,
+.interface-system-set-primary .interface-side-panel .interface-jump-link:hover::before,
+.interface-system-set-primary .interface-side-panel .interface-jump-link:focus-visible::before,
+.interface-system-set-operations .interface-side-panel .interface-jump-link:hover::before,
+.interface-system-set-operations .interface-side-panel .interface-jump-link:focus-visible::before,
+.interface-system-set-media .interface-side-panel .interface-jump-link:hover::before,
+.interface-system-set-media .interface-side-panel .interface-jump-link:focus-visible::before {
+  background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.34), rgba(236, 72, 153, 0.24), transparent) !important;
+  opacity: 0.70 !important;
+}
+
+/* Preserve Pause Intel active red state with the restored premium border stack. */
+.interface-shell .interface-side-panel .interface-jump-link.interface-jump-link-media-control[aria-pressed="true"] {
+  border-radius: 16px !important;
+  color: var(--text) !important;
+  border-color: rgba(239, 68, 68, 0.58) !important;
+  background:
+    linear-gradient(145deg, rgba(239, 68, 68, 0.22), rgba(236, 72, 153, 0.13)),
+    radial-gradient(circle at 18% 18%, rgba(239, 68, 68, 0.15), transparent 44%),
+    rgba(255, 255, 255, 0.056) !important;
+  box-shadow:
+    0 0 0 1px rgba(239, 68, 68, 0.085),
+    0 16px 38px rgba(0, 0, 0, 0.24),
+    0 0 34px rgba(239, 68, 68, 0.20),
+    0 0 50px rgba(236, 72, 153, 0.13),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.055),
+    inset 0 0 30px rgba(239, 68, 68, 0.070) !important;
+}
+
