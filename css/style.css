@@ -6548,3 +6548,79 @@ body.winterface-offline .interface-section .interface-shell {
     0 0 22px rgba(56, 189, 248, 0.56),
     0 0 38px rgba(56, 189, 248, 0.25) !important;
 }
+
+/* =========================
+   WINTERFACE SHOWCASE STATUS BUTTON PINK MATCH
+   Keeps the Showcase Bay Active / Live Playback status button aligned with the pink Showcase rail.
+   Launch Image and Play Intel buttons intentionally remain on the standard cyan/core treatment.
+   CSS-only: no HTML or JavaScript changes.
+========================= */
+
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status:not(.interface-playback-is-playing) {
+  color: var(--text) !important;
+  border-color: rgba(236, 72, 153, 0.58) !important;
+  background:
+    linear-gradient(145deg, rgba(236, 72, 153, 0.135), rgba(255, 255, 255, 0.050)),
+    radial-gradient(circle at 16% 18%, rgba(236, 72, 153, 0.22), transparent 44%),
+    radial-gradient(circle at 90% 88%, rgba(139, 92, 246, 0.105), transparent 48%),
+    rgba(255, 255, 255, 0.045) !important;
+  box-shadow:
+    0 0 0 1px rgba(236, 72, 153, 0.060),
+    0 16px 38px rgba(0, 0, 0, 0.24),
+    0 0 24px rgba(236, 72, 153, 0.16),
+    inset 0 0 26px rgba(236, 72, 153, 0.038) !important;
+}
+
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status:not(.interface-playback-is-playing)::before {
+  background:
+    linear-gradient(90deg, transparent, rgba(236, 72, 153, 0.34), rgba(139, 92, 246, 0.18), transparent) !important;
+  opacity: 0.62 !important;
+}
+
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status:not(.interface-playback-is-playing)::after {
+  border-color: rgba(255, 255, 255, 0.060) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.070),
+    inset 0 -1px 0 rgba(236, 72, 153, 0.070) !important;
+}
+
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-dot {
+  background: var(--pink) !important;
+  box-shadow:
+    0 0 12px rgba(236, 72, 153, 0.92),
+    0 0 28px rgba(236, 72, 153, 0.46),
+    0 0 44px rgba(236, 72, 153, 0.22) !important;
+}
+
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status.interface-playback-is-playing .interface-playback-dot {
+  background: #ef4444 !important;
+  box-shadow:
+    0 0 12px rgba(239, 68, 68, 0.92),
+    0 0 28px rgba(239, 68, 68, 0.46),
+    0 0 42px rgba(236, 72, 153, 0.22) !important;
+}
+
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status:not(.interface-playback-is-playing):hover,
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status:not(.interface-playback-is-playing):focus-visible {
+  transform: translateY(-2px) !important;
+  color: var(--text) !important;
+  border-color: rgba(236, 72, 153, 0.74) !important;
+  background:
+    linear-gradient(145deg, rgba(236, 72, 153, 0.185), rgba(255, 255, 255, 0.060)),
+    radial-gradient(circle at 16% 18%, rgba(236, 72, 153, 0.28), transparent 44%),
+    radial-gradient(circle at 90% 88%, rgba(139, 92, 246, 0.13), transparent 48%),
+    rgba(255, 255, 255, 0.056) !important;
+  box-shadow:
+    0 0 0 1px rgba(236, 72, 153, 0.080),
+    0 18px 42px rgba(0, 0, 0, 0.26),
+    0 0 32px rgba(236, 72, 153, 0.22),
+    0 0 52px rgba(139, 92, 246, 0.09),
+    inset 0 0 30px rgba(236, 72, 153, 0.055) !important;
+}
+
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status:not(.interface-playback-is-playing):hover::before,
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status:not(.interface-playback-is-playing):focus-visible::before {
+  background:
+    linear-gradient(90deg, transparent, rgba(236, 72, 153, 0.42), rgba(139, 92, 246, 0.22), transparent) !important;
+  opacity: 0.72 !important;
+}
