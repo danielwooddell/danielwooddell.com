@@ -965,7 +965,7 @@
         command: 'map_course_design_systems',
         aliases: ['course systems', 'course design', 'ai course design', 'ai in design', 'design systems'],
         kicker: 'Course Design Infrastructure',
-        title: 'AI-Supported Course',
+        title: 'AI-Supported Design',
         copy: 'Course design support becomes more useful when AI is positioned as a planning partner for outcomes, activities, materials, feedback, and educator judgment.',
         systems: ['Outcome alignment', 'Activity planning', 'Educator judgment'],
         primary: 'AI should support better design decisions, not replace educator expertise.',
