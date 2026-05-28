@@ -985,7 +985,7 @@
       mediaPreview: {
         set: 'media',
         number: '01',
-        nav: 'Tech Hub Screenshot',
+        nav: 'Tech Hub SS',
         command: 'open_teaching_with_technology_preview',
         aliases: ['media', 'preview', 'screenshots', 'images', 'image', 'visuals', 'teaching with technology', 'twt'],
         kicker: 'Showcase Bay',
@@ -1005,7 +1005,7 @@
       videoWalkthroughs: {
         set: 'media',
         number: '02',
-        nav: 'GenAI Hub Screenshot',
+        nav: 'GenAI Hub SS',
         command: 'open_genai_hub_preview',
         aliases: ['video', 'videos', 'walkthrough', 'demo', 'player', 'embedded video', 'genai', 'ai hub', 'generative ai hub'],
         kicker: 'Showcase Bay',
@@ -1025,7 +1025,7 @@
       imageSystems: {
         set: 'media',
         number: '03',
-        nav: 'AI Design Screenshot',
+        nav: 'AI in Design SS',
         command: 'open_ai_course_design_preview',
         aliases: ['showcase', 'gallery', 'case study media', 'portfolio media', 'pip boy', 'pipboy', 'course design', 'ai4cd', 'ai in design'],
         kicker: 'Showcase Bay',
@@ -1045,7 +1045,7 @@
       demoConsole: {
         set: 'media',
         number: '04',
-        nav: 'ETA Screenshot',
+        nav: 'ETA SS',
         command: 'open_eta_assistant_preview',
         aliases: ['demo console', 'demo', 'interactive demo', 'system demo', 'live demo', 'eta', 'edtech assistant'],
         kicker: 'Showcase Bay',
