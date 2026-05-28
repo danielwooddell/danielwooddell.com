@@ -909,8 +909,27 @@
           <div class="interface-media-actions">
             <div class="interface-playback-status" data-interface-playback-status aria-label="Showcase bay status" aria-live="polite">
               <span class="interface-playback-dot" aria-hidden="true"></span>
-              <span data-interface-media-status-text>Showcase Bay Active</span>
+              <span data-interface-media-status-text>Showcase Active</span>
             </div>
+            <button
+              aria-label="Mute Showcase Bay audio"
+              aria-pressed="false"
+              class="interface-media-mute"
+              data-interface-media-mute
+              title="Mute Showcase Bay audio"
+              type="button"
+            >
+              <span class="interface-media-mute-stick" aria-hidden="true"></span>
+              <span class="interface-media-mute-orb" aria-hidden="true">
+                <svg class="interface-media-mute-icon" viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                  <path class="interface-media-mute-speaker" d="M4 9.25h3.4L12 5.6v12.8l-4.6-3.65H4z"></path>
+                  <path class="interface-media-mute-wave interface-media-mute-wave-one" d="M15 9.25c.86.78 1.35 1.7 1.35 2.75s-.49 1.97-1.35 2.75"></path>
+                  <path class="interface-media-mute-wave interface-media-mute-wave-two" d="M17.35 7.1C18.72 8.42 19.5 10.08 19.5 12s-.78 3.58-2.15 4.9"></path>
+                  <path class="interface-media-mute-slash" d="M5.6 5.6l12.8 12.8"></path>
+                </svg>
+              </span>
+              <span class="sr-only" data-interface-media-mute-text>Mute Showcase Bay audio</span>
+            </button>
             <button
               aria-pressed="false"
               class="interface-media-toggle"
