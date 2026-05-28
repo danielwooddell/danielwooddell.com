@@ -3655,12 +3655,30 @@ main,
 }
 
 .interface-showcase-caption span {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  width: fit-content;
+  max-width: 100%;
+  padding: 0.36rem 0.58rem;
+  border-radius: 999px;
   color: var(--cyan);
+  background:
+    linear-gradient(145deg, rgba(5, 8, 22, 0.82), rgba(5, 8, 22, 0.58)),
+    radial-gradient(circle at 12% 50%, rgba(56, 189, 248, 0.20), transparent 62%);
+  border: 1px solid rgba(56, 189, 248, 0.34);
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.28),
+    0 0 18px rgba(56, 189, 248, 0.12),
+    inset 0 0 18px rgba(56, 189, 248, 0.045);
+  backdrop-filter: blur(12px);
   font-family: "Space Grotesk", sans-serif;
   font-size: 0.68rem;
   font-weight: 800;
   letter-spacing: 0.16em;
+  line-height: 1;
   text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.42);
 }
 
 .interface-showcase-caption strong {
@@ -6300,3 +6318,233 @@ body.winterface-offline .interface-status-bar > span:nth-child(3) i::after {
   }
 }
 
+
+/* =========================
+   WINTERFACE COLOR RESET
+   Clean, restrained bay colors:
+   Active Pathways = cyan
+   Operational Layer = purple
+   Showcase Bay = pink
+========================= */
+
+.interface-section {
+  --winterface-accent: var(--cyan);
+  --winterface-accent-rgb: 56, 189, 248;
+  --winterface-accent-text: #7dd3fc;
+  --winterface-accent-soft: rgba(56, 189, 248, 0.095);
+  --winterface-accent-mid: rgba(56, 189, 248, 0.22);
+  --winterface-accent-strong: rgba(56, 189, 248, 0.56);
+}
+
+.interface-section.interface-system-set-primary {
+  --winterface-accent: var(--cyan);
+  --winterface-accent-rgb: 56, 189, 248;
+  --winterface-accent-text: #7dd3fc;
+  --winterface-accent-soft: rgba(56, 189, 248, 0.095);
+  --winterface-accent-mid: rgba(56, 189, 248, 0.22);
+  --winterface-accent-strong: rgba(56, 189, 248, 0.56);
+}
+
+.interface-section.interface-system-set-operations {
+  --winterface-accent: var(--violet);
+  --winterface-accent-rgb: 139, 92, 246;
+  --winterface-accent-text: #c4b5fd;
+  --winterface-accent-soft: rgba(139, 92, 246, 0.095);
+  --winterface-accent-mid: rgba(139, 92, 246, 0.22);
+  --winterface-accent-strong: rgba(139, 92, 246, 0.56);
+}
+
+.interface-section.interface-system-set-media {
+  --winterface-accent: var(--pink);
+  --winterface-accent-rgb: 236, 72, 153;
+  --winterface-accent-text: #f9a8d4;
+  --winterface-accent-soft: rgba(236, 72, 153, 0.095);
+  --winterface-accent-mid: rgba(236, 72, 153, 0.22);
+  --winterface-accent-strong: rgba(236, 72, 153, 0.56);
+}
+
+.interface-section .interface-shell {
+  border-color: rgba(var(--winterface-accent-rgb), 0.18);
+  box-shadow:
+    0 34px 110px rgba(0,0,0,0.48),
+    0 0 62px rgba(var(--winterface-accent-rgb), 0.10),
+    inset 0 0 70px rgba(255,255,255,0.035);
+}
+
+.interface-section .interface-rail {
+  background:
+    radial-gradient(circle at 10% 8%, rgba(var(--winterface-accent-rgb), 0.12), transparent 42%),
+    rgba(5, 8, 22, 0.36);
+  border-color: rgba(var(--winterface-accent-rgb), 0.22);
+}
+
+.interface-section .interface-rail-label,
+.interface-section .interface-output-label,
+.interface-section .interface-response .panel-label,
+.interface-section .interface-showcase-caption span {
+  color: var(--winterface-accent) !important;
+}
+
+.interface-section .interface-status-bar > span:nth-child(2) i,
+.interface-section .interface-status-bar > span:nth-child(3) i {
+  background: var(--winterface-accent);
+  box-shadow:
+    0 0 12px rgba(var(--winterface-accent-rgb), 0.78),
+    0 0 26px rgba(var(--winterface-accent-rgb), 0.28);
+}
+
+.interface-section .interface-path {
+  border-color: rgba(var(--winterface-accent-rgb), 0.20);
+  background:
+    linear-gradient(145deg, rgba(var(--winterface-accent-rgb), 0.045), rgba(255,255,255,0.035)),
+    rgba(255,255,255,0.035);
+  box-shadow: none;
+}
+
+.interface-section .interface-path:hover,
+.interface-section .interface-path:focus-visible {
+  transform: translateX(3px);
+  color: var(--text);
+  border-color: rgba(var(--winterface-accent-rgb), 0.42);
+  background:
+    linear-gradient(145deg, rgba(var(--winterface-accent-rgb), 0.085), rgba(255,255,255,0.045)),
+    rgba(255,255,255,0.04);
+  box-shadow:
+    0 0 18px rgba(var(--winterface-accent-rgb), 0.12),
+    inset 0 0 22px rgba(var(--winterface-accent-rgb), 0.025);
+}
+
+.interface-section .interface-path.is-active {
+  transform: translateX(3px);
+  color: var(--text);
+  border-color: rgba(var(--winterface-accent-rgb), 0.58);
+  background:
+    linear-gradient(145deg, rgba(var(--winterface-accent-rgb), 0.13), rgba(255,255,255,0.052)),
+    rgba(var(--winterface-accent-rgb), 0.055);
+  box-shadow:
+    0 0 0 1px rgba(var(--winterface-accent-rgb), 0.05),
+    0 0 24px rgba(var(--winterface-accent-rgb), 0.16),
+    inset 0 0 26px rgba(var(--winterface-accent-rgb), 0.035);
+}
+
+.interface-section .interface-path span {
+  color: var(--winterface-accent-text);
+  border-color: rgba(var(--winterface-accent-rgb), 0.34);
+  background:
+    radial-gradient(circle at 35% 28%, rgba(248, 250, 252, 0.24), transparent 25%),
+    radial-gradient(circle at 50% 52%, rgba(var(--winterface-accent-rgb), 0.18), rgba(var(--winterface-accent-rgb), 0.065) 58%, rgba(5, 8, 22, 0.18) 100%);
+  text-shadow:
+    0 1px 2px rgba(0,0,0,0.58),
+    0 0 9px rgba(var(--winterface-accent-rgb), 0.54);
+  box-shadow:
+    inset 0 0 14px rgba(var(--winterface-accent-rgb), 0.10),
+    0 0 16px rgba(var(--winterface-accent-rgb), 0.12);
+}
+
+.interface-section .interface-path span::before {
+  border-color: rgba(var(--winterface-accent-rgb), 0.22);
+  opacity: 0.54;
+}
+
+.interface-section .interface-path span::after {
+  border-color: rgba(248, 250, 252, 0.13);
+}
+
+.interface-section .interface-path:hover span,
+.interface-section .interface-path:focus-visible span,
+.interface-section .interface-path.is-active span {
+  color: #f8fafc;
+  border-color: rgba(var(--winterface-accent-rgb), 0.66);
+  background:
+    radial-gradient(circle at 35% 28%, rgba(248, 250, 252, 0.30), transparent 25%),
+    radial-gradient(circle at 50% 52%, rgba(var(--winterface-accent-rgb), 0.28), rgba(var(--winterface-accent-rgb), 0.11) 58%, rgba(5, 8, 22, 0.16) 100%);
+  box-shadow:
+    inset 0 0 16px rgba(var(--winterface-accent-rgb), 0.16),
+    0 0 20px rgba(var(--winterface-accent-rgb), 0.24),
+    0 0 36px rgba(var(--winterface-accent-rgb), 0.12);
+}
+
+.interface-section .interface-set-button.is-active {
+  border-color: rgba(var(--winterface-accent-rgb), 0.58);
+  background: rgba(var(--winterface-accent-rgb), 0.08);
+  box-shadow: 0 0 18px rgba(var(--winterface-accent-rgb), 0.18);
+}
+
+.interface-section .interface-set-button.is-active span {
+  background: var(--winterface-accent);
+  box-shadow:
+    0 0 16px rgba(var(--winterface-accent-rgb), 0.72),
+    0 0 34px rgba(var(--winterface-accent-rgb), 0.22);
+}
+
+.interface-section.interface-system-set-media .interface-playback-status:not(.interface-playback-is-playing),
+.interface-section.interface-system-set-media .interface-media-toggle {
+  border-color: rgba(236, 72, 153, 0.34);
+  box-shadow:
+    0 0 28px rgba(236, 72, 153, 0.13),
+    inset 0 0 24px rgba(236, 72, 153, 0.05);
+}
+
+.interface-section.interface-system-set-operations .interface-playback-status,
+.interface-section.interface-system-set-operations .interface-media-toggle {
+  border-color: rgba(139, 92, 246, 0.34);
+  box-shadow:
+    0 0 28px rgba(139, 92, 246, 0.13),
+    inset 0 0 24px rgba(139, 92, 246, 0.05);
+}
+
+body.winterface-offline .interface-section .interface-path,
+body.winterface-offline .interface-section .interface-rail,
+body.winterface-offline .interface-section .interface-shell {
+  filter: saturate(0.74);
+}
+
+
+/* =========================
+   WINTERFACE CORE + RIGHT PANEL CYAN TEXT FIX
+   Keeps mode color changes on the left pathway rail only.
+   Middle/core and right/status content labels remain cyan in all modes.
+========================= */
+
+.interface-section .interface-core .panel-label,
+.interface-section .interface-core [data-interface-kicker],
+.interface-section .interface-core .interface-command-prefix,
+.interface-section .interface-core .interface-showcase-caption span,
+.interface-section .interface-side-panel .interface-output-label,
+.interface-section .interface-side-panel [data-interface-output-label],
+.interface-section .interface-side-panel .interface-jump-link:not(:hover):not(:focus-visible) {
+  color: var(--cyan) !important;
+}
+
+.interface-section .interface-core .interface-command-prefix,
+.interface-section .interface-core .panel-label,
+.interface-section .interface-core [data-interface-kicker],
+.interface-section .interface-core .interface-showcase-caption span,
+.interface-section .interface-side-panel .interface-output-label,
+.interface-section .interface-side-panel [data-interface-output-label] {
+  text-shadow:
+    0 0 10px rgba(56, 189, 248, 0.52),
+    0 0 22px rgba(56, 189, 248, 0.18);
+}
+
+.interface-section .interface-core .interface-cursor {
+  background: var(--cyan) !important;
+  box-shadow:
+    0 0 12px rgba(56, 189, 248, 0.94),
+    0 0 26px rgba(56, 189, 248, 0.46),
+    0 0 44px rgba(56, 189, 248, 0.22) !important;
+}
+
+.interface-section .interface-core .interface-showcase-frame,
+.interface-section .interface-core .interface-video-frame,
+.interface-section .interface-core .interface-command-line {
+  border-color: rgba(56, 189, 248, 0.42) !important;
+}
+
+.interface-section .interface-side-panel .interface-system-list li::before {
+  background: var(--cyan) !important;
+  box-shadow:
+    0 0 10px rgba(56, 189, 248, 0.96),
+    0 0 22px rgba(56, 189, 248, 0.56),
+    0 0 38px rgba(56, 189, 248, 0.25) !important;
+}
