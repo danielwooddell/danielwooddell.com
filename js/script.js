@@ -717,6 +717,19 @@
   });
 
   /* =========================
+     TELEMETRY CARD AUDIO
+  ========================= */
+
+  document.addEventListener('click', event => {
+    const telemetryCard = event.target.closest('.interface-signal-chip');
+    if (!telemetryCard) return;
+
+    if (typeof playInterfaceSubmitSound === 'function') {
+      playInterfaceSubmitSound();
+    }
+  });
+
+  /* =========================
      INTELLIGENCE INTERFACE
   ========================= */
 
