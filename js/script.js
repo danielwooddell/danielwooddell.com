@@ -1500,18 +1500,8 @@
 
     function setInterfaceMediaExpanded(expanded) {
       interfaceSystem.classList.toggle('interface-system-media-expanded', Boolean(expanded));
-  
-    if (mediaMute) {
-      updateInterfaceMuteControl();
-      mediaMute.addEventListener('click', () => {
-        toggleInterfaceMediaMute();
-        if (typeof playInterfaceOrbSound === 'function') {
-          playInterfaceOrbSound();
-        }
-      });
-    }
 
-    if (mediaToggle) {
+      if (mediaToggle) {
         mediaToggle.setAttribute('aria-pressed', String(Boolean(expanded)));
         mediaToggle.textContent = expanded ? 'Collapse WInterface🦇' : 'Expand WInterface🦇';
       }
@@ -1629,6 +1619,16 @@
         switchInterfaceSet(button.dataset.interfaceSetButton, { playSound: false });
       });
     });
+
+    if (mediaMute) {
+      updateInterfaceMuteControl();
+      mediaMute.addEventListener('click', () => {
+        toggleInterfaceMediaMute();
+        if (typeof playInterfaceOrbSound === 'function') {
+          playInterfaceOrbSound();
+        }
+      });
+    }
 
     if (mediaToggle) {
       mediaToggle.addEventListener('click', () => {
