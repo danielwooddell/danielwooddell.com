@@ -871,7 +871,7 @@
         copy: 'The goal is to identify where people get stuck, remove unnecessary complexity, and design pathways that make tools, processes, and decisions easier to act on.',
         systems: ['Process mapping', 'Tool guidance', 'Cognitive load reduction'],
         primary: 'The best interface removes unnecessary effort.',
-        linkText: 'Launch Workflows',
+        linkText: 'Launch Projects',
         linkUrl: '#projects'
       },
       human: {
@@ -913,7 +913,7 @@
         copy: 'Accessibility support becomes stronger when it is connected to LMS workflows, document improvement, readable design, captions, alternative text, and human guidance.',
         systems: ['Ally-informed workflows', 'Accessible Canvas practices', 'Improvement pathways'],
         primary: 'Accessibility works best as a visible workflow, not a hidden compliance task. All systems go.',
-        linkText: 'Launch Ally Info',
+        linkText: 'Launch Ally Intel',
         linkUrl: 'https://www.xavier.edu/teachingwithtech/a-z/tools/ally'
       },
       teachingTech: {
@@ -1513,7 +1513,7 @@
 
     if (mediaToggle) {
         mediaToggle.setAttribute('aria-pressed', String(Boolean(expanded)));
-        mediaToggle.textContent = expanded ? 'Collapse WInterface' : 'Expand WInterface';
+        mediaToggle.textContent = expanded ? 'Collapse WInterface🦇' : 'Expand WInterface🦇';
       }
     }
 
@@ -1604,8 +1604,8 @@
         if (copy) copy.textContent = `The interface did not find a direct pathway for "${value}". Try AI, Canvas, Ally, accessibility, workflow, support, learning design, ETA, video, or media.`;
         updateInterfaceTelemetry(null);
         if (primary) primary.textContent = 'A good system should fail clearly, then help the user recover.';
-        updateSystemsList({ systems: ['Try: AI systems', 'Try: Canvas Basics', 'Try: media preview'] });
-        updateInterfaceLink({ linkText: 'Launch Workflows', linkUrl: '#projects' });
+        updateSystemsList({ systems: ['Try: AI systems', 'Try: Accessibility', 'Try: Media preview'] });
+        updateInterfaceLink({ linkText: 'Launch Projects', linkUrl: '#projects' });
         if (response) response.classList.remove('is-switching');
       }, prefersReducedMotion.matches ? 0 : 140);
     }
