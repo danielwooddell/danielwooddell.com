@@ -536,6 +536,7 @@
   const startupSound = document.querySelector('#startup-sound');
   const interactionSound = document.querySelector('#interaction-sound');
   const interfaceOrbSound = document.querySelector('#interface-orb-sound');
+  const interfaceMenuSound = document.querySelector('#interface-menu-sound');
   const interfaceSubmitSound = document.querySelector('#interface-submit-sound');
   const interfaceLaunchSound = document.querySelector('#interface-launch-sound');
   const soundToggle = document.querySelector('#sound-toggle');
@@ -549,6 +550,7 @@
   const startupVolume = 0.10;
   const interactionVolume = 0.16;
   const interfaceOrbVolume = 0.18;
+  const interfaceMenuVolume = 0.20;
   const interfaceSubmitVolume = 0.18;
   const interfaceLaunchVolume = 0.18;
 
@@ -633,6 +635,11 @@
     playAudio(interfaceOrbSound, { volume: interfaceOrbVolume });
   }
 
+  function playInterfaceMenuSound() {
+    if (!soundEnabled || !startupPlayed) return;
+    playAudio(interfaceMenuSound, { volume: interfaceMenuVolume });
+  }
+
   function playInterfaceSubmitSound() {
     if (!soundEnabled || !startupPlayed) return;
     playAudio(interfaceSubmitSound, { volume: interfaceSubmitVolume });
@@ -669,10 +676,11 @@
     });
   }
 
-  if (startupSound || interactionSound || interfaceOrbSound || interfaceSubmitSound || interfaceLaunchSound) {
+  if (startupSound || interactionSound || interfaceOrbSound || interfaceMenuSound || interfaceSubmitSound || interfaceLaunchSound) {
     prepareAudioElement(startupSound, startupVolume);
     prepareAudioElement(interactionSound, interactionVolume);
     prepareAudioElement(interfaceOrbSound, interfaceOrbVolume);
+    prepareAudioElement(interfaceMenuSound, interfaceMenuVolume);
     prepareAudioElement(interfaceSubmitSound, interfaceSubmitVolume);
     prepareAudioElement(interfaceLaunchSound, interfaceLaunchVolume);
     updateSoundControl();
@@ -695,6 +703,7 @@
         stopAudio(startupSound);
         stopAudio(interactionSound);
         stopAudio(interfaceOrbSound);
+        stopAudio(interfaceMenuSound);
         stopAudio(interfaceSubmitSound);
         stopAudio(interfaceLaunchSound);
         return;
@@ -756,6 +765,7 @@
         stopAudio(startupSound);
         stopAudio(interactionSound);
         stopAudio(interfaceOrbSound);
+        stopAudio(interfaceMenuSound);
         stopAudio(interfaceSubmitSound);
         stopAudio(interfaceLaunchSound);
       }
@@ -1579,8 +1589,8 @@
         if (response) response.classList.remove('is-switching');
       }, prefersReducedMotion.matches ? 0 : 140);
 
-      if (options.playSound && typeof playInteractionSound === 'function') {
-        playInteractionSound();
+      if (options.playSound && typeof playInterfaceMenuSound === 'function') {
+        playInterfaceMenuSound();
       }
     }
 
