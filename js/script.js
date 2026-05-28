@@ -841,7 +841,7 @@
         kicker: 'Inclusive Digital Systems',
         title: 'Accessibility Built Into the Workflow',
         copy: 'Accessibility works best when it is embedded into everyday design, documentation, LMS support, and content improvement workflows rather than added after the fact.',
-        systems: ['Readable interface patterns', 'Inclusive design workflows', 'Content improvement systems'],
+        systems: ['Readable interface patterns', 'Inclusive design workflows', 'Content improvement'],
         primary: 'Accessible systems reduce friction for everyone.',
         linkText: 'Launch Accessibility',
         linkUrl: 'https://www.xavier.edu/id/canvas/accessibility-strategies'
