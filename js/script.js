@@ -834,7 +834,7 @@
         nav: 'Experience Design',
         command: 'map_learning_design_logic',
         aliases: ['learning', 'design', 'course', 'instructional design', 'learning design', 'faculty development', 'teaching'],
-        kicker: 'Learning Experience Design',
+        kicker: 'Digital Experience Design',
         title: 'Learning Design With Structure and Purpose',
         copy: 'My work connects learning objectives, instructional pathways, digital materials, and support resources so technology serves the learning experience instead of distracting from it.',
         systems: ['Course design strategy', 'Instructional pathways', 'Reusable educator resources'],
