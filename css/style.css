@@ -6819,3 +6819,57 @@ body.winterface-offline .interface-section .interface-shell {
     grid-template-columns: 1fr !important;
   }
 }
+
+/* =========================
+   WINTERFACE STATUS ORB SYMMETRY PATCH
+   Adds a mirrored center mode orb and places the right count orb after its text.
+   HTML is adjusted only inside the WInterface status bar; JavaScript selectors remain unchanged.
+========================= */
+
+.interface-status-bar > .interface-status-item {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center;
+  gap: 0.48rem;
+  white-space: nowrap;
+}
+
+.interface-status-bar > .interface-status-item > span {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0 !important;
+}
+
+.interface-section .interface-status-bar > .interface-status-item > .interface-status-orb {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  width: 0.48rem;
+  height: 0.48rem;
+  border-radius: 50%;
+  background: var(--winterface-accent) !important;
+  box-shadow:
+    0 0 12px rgba(var(--winterface-accent-rgb), 0.78),
+    0 0 26px rgba(var(--winterface-accent-rgb), 0.28) !important;
+}
+
+.interface-status-bar > .interface-status-mode > .interface-status-orb-mirror {
+  margin-left: 0.02rem;
+}
+
+.interface-status-bar > .interface-status-count > .interface-status-orb {
+  margin-left: 0.02rem;
+}
+
+body.winterface-offline .interface-section .interface-status-bar > .interface-status-item > .interface-status-orb {
+  opacity: 0.42;
+  box-shadow:
+    0 0 8px rgba(var(--winterface-accent-rgb), 0.32),
+    0 0 18px rgba(var(--winterface-accent-rgb), 0.12) !important;
+}
+
+@media (max-width: 640px) {
+  .interface-status-bar > .interface-status-item {
+    gap: 0.4rem;
+  }
+}
