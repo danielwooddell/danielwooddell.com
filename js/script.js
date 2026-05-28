@@ -1181,11 +1181,14 @@
     const showcaseCopy = interfaceSystem.querySelector('[data-interface-showcase-copy]');
     const mediaStatusText = interfaceSystem.querySelector('[data-interface-media-status-text]');
     const playbackStatus = interfaceSystem.querySelector('[data-interface-playback-status]');
+    const mediaMute = interfaceSystem.querySelector('[data-interface-media-mute]');
+    const mediaMuteText = interfaceSystem.querySelector('[data-interface-media-mute-text]');
     let activeInterfaceSet = 'primary';
     let activeInterfaceKey = 'ai';
     let interfaceTimer = null;
     let interfacePaused = false;
     let interfaceMediaPlaying = false;
+    let interfaceMediaMuted = false;
     const routeTokens = [
       {
         token: '3a9cead089fd87a9f599b65b29568c3900362c4dd5f588536f35d2ca342ec9b4',
@@ -1418,6 +1421,39 @@
       updateInterfacePlaybackControl();
     }
 
+    function updateInterfaceMuteControl() {
+      if (!mediaMute) return;
+
+      const labelText = interfaceMediaMuted ? 'Unmute Showcase Bay audio' : 'Mute Showcase Bay audio';
+      mediaMute.classList.toggle('is-muted', interfaceMediaMuted);
+      mediaMute.setAttribute('aria-pressed', String(interfaceMediaMuted));
+      mediaMute.setAttribute('aria-label', labelText);
+      mediaMute.setAttribute('title', labelText);
+
+      if (mediaMuteText) {
+        mediaMuteText.textContent = labelText;
+      }
+    }
+
+    function applyInterfaceMediaMuteState() {
+      updateInterfaceMuteControl();
+
+      if (interfaceVimeoPlayer && typeof interfaceVimeoPlayer.setMuted === 'function') {
+        const muteAction = interfaceVimeoPlayer.setMuted(interfaceMediaMuted);
+
+        if (muteAction && typeof muteAction.catch === 'function') {
+          muteAction.catch(() => {
+            // Vimeo may reject mute calls before the player is ready or after iframe state changes.
+          });
+        }
+      }
+    }
+
+    function toggleInterfaceMediaMute() {
+      interfaceMediaMuted = !interfaceMediaMuted;
+      applyInterfaceMediaMuteState();
+    }
+
     function pauseInterfaceMedia() {
       if (interfaceVimeoPlayer && typeof interfaceVimeoPlayer.pause === 'function') {
         interfaceVimeoPlayer.pause().catch(() => {
@@ -1443,6 +1479,7 @@
     if (mediaFrame && window.Vimeo && typeof window.Vimeo.Player === 'function') {
       try {
         interfaceVimeoPlayer = new window.Vimeo.Player(mediaFrame);
+        interfaceVimeoPlayer.ready().then(applyInterfaceMediaMuteState).catch(() => {});
         interfaceVimeoPlayer.on('play', () => setInterfacePlaybackState(true));
         interfaceVimeoPlayer.on('pause', () => setInterfacePlaybackState(false));
         interfaceVimeoPlayer.on('ended', () => setInterfacePlaybackState(false));
@@ -1476,7 +1513,7 @@
         showcaseFrame.dataset.showcaseKey = activeInterfaceKey;
       }
       if (videoFrameWrap) videoFrameWrap.hidden = !isVideo;
-      if (mediaStatusText) mediaStatusText.textContent = isVideo ? 'Live Playback' : 'Showcase Bay Active';
+      if (mediaStatusText) mediaStatusText.textContent = isVideo ? 'Live Playback' : 'Showcase Active';
 
       if (!isVideo && showcaseImage) {
         if (showcaseFrame && !prefersReducedMotion.matches) showcaseFrame.classList.add('is-switching');
@@ -1580,6 +1617,16 @@
         switchInterfaceSet(button.dataset.interfaceSetButton, { playSound: false });
       });
     });
+
+    if (mediaMute) {
+      updateInterfaceMuteControl();
+      mediaMute.addEventListener('click', () => {
+        toggleInterfaceMediaMute();
+        if (typeof playInterfaceOrbSound === 'function') {
+          playInterfaceOrbSound();
+        }
+      });
+    }
 
     if (mediaToggle) {
       mediaToggle.addEventListener('click', () => {
