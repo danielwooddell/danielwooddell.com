@@ -826,7 +826,7 @@
         aliases: ['learning', 'design', 'course', 'instructional design', 'learning design', 'faculty development', 'teaching'],
         kicker: 'Learning Experience Design',
         title: 'Learning Design With Structure and Purpose',
-        copy: 'My work connects objectives, pathways, digital materials, and support resources so technology serves the learning experience instead of distracting from it.',
+        copy: 'My work connects learning objectives, instructional pathways, digital materials, and support resources so technology serves the learning experience instead of distracting from it.',
         systems: ['Course design strategy', 'Instructional pathways', 'Reusable educator resources'],
         primary: 'Strong learning systems make the next action clear.',
         linkText: 'Launch Design Site',
@@ -981,7 +981,7 @@
         kicker: 'Showcase Bay',
         title: 'Teaching with Technology Preview',
         copy: 'The Showcase Bay now displays actual project visuals from the live portfolio package rather than placeholder future modules.',
-        systems: ['Live screenshot preview', 'Educator support UX', 'Resource ecosystem design'],
+        systems: ['Live screenshot preview', 'Faculty support UX', 'Resource ecosystem design'],
         primary: 'Visual evidence makes the portfolio feel more concrete and easier to scan.',
         linkText: 'Launch Image',
         linkUrl: 'assets/showcase/TwT.png',
@@ -1075,7 +1075,7 @@
       caseStudyPlayer: {
         set: 'media',
         number: '06',
-        nav: 'Secret Intel Player',
+        nav: 'Secret Intel',
         command: 'open_intel_player',
         aliases: ['intel player', 'intel study player', 'secret intel', 'secret', 'project player', 'portfolio player', 'media player'],
         kicker: 'Live Playback Layer',
@@ -1096,7 +1096,7 @@
       ai: [
         { label: 'Problem', value: 'Unclear AI adoption' },
         { label: 'Method', value: 'Practical guidance' },
-        { label: 'Result', value: 'Useful educator workflows' }
+        { label: 'Result', value: 'Useful faculty workflows' }
       ],
       learning: [
         { label: 'Problem', value: 'Disconnected course pieces' },
@@ -1181,14 +1181,11 @@
     const showcaseCopy = interfaceSystem.querySelector('[data-interface-showcase-copy]');
     const mediaStatusText = interfaceSystem.querySelector('[data-interface-media-status-text]');
     const playbackStatus = interfaceSystem.querySelector('[data-interface-playback-status]');
-    const mediaMute = interfaceSystem.querySelector('[data-interface-media-mute]');
-    const mediaMuteText = interfaceSystem.querySelector('[data-interface-media-mute-text]');
     let activeInterfaceSet = 'primary';
     let activeInterfaceKey = 'ai';
     let interfaceTimer = null;
     let interfacePaused = false;
     let interfaceMediaPlaying = false;
-    let interfaceMediaMuted = false;
     const routeTokens = [
       {
         token: '3a9cead089fd87a9f599b65b29568c3900362c4dd5f588536f35d2ca342ec9b4',
@@ -1421,39 +1418,6 @@
       updateInterfacePlaybackControl();
     }
 
-    function updateInterfaceMuteControl() {
-      if (!mediaMute) return;
-
-      const labelText = interfaceMediaMuted ? 'Unmute Showcase Bay audio' : 'Mute Showcase Bay audio';
-      mediaMute.classList.toggle('is-muted', interfaceMediaMuted);
-      mediaMute.setAttribute('aria-pressed', String(interfaceMediaMuted));
-      mediaMute.setAttribute('aria-label', labelText);
-      mediaMute.setAttribute('title', labelText);
-
-      if (mediaMuteText) {
-        mediaMuteText.textContent = labelText;
-      }
-    }
-
-    function applyInterfaceMediaMuteState() {
-      updateInterfaceMuteControl();
-
-      if (interfaceVimeoPlayer && typeof interfaceVimeoPlayer.setMuted === 'function') {
-        const muteAction = interfaceVimeoPlayer.setMuted(interfaceMediaMuted);
-
-        if (muteAction && typeof muteAction.catch === 'function') {
-          muteAction.catch(() => {
-            // Vimeo may reject mute calls before the player is ready or after iframe state changes.
-          });
-        }
-      }
-    }
-
-    function toggleInterfaceMediaMute() {
-      interfaceMediaMuted = !interfaceMediaMuted;
-      applyInterfaceMediaMuteState();
-    }
-
     function pauseInterfaceMedia() {
       if (interfaceVimeoPlayer && typeof interfaceVimeoPlayer.pause === 'function') {
         interfaceVimeoPlayer.pause().catch(() => {
@@ -1479,7 +1443,6 @@
     if (mediaFrame && window.Vimeo && typeof window.Vimeo.Player === 'function') {
       try {
         interfaceVimeoPlayer = new window.Vimeo.Player(mediaFrame);
-        interfaceVimeoPlayer.ready().then(applyInterfaceMediaMuteState).catch(() => {});
         interfaceVimeoPlayer.on('play', () => setInterfacePlaybackState(true));
         interfaceVimeoPlayer.on('pause', () => setInterfacePlaybackState(false));
         interfaceVimeoPlayer.on('ended', () => setInterfacePlaybackState(false));
@@ -1513,7 +1476,7 @@
         showcaseFrame.dataset.showcaseKey = activeInterfaceKey;
       }
       if (videoFrameWrap) videoFrameWrap.hidden = !isVideo;
-      if (mediaStatusText) mediaStatusText.textContent = isVideo ? 'Live Playback' : 'Showcase Active';
+      if (mediaStatusText) mediaStatusText.textContent = isVideo ? 'Live Playback' : 'Showcase Bay Active';
 
       if (!isVideo && showcaseImage) {
         if (showcaseFrame && !prefersReducedMotion.matches) showcaseFrame.classList.add('is-switching');
@@ -1617,16 +1580,6 @@
         switchInterfaceSet(button.dataset.interfaceSetButton, { playSound: false });
       });
     });
-
-    if (mediaMute) {
-      updateInterfaceMuteControl();
-      mediaMute.addEventListener('click', () => {
-        toggleInterfaceMediaMute();
-        if (typeof playInterfaceOrbSound === 'function') {
-          playInterfaceOrbSound();
-        }
-      });
-    }
 
     if (mediaToggle) {
       mediaToggle.addEventListener('click', () => {
