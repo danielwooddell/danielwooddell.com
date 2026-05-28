@@ -985,13 +985,13 @@
       mediaPreview: {
         set: 'media',
         number: '01',
-        nav: 'Tech Hub SS',
+        nav: 'Tech Hub Screenshot',
         command: 'open_teaching_with_technology_preview',
         aliases: ['media', 'preview', 'screenshots', 'images', 'image', 'visuals', 'teaching with technology', 'twt'],
         kicker: 'Showcase Bay',
         title: 'Teaching with Technology Preview',
         copy: 'The Showcase Bay now displays actual project visuals from the live portfolio package rather than placeholder future modules.',
-        systems: ['Live screenshot preview', 'Educator support UX', 'Resource ecosystem design'],
+        systems: ['Live screenshot preview', 'Faculty support UX', 'Resource ecosystem design'],
         primary: 'Visual evidence makes the portfolio feel more concrete and easier to scan.',
         linkText: 'Launch Image',
         linkUrl: 'assets/showcase/TwT.png',
@@ -1005,14 +1005,14 @@
       videoWalkthroughs: {
         set: 'media',
         number: '02',
-        nav: 'GenAI Hub SS',
+        nav: 'GenAI Hub Screenshot',
         command: 'open_genai_hub_preview',
         aliases: ['video', 'videos', 'walkthrough', 'demo', 'player', 'embedded video', 'genai', 'ai hub', 'generative ai hub'],
         kicker: 'Showcase Bay',
         title: 'Generative AI Hub Preview',
         copy: 'A visual module for the public-facing AI teaching support hub with prompting, tool comparisons, quick wins, and mission-aligned guidance.',
         systems: ['Generative AI support', 'Prompting guidance', 'Mission-aware design'],
-        primary: 'AI support becomes more credible when educators can quickly see the system’s structure.',
+        primary: 'AI support becomes more credible when faculty can quickly see the system’s structure.',
         linkText: 'Launch Image',
         linkUrl: 'assets/showcase/GenAIhub.png',
         mediaType: 'image',
@@ -1025,7 +1025,7 @@
       imageSystems: {
         set: 'media',
         number: '03',
-        nav: 'AI in Design SS',
+        nav: 'AI Design Screenshot',
         command: 'open_ai_course_design_preview',
         aliases: ['showcase', 'gallery', 'case study media', 'portfolio media', 'pip boy', 'pipboy', 'course design', 'ai4cd', 'ai in design'],
         kicker: 'Showcase Bay',
@@ -1045,7 +1045,7 @@
       demoConsole: {
         set: 'media',
         number: '04',
-        nav: 'ETA SS',
+        nav: 'ETA Screenshot',
         command: 'open_eta_assistant_preview',
         aliases: ['demo console', 'demo', 'interactive demo', 'system demo', 'live demo', 'eta', 'edtech assistant'],
         kicker: 'Showcase Bay',
@@ -1060,7 +1060,7 @@
         imageAlt: 'EdTech Assistant ETA project screenshot',
         mediaKicker: 'AI Support Assistant',
         mediaTitle: 'EdTech Assistant ETA',
-        mediaCopy: 'A custom GPT support layer for ed-tech questions, LMS workflows, accessibility guidance, & educator-facing resources.'
+        mediaCopy: 'A custom GPT support layer for ed-tech questions, LMS workflows, accessibility guidance, and faculty-facing resources.'
       },
       workflowReplay: {
         set: 'media',
@@ -1094,7 +1094,7 @@
         systems: ['Embedded walkthrough', 'Project playback', 'Focused explanation'],
         primary: 'The video layer should remain available without replacing the faster image-based showcase modules.',
         linkText: 'Play Intel',
-        linkUrl: '#interface',
+        linkUrl: '#winterface',
         mediaType: 'video',
         mediaKicker: 'Live Playback',
         mediaTitle: 'AI Course Design Walkthrough',
@@ -1341,7 +1341,7 @@
       if (!link || !interfaceData[activeInterfaceKey] || interfaceData[activeInterfaceKey].mediaType !== 'video') return;
 
       link.textContent = interfaceMediaPlaying ? 'Pause Intel' : 'Play Intel';
-      link.setAttribute('href', '#interface');
+      link.setAttribute('href', '#winterface');
       link.setAttribute('role', 'button');
       link.setAttribute('aria-pressed', String(interfaceMediaPlaying));
       link.setAttribute('aria-label', interfaceMediaPlaying ? 'Pause WInterface video playback' : 'Play WInterface video playback');
@@ -1511,9 +1511,10 @@
     function setInterfaceMediaExpanded(expanded) {
       interfaceSystem.classList.toggle('interface-system-media-expanded', Boolean(expanded));
 
-      if (mediaToggle) {
+
+    if (mediaToggle) {
         mediaToggle.setAttribute('aria-pressed', String(Boolean(expanded)));
-        mediaToggle.textContent = expanded ? 'Collapse WInterface☠️' : 'Expand WInterface🦇';
+        mediaToggle.textContent = expanded ? 'Collapse WInterface🦇' : 'Expand WInterface🦇';
       }
     }
 
