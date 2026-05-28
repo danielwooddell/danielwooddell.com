@@ -749,7 +749,7 @@
       }
 
       if (interfaceSystemStatusText) {
-        interfaceSystemStatusText.textContent = winterfaceOnline ? 'Winterface System online' : 'Winterface System paused';
+        interfaceSystemStatusText.textContent = winterfaceOnline ? 'Winterface™ System online' : 'Winterface™ System paused';
       }
 
       if (!winterfaceOnline) {
@@ -786,7 +786,7 @@
         keys: ['ai', 'learning', 'accessibility', 'support', 'workflow', 'human']
       },
       operations: {
-        label: 'Operational Layer',
+        label: 'Operational',
         subtitle: 'Support Modules',
         modeLabel: 'Manual exploration mode',
         countLabel: '6 operational modules connected',
