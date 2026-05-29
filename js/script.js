@@ -874,7 +874,7 @@
       },
       operations: {
         label: 'Operational',
-        subtitle: 'Support Modules',
+        subtitle: 'Support Nodes',
         modeLabel: 'Manual exploration mode',
         countLabel: '6 operational modules connected',
         autoplay: false,
