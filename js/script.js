@@ -985,7 +985,7 @@
       mediaPreview: {
         set: 'media',
         number: '01',
-        nav: 'Tw/Tech Hub SS',
+        nav: 'T w/Tech Hub SS',
         command: 'open_teaching_with_technology_preview',
         aliases: ['media', 'preview', 'screenshots', 'images', 'image', 'visuals', 'teaching with technology', 'twt'],
         kicker: 'Showcase Bay',
