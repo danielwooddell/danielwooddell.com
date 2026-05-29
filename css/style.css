@@ -6812,3 +6812,234 @@ body.winterface-offline .interface-section .interface-shell {
     grid-template-columns: 1fr !important;
   }
 }
+
+
+/* =========================
+   WINTERFACE FULLSCREEN ORB + CONTROL SCALE PATCH
+   Scope: WInterface only.
+========================= */
+
+.interface-maximize-button {
+  appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 1.54rem;
+  height: 1.54rem;
+  margin-left: 0.05rem;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 50%;
+  color: var(--cyan);
+  background:
+    radial-gradient(circle at 35% 30%, rgba(248, 250, 252, 0.16), transparent 28%),
+    rgba(255, 255, 255, 0.045);
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.interface-maximize-button:hover,
+.interface-maximize-button:focus-visible,
+.interface-maximize-button[aria-pressed="true"] {
+  transform: translateY(-1px) scale(1.08);
+  border-color: rgba(56, 189, 248, 0.56);
+  background:
+    radial-gradient(circle at 35% 30%, rgba(248, 250, 252, 0.22), transparent 28%),
+    rgba(56, 189, 248, 0.08);
+  box-shadow:
+    0 0 18px rgba(56, 189, 248, 0.18),
+    inset 0 0 16px rgba(56, 189, 248, 0.055);
+}
+
+.interface-maximize-button[disabled] {
+  opacity: 0.48;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.interface-maximize-button i {
+  pointer-events: none;
+}
+
+.interface-system-set-operations .interface-maximize-button {
+  color: var(--violet);
+}
+
+.interface-system-set-media .interface-maximize-button {
+  color: var(--pink);
+}
+
+.interface-system-set-operations .interface-maximize-button:hover,
+.interface-system-set-operations .interface-maximize-button:focus-visible,
+.interface-system-set-operations .interface-maximize-button[aria-pressed="true"] {
+  border-color: rgba(139, 92, 246, 0.58);
+  background:
+    radial-gradient(circle at 35% 30%, rgba(248, 250, 252, 0.20), transparent 28%),
+    rgba(139, 92, 246, 0.09);
+  box-shadow:
+    0 0 18px rgba(139, 92, 246, 0.20),
+    inset 0 0 16px rgba(139, 92, 246, 0.055);
+}
+
+.interface-system-set-media .interface-maximize-button:hover,
+.interface-system-set-media .interface-maximize-button:focus-visible,
+.interface-system-set-media .interface-maximize-button[aria-pressed="true"] {
+  border-color: rgba(236, 72, 153, 0.58);
+  background:
+    radial-gradient(circle at 35% 30%, rgba(248, 250, 252, 0.20), transparent 28%),
+    rgba(236, 72, 153, 0.09);
+  box-shadow:
+    0 0 18px rgba(236, 72, 153, 0.22),
+    inset 0 0 16px rgba(236, 72, 153, 0.055);
+}
+
+.interface-section .interface-media-actions .interface-playback-status,
+.interface-section .interface-media-actions .interface-media-toggle {
+  min-height: 2.18rem;
+  padding: 0.46rem 0.78rem;
+}
+
+.interface-section .interface-side-panel .interface-jump-link {
+  min-height: 2.75rem;
+  padding: 0.72rem 0.9rem;
+}
+
+@media (min-width: 900px) {
+  html.winterface-maximized,
+  body.winterface-maximized {
+    overscroll-behavior: none;
+  }
+
+  body.winterface-maximized .footer,
+  body.winterface-maximized .skip-link {
+    visibility: hidden;
+  }
+
+  .interface-section.is-winterface-maximized {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    max-width: none;
+    width: 100vw;
+    height: 100dvh;
+    margin: 0;
+    padding: clamp(0.55rem, 1vw, 0.9rem);
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 16% 12%, rgba(56, 189, 248, 0.22), transparent 36%),
+      radial-gradient(circle at 84% 24%, rgba(139, 92, 246, 0.24), transparent 40%),
+      radial-gradient(circle at 52% 92%, rgba(236, 72, 153, 0.16), transparent 42%),
+      rgba(5, 8, 22, 0.96);
+  }
+
+  .interface-section.is-winterface-maximized::before {
+    content: none;
+  }
+
+  .interface-section.is-winterface-maximized .interface-header {
+    display: none;
+  }
+
+  .interface-section.is-winterface-maximized .interface-shell {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    min-height: 0;
+    padding: clamp(0.75rem, 1.05vw, 1.05rem);
+    border-radius: clamp(20px, 2vw, 30px);
+  }
+
+  .interface-section.is-winterface-maximized .interface-shell::before {
+    border-radius: inherit;
+  }
+
+  .interface-section.is-winterface-maximized .interface-status-bar {
+    flex: 0 0 auto;
+    margin-bottom: clamp(0.62rem, 0.9vw, 0.9rem);
+  }
+
+  .interface-section.is-winterface-maximized .interface-grid {
+    flex: 1 1 auto;
+    min-height: 0;
+    height: auto;
+    align-items: stretch;
+    grid-template-columns: minmax(210px, 0.62fr) minmax(0, 1.58fr) minmax(250px, 0.82fr);
+    gap: clamp(0.65rem, 0.85vw, 0.95rem);
+  }
+
+  .interface-section.is-winterface-maximized.interface-system-media-expanded .interface-grid {
+    grid-template-columns: minmax(210px, 0.48fr) minmax(0, 2fr);
+  }
+
+  .interface-section.is-winterface-maximized .interface-rail,
+  .interface-section.is-winterface-maximized .interface-core,
+  .interface-section.is-winterface-maximized .interface-side-panel {
+    min-height: 0;
+    max-height: none;
+    overflow: hidden;
+  }
+
+  .interface-section.is-winterface-maximized .interface-rail {
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  .interface-section.is-winterface-maximized .interface-path-list {
+    min-height: 0;
+    grid-template-rows: repeat(6, minmax(0, 1fr));
+  }
+
+  .interface-section.is-winterface-maximized .interface-core {
+    justify-content: flex-start;
+  }
+
+  .interface-section.is-winterface-maximized .interface-response[data-interface-response] {
+    min-height: 0;
+  }
+
+  .interface-section.is-winterface-maximized .interface-side-panel {
+    grid-template-rows: minmax(7.25rem, auto) minmax(0, 1fr) minmax(4.5rem, auto);
+  }
+
+  .interface-section.is-winterface-maximized .interface-output-card,
+  .interface-section.is-winterface-maximized .interface-output-card-soft,
+  .interface-section.is-winterface-maximized .interface-jump-link {
+    min-height: 0;
+  }
+
+  .interface-section.is-winterface-maximized .interface-media-panel:not([hidden]) {
+    min-height: 0;
+  }
+
+  .interface-section.is-winterface-maximized .interface-showcase-frame,
+  .interface-section.is-winterface-maximized .interface-video-frame {
+    max-height: min(56vh, 620px);
+  }
+
+  .interface-section.is-winterface-maximized .interface-showcase-caption strong {
+    font-size: clamp(1.35rem, 2vw, 2.15rem);
+  }
+}
+
+@media (max-width: 899px) {
+  .interface-maximize-button {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interface-maximize-button,
+  .interface-section.is-winterface-maximized,
+  .interface-section.is-winterface-maximized .interface-shell {
+    transition: none !important;
+  }
+}
