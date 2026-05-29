@@ -867,7 +867,7 @@
       primary: {
         label: 'Active Pathways',
         subtitle: 'Primary Systems',
-        modeLabel: 'Primary pathways active',
+        modeLabel: 'Primary systems active',
         countLabel: '6 pathways connected',
         autoplay: true,
         keys: ['ai', 'learning', 'accessibility', 'support', 'workflow', 'human']
@@ -876,7 +876,7 @@
         label: 'Operational',
         subtitle: 'Support Nodes',
         modeLabel: 'Manual exploration mode',
-        countLabel: '6 operational modules connected',
+        countLabel: '6 support nodes connected',
         autoplay: false,
         keys: ['canvasBasics', 'allyAccess', 'teachingTech', 'etaAssistant', 'genaiPrompting', 'courseSystems']
       },
