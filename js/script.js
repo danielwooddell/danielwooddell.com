@@ -1045,7 +1045,7 @@
       demoConsole: {
         set: 'media',
         number: '04',
-        nav: 'ETA Assistant SS',
+        nav: '24/7 ETA Assistant',
         command: 'open_eta_assistant_preview',
         aliases: ['demo console', 'demo', 'interactive demo', 'system demo', 'live demo', 'eta', 'edtech assistant'],
         kicker: 'Showcase Bay',
