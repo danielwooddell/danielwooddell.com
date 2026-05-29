@@ -7043,3 +7043,15 @@ body.winterface-offline .interface-section .interface-shell {
     transition: none !important;
   }
 }
+
+/* =========================
+   WINTERFACE FULLSCREEN SHOWCASE CONTROL CLEARANCE PATCH
+   Moves only the middle Showcase Bay control strip slightly upward while WInterface is maximized.
+   CSS-only: no HTML, JavaScript, content, audio, or non-WInterface layout changes.
+========================= */
+
+@media (min-width: 900px) {
+  .interface-section.is-winterface-maximized .interface-media-actions {
+    transform: translateY(-6px);
+  }
+}
