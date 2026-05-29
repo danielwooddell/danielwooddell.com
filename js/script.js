@@ -901,7 +901,7 @@
       canvasBasics: {
         set: 'operations',
         number: '01',
-        nav: 'Canvas Basics',
+        nav: 'Canvas LMS Basics',
         command: 'launch_canvas_basics',
         aliases: ['canvas', 'canvas basics', 'lms basics', 'faculty canvas', 'canvas course', 'training course'],
         kicker: 'Faculty Training System',
@@ -943,7 +943,7 @@
       etaAssistant: {
         set: 'operations',
         number: '04',
-        nav: 'ETA Assistant',
+        nav: '24/7 ETA Assistant',
         command: 'activate_edtech_assistant',
         aliases: ['eta', 'edtech assistant', 'custom gpt', 'assistant', 'ai assistant', 'support bot'],
         kicker: 'AI Support Assistant',
@@ -971,7 +971,7 @@
       courseSystems: {
         set: 'operations',
         number: '06',
-        nav: 'AI Course Systems',
+        nav: 'AI Design Systems',
         command: 'map_course_design_systems',
         aliases: ['course systems', 'course design', 'ai course design', 'ai in design', 'design systems'],
         kicker: 'Course Design Infrastructure',
@@ -985,7 +985,7 @@
       mediaPreview: {
         set: 'media',
         number: '01',
-        nav: 'Tech Hub SS',
+        nav: 'Tw/Tech Hub SS',
         command: 'open_teaching_with_technology_preview',
         aliases: ['media', 'preview', 'screenshots', 'images', 'image', 'visuals', 'teaching with technology', 'twt'],
         kicker: 'Showcase Bay',
@@ -1045,7 +1045,7 @@
       demoConsole: {
         set: 'media',
         number: '04',
-        nav: 'ETA SS',
+        nav: 'ETA Assistant SS',
         command: 'open_eta_assistant_preview',
         aliases: ['demo console', 'demo', 'interactive demo', 'system demo', 'live demo', 'eta', 'edtech assistant'],
         kicker: 'Showcase Bay',
