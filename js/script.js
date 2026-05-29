@@ -747,7 +747,84 @@
   if (interfaceSystem) {
     const interfaceSystemToggle = interfaceSystem.querySelector('[data-interface-system-toggle]');
     const interfaceSystemStatusText = interfaceSystem.querySelector('[data-interface-system-status-text]');
+    const interfaceMaximizeToggle = interfaceSystem.querySelector('[data-interface-maximize-toggle]');
+    const winterfaceMaximizeQuery = window.matchMedia('(min-width: 900px)');
     let winterfaceOnline = true;
+    let winterfaceMaximized = false;
+    let storedBodyOverflow = '';
+    let storedHtmlOverflow = '';
+
+    function updateWinterfaceMaximizeControl() {
+      if (!interfaceMaximizeToggle) return;
+
+      const canMaximize = winterfaceMaximizeQuery.matches;
+      interfaceMaximizeToggle.disabled = !canMaximize;
+      interfaceMaximizeToggle.setAttribute('aria-disabled', String(!canMaximize));
+      interfaceMaximizeToggle.setAttribute('aria-pressed', String(winterfaceMaximized));
+      interfaceMaximizeToggle.setAttribute(
+        'aria-label',
+        canMaximize
+          ? (winterfaceMaximized ? 'Restore WInterface console' : 'Maximize WInterface console')
+          : 'WInterface maximize mode is available on larger screens'
+      );
+      interfaceMaximizeToggle.title = canMaximize
+        ? (winterfaceMaximized ? 'Restore WInterface console' : 'Maximize WInterface console')
+        : 'Maximize mode is available on larger screens';
+    }
+
+    function setWinterfaceMaximized(maximized) {
+      const nextState = Boolean(maximized) && winterfaceMaximizeQuery.matches;
+      if (nextState === winterfaceMaximized) {
+        updateWinterfaceMaximizeControl();
+        return;
+      }
+
+      if (nextState) {
+        storedBodyOverflow = document.body.style.overflow || '';
+        storedHtmlOverflow = document.documentElement.style.overflow || '';
+        document.body.style.overflow = 'hidden';
+        document.documentElement.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = storedBodyOverflow;
+        document.documentElement.style.overflow = storedHtmlOverflow;
+      }
+
+      winterfaceMaximized = nextState;
+      document.body.classList.toggle('winterface-maximized', winterfaceMaximized);
+      document.documentElement.classList.toggle('winterface-maximized', winterfaceMaximized);
+      interfaceSystem.classList.toggle('is-winterface-maximized', winterfaceMaximized);
+      updateWinterfaceMaximizeControl();
+    }
+
+    if (interfaceMaximizeToggle) {
+      interfaceMaximizeToggle.addEventListener('click', event => {
+        event.preventDefault();
+        event.stopPropagation();
+        setWinterfaceMaximized(!winterfaceMaximized);
+
+        if (typeof playInterfaceOrbSound === 'function') {
+          playInterfaceOrbSound();
+        }
+      });
+
+      updateWinterfaceMaximizeControl();
+    }
+
+    window.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && winterfaceMaximized) {
+        setWinterfaceMaximized(false);
+      }
+    });
+
+    if (typeof winterfaceMaximizeQuery.addEventListener === 'function') {
+      winterfaceMaximizeQuery.addEventListener('change', () => {
+        if (!winterfaceMaximizeQuery.matches && winterfaceMaximized) {
+          setWinterfaceMaximized(false);
+        } else {
+          updateWinterfaceMaximizeControl();
+        }
+      });
+    }
 
     function updateWinterfacePowerState() {
       document.body.classList.toggle('winterface-offline', !winterfaceOnline);
