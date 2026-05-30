@@ -8114,3 +8114,18 @@ body.winterface-offline .interface-section .interface-shell {
   background: linear-gradient(90deg, transparent, rgba(236, 72, 153, 0.18), rgba(248, 113, 113, 0.10), transparent) !important;
   opacity: 0.42 !important;
 }
+
+/* =========================
+   WINTERFACE V3.5 MICROPHONE ORB CLIP FIX
+   Scope: Showcase Bay audio mute button only.
+   CSS-only: no HTML, JavaScript, content, assets, or other layout behavior changed.
+========================= */
+
+.interface-media-mute {
+  transform: translateY(0.02rem) !important;
+}
+
+.interface-media-mute:hover,
+.interface-media-mute:focus-visible {
+  transform: translateY(-0.08rem) scale(1.04) !important;
+}
