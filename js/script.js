@@ -943,7 +943,7 @@
       accessibility: {
         set: 'primary',
         number: '03',
-        nav: 'Accessibility',
+        nav: 'Open Interface',
         command: 'sync_accessibility_layer',
         aliases: ['accessibility', 'accessible', 'ada', 'ally', 'inclusive', 'wcag', 'readability', 'universal design', 'udl'],
         kicker: 'Inclusive Digital Systems',
