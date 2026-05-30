@@ -782,11 +782,11 @@
       interfaceMaximizeToggle.setAttribute(
         'aria-label',
         canMaximize
-          ? (winterfaceMaximized ? 'Restore WInterface console' : 'Maximize WInterface console')
+          ? (winterfaceMaximized ? 'Restore WInterface Console' : 'Maximize WInterface Console')
           : 'WInterface maximize mode is available on larger screens'
       );
       interfaceMaximizeToggle.title = canMaximize
-        ? (winterfaceMaximized ? 'Restore WInterface console' : 'Maximize WInterface console')
+        ? (winterfaceMaximized ? 'Restore WInterface Console' : 'Maximize WInterface Console')
         : 'Maximize mode is available on larger screens';
     }
 
