@@ -1282,7 +1282,7 @@
       support: [
         { label: 'GUIDE', readout: 'GUIDE PATHWAY: READY.' },
         { label: 'DOCS', readout: 'DOCUMENTATION STACK: LINKED.' },
-        { label: '247', readout: 'SUPPORT LAYER: ALWAYS ON.' }
+        { label: '24/7', readout: 'SUPPORT LAYER: ALWAYS ON.' }
       ],
       workflow: [
         { label: 'MAP', readout: 'PROCESS MAP: ACTIVE.' },
