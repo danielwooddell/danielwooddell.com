@@ -7987,11 +7987,11 @@ body.winterface-offline .interface-section .interface-shell {
   }
 
   .interface-section.interface-system-set-operations:not(.is-winterface-maximized) .interface-core {
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .interface-section.interface-system-set-operations:not(.is-winterface-maximized) .interface-response[data-interface-response] {
-    min-height: 22.8rem;
+    min-height: 21.1rem;
   }
 }
 
