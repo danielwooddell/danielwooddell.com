@@ -539,6 +539,9 @@
   const interfaceMenuSound = document.querySelector('#interface-menu-sound');
   const interfaceSubmitSound = document.querySelector('#interface-submit-sound');
   const interfaceLaunchSound = document.querySelector('#interface-launch-sound');
+  const signalPulseLeftSound = typeof Audio === 'function' ? new Audio('audio/ileft.mp3') : null;
+  const signalPulseTopSound = typeof Audio === 'function' ? new Audio('audio/itop.mp3') : null;
+  const signalPulseRightSound = typeof Audio === 'function' ? new Audio('audio/iright.mp3') : null;
   const soundToggle = document.querySelector('#sound-toggle');
   const soundToggleText = soundToggle ? soundToggle.querySelector('.sound-toggle-text') : null;
   const soundStatus = document.querySelector('#sound-status');
@@ -553,6 +556,7 @@
   const interfaceMenuVolume = 0.20;
   const interfaceSubmitVolume = 0.18;
   const interfaceLaunchVolume = 0.18;
+  const signalPulseVolume = 0.15;
 
   function getStoredSoundPreference() {
     try {
@@ -650,6 +654,14 @@
     playAudio(interfaceLaunchSound, { volume: interfaceLaunchVolume });
   }
 
+  function playSignalPulseSound(index) {
+    if (!soundEnabled || !startupPlayed) return;
+
+    const signalSounds = [signalPulseLeftSound, signalPulseTopSound, signalPulseRightSound];
+    const soundIndex = Math.max(0, Math.min(signalSounds.length - 1, Number(index) || 0));
+    playAudio(signalSounds[soundIndex], { volume: signalPulseVolume });
+  }
+
   function armStartupSound() {
     if (startupArmed || startupPlayed) return;
 
@@ -676,13 +688,16 @@
     });
   }
 
-  if (startupSound || interactionSound || interfaceOrbSound || interfaceMenuSound || interfaceSubmitSound || interfaceLaunchSound) {
+  if (startupSound || interactionSound || interfaceOrbSound || interfaceMenuSound || interfaceSubmitSound || interfaceLaunchSound || signalPulseLeftSound || signalPulseTopSound || signalPulseRightSound) {
     prepareAudioElement(startupSound, startupVolume);
     prepareAudioElement(interactionSound, interactionVolume);
     prepareAudioElement(interfaceOrbSound, interfaceOrbVolume);
     prepareAudioElement(interfaceMenuSound, interfaceMenuVolume);
     prepareAudioElement(interfaceSubmitSound, interfaceSubmitVolume);
     prepareAudioElement(interfaceLaunchSound, interfaceLaunchVolume);
+    prepareAudioElement(signalPulseLeftSound, signalPulseVolume);
+    prepareAudioElement(signalPulseTopSound, signalPulseVolume);
+    prepareAudioElement(signalPulseRightSound, signalPulseVolume);
     updateSoundControl();
 
     if (soundEnabled) {
@@ -706,6 +721,9 @@
         stopAudio(interfaceMenuSound);
         stopAudio(interfaceSubmitSound);
         stopAudio(interfaceLaunchSound);
+        stopAudio(signalPulseLeftSound);
+        stopAudio(signalPulseTopSound);
+        stopAudio(signalPulseRightSound);
         return;
       }
 
@@ -733,9 +751,9 @@
     const telemetryCard = event.target.closest('.interface-signal-chip');
     if (!telemetryCard) return;
 
-    if (typeof playInterfaceSubmitSound === 'function') {
-      playInterfaceSubmitSound();
-    }
+    const telemetryCards = Array.from(telemetryCard.parentElement ? telemetryCard.parentElement.querySelectorAll('.interface-signal-chip') : []);
+    const telemetryIndex = Math.max(0, telemetryCards.indexOf(telemetryCard));
+    playSignalPulseSound(telemetryIndex);
   });
 
   /* =========================
@@ -845,6 +863,9 @@
         stopAudio(interfaceMenuSound);
         stopAudio(interfaceSubmitSound);
         stopAudio(interfaceLaunchSound);
+        stopAudio(signalPulseLeftSound);
+        stopAudio(signalPulseTopSound);
+        stopAudio(signalPulseRightSound);
       }
     }
 
@@ -943,7 +964,7 @@
         title: 'Support Ecosystems That Scale Knowledge',
         copy: 'I build resource hubs, training materials, documentation, and AI support layers that help people find accurate guidance without waiting for one-to-one help every time.',
         systems: ['Resource hubs', 'Documentation systems', '24/7 support layers'],
-        primary: 'Good support architecture multiplies institutional capacity.',
+        primary: 'Good support architecture multiplies capacity.',
         linkText: 'Launch Support System',
         linkUrl: 'https://www.xavier.edu/teachingwithtech'
       },
@@ -969,9 +990,9 @@
         aliases: ['human', 'people', 'user', 'users', 'communication', 'judgment', 'trust', 'experience', 'ux'],
         kicker: 'Human-Centered Technology',
         title: 'Technology Decisions Grounded in People',
-        copy: 'I approach emerging technology through the lens of real users, real constraints, accessibility, trust, training, and long-term maintainability.',
+        copy: 'I approach emerging technology through the lens of real users, real constraints, accessible content for all, trust, training, and long-term maintainability.',
         systems: ['User confidence', 'Clear communication', 'Sustainable systems'],
-        primary: 'Technology should make people more capable, not more confused.',
+        primary: 'Technology should make people more capable🚫more confused.',
         linkText: 'Launch Intelligence',
         linkUrl: '#recommendations'
       },
@@ -999,7 +1020,7 @@
         title: 'Ally Accessibility',
         copy: 'Accessibility support becomes stronger when it is connected to LMS workflows, document improvement, readable design, captions, alternative text, and human guidance.',
         systems: ['Ally-informed workflows', 'Accessible Canvas practices', 'Improvement pathways'],
-        primary: 'Accessibility works best as a visible workflow, not a hidden compliance task. All systems go.',
+        primary: 'Accessibility works best as a visible workflow, not a hidden compliance task. Systems go.',
         linkText: 'Launch Ally Intel',
         linkUrl: 'https://www.xavier.edu/teachingwithtech/a-z/tools/ally'
       },
@@ -1089,7 +1110,7 @@
         title: 'Generative AI Hub Preview',
         copy: 'A visual module for the public-facing AI teaching support hub with prompting, tool comparisons, quick wins, and mission-aligned guidance.',
         systems: ['Generative AI support', 'Prompting guidance', 'Mission-aware design'],
-        primary: 'AI support becomes more credible when educators can quickly see the system’s structure.',
+        primary: 'AI support becomes more credible when educators can see the system’s structure.',
         linkText: 'Launch Image',
         linkUrl: 'assets/showcase/GenAIhub.png',
         mediaType: 'image',
@@ -1129,7 +1150,7 @@
         title: 'EdTech Assistant Preview',
         copy: 'ETA functions as a conversational support layer for Canvas, supported educational technologies, accessibility workflows, and Teaching with Technology resources.',
         systems: ['Custom GPT workflow', 'Support architecture', 'Always-available guidance'],
-        primary: 'The assistant works because it is connected to a real support ecosystem, not isolated as a novelty.',
+        primary: 'The assistant works because it is connected to a real support ecosystem.',
         linkText: 'Launch Image',
         linkUrl: 'assets/showcase/ETA.png',
         mediaType: 'image',
@@ -1149,7 +1170,7 @@
         title: 'Creator Preview',
         copy: 'A visual module reserved for the creator system asset included in the package, giving the Showcase Bay a fifth live media target.',
         systems: ['Character interface asset', 'Visual system cue', 'Portfolio atmosphere'],
-        primary: 'A consistent media bay can carry both project evidence and site personality without breaking usability.',
+        primary: 'Real progress happens when innovation meets usability, accessibility, and purpose.',
         linkText: 'Launch Image',
         linkUrl: 'assets/showcase/Woodrow.png',
         mediaType: 'image',
@@ -1169,7 +1190,7 @@
         title: 'AI Course Design Walkthrough Player',
         copy: 'The Intel Player keeps the embedded walkthrough available as a focused playback layer inside the WInterface command system.',
         systems: ['Embedded walkthrough', 'Project playback', 'Focused explanation'],
-        primary: 'The video layer should remain available without replacing the faster image-based showcase modules.',
+        primary: 'The video layer should remain available without replacing the faster image-based modules.',
         linkText: 'Play Intel',
         linkUrl: '#winterface',
         mediaType: 'video',
@@ -1242,6 +1263,99 @@
       ]
     };
 
+    const interfacePulseMap = {
+      ai: [
+        { label: 'PRMT', readout: 'PROMPT CHANNEL: ALIGNED.' },
+        { label: 'FLOW', readout: 'FACULTY WORKFLOW: ROUTED.' },
+        { label: 'SCAN', readout: 'AI REVIEW LOOP: ACTIVE.' }
+      ],
+      learning: [
+        { label: 'MAP', readout: 'OUTCOME MAP: LOCKED.' },
+        { label: 'SEQ', readout: 'ACTIVITY SEQUENCE: ONLINE.' },
+        { label: 'LINK', readout: 'RESOURCE LAYER: CONNECTED.' }
+      ],
+      accessibility: [
+        { label: 'ALLY', readout: 'ALLY CHECK: STANDING BY.' },
+        { label: 'STRUCT', readout: 'CONTENT STRUCTURE: VERIFIED.' },
+        { label: 'FIX', readout: 'IMPROVEMENT ROUTE: OPEN.' }
+      ],
+      support: [
+        { label: 'GUIDE', readout: 'GUIDE PATHWAY: READY.' },
+        { label: 'DOCS', readout: 'DOCUMENTATION STACK: LINKED.' },
+        { label: '247', readout: 'SUPPORT LAYER: ALWAYS ON.' }
+      ],
+      workflow: [
+        { label: 'MAP', readout: 'PROCESS MAP: ACTIVE.' },
+        { label: 'ROUTE', readout: 'TOOL ROUTING: OPTIMIZED.' },
+        { label: 'LOAD', readout: 'COGNITIVE LOAD: REDUCING.' }
+      ],
+      human: [
+        { label: 'CLEAR', readout: 'CLARITY CHECK: PRIORITY.' },
+        { label: 'TRUST', readout: 'TRUST SIGNAL: STABLE.' },
+        { label: 'FIT', readout: 'CONTEXT FIT: VALIDATED.' }
+      ],
+      canvasBasics: [
+        { label: 'LMS', readout: 'LMS TRAINING PATH: ACTIVE.' },
+        { label: 'SETUP', readout: 'COURSE SETUP: LINKED.' },
+        { label: 'REUSE', readout: 'REUSABLE GUIDANCE: READY.' }
+      ],
+      allyAccess: [
+        { label: 'ALLY', readout: 'ALLY REVIEW: ACTIVE.' },
+        { label: 'CANVAS', readout: 'CANVAS ACCESS ROUTE: CONNECTED.' },
+        { label: 'FIX', readout: 'ACCESS FIX PATH: AVAILABLE.' }
+      ],
+      teachingTech: [
+        { label: 'TOOLS', readout: 'TOOL INDEX: SCANNED.' },
+        { label: 'HUB', readout: 'RESOURCE HUB: CONNECTED.' },
+        { label: 'UX', readout: 'SUPPORT UX: VISIBLE.' }
+      ],
+      etaAssistant: [
+        { label: 'ETA', readout: 'ETA ASSISTANT: ONLINE.' },
+        { label: 'ROUTE', readout: 'EDTECH ROUTING: ACTIVE.' },
+        { label: '24/7', readout: 'ON-DEMAND LAYER: READY.' }
+      ],
+      genaiPrompting: [
+        { label: 'CTX', readout: 'PROMPT CONTEXT: LOADED.' },
+        { label: 'FORM', readout: 'OUTPUT FORMAT: SET.' },
+        { label: 'SCAN', readout: 'REVIEW HABIT: ENABLED.' }
+      ],
+      courseSystems: [
+        { label: 'OUT', readout: 'OUTCOME ALIGNMENT: ACTIVE.' },
+        { label: 'PLAN', readout: 'AI PLANNING ROUTE: CONNECTED.' },
+        { label: 'JUDGE', readout: 'EDUCATOR JUDGMENT: PRIMARY.' }
+      ],
+      mediaPreview: [
+        { label: 'PREV', readout: 'TWT PREVIEW: LOADED.' },
+        { label: 'UX', readout: 'SUPPORT UX: VISIBLE.' },
+        { label: 'GO', readout: 'IMAGE LAUNCH: READY.' }
+      ],
+      videoWalkthroughs: [
+        { label: 'GENAI', readout: 'GENAI HUB PREVIEW: LOADED.' },
+        { label: 'PRMT', readout: 'PROMPT SIGNAL: ACTIVE.' },
+        { label: 'MISSION', readout: 'MISSION LAYER: CONNECTED.' }
+      ],
+      imageSystems: [
+        { label: 'COURSE', readout: 'COURSE DESIGN VIEW: ACTIVE.' },
+        { label: 'PLAN', readout: 'AI PLANNING SIGNAL: ONLINE.' },
+        { label: 'DESIGN', readout: 'LEARNING DESIGN LAYER: LINKED.' }
+      ],
+      demoConsole: [
+        { label: 'ETA', readout: 'ETA PREVIEW: LOADED.' },
+        { label: 'SUPPORT', readout: 'SUPPORT ARCHITECTURE: ACTIVE.' },
+        { label: '24/7', readout: 'ALWAYS-ON GUIDANCE: CONNECTED.' }
+      ],
+      workflowReplay: [
+        { label: 'CREATOR', readout: 'CREATOR ASSET: LOADED.' },
+        { label: 'ATMOS', readout: 'ATMOSPHERE SIGNAL: ACTIVE.' },
+        { label: 'ID', readout: 'WINTERFACE IDENTITY: LINKED.' }
+      ],
+      caseStudyPlayer: [
+        { label: 'AUDIO', readout: 'SECRET INTEL AUDIO: READY.' },
+        { label: 'VIDEO', readout: 'WALKTHROUGH PLAYER: CONNECTED.' },
+        { label: 'FOCUS', readout: 'FOCUSED EXPLANATION: AVAILABLE.' }
+      ]
+    };
+
     const pathList = interfaceSystem.querySelector('[data-interface-path-list]');
     const setButtons = Array.from(interfaceSystem.querySelectorAll('[data-interface-set-button]'));
     const railLabel = interfaceSystem.querySelector('[data-interface-rail-label]');
@@ -1255,6 +1369,9 @@
     const copy = interfaceSystem.querySelector('[data-interface-copy]');
     const telemetry = interfaceSystem.querySelector('[data-interface-telemetry]');
     const systems = interfaceSystem.querySelector('[data-interface-systems]');
+    const pulse = interfaceSystem.querySelector('[data-interface-pulse]');
+    const pulseChips = pulse ? Array.from(pulse.querySelectorAll('[data-interface-pulse-chip]')) : [];
+    const pulseReadout = interfaceSystem.querySelector('[data-interface-pulse-readout]');
     const primary = interfaceSystem.querySelector('[data-interface-primary]');
     const link = interfaceSystem.querySelector('[data-interface-link]');
     const mediaPanel = interfaceSystem.querySelector('[data-interface-media-panel]');
@@ -1462,6 +1579,46 @@
       }
     }
 
+    function normalizePulseReadout(value) {
+      return String(value || '').trim().replace(/[.\s]+$/, '');
+    }
+
+    function setInterfacePulseReadout(items, index) {
+      if (!pulseReadout || !Array.isArray(items) || !items.length) return;
+      const item = items[index] || items[0];
+      pulseReadout.textContent = normalizePulseReadout(item.readout || item.label || '');
+      pulseChips.forEach((chip, chipIndex) => {
+        chip.classList.toggle('is-active', chipIndex === index);
+        chip.setAttribute('aria-pressed', String(chipIndex === index));
+      });
+    }
+
+    function updateInterfacePulse(key) {
+      if (!pulse || !pulseChips.length) return;
+
+      const data = interfaceData[key];
+      const fallback = data && Array.isArray(data.systems)
+        ? data.systems.map(system => ({ label: system, readout: `${system} signal active.` }))
+        : [];
+      const items = interfacePulseMap[key] || fallback;
+
+      if (!Array.isArray(items) || !items.length) {
+        pulse.hidden = true;
+        return;
+      }
+
+      pulse.hidden = false;
+      pulseChips.forEach((chip, index) => {
+        const item = items[index] || items[0];
+        chip.textContent = item.label || `Signal ${index + 1}`;
+        chip.setAttribute('aria-label', normalizePulseReadout(item.readout || item.label || `Signal ${index + 1}`));
+        chip.setAttribute('title', normalizePulseReadout(item.readout || item.label || `Signal ${index + 1}`));
+        chip.dataset.interfacePulseIndex = String(index);
+      });
+
+      setInterfacePulseReadout(items, 0);
+    }
+
 
 
     function escapeInterfaceHTML(value) {
@@ -1663,6 +1820,7 @@
         updateInterfaceTelemetry(key);
         if (primary) primary.textContent = data.primary;
         updateSystemsList(data);
+        updateInterfacePulse(key);
         updateInterfaceLink(data);
         if (response) response.classList.remove('is-switching');
       }, prefersReducedMotion.matches ? 0 : 140);
@@ -1683,6 +1841,7 @@
         updateInterfaceTelemetry(null);
         if (primary) primary.textContent = 'A good system should fail clearly, then help the user recover.';
         updateSystemsList({ systems: ['Try: AI systems', 'Try: Accessibility', 'Try: Media preview'] });
+        updateInterfacePulse(null);
         updateInterfaceLink({ linkText: 'Launch Projects', linkUrl: '#projects' });
         if (response) response.classList.remove('is-switching');
       }, prefersReducedMotion.matches ? 0 : 140);
@@ -1705,6 +1864,22 @@
           playInterfaceOrbSound();
         }
         switchInterfaceSet(button.dataset.interfaceSetButton, { playSound: false });
+      });
+    });
+
+    pulseChips.forEach(chip => {
+      const activatePulseChip = () => {
+        const items = interfacePulseMap[activeInterfaceKey] || [];
+        const index = Number(chip.dataset.interfacePulseIndex || chip.dataset.interfacePulseChip || 0);
+        setInterfacePulseReadout(items, index);
+      };
+
+      chip.addEventListener('mouseenter', activatePulseChip);
+      chip.addEventListener('focus', activatePulseChip);
+      chip.addEventListener('click', () => {
+        activatePulseChip();
+        const index = Number(chip.dataset.interfacePulseIndex || chip.dataset.interfacePulseChip || 0);
+        playSignalPulseSound(index);
       });
     });
 
