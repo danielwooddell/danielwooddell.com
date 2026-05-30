@@ -7055,3 +7055,1062 @@ body.winterface-offline .interface-section .interface-shell {
     transform: translateY(-6px);
   }
 }
+
+
+/* =========================
+   WINTERFACE SIGNAL PULSE MINI-CONSOLE
+   Adds a compact contextual readout inside the Live Systems card.
+   Scoped to WInterface only.
+========================= */
+
+.interface-signal-pulse {
+  position: relative;
+  margin-top: 1rem;
+  padding: 0.82rem;
+  border-radius: 16px;
+  border: 1px solid rgba(56, 189, 248, 0.24);
+  background:
+    linear-gradient(145deg, rgba(56, 189, 248, 0.075), rgba(139, 92, 246, 0.040)),
+    radial-gradient(circle at 12% 18%, rgba(56, 189, 248, 0.10), transparent 48%),
+    rgba(255, 255, 255, 0.030);
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.030),
+    0 12px 28px rgba(0, 0, 0, 0.16),
+    0 0 22px rgba(56, 189, 248, 0.080),
+    inset 0 0 18px rgba(56, 189, 248, 0.026);
+  overflow: hidden;
+}
+
+.interface-signal-pulse::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.13), rgba(139, 92, 246, 0.08), transparent);
+  opacity: 0.34;
+  transform: translateX(-76%);
+  animation: interfacePlaybackSweep 5.6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.interface-signal-pulse > * {
+  position: relative;
+  z-index: 1;
+}
+
+.interface-signal-pulse-label {
+  display: block;
+  margin-bottom: 0.58rem;
+  color: var(--cyan);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(0.62rem, 0.82vw, 0.72rem);
+  font-weight: 950;
+  letter-spacing: 0.145em;
+  line-height: 1.05;
+  text-transform: uppercase;
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.72),
+    0 0 11px rgba(56, 189, 248, 0.42);
+}
+
+.interface-signal-pulse-chips {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.42rem;
+}
+
+.interface-signal-pulse-chip {
+  appearance: none;
+  -webkit-appearance: none;
+  min-width: 0;
+  min-height: 2rem;
+  padding: 0.42rem 0.46rem;
+  border-radius: 999px;
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  color: var(--muted-strong);
+  background:
+    linear-gradient(145deg, rgba(56, 189, 248, 0.060), rgba(139, 92, 246, 0.035)),
+    rgba(255, 255, 255, 0.028);
+  box-shadow:
+    inset 0 0 14px rgba(56, 189, 248, 0.026),
+    0 0 12px rgba(56, 189, 248, 0.045);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(0.58rem, 0.78vw, 0.68rem);
+  font-weight: 900;
+  letter-spacing: 0.07em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  transition:
+    transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.interface-signal-pulse-chip:hover,
+.interface-signal-pulse-chip:focus-visible,
+.interface-signal-pulse-chip.is-active {
+  transform: translateY(-2px);
+  color: var(--text);
+  border-color: rgba(56, 189, 248, 0.58);
+  background:
+    linear-gradient(145deg, rgba(56, 189, 248, 0.14), rgba(139, 92, 246, 0.075)),
+    rgba(255, 255, 255, 0.044);
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.070),
+    0 0 20px rgba(56, 189, 248, 0.14),
+    inset 0 0 18px rgba(56, 189, 248, 0.048);
+}
+
+.interface-signal-pulse-readout {
+  min-height: 2.55rem;
+  margin: 0.64rem 0 0 !important;
+  max-width: none !important;
+  color: var(--muted-strong) !important;
+  font-size: clamp(0.76rem, 0.92vw, 0.86rem) !important;
+  line-height: 1.32 !important;
+}
+
+.interface-system-set-media .interface-signal-pulse {
+  border-color: rgba(236, 72, 153, 0.26);
+  background:
+    linear-gradient(145deg, rgba(236, 72, 153, 0.075), rgba(56, 189, 248, 0.038)),
+    radial-gradient(circle at 12% 18%, rgba(236, 72, 153, 0.10), transparent 48%),
+    rgba(255, 255, 255, 0.030);
+  box-shadow:
+    0 0 0 1px rgba(236, 72, 153, 0.032),
+    0 12px 28px rgba(0, 0, 0, 0.16),
+    0 0 22px rgba(236, 72, 153, 0.080),
+    inset 0 0 18px rgba(236, 72, 153, 0.026);
+}
+
+.interface-system-set-media .interface-signal-pulse::before {
+  background: linear-gradient(90deg, transparent, rgba(236, 72, 153, 0.14), rgba(56, 189, 248, 0.08), transparent);
+}
+
+.interface-system-set-operations .interface-signal-pulse-chip:hover,
+.interface-system-set-operations .interface-signal-pulse-chip:focus-visible,
+.interface-system-set-operations .interface-signal-pulse-chip.is-active {
+  border-color: rgba(139, 92, 246, 0.58);
+  background:
+    linear-gradient(145deg, rgba(139, 92, 246, 0.14), rgba(56, 189, 248, 0.060)),
+    rgba(255, 255, 255, 0.044);
+  box-shadow:
+    0 0 0 1px rgba(139, 92, 246, 0.070),
+    0 0 20px rgba(139, 92, 246, 0.14),
+    inset 0 0 18px rgba(139, 92, 246, 0.048);
+}
+
+.interface-system-set-media .interface-signal-pulse-chip:hover,
+.interface-system-set-media .interface-signal-pulse-chip:focus-visible,
+.interface-system-set-media .interface-signal-pulse-chip.is-active {
+  border-color: rgba(236, 72, 153, 0.58);
+  background:
+    linear-gradient(145deg, rgba(236, 72, 153, 0.14), rgba(56, 189, 248, 0.060)),
+    rgba(255, 255, 255, 0.044);
+  box-shadow:
+    0 0 0 1px rgba(236, 72, 153, 0.070),
+    0 0 20px rgba(236, 72, 153, 0.14),
+    inset 0 0 18px rgba(236, 72, 153, 0.048);
+}
+
+@media (max-width: 1100px) {
+  .interface-signal-pulse-readout {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .interface-signal-pulse-chips {
+    grid-template-columns: 1fr;
+  }
+
+  .interface-signal-pulse-chip {
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interface-signal-pulse::before {
+    animation: none !important;
+    opacity: 0.16;
+    transform: none;
+  }
+
+  .interface-signal-pulse-chip,
+  .interface-signal-pulse-chip:hover,
+  .interface-signal-pulse-chip:focus-visible,
+  .interface-signal-pulse-chip.is-active {
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* =========================
+   WINTERFACE SIGNAL PULSE CONSOLE REFINEMENT PATCH
+   Refines the Signal Pulse area into a compact console-style readout.
+   CSS-only visual adjustment scoped to the WInterface Live Systems card.
+========================= */
+
+.interface-signal-pulse {
+  margin-top: 0.88rem;
+  padding: 0.72rem 0.74rem 0.78rem;
+  border-radius: 13px;
+  border-color: rgba(56, 189, 248, 0.22);
+  background:
+    linear-gradient(180deg, rgba(5, 8, 22, 0.34), rgba(5, 8, 22, 0.18)),
+    radial-gradient(circle at 14% 16%, rgba(56, 189, 248, 0.105), transparent 44%),
+    rgba(255, 255, 255, 0.024);
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.026),
+    0 10px 22px rgba(0, 0, 0, 0.14),
+    0 0 18px rgba(56, 189, 248, 0.058),
+    inset 0 0 16px rgba(56, 189, 248, 0.022);
+}
+
+.interface-signal-pulse::after {
+  content: "";
+  position: absolute;
+  left: 0.74rem;
+  right: 0.74rem;
+  top: 2.28rem;
+  height: 1px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.44), rgba(139, 92, 246, 0.24), transparent);
+  opacity: 0.58;
+  pointer-events: none;
+}
+
+.interface-signal-pulse-label {
+  display: flex;
+  align-items: center;
+  gap: 0.42rem;
+  margin-bottom: 0.76rem;
+  font-size: clamp(0.58rem, 0.74vw, 0.66rem);
+  letter-spacing: 0.18em;
+}
+
+.interface-signal-pulse-label::before {
+  content: "";
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow:
+    0 0 8px rgba(56, 189, 248, 0.86),
+    0 0 18px rgba(56, 189, 248, 0.32);
+}
+
+.interface-signal-pulse-chips {
+  gap: 0.34rem;
+}
+
+.interface-signal-pulse-chip {
+  min-height: 1.82rem;
+  padding: 0.36rem 0.34rem;
+  border-radius: 10px;
+  border-color: rgba(56, 189, 248, 0.18);
+  background:
+    linear-gradient(180deg, rgba(56, 189, 248, 0.075), rgba(5, 8, 22, 0.12)),
+    rgba(255, 255, 255, 0.020);
+  box-shadow:
+    inset 0 0 12px rgba(56, 189, 248, 0.018),
+    0 0 10px rgba(56, 189, 248, 0.034);
+  font-size: clamp(0.50rem, 0.66vw, 0.58rem);
+  letter-spacing: 0.075em;
+  text-overflow: clip;
+}
+
+.interface-signal-pulse-chip:hover,
+.interface-signal-pulse-chip:focus-visible,
+.interface-signal-pulse-chip.is-active {
+  transform: translateY(-1px);
+  border-color: rgba(56, 189, 248, 0.62);
+  background:
+    linear-gradient(180deg, rgba(56, 189, 248, 0.18), rgba(5, 8, 22, 0.12)),
+    rgba(255, 255, 255, 0.032);
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.080),
+    0 0 18px rgba(56, 189, 248, 0.16),
+    inset 0 0 16px rgba(56, 189, 248, 0.045);
+}
+
+.interface-signal-pulse-readout {
+  position: relative;
+  min-height: 1.86rem;
+  margin-top: 0.58rem !important;
+  padding: 0.46rem 0.54rem 0.44rem 0.72rem;
+  border-radius: 9px;
+  border: 1px solid rgba(56, 189, 248, 0.13);
+  background: rgba(5, 8, 22, 0.22);
+  color: rgba(199, 210, 254, 0.94) !important;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(0.58rem, 0.72vw, 0.66rem) !important;
+  font-weight: 850;
+  letter-spacing: 0.075em;
+  line-height: 1.18 !important;
+  text-transform: uppercase;
+}
+
+.interface-signal-pulse-readout::before {
+  content: ">";
+  position: absolute;
+  left: 0.28rem;
+  top: 0.45rem;
+  color: var(--cyan);
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.62);
+}
+
+.interface-system-set-operations .interface-signal-pulse-label::before {
+  background: var(--violet);
+  box-shadow:
+    0 0 8px rgba(139, 92, 246, 0.82),
+    0 0 18px rgba(139, 92, 246, 0.32);
+}
+
+.interface-system-set-media .interface-signal-pulse-label::before {
+  background: var(--pink);
+  box-shadow:
+    0 0 8px rgba(236, 72, 153, 0.82),
+    0 0 18px rgba(236, 72, 153, 0.32);
+}
+
+.interface-system-set-operations .interface-signal-pulse::after {
+  background: linear-gradient(90deg, rgba(139, 92, 246, 0.44), rgba(56, 189, 248, 0.20), transparent);
+}
+
+.interface-system-set-media .interface-signal-pulse::after {
+  background: linear-gradient(90deg, rgba(236, 72, 153, 0.44), rgba(56, 189, 248, 0.20), transparent);
+}
+
+@media (max-width: 640px) {
+  .interface-signal-pulse-chip {
+    min-height: 2rem;
+  }
+}
+
+/* =========================
+   WINTERFACE SIGNAL PULSE HEADING REMOVAL PATCH
+   Removes the Signal Pulse heading text and divider for a cleaner console block.
+   CSS-only: no HTML, JavaScript, or content changes.
+========================= */
+
+.interface-signal-pulse {
+  padding-top: 0.72rem;
+}
+
+.interface-signal-pulse-label {
+  display: none !important;
+}
+
+.interface-signal-pulse::after {
+  content: none !important;
+}
+
+/* =========================
+   WINTERFACE SIGNAL PULSE CYAN BUTTON LIFT PATCH
+   Gives the three Signal Pulse console buttons the same cyan/blue energy as the Live Systems orbs.
+   CSS-only: no HTML, JavaScript, content, fullscreen, or audio changes.
+========================= */
+
+.interface-signal-pulse-chip,
+.interface-system-set-operations .interface-signal-pulse-chip,
+.interface-system-set-media .interface-signal-pulse-chip {
+  color: #dff7ff !important;
+  border-color: rgba(56, 189, 248, 0.34) !important;
+  background:
+    linear-gradient(180deg, rgba(56, 189, 248, 0.135), rgba(14, 23, 47, 0.28)),
+    radial-gradient(circle at 50% 0%, rgba(125, 211, 252, 0.20), transparent 62%),
+    rgba(255, 255, 255, 0.024) !important;
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.040),
+    0 0 14px rgba(56, 189, 248, 0.085),
+    inset 0 0 14px rgba(56, 189, 248, 0.040) !important;
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.72),
+    0 0 8px rgba(56, 189, 248, 0.32);
+}
+
+.interface-signal-pulse-chip:hover,
+.interface-signal-pulse-chip:focus-visible,
+.interface-signal-pulse-chip.is-active,
+.interface-system-set-operations .interface-signal-pulse-chip:hover,
+.interface-system-set-operations .interface-signal-pulse-chip:focus-visible,
+.interface-system-set-operations .interface-signal-pulse-chip.is-active,
+.interface-system-set-media .interface-signal-pulse-chip:hover,
+.interface-system-set-media .interface-signal-pulse-chip:focus-visible,
+.interface-system-set-media .interface-signal-pulse-chip.is-active {
+  transform: translateY(-2px) scale(1.015) !important;
+  color: #f8fbff !important;
+  border-color: rgba(125, 211, 252, 0.82) !important;
+  background:
+    linear-gradient(180deg, rgba(56, 189, 248, 0.28), rgba(14, 23, 47, 0.24)),
+    radial-gradient(circle at 50% 0%, rgba(125, 211, 252, 0.36), transparent 62%),
+    rgba(255, 255, 255, 0.038) !important;
+  box-shadow:
+    0 0 0 1px rgba(125, 211, 252, 0.12),
+    0 0 18px rgba(56, 189, 248, 0.26),
+    0 0 34px rgba(56, 189, 248, 0.13),
+    inset 0 0 18px rgba(56, 189, 248, 0.075) !important;
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.78),
+    0 0 11px rgba(125, 211, 252, 0.58);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interface-signal-pulse-chip:hover,
+  .interface-signal-pulse-chip:focus-visible,
+  .interface-signal-pulse-chip.is-active {
+    transform: none !important;
+  }
+}
+
+/* =========================
+   WINTERFACE SIGNAL PULSE CONTROLLER CLUSTER PATCH
+   Reshapes the three Signal Pulse buttons into a compact three-node control-pad cluster.
+   CSS-only: no HTML, JavaScript, content, fullscreen, or audio changes.
+========================= */
+
+.interface-signal-pulse {
+  padding: 0.74rem 0.76rem 0.78rem;
+}
+
+.interface-signal-pulse-chips {
+  width: min(100%, 15.5rem);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-areas:
+    "pulseTop pulseTop"
+    "pulseLeft pulseRight";
+  gap: 0.38rem;
+  align-items: center;
+  justify-items: stretch;
+}
+
+.interface-signal-pulse-chip {
+  position: relative;
+  overflow: hidden;
+  min-height: 2.18rem;
+  border-radius: 12px !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #e8fbff !important;
+  border-color: rgba(56, 189, 248, 0.42) !important;
+  background:
+    linear-gradient(180deg, rgba(56, 189, 248, 0.155), rgba(5, 8, 22, 0.30)),
+    radial-gradient(circle at 50% 0%, rgba(125, 211, 252, 0.24), transparent 64%),
+    rgba(255, 255, 255, 0.026) !important;
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.052),
+    0 0 15px rgba(56, 189, 248, 0.105),
+    inset 0 0 16px rgba(56, 189, 248, 0.046),
+    inset 0 -8px 16px rgba(0, 0, 0, 0.16) !important;
+}
+
+.interface-signal-pulse-chip::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    linear-gradient(180deg, rgba(248, 250, 252, 0.12), transparent 42%),
+    linear-gradient(90deg, transparent, rgba(125, 211, 252, 0.10), transparent);
+  opacity: 0.58;
+  pointer-events: none;
+}
+
+.interface-signal-pulse-chip::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0.22rem;
+  width: 38%;
+  height: 1px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: rgba(125, 211, 252, 0.44);
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.38);
+  opacity: 0.52;
+  pointer-events: none;
+}
+
+.interface-signal-pulse-chip:nth-child(1) {
+  grid-area: pulseTop;
+  width: min(7.8rem, 64%);
+  justify-self: center;
+  border-radius: 13px 13px 10px 10px !important;
+}
+
+.interface-signal-pulse-chip:nth-child(2) {
+  grid-area: pulseLeft;
+  border-radius: 13px 10px 10px 13px !important;
+}
+
+.interface-signal-pulse-chip:nth-child(3) {
+  grid-area: pulseRight;
+  border-radius: 10px 13px 13px 10px !important;
+}
+
+.interface-signal-pulse-chip:hover,
+.interface-signal-pulse-chip:focus-visible,
+.interface-signal-pulse-chip.is-active,
+.interface-system-set-operations .interface-signal-pulse-chip:hover,
+.interface-system-set-operations .interface-signal-pulse-chip:focus-visible,
+.interface-system-set-operations .interface-signal-pulse-chip.is-active,
+.interface-system-set-media .interface-signal-pulse-chip:hover,
+.interface-system-set-media .interface-signal-pulse-chip:focus-visible,
+.interface-system-set-media .interface-signal-pulse-chip.is-active {
+  transform: translateY(-2px) scale(1.025) !important;
+  color: #ffffff !important;
+  border-color: rgba(125, 211, 252, 0.92) !important;
+  background:
+    linear-gradient(180deg, rgba(56, 189, 248, 0.34), rgba(5, 8, 22, 0.24)),
+    radial-gradient(circle at 50% 0%, rgba(125, 211, 252, 0.42), transparent 64%),
+    rgba(255, 255, 255, 0.044) !important;
+  box-shadow:
+    0 0 0 1px rgba(125, 211, 252, 0.16),
+    0 0 20px rgba(56, 189, 248, 0.34),
+    0 0 38px rgba(56, 189, 248, 0.18),
+    inset 0 0 20px rgba(56, 189, 248, 0.095),
+    inset 0 -8px 16px rgba(0, 0, 0, 0.12) !important;
+}
+
+.interface-signal-pulse-chip:hover::before,
+.interface-signal-pulse-chip:focus-visible::before,
+.interface-signal-pulse-chip.is-active::before {
+  opacity: 0.82;
+}
+
+.interface-signal-pulse-chip:hover::after,
+.interface-signal-pulse-chip:focus-visible::after,
+.interface-signal-pulse-chip.is-active::after {
+  opacity: 0.88;
+  background: rgba(224, 247, 255, 0.78);
+  box-shadow:
+    0 0 10px rgba(125, 211, 252, 0.76),
+    0 0 18px rgba(56, 189, 248, 0.42);
+}
+
+.interface-signal-pulse-readout {
+  margin-top: 0.64rem !important;
+}
+
+@media (max-width: 640px) {
+  .interface-signal-pulse-chips {
+    width: 100%;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "pulseTop"
+      "pulseLeft"
+      "pulseRight";
+  }
+
+  .interface-signal-pulse-chip:nth-child(1) {
+    width: 100%;
+  }
+
+  .interface-signal-pulse-chip:nth-child(1),
+  .interface-signal-pulse-chip:nth-child(2),
+  .interface-signal-pulse-chip:nth-child(3) {
+    border-radius: 12px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interface-signal-pulse-chip:hover,
+  .interface-signal-pulse-chip:focus-visible,
+  .interface-signal-pulse-chip.is-active {
+    transform: none !important;
+  }
+}
+
+/* =========================
+   WINTERFACE SIGNAL PULSE CONTROLLER TEXT ALIGNMENT PATCH
+   Centers the console readout beneath the controller cluster and adds a little more breathing room above the top node.
+   CSS-only: no HTML, JavaScript, page content, fullscreen, or audio changes.
+========================= */
+
+.interface-signal-pulse {
+  padding-top: 0.95rem;
+}
+
+.interface-signal-pulse-chips {
+  margin-top: 0.06rem;
+}
+
+.interface-signal-pulse-readout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.18rem;
+  text-align: center !important;
+  padding: 0.48rem 0.68rem 0.46rem !important;
+}
+
+.interface-signal-pulse-readout::before {
+  position: static !important;
+  flex: 0 0 auto;
+  margin-right: 0;
+}
+
+@media (max-width: 640px) {
+  .interface-signal-pulse {
+    padding-top: 0.86rem;
+  }
+}
+
+/* =========================
+   WINTERFACE SIGNAL PULSE TRIAD HOVER COLOR PATCH
+   Maps the controller-cluster hover colors to the center telemetry triad:
+   Problem = cyan/blue, Method = violet/purple, Result = magenta-red.
+   CSS-only: no HTML, JavaScript, content, fullscreen, or audio changes.
+========================= */
+
+/* Re-map visual positions so the second Signal Pulse action, Method, sits in the top controller node. */
+.interface-signal-pulse-chip:nth-child(1) {
+  grid-area: pulseLeft;
+  width: auto;
+  justify-self: stretch;
+  border-radius: 13px 10px 10px 13px !important;
+}
+
+.interface-signal-pulse-chip:nth-child(2) {
+  grid-area: pulseTop;
+  width: min(7.8rem, 64%);
+  justify-self: center;
+  border-radius: 13px 13px 10px 10px !important;
+}
+
+.interface-signal-pulse-chip:nth-child(3) {
+  grid-area: pulseRight;
+  width: auto;
+  justify-self: stretch;
+  border-radius: 10px 13px 13px 10px !important;
+}
+
+/* Method / top node: purple hover and active state to match the center Method orb. */
+.interface-signal-pulse-chip:nth-child(2):hover,
+.interface-signal-pulse-chip:nth-child(2):focus-visible,
+.interface-signal-pulse-chip:nth-child(2).is-active,
+.interface-system-set-operations .interface-signal-pulse-chip:nth-child(2):hover,
+.interface-system-set-operations .interface-signal-pulse-chip:nth-child(2):focus-visible,
+.interface-system-set-operations .interface-signal-pulse-chip:nth-child(2).is-active,
+.interface-system-set-media .interface-signal-pulse-chip:nth-child(2):hover,
+.interface-system-set-media .interface-signal-pulse-chip:nth-child(2):focus-visible,
+.interface-system-set-media .interface-signal-pulse-chip:nth-child(2).is-active {
+  border-color: rgba(167, 139, 250, 0.94) !important;
+  background:
+    linear-gradient(180deg, rgba(139, 92, 246, 0.36), rgba(5, 8, 22, 0.24)),
+    radial-gradient(circle at 50% 0%, rgba(167, 139, 250, 0.44), transparent 64%),
+    rgba(255, 255, 255, 0.044) !important;
+  box-shadow:
+    0 0 0 1px rgba(167, 139, 250, 0.18),
+    0 0 20px rgba(139, 92, 246, 0.36),
+    0 0 40px rgba(139, 92, 246, 0.20),
+    inset 0 0 20px rgba(139, 92, 246, 0.10),
+    inset 0 -8px 16px rgba(0, 0, 0, 0.12) !important;
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.78),
+    0 0 11px rgba(167, 139, 250, 0.62);
+}
+
+.interface-signal-pulse-chip:nth-child(2):hover::after,
+.interface-signal-pulse-chip:nth-child(2):focus-visible::after,
+.interface-signal-pulse-chip:nth-child(2).is-active::after {
+  background: rgba(221, 214, 254, 0.82);
+  box-shadow:
+    0 0 10px rgba(167, 139, 250, 0.80),
+    0 0 20px rgba(139, 92, 246, 0.48);
+}
+
+/* Result / right node: magenta-red hover and active state to match the center Result orb. */
+.interface-signal-pulse-chip:nth-child(3):hover,
+.interface-signal-pulse-chip:nth-child(3):focus-visible,
+.interface-signal-pulse-chip:nth-child(3).is-active,
+.interface-system-set-operations .interface-signal-pulse-chip:nth-child(3):hover,
+.interface-system-set-operations .interface-signal-pulse-chip:nth-child(3):focus-visible,
+.interface-system-set-operations .interface-signal-pulse-chip:nth-child(3).is-active,
+.interface-system-set-media .interface-signal-pulse-chip:nth-child(3):hover,
+.interface-system-set-media .interface-signal-pulse-chip:nth-child(3):focus-visible,
+.interface-system-set-media .interface-signal-pulse-chip:nth-child(3).is-active {
+  border-color: rgba(248, 113, 113, 0.96) !important;
+  background:
+    linear-gradient(180deg, rgba(239, 68, 68, 0.34), rgba(5, 8, 22, 0.24)),
+    radial-gradient(circle at 50% 0%, rgba(236, 72, 153, 0.42), transparent 64%),
+    rgba(255, 255, 255, 0.044) !important;
+  box-shadow:
+    0 0 0 1px rgba(248, 113, 113, 0.17),
+    0 0 20px rgba(239, 68, 68, 0.34),
+    0 0 40px rgba(236, 72, 153, 0.20),
+    inset 0 0 20px rgba(239, 68, 68, 0.10),
+    inset 0 -8px 16px rgba(0, 0, 0, 0.12) !important;
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.78),
+    0 0 11px rgba(248, 113, 113, 0.60);
+}
+
+.interface-signal-pulse-chip:nth-child(3):hover::after,
+.interface-signal-pulse-chip:nth-child(3):focus-visible::after,
+.interface-signal-pulse-chip:nth-child(3).is-active::after {
+  background: rgba(254, 202, 202, 0.84);
+  box-shadow:
+    0 0 10px rgba(248, 113, 113, 0.82),
+    0 0 20px rgba(239, 68, 68, 0.48),
+    0 0 28px rgba(236, 72, 153, 0.28);
+}
+
+@media (max-width: 640px) {
+  .interface-signal-pulse-chip:nth-child(1),
+  .interface-signal-pulse-chip:nth-child(2),
+  .interface-signal-pulse-chip:nth-child(3) {
+    width: 100%;
+    justify-self: stretch;
+    border-radius: 12px !important;
+  }
+}
+
+/* =========================
+   WINTERFACE SIGNAL PULSE FINAL GLASS TRIAD COLOR PATCH
+   Sets a consistent controller-color system across all 18 WInterface cards.
+   Left = cyan-green glass, middle/top = purple glass, right = red/magenta glass.
+   Hover/focus/active states deepen each color while preserving the glass control-surface style.
+   CSS-only: no HTML, JavaScript, page content, fullscreen behavior, or audio behavior changes.
+========================= */
+
+/* Shared final glass polish for all three controller buttons. */
+.interface-signal-pulse .interface-signal-pulse-chip,
+.interface-system-set-operations .interface-signal-pulse .interface-signal-pulse-chip,
+.interface-system-set-media .interface-signal-pulse .interface-signal-pulse-chip {
+  color: #f8fafc !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow:
+    0 0 0 1px rgba(248, 250, 252, 0.035),
+    0 0 16px rgba(56, 189, 248, 0.085),
+    inset 0 1px 0 rgba(248, 250, 252, 0.145),
+    inset 0 0 18px rgba(248, 250, 252, 0.035),
+    inset 0 -9px 16px rgba(0, 0, 0, 0.18) !important;
+}
+
+/* LEFT NODE: cyan-green default. */
+.interface-signal-pulse .interface-signal-pulse-chip:nth-child(1),
+.interface-system-set-operations .interface-signal-pulse .interface-signal-pulse-chip:nth-child(1),
+.interface-system-set-media .interface-signal-pulse .interface-signal-pulse-chip:nth-child(1) {
+  border-color: rgba(45, 212, 191, 0.72) !important;
+  background:
+    linear-gradient(180deg, rgba(45, 212, 191, 0.30), rgba(14, 165, 233, 0.16) 52%, rgba(5, 8, 22, 0.28)),
+    radial-gradient(circle at 50% 0%, rgba(153, 246, 228, 0.30), transparent 66%),
+    rgba(255, 255, 255, 0.036) !important;
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.78),
+    0 0 10px rgba(45, 212, 191, 0.48);
+}
+
+/* MIDDLE/TOP NODE: purple default. */
+.interface-signal-pulse .interface-signal-pulse-chip:nth-child(2),
+.interface-system-set-operations .interface-signal-pulse .interface-signal-pulse-chip:nth-child(2),
+.interface-system-set-media .interface-signal-pulse .interface-signal-pulse-chip:nth-child(2) {
+  border-color: rgba(167, 139, 250, 0.74) !important;
+  background:
+    linear-gradient(180deg, rgba(139, 92, 246, 0.32), rgba(99, 102, 241, 0.16) 52%, rgba(5, 8, 22, 0.28)),
+    radial-gradient(circle at 50% 0%, rgba(221, 214, 254, 0.27), transparent 66%),
+    rgba(255, 255, 255, 0.036) !important;
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.78),
+    0 0 10px rgba(167, 139, 250, 0.50);
+}
+
+/* RIGHT NODE: red/magenta default. */
+.interface-signal-pulse .interface-signal-pulse-chip:nth-child(3),
+.interface-system-set-operations .interface-signal-pulse .interface-signal-pulse-chip:nth-child(3),
+.interface-system-set-media .interface-signal-pulse .interface-signal-pulse-chip:nth-child(3) {
+  border-color: rgba(248, 113, 113, 0.74) !important;
+  background:
+    linear-gradient(180deg, rgba(239, 68, 68, 0.31), rgba(236, 72, 153, 0.16) 52%, rgba(5, 8, 22, 0.28)),
+    radial-gradient(circle at 50% 0%, rgba(254, 202, 202, 0.25), transparent 66%),
+    rgba(255, 255, 255, 0.036) !important;
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.78),
+    0 0 10px rgba(248, 113, 113, 0.48);
+}
+
+/* LEFT NODE: darker cyan-green/blue hover, focus, and active state. */
+.interface-signal-pulse .interface-signal-pulse-chip:nth-child(1):hover,
+.interface-signal-pulse .interface-signal-pulse-chip:nth-child(1):focus-visible,
+.interface-signal-pulse .interface-signal-pulse-chip:nth-child(1).is-active,
+.interface-system-set-operations .interface-signal-pulse .interface-signal-pulse-chip:nth-child(1):hover,
+.interface-system-set-operations .interface-signal-pulse .interface-signal-pulse-chip:nth-child(1):focus-visible,
+.interface-system-set-operations .interface-signal-pulse .interface-signal-pulse-chip:nth-child(1).is-active,
+.interface-system-set-media .interface-signal-pulse .interface-signal-pulse-chip:nth-child(1):hover,
+.interface-system-set-media .interface-signal-pulse .interface-signal-pulse-chip:nth-child(1):focus-visible,
+.interface-system-set-media .interface-signal-pulse .interface-signal-pulse-chip:nth-child(1).is-active {
+  transform: translateY(-2px) scale(1.025) !important;
+  border-color: rgba(34, 211, 238, 0.96) !important;
+  background:
+    linear-gradient(180deg, rgba(13, 148, 136, 0.46), rgba(8, 145, 178, 0.30) 56%, rgba(5, 8, 22, 0.24)),
+    radial-gradient(circle at 50% 0%, rgba(103, 232, 249, 0.42), transparent 66%),
+    rgba(255, 255, 255, 0.048) !important;
+  box-shadow:
+    0 0 0 1px rgba(34, 211, 238, 0.17),
+    0 0 20px rgba(13, 148, 136, 0.36),
+    0 0 38px rgba(8, 145, 178, 0.24),
+    inset 0 1px 0 rgba(248, 250, 252, 0.20),
+    inset 0 0 22px rgba(34, 211, 238, 0.11),
+    inset 0 -9px 16px rgba(0, 0, 0, 0.15) !important;
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.82),
+    0 0 12px rgba(103, 232, 249, 0.62);
+}
+
+/* MIDDLE/TOP NODE: darker purple/violet hover, focus, and active state. */
+.interface-signal-pulse .interface-signal-pulse-chip:nth-child(2):hover,
+.interface-signal-pulse .interface-signal-pulse-chip:nth-child(2):focus-visible,
+.interface-signal-pulse .interface-signal-pulse-chip:nth-child(2).is-active,
+.interface-system-set-operations .interface-signal-pulse .interface-signal-pulse-chip:nth-child(2):hover,
+.interface-system-set-operations .interface-signal-pulse .interface-signal-pulse-chip:nth-child(2):focus-visible,
+.interface-system-set-operations .interface-signal-pulse .interface-signal-pulse-chip:nth-child(2).is-active,
+.interface-system-set-media .interface-signal-pulse .interface-signal-pulse-chip:nth-child(2):hover,
+.interface-system-set-media .interface-signal-pulse .interface-signal-pulse-chip:nth-child(2):focus-visible,
+.interface-system-set-media .interface-signal-pulse .interface-signal-pulse-chip:nth-child(2).is-active {
+  transform: translateY(-2px) scale(1.025) !important;
+  border-color: rgba(167, 139, 250, 0.98) !important;
+  background:
+    linear-gradient(180deg, rgba(109, 40, 217, 0.50), rgba(76, 29, 149, 0.34) 56%, rgba(5, 8, 22, 0.24)),
+    radial-gradient(circle at 50% 0%, rgba(196, 181, 253, 0.42), transparent 66%),
+    rgba(255, 255, 255, 0.048) !important;
+  box-shadow:
+    0 0 0 1px rgba(167, 139, 250, 0.18),
+    0 0 20px rgba(109, 40, 217, 0.40),
+    0 0 40px rgba(76, 29, 149, 0.24),
+    inset 0 1px 0 rgba(248, 250, 252, 0.20),
+    inset 0 0 22px rgba(167, 139, 250, 0.12),
+    inset 0 -9px 16px rgba(0, 0, 0, 0.15) !important;
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.82),
+    0 0 12px rgba(196, 181, 253, 0.64);
+}
+
+/* RIGHT NODE: darker red/magenta hover, focus, and active state. */
+.interface-signal-pulse .interface-signal-pulse-chip:nth-child(3):hover,
+.interface-signal-pulse .interface-signal-pulse-chip:nth-child(3):focus-visible,
+.interface-signal-pulse .interface-signal-pulse-chip:nth-child(3).is-active,
+.interface-system-set-operations .interface-signal-pulse .interface-signal-pulse-chip:nth-child(3):hover,
+.interface-system-set-operations .interface-signal-pulse .interface-signal-pulse-chip:nth-child(3):focus-visible,
+.interface-system-set-operations .interface-signal-pulse .interface-signal-pulse-chip:nth-child(3).is-active,
+.interface-system-set-media .interface-signal-pulse .interface-signal-pulse-chip:nth-child(3):hover,
+.interface-system-set-media .interface-signal-pulse .interface-signal-pulse-chip:nth-child(3):focus-visible,
+.interface-system-set-media .interface-signal-pulse .interface-signal-pulse-chip:nth-child(3).is-active {
+  transform: translateY(-2px) scale(1.025) !important;
+  border-color: rgba(248, 113, 113, 0.98) !important;
+  background:
+    linear-gradient(180deg, rgba(185, 28, 28, 0.50), rgba(190, 24, 93, 0.34) 56%, rgba(5, 8, 22, 0.24)),
+    radial-gradient(circle at 50% 0%, rgba(251, 113, 133, 0.42), transparent 66%),
+    rgba(255, 255, 255, 0.048) !important;
+  box-shadow:
+    0 0 0 1px rgba(248, 113, 113, 0.18),
+    0 0 20px rgba(185, 28, 28, 0.40),
+    0 0 40px rgba(190, 24, 93, 0.24),
+    inset 0 1px 0 rgba(248, 250, 252, 0.20),
+    inset 0 0 22px rgba(248, 113, 113, 0.12),
+    inset 0 -9px 16px rgba(0, 0, 0, 0.15) !important;
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.82),
+    0 0 12px rgba(251, 113, 133, 0.64);
+}
+
+/* Match the small lower light bars to each controller button color. */
+.interface-signal-pulse .interface-signal-pulse-chip:nth-child(1)::after {
+  background: rgba(153, 246, 228, 0.70) !important;
+  box-shadow:
+    0 0 10px rgba(45, 212, 191, 0.58),
+    0 0 18px rgba(14, 165, 233, 0.32) !important;
+}
+
+.interface-signal-pulse .interface-signal-pulse-chip:nth-child(2)::after {
+  background: rgba(221, 214, 254, 0.72) !important;
+  box-shadow:
+    0 0 10px rgba(167, 139, 250, 0.60),
+    0 0 18px rgba(139, 92, 246, 0.34) !important;
+}
+
+.interface-signal-pulse .interface-signal-pulse-chip:nth-child(3)::after {
+  background: rgba(254, 202, 202, 0.72) !important;
+  box-shadow:
+    0 0 10px rgba(248, 113, 113, 0.60),
+    0 0 18px rgba(236, 72, 153, 0.34) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interface-signal-pulse .interface-signal-pulse-chip:hover,
+  .interface-signal-pulse .interface-signal-pulse-chip:focus-visible,
+  .interface-signal-pulse .interface-signal-pulse-chip.is-active {
+    transform: none !important;
+  }
+}
+
+/* =========================
+   WINTERFACE SIGNAL PULSE AUDIO + READOUT FINAL PATCH
+   Adds the closing cyan bracket marker and keeps the readout centered.
+   CSS-only: no layout, copy, fullscreen, or audio setting changes.
+========================= */
+
+.interface-signal-pulse-readout::after {
+  content: "<";
+  position: static;
+  flex: 0 0 auto;
+  margin-left: 0.18rem;
+  color: var(--cyan);
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.62);
+}
+
+/* =========================
+   WINTERFACE NORMAL-VIEW CORE SPACING NORMALIZATION PATCH
+   Balances the middle/core panel spacing in normal view only.
+   Fullscreen/maximized mode is intentionally untouched.
+========================= */
+
+@media (min-width: 901px) {
+  .interface-section.interface-system-set-media:not(.is-winterface-maximized) .interface-core {
+    justify-content: center;
+  }
+
+  .interface-section.interface-system-set-media:not(.is-winterface-maximized) .interface-media-panel:not([hidden]) {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .interface-section.interface-system-set-operations:not(.is-winterface-maximized) .interface-core {
+    justify-content: center;
+  }
+
+  .interface-section.interface-system-set-operations:not(.is-winterface-maximized) .interface-response[data-interface-response] {
+    min-height: 22.8rem;
+  }
+}
+
+/* =========================
+   WINTERFACE RIGHT PANEL SIGNAL PULSE CONTAINMENT PATCH
+   Keeps the Signal Pulse controller fully contained inside the Live Systems card in normal desktop view.
+   Fullscreen/maximized mode is intentionally untouched.
+   CSS-only: no HTML, JavaScript, content, sound, or data changes.
+========================= */
+
+@media (min-width: 901px) {
+  .interface-section:not(.is-winterface-maximized) .interface-side-panel {
+    grid-template-rows: minmax(7.2rem, auto) minmax(16.65rem, auto) minmax(4.85rem, auto);
+    align-content: stretch;
+  }
+
+  .interface-section:not(.is-winterface-maximized) .interface-output-card-soft {
+    display: flex;
+    flex-direction: column;
+    min-height: 16.65rem;
+    overflow: hidden;
+  }
+
+  .interface-section:not(.is-winterface-maximized) .interface-output-card-soft .interface-system-list {
+    flex: 0 0 auto;
+  }
+
+  .interface-section:not(.is-winterface-maximized) .interface-output-card-soft .interface-signal-pulse {
+    width: 100%;
+    flex: 0 0 auto;
+    margin-top: auto;
+    padding: 0.58rem 0.66rem 0.62rem;
+  }
+
+  .interface-section:not(.is-winterface-maximized) .interface-output-card-soft .interface-signal-pulse-chips {
+    width: min(100%, 14.7rem);
+    gap: 0.32rem;
+  }
+
+  .interface-section:not(.is-winterface-maximized) .interface-output-card-soft .interface-signal-pulse-chip {
+    min-height: 1.98rem;
+    font-size: clamp(0.48rem, 0.62vw, 0.56rem);
+  }
+
+  .interface-section:not(.is-winterface-maximized) .interface-output-card-soft .interface-signal-pulse-readout {
+    min-height: 1.58rem;
+    margin-top: 0.46rem !important;
+    padding: 0.36rem 0.56rem 0.34rem 0.72rem;
+    font-size: clamp(0.54rem, 0.66vw, 0.60rem) !important;
+    line-height: 1.12 !important;
+  }
+
+  .interface-section:not(.is-winterface-maximized) .interface-output-card-soft .interface-signal-pulse-readout::before {
+    top: 0.34rem;
+  }
+}
+
+/* =========================
+   WINTERFACE SIGNAL PULSE MODE-AWARE CONTAINER PATCH
+   Makes the right-side Signal Pulse console background follow the active WInterface bay.
+   Primary Systems = cyan-green / blue, Operational = purple / violet, Showcase Bay = pink / magenta.
+   CSS-only: controller button colors, sounds, readout text, fullscreen, and content remain unchanged.
+========================= */
+
+.interface-section .interface-signal-pulse,
+.interface-section.interface-system-set-primary .interface-signal-pulse {
+  border-color: rgba(45, 212, 191, 0.34) !important;
+  background:
+    linear-gradient(145deg, rgba(45, 212, 191, 0.105), rgba(14, 165, 233, 0.060) 52%, rgba(5, 8, 22, 0.19)),
+    radial-gradient(circle at 16% 18%, rgba(45, 212, 191, 0.16), transparent 48%),
+    radial-gradient(circle at 88% 72%, rgba(56, 189, 248, 0.10), transparent 44%),
+    rgba(255, 255, 255, 0.034) !important;
+  box-shadow:
+    0 0 0 1px rgba(45, 212, 191, 0.040),
+    0 14px 30px rgba(0, 0, 0, 0.17),
+    0 0 24px rgba(45, 212, 191, 0.095),
+    inset 0 0 20px rgba(45, 212, 191, 0.032) !important;
+}
+
+.interface-section .interface-signal-pulse::before,
+.interface-section.interface-system-set-primary .interface-signal-pulse::before {
+  background: linear-gradient(90deg, transparent, rgba(45, 212, 191, 0.16), rgba(56, 189, 248, 0.10), transparent) !important;
+  opacity: 0.42 !important;
+}
+
+.interface-section.interface-system-set-operations .interface-signal-pulse {
+  border-color: rgba(139, 92, 246, 0.34) !important;
+  background:
+    linear-gradient(145deg, rgba(139, 92, 246, 0.115), rgba(99, 102, 241, 0.060) 52%, rgba(5, 8, 22, 0.19)),
+    radial-gradient(circle at 16% 18%, rgba(139, 92, 246, 0.18), transparent 48%),
+    radial-gradient(circle at 88% 72%, rgba(167, 139, 250, 0.10), transparent 44%),
+    rgba(255, 255, 255, 0.034) !important;
+  box-shadow:
+    0 0 0 1px rgba(139, 92, 246, 0.045),
+    0 14px 30px rgba(0, 0, 0, 0.17),
+    0 0 24px rgba(139, 92, 246, 0.105),
+    inset 0 0 20px rgba(139, 92, 246, 0.036) !important;
+}
+
+.interface-section.interface-system-set-operations .interface-signal-pulse::before {
+  background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.18), rgba(167, 139, 250, 0.10), transparent) !important;
+  opacity: 0.42 !important;
+}
+
+.interface-section.interface-system-set-media .interface-signal-pulse {
+  border-color: rgba(236, 72, 153, 0.34) !important;
+  background:
+    linear-gradient(145deg, rgba(236, 72, 153, 0.115), rgba(190, 24, 93, 0.060) 52%, rgba(5, 8, 22, 0.19)),
+    radial-gradient(circle at 16% 18%, rgba(236, 72, 153, 0.18), transparent 48%),
+    radial-gradient(circle at 88% 72%, rgba(248, 113, 113, 0.10), transparent 44%),
+    rgba(255, 255, 255, 0.034) !important;
+  box-shadow:
+    0 0 0 1px rgba(236, 72, 153, 0.045),
+    0 14px 30px rgba(0, 0, 0, 0.17),
+    0 0 24px rgba(236, 72, 153, 0.105),
+    inset 0 0 20px rgba(236, 72, 153, 0.036) !important;
+}
+
+.interface-section.interface-system-set-media .interface-signal-pulse::before {
+  background: linear-gradient(90deg, transparent, rgba(236, 72, 153, 0.18), rgba(248, 113, 113, 0.10), transparent) !important;
+  opacity: 0.42 !important;
+}
