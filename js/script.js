@@ -539,6 +539,7 @@
   const interfaceMenuSound = document.querySelector('#interface-menu-sound');
   const interfaceSubmitSound = document.querySelector('#interface-submit-sound');
   const interfaceLaunchSound = document.querySelector('#interface-launch-sound');
+  const jarvisEasterEggSound = typeof Audio === 'function' ? new Audio('audio/ijarvis.mp3') : null;
   const signalPulseLeftSound = typeof Audio === 'function' ? new Audio('audio/ileft.mp3') : null;
   const signalPulseTopSound = typeof Audio === 'function' ? new Audio('audio/itop.mp3') : null;
   const signalPulseRightSound = typeof Audio === 'function' ? new Audio('audio/iright.mp3') : null;
@@ -556,6 +557,7 @@
   const interfaceMenuVolume = 0.20;
   const interfaceSubmitVolume = 0.18;
   const interfaceLaunchVolume = 0.18;
+  const jarvisEasterEggVolume = 0.22;
   const signalPulseVolume = 0.15;
 
   function getStoredSoundPreference() {
@@ -654,6 +656,11 @@
     playAudio(interfaceLaunchSound, { volume: interfaceLaunchVolume });
   }
 
+  function playJarvisEasterEggSound() {
+    if (!soundEnabled || !startupPlayed) return;
+    playAudio(jarvisEasterEggSound, { volume: jarvisEasterEggVolume });
+  }
+
   function playSignalPulseSound(index) {
     if (!soundEnabled || !startupPlayed) return;
 
@@ -688,13 +695,14 @@
     });
   }
 
-  if (startupSound || interactionSound || interfaceOrbSound || interfaceMenuSound || interfaceSubmitSound || interfaceLaunchSound || signalPulseLeftSound || signalPulseTopSound || signalPulseRightSound) {
+  if (startupSound || interactionSound || interfaceOrbSound || interfaceMenuSound || interfaceSubmitSound || interfaceLaunchSound || jarvisEasterEggSound || signalPulseLeftSound || signalPulseTopSound || signalPulseRightSound) {
     prepareAudioElement(startupSound, startupVolume);
     prepareAudioElement(interactionSound, interactionVolume);
     prepareAudioElement(interfaceOrbSound, interfaceOrbVolume);
     prepareAudioElement(interfaceMenuSound, interfaceMenuVolume);
     prepareAudioElement(interfaceSubmitSound, interfaceSubmitVolume);
     prepareAudioElement(interfaceLaunchSound, interfaceLaunchVolume);
+    prepareAudioElement(jarvisEasterEggSound, jarvisEasterEggVolume);
     prepareAudioElement(signalPulseLeftSound, signalPulseVolume);
     prepareAudioElement(signalPulseTopSound, signalPulseVolume);
     prepareAudioElement(signalPulseRightSound, signalPulseVolume);
@@ -721,6 +729,7 @@
         stopAudio(interfaceMenuSound);
         stopAudio(interfaceSubmitSound);
         stopAudio(interfaceLaunchSound);
+        stopAudio(jarvisEasterEggSound);
         stopAudio(signalPulseLeftSound);
         stopAudio(signalPulseTopSound);
         stopAudio(signalPulseRightSound);
@@ -863,6 +872,7 @@
         stopAudio(interfaceMenuSound);
         stopAudio(interfaceSubmitSound);
         stopAudio(interfaceLaunchSound);
+        stopAudio(jarvisEasterEggSound);
         stopAudio(signalPulseLeftSound);
         stopAudio(signalPulseTopSound);
         stopAudio(signalPulseRightSound);
@@ -1886,8 +1896,13 @@
     if (mediaMute) {
       updateInterfaceMuteControl();
       mediaMute.addEventListener('click', () => {
+        const wasInterfaceMediaMuted = interfaceMediaMuted;
         toggleInterfaceMediaMute();
-        if (typeof playInterfaceOrbSound === 'function') {
+        const jarvisEasterEggActive = activeInterfaceKey === 'workflowReplay' && wasInterfaceMediaMuted && !interfaceMediaMuted;
+
+        if (jarvisEasterEggActive && typeof playJarvisEasterEggSound === 'function') {
+          playJarvisEasterEggSound();
+        } else if (typeof playInterfaceOrbSound === 'function') {
           playInterfaceOrbSound();
         }
       });
