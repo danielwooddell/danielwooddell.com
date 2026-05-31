@@ -975,7 +975,7 @@
         command: 'reduce_workflow_friction',
         aliases: ['workflow', 'process', 'friction', 'systems', 'operations', 'efficiency', 'clarity', 'navigation'],
         kicker: 'Workflow Intelligence',
-        title: 'Complex Tools Translated Into Usable Pathways',
+        title: 'Complex Tools Made Into Usable Pathways',
         copy: 'The goal is to identify where people get stuck, remove unnecessary complexity, and design pathways that make tools, processes, and decisions easier to act on.',
         systems: ['Process mapping', 'Tool guidance', 'Cognitive load reduction'],
         primary: 'The best interface removes unnecessary effort.',
