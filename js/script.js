@@ -539,8 +539,8 @@
   const interfaceMenuSound = document.querySelector('#interface-menu-sound');
   const interfaceSubmitSound = document.querySelector('#interface-submit-sound');
   const interfaceLaunchSound = document.querySelector('#interface-launch-sound');
-  const jarvisEasterEggSound = typeof Audio === 'function' ? new Audio('audio/ijarvis.mp3') : null;
-  const glitchEasterEggSound = typeof Audio === 'function' ? new Audio('audio/iglitch.mp3') : null;
+  const jarvisEasterEggSound = typeof Audio === 'function' ? new Audio('/audio/ijarvis.mp3') : null;
+  const glitchEasterEggSound = typeof Audio === 'function' ? new Audio('/audio/iglitch.mp3') : null;
   const signalPulseLeftSound = typeof Audio === 'function' ? new Audio('audio/ileft.mp3') : null;
   const signalPulseTopSound = typeof Audio === 'function' ? new Audio('audio/itop.mp3') : null;
   const signalPulseRightSound = typeof Audio === 'function' ? new Audio('audio/iright.mp3') : null;
@@ -558,8 +558,7 @@
   const interfaceMenuVolume = 0.20;
   const interfaceSubmitVolume = 0.18;
   const interfaceLaunchVolume = 0.18;
-  const jarvisEasterEggVolume = 0.22;
-  const glitchEasterEggVolume = 0.20;
+  const easterEggVolume = 0.18;
   const signalPulseVolume = 0.15;
 
   function getStoredSoundPreference() {
@@ -660,12 +659,12 @@
 
   function playJarvisEasterEggSound() {
     if (!soundEnabled || !startupPlayed) return;
-    playAudio(jarvisEasterEggSound, { volume: jarvisEasterEggVolume });
+    playAudio(jarvisEasterEggSound, { volume: easterEggVolume });
   }
 
   function playGlitchEasterEggSound() {
     if (!soundEnabled || !startupPlayed) return;
-    playAudio(glitchEasterEggSound, { volume: glitchEasterEggVolume });
+    playAudio(glitchEasterEggSound, { volume: easterEggVolume });
   }
 
   function playSignalPulseSound(index) {
@@ -709,8 +708,8 @@
     prepareAudioElement(interfaceMenuSound, interfaceMenuVolume);
     prepareAudioElement(interfaceSubmitSound, interfaceSubmitVolume);
     prepareAudioElement(interfaceLaunchSound, interfaceLaunchVolume);
-    prepareAudioElement(jarvisEasterEggSound, jarvisEasterEggVolume);
-    prepareAudioElement(glitchEasterEggSound, glitchEasterEggVolume);
+    prepareAudioElement(jarvisEasterEggSound, easterEggVolume);
+    prepareAudioElement(glitchEasterEggSound, easterEggVolume);
     prepareAudioElement(signalPulseLeftSound, signalPulseVolume);
     prepareAudioElement(signalPulseTopSound, signalPulseVolume);
     prepareAudioElement(signalPulseRightSound, signalPulseVolume);
@@ -954,7 +953,7 @@
         aliases: ['learning', 'design', 'course', 'instructional design', 'learning design', 'faculty development', 'teaching'],
         kicker: 'Digital Experience Design',
         title: 'Learning Design With Structure and Purpose',
-        copy: 'My work connects learning objectives, instructional pathways, digital materials, and support resources so technology serves the learning experience instead of distracting from it.',
+        copy: 'My work connects learning objectives, instructional pathways, digital materials, and support resources so technology serves the learning experience.',
         systems: ['Course design strategy', 'Instructional pathways', 'Reusable educator resources'],
         primary: 'Strong learning systems make the next action clear.',
         linkText: 'Launch Design Site',
@@ -1012,19 +1011,19 @@
         title: 'Technology Decisions Grounded in People',
         copy: 'I approach emerging technology through the lens of real users, real constraints, accessible content for all, trust, training, and long-term maintainability.',
         systems: ['User confidence', 'Clear communication', 'Sustainable systems'],
-        primary: 'Technology should make people more capable🚫more confused.',
+        primary: 'Technology should make people more capable.✅',
         linkText: 'Launch Intelligence',
         linkUrl: '#recommendations'
       },
       canvasBasics: {
         set: 'operations',
         number: '01',
-        nav: 'Canvas LMS Basics',
-        command: 'launch_canvas_basics',
+        nav: 'Faculty LMS Basics',
+        command: 'launch_faculty_basics',
         aliases: ['canvas', 'canvas basics', 'lms basics', 'faculty canvas', 'canvas course', 'training course'],
         kicker: 'Faculty Training System',
-        title: 'Canvas Basics for Faculty',
-        copy: 'A structured faculty training course that supports practical Canvas use, common teaching workflows, and scalable LMS guidance for instructors who need clear next steps.',
+        title: 'Basics for Faculty',
+        copy: 'A structured faculty training course that supports practical LMS use, common teaching workflows, and scalable LMS guidance for instructors who need clear next steps.',
         systems: ['Faculty LMS training', 'Canvas workflow support', 'Reusable course guidance'],
         primary: 'Effective LMS support gives faculty confidence before complexity appears.',
         linkText: 'Launch Canvas Basics',
@@ -1033,12 +1032,12 @@
       allyAccess: {
         set: 'operations',
         number: '02',
-        nav: 'Ally Accessibility',
+        nav: 'Course Accessibility',
         command: 'open_ally_accessibility_systems',
         aliases: ['ally', 'anthology ally', 'accessibility strategies', 'canvas accessibility', 'accessible canvas', 'accessible content'],
         kicker: 'Accessibility Support Layer',
-        title: 'Ally Accessibility',
-        copy: 'Accessibility support becomes stronger when it is connected to LMS workflows, document improvement, readable design, captions, alternative text, and human guidance.',
+        title: 'Accessibility Built-in',
+        copy: 'Accessibility support becomes stronger when it is connected to LMS workflows, document improvement, readable design, captions, alternative text, & guidance.',
         systems: ['Ally-informed workflows', 'Accessible Canvas practices', 'Improvement pathways'],
         primary: 'Accessibility works best as a visible workflow, not a hidden compliance task. Systems go.',
         linkText: 'Launch Ally Intel',
@@ -1051,8 +1050,8 @@
         command: 'open_technology_hub',
         aliases: ['teaching with technology', 'technology hub', 'edtech hub', 'tool hub', 'teaching tools'],
         kicker: 'Digital Resource Ecosystem',
-        title: 'Teaching with Technology',
-        copy: 'A public-facing ecosystem for helping educators discover educational technology, generative AI guidance, accessibility support, and practical digital teaching resources.',
+        title: 'Teaching with Tech',
+        copy: 'A public-facing ecosystem for helping educators discover EdTech, generative AI guidance, accessibility support, and practical digital teaching resources.',
         systems: ['Tool discovery', 'Educator resource pathways', 'Public-facing support UX'],
         primary: 'A strong resource hub reduces support friction before questions become tickets.',
         linkText: 'Launch Tech Hub',
@@ -1066,7 +1065,7 @@
         aliases: ['eta', 'edtech assistant', 'custom gpt', 'assistant', 'ai assistant', 'support bot'],
         kicker: 'AI Support Assistant',
         title: '24/7 EdTech Assistant',
-        copy: 'ETA extends the support ecosystem through conversational guidance for the Canvas LMS, educational technology tools, accessibility workflows, and Teaching with Tech resources.',
+        copy: 'ETA extends the support ecosystem through conversational guidance for the LMS, educational technology tools, accessibility workflows, and Teaching with Tech resources.',
         systems: ['Custom GPT support', '24/7 guidance layer', 'Ed-tech workflow routing'],
         primary: 'AI assistants are strongest when they sit inside a real support architecture.',
         linkText: 'Launch ETA',
@@ -1079,7 +1078,7 @@
         command: 'route_prompting_systems',
         aliases: ['prompting', 'prompts', 'prompt', 'prompt design', 'ai prompts', 'genai prompts'],
         kicker: 'Prompting Architecture',
-        title: 'Prompting as a Workflow',
+        title: 'Prompting Workflow',
         copy: 'Prompting works best when users understand context, role, output format, constraints, examples, and review habits rather than relying on one-off prompt tricks.',
         systems: ['Prompt structure', 'Educator productivity', 'AI output review'],
         primary: 'Good prompting is structured thinking made visible. An iterative process for my CPU.',
@@ -1719,6 +1718,24 @@
       applyInterfaceMediaMuteState();
     }
 
+    function playInterfaceMediaMuteFeedback(wasMuted) {
+      const mediaSoundWasTurnedOn = wasMuted === true && interfaceMediaMuted === false;
+
+      if (mediaSoundWasTurnedOn && activeInterfaceKey === 'workflowReplay') {
+        playJarvisEasterEggSound();
+        return;
+      }
+
+      if (mediaSoundWasTurnedOn && activeInterfaceKey === 'caseStudyPlayer') {
+        playGlitchEasterEggSound();
+        return;
+      }
+
+      if (typeof playInterfaceOrbSound === 'function') {
+        playInterfaceOrbSound();
+      }
+    }
+
     function pauseInterfaceMedia() {
       if (interfaceVimeoPlayer && typeof interfaceVimeoPlayer.pause === 'function') {
         interfaceVimeoPlayer.pause().catch(() => {
@@ -1906,18 +1923,9 @@
     if (mediaMute) {
       updateInterfaceMuteControl();
       mediaMute.addEventListener('click', () => {
-        const wasInterfaceMediaMuted = interfaceMediaMuted;
+        const wasMuted = interfaceMediaMuted;
         toggleInterfaceMediaMute();
-        const jarvisEasterEggActive = activeInterfaceKey === 'workflowReplay' && wasInterfaceMediaMuted && !interfaceMediaMuted;
-        const glitchEasterEggActive = activeInterfaceKey === 'caseStudyPlayer' && wasInterfaceMediaMuted && !interfaceMediaMuted;
-
-        if (jarvisEasterEggActive && typeof playJarvisEasterEggSound === 'function') {
-          playJarvisEasterEggSound();
-        } else if (glitchEasterEggActive && typeof playGlitchEasterEggSound === 'function') {
-          playGlitchEasterEggSound();
-        } else if (typeof playInterfaceOrbSound === 'function') {
-          playInterfaceOrbSound();
-        }
+        playInterfaceMediaMuteFeedback(wasMuted);
       });
     }
 
