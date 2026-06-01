@@ -939,9 +939,9 @@
         aliases: ['ai', 'artificial intelligence', 'genai', 'generative ai', 'prompt', 'prompting', 'gpt', 'chatgpt', 'copilot', 'automation'],
         kicker: 'Generative AI Strategy',
         title: 'AI Systems That Support Real Work',
-        copy: 'I design AI guidance around practical teaching, course design, prompting, productivity, and responsible adoption rather than treating AI as only a policy conversation.',
+        copy: 'This pathway models AI guidance around practical use, course or content design, prompting, productivity, and responsible adoption.',
         systems: ['Prompting guidance', 'Educator workflows', 'Custom GPT support'],
-        primary: 'AI adoption becomes useful when it is tied to actual work.',
+        primary: 'AI adoption becomes useful when it is tied to actual work. 💻',
         linkText: 'Launch GenAI Hub',
         linkUrl: 'https://www.xavier.edu/teachingwithtech/genai'
       },
@@ -953,9 +953,9 @@
         aliases: ['learning', 'design', 'course', 'instructional design', 'learning design', 'faculty development', 'teaching'],
         kicker: 'Digital Experience Design',
         title: 'Learning Design With Structure and Purpose',
-        copy: 'My work connects learning objectives, instructional pathways, digital materials, and support resources so technology serves the learning experience.',
+        copy: 'This pathway connects objectives, goals, & digital resources so technology serves the learning or communication experience instead of distracting from it.',
         systems: ['Course design strategy', 'Instructional pathways', 'Reusable educator resources'],
-        primary: 'Strong learning systems make the next action clear.',
+        primary: 'Strong learning systems make the next action clear. 💎',
         linkText: 'Launch Design Site',
         linkUrl: 'https://www.xavier.edu/id'
       },
@@ -969,7 +969,7 @@
         title: 'Accessibility Built Into the Workflow',
         copy: 'Accessibility works best when it is embedded into everyday design, documentation, LMS support, and content improvement workflows rather than added after the fact.',
         systems: ['Readable interface patterns', 'Inclusive design workflows', 'Content improvement'],
-        primary: 'Accessible systems reduce friction for everyone.',
+        primary: 'Accessible systems reduce friction for everyone. 🌎',
         linkText: 'Launch Accessibility',
         linkUrl: 'https://www.xavier.edu/id/canvas/accessibility-strategies'
       },
@@ -983,7 +983,7 @@
         title: 'Support Ecosystems That Scale Knowledge',
         copy: 'I build resource hubs, training materials, documentation, and AI support layers that help people find accurate guidance without waiting for one-to-one help every time.',
         systems: ['Resource hubs', 'Documentation systems', '24/7 support layers'],
-        primary: 'Good support architecture multiplies capacity.',
+        primary: 'Good support architecture multiplies capacity. 🔋',
         linkText: 'Launch Support System',
         linkUrl: 'https://www.xavier.edu/teachingwithtech'
       },
@@ -995,11 +995,11 @@
         aliases: ['workflow', 'process', 'friction', 'systems', 'operations', 'efficiency', 'clarity', 'navigation'],
         kicker: 'Workflow Intelligence',
         title: 'Complex Tools Made Into Usable Pathways',
-        copy: 'The goal is to identify where people get stuck, remove unnecessary complexity, and design pathways that make tools, processes, and decisions easier to act on.',
+        copy: 'The goal is to identify where users get stuck, remove unnecessary complexity, and design pathways that make tools, processes, and decisions easier to act on.',
         systems: ['Process mapping', 'Tool guidance', 'Cognitive load reduction'],
-        primary: 'The best interface removes unnecessary effort.',
+        primary: 'The best interface removes unnecessary effort. 🏋️',
         linkText: 'Launch Projects',
-        linkUrl: '#projects'
+        linkUrl: '#winterface'
       },
       human: {
         set: 'primary',
@@ -1009,11 +1009,11 @@
         aliases: ['human', 'people', 'user', 'users', 'communication', 'judgment', 'trust', 'experience', 'ux'],
         kicker: 'Human-Centered Technology',
         title: 'Technology Decisions Grounded in People',
-        copy: 'I approach emerging technology through the lens of real users, real constraints, accessible content for all, trust, training, and long-term maintainability.',
+        copy: 'This pathway approaches emerging technology through the lens of real users, real constraints, accessible content, trust, training, and long-term maintainability.',
         systems: ['User confidence', 'Clear communication', 'Sustainable systems'],
-        primary: 'Technology should make people more capable.✅',
+        primary: 'Technology should make people more capable. ✅',
         linkText: 'Launch Intelligence',
-        linkUrl: '#recommendations'
+        linkUrl: '#winterface'
       },
       canvasBasics: {
         set: 'operations',
@@ -1023,9 +1023,9 @@
         aliases: ['canvas', 'canvas basics', 'lms basics', 'faculty canvas', 'canvas course', 'training course'],
         kicker: 'Faculty Training System',
         title: 'Basics for Faculty',
-        copy: 'A structured faculty training course that supports practical LMS use, common teaching workflows, and scalable LMS guidance for instructors who need clear next steps.',
-        systems: ['Faculty LMS training', 'Canvas workflow support', 'Reusable course guidance'],
-        primary: 'Effective LMS support gives faculty confidence before complexity appears.',
+        copy: 'A structured faculty training course that supports practical LMS use, common workflows, and scalable LMS guidance for instructors who need clear next steps.',
+        systems: ['Faculty LMS training', 'LMS workflow support', 'Reusable course guidance'],
+        primary: 'Effective LMS support gives educators confidence before complexity appears.',
         linkText: 'Launch Canvas Basics',
         linkUrl: 'https://canvas.xavier.edu/courses/23190'
       },
@@ -1038,8 +1038,8 @@
         kicker: 'Accessibility Support Layer',
         title: 'Accessibility Built-in',
         copy: 'Accessibility support becomes stronger when it is connected to LMS workflows, document improvement, readable design, captions, alternative text, & guidance.',
-        systems: ['Ally-informed workflows', 'Accessible Canvas practices', 'Improvement pathways'],
-        primary: 'Accessibility works best as a visible workflow, not a hidden compliance task. Systems go.',
+        systems: ['Ally-informed workflows', 'Accessible LMS practices', 'Improvement pathways'],
+        primary: 'Accessibility works best as a visible workflow, not a hidden compliance task. All systems go.',
         linkText: 'Launch Ally Intel',
         linkUrl: 'https://www.xavier.edu/teachingwithtech/a-z/tools/ally'
       },
@@ -1065,9 +1065,9 @@
         aliases: ['eta', 'edtech assistant', 'custom gpt', 'assistant', 'ai assistant', 'support bot'],
         kicker: 'AI Support Assistant',
         title: '24/7 EdTech Assistant',
-        copy: 'ETA extends the support ecosystem through conversational guidance for the LMS, educational technology tools, accessibility workflows, and Teaching with Tech resources.',
+        copy: 'ETA extends the support ecosystem through conversational guidance for the LMS, EdTech tools, accessibility workflows, and Teaching with Tech resources.',
         systems: ['Custom GPT support', '24/7 guidance layer', 'Ed-tech workflow routing'],
-        primary: 'AI assistants are strongest when they sit inside a real support architecture.',
+        primary: 'Artificial assistants are strongest when they sit inside a real support architecture.',
         linkText: 'Launch ETA',
         linkUrl: 'https://chatgpt.com/g/g-69ffe6dfccf48191b6afb459d0c78cce-edtech-assistant-eta'
       },
@@ -1137,7 +1137,7 @@
         imageAlt: 'Generative AI Hub website screenshot',
         mediaKicker: 'Generative AI Strategy',
         mediaTitle: 'Generative AI Hub',
-        mediaCopy: 'A practical AI teaching support environment for tool comparison, prompting, classroom use, examples, and responsible adoption.'
+        mediaCopy: 'A practical AI teaching support environment for tool comparison, prompting, classroom use, & responsible adoption.'
       },
       imageSystems: {
         set: 'media',
@@ -1182,22 +1182,22 @@
       workflowReplay: {
         set: 'media',
         number: '05',
-        nav: 'Meet The Creator',
+        nav: 'Meet the Dev',
         command: 'open_creator_preview',
         aliases: ['workflow replay', 'replay', 'creator','process video', 'workflow video', 'walkthrough replay', 'woodrow', 'woodrow wilson'],
         kicker: 'Showcase Bay',
-        title: 'Creator Preview',
-        copy: 'A visual module reserved for the creator system asset included in the package, giving the Showcase Bay a fifth live media target.',
+        title: 'Creator System Preview',
+        copy: 'A visual identity module for the WInterface experience, giving the Showcase Bay a fifth live media target.',
         systems: ['Character interface asset', 'Visual system cue', 'Portfolio atmosphere'],
         primary: 'Real progress happens when innovation meets usability, accessibility, and purpose.',
         linkText: 'Launch Image',
         linkUrl: 'assets/showcase/Woodrow.png',
         mediaType: 'image',
         image: 'assets/showcase/Woodrow.png',
-        imageAlt: 'Creator visual asset',
-        mediaKicker: 'WInterface™ = (Daniel)Wooddell’s + Interface',
-        mediaTitle: 'Daniel Wooddell',
-        mediaCopy: 'A visual identity asset that supports the site’s intelligent interface atmosphere. WInterface™ = (Daniel)Wooddell’s + Interface 🦇'
+        imageAlt: 'Creator system visual asset',
+        mediaKicker: 'WInterface™🟰',
+        mediaTitle: '(Daniel)Wooddell’s + Interface',
+        mediaCopy: 'A visual identity asset used to reinforce the atmosphere, personality, and interface language of WInterface.'
       },
       caseStudyPlayer: {
         set: 'media',
@@ -1228,7 +1228,7 @@
       learning: [
         { label: 'Problem', value: 'Disconnected course pieces' },
         { label: 'Method', value: 'Learning pathway design' },
-        { label: 'Result', value: 'Clear instructional flow' }
+        { label: 'Result', value: 'Clearer instructor flow' }
       ],
       accessibility: [
         { label: 'Problem', value: 'Barriers in digital content' },
@@ -1236,7 +1236,7 @@
         { label: 'Result', value: 'Better learner access' }
       ],
       support: [
-        { label: 'Problem', value: 'Repeated support questions' },
+        { label: 'Problem', value: 'Repeated questions' },
         { label: 'Method', value: 'Resource architecture' },
         { label: 'Result', value: 'Scalable guidance' }
       ],
@@ -1256,7 +1256,7 @@
         { label: 'Result', value: 'Confident course setup' }
       ],
       allyAccess: [
-        { label: 'Problem', value: 'Hidden accessibility issues' },
+        { label: 'Problem', value: 'Hidden issues' },
         { label: 'Method', value: 'Ally-informed review' },
         { label: 'Result', value: 'Improved course access' }
       ],
@@ -1320,7 +1320,7 @@
       ],
       allyAccess: [
         { label: 'ALLY', readout: 'ALLY REVIEW: ACTIVE.' },
-        { label: 'CANVAS', readout: 'CANVAS ACCESS ROUTE: CONNECTED.' },
+        { label: 'LMS', readout: 'LMS ACCESS ROUTE: CONNECTED.' },
         { label: 'FIX', readout: 'ACCESS FIX PATH: AVAILABLE.' }
       ],
       teachingTech: [
@@ -1339,7 +1339,7 @@
         { label: 'SCAN', readout: 'REVIEW HABIT: ENABLED.' }
       ],
       courseSystems: [
-        { label: 'OUT', readout: 'OUTCOME ALIGNMENT: ACTIVE.' },
+        { label: 'OUT', readout: 'ALIGNMENT: ACTIVE.' },
         { label: 'PLAN', readout: 'AI PLANNING ROUTE: CONNECTED.' },
         { label: 'JUDGE', readout: 'EDUCATOR JUDGMENT: PRIMARY.' }
       ],
@@ -1354,7 +1354,7 @@
         { label: 'MISSION', readout: 'MISSION LAYER: CONNECTED.' }
       ],
       imageSystems: [
-        { label: 'COURSE', readout: 'COURSE DESIGN VIEW: ACTIVE.' },
+        { label: 'COURSE', readout: 'DESIGN VIEW: ACTIVE.' },
         { label: 'PLAN', readout: 'AI PLANNING SIGNAL: ONLINE.' },
         { label: 'DESIGN', readout: 'LEARNING DESIGN LAYER: LINKED.' }
       ],
