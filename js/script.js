@@ -1011,7 +1011,7 @@
         title: 'Technology Decisions Grounded in People',
         copy: 'This pathway approaches emerging technology through the lens of real users, real constraints, accessible content, trust, training, and long-term maintainability.',
         systems: ['User confidence', 'Clear communication', 'Sustainable systems'],
-        primary: 'Technology should make people more capable. ✅',
+        primary: 'Technology should make people more capable, not less. ✅',
         linkText: 'Launch WIntelligence',
         linkUrl: '#winterface'
       },
