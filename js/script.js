@@ -939,7 +939,7 @@
         aliases: ['ai', 'artificial intelligence', 'genai', 'generative ai', 'prompt', 'prompting', 'gpt', 'chatgpt', 'copilot', 'automation'],
         kicker: 'Generative AI Strategy',
         title: 'AI Systems That Support Real Work',
-        copy: 'This pathway models AI guidance around practical use, course or content design, prompting, productivity, and responsible adoption across teaching, learning, and professional workplace contexts.',
+        copy: 'This pathway models AI guidance around practical use, course or content design, prompting, productivity & responsible adoption across teaching, learning, & professional workplace contexts.',
         systems: ['Prompting guidance', 'Educator workflows', 'Custom GPT support'],
         primary: 'AI adoption becomes useful when it is tied to actual work💻',
         linkText: 'Launch GenAI Hub',
