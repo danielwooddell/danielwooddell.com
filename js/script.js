@@ -956,7 +956,7 @@
         copy: 'This pathway connects objectives, goals, & digital resources so technology serves the learning or communication experience instead of distracting from it.',
         systems: ['Course design strategy', 'Instructional pathways', 'Reusable educator resources'],
         primary: 'Strong learning systems make the next action clear. 💎',
-        linkText: 'Launch Design Site',
+        linkText: 'Launch Design Lab',
         linkUrl: 'https://www.xavier.edu/id'
       },
       accessibility: {
@@ -984,7 +984,7 @@
         copy: 'I build resource hubs, training materials, documentation, and AI support layers that help people find accurate guidance without waiting for one-to-one help every time.',
         systems: ['Resource hubs', 'Documentation systems', '24/7 support layers'],
         primary: 'Good support architecture multiplies capacity. 🔋',
-        linkText: 'Launch Support System',
+        linkText: 'Launch Support Systems',
         linkUrl: 'https://www.xavier.edu/teachingwithtech'
       },
       workflow: {
@@ -1012,7 +1012,7 @@
         copy: 'This pathway approaches emerging technology through the lens of real users, real constraints, accessible content, trust, training, and long-term maintainability.',
         systems: ['User confidence', 'Clear communication', 'Sustainable systems'],
         primary: 'Technology should make people more capable. ✅',
-        linkText: 'Launch Intelligence',
+        linkText: 'Launch WIntelligence',
         linkUrl: '#winterface'
       },
       canvasBasics: {
@@ -1026,7 +1026,7 @@
         copy: 'A structured faculty training course that supports practical LMS use, common workflows, and scalable LMS guidance for instructors who need clear next steps.',
         systems: ['Faculty LMS training', 'LMS workflow support', 'Reusable course guidance'],
         primary: 'Effective LMS support gives educators confidence before complexity appears.',
-        linkText: 'Launch Canvas Basics',
+        linkText: 'Launch LMS Basics',
         linkUrl: 'https://canvas.xavier.edu/courses/23190'
       },
       allyAccess: {
@@ -1054,7 +1054,7 @@
         copy: 'A public-facing ecosystem for helping educators discover EdTech, generative AI guidance, accessibility support, and practical digital teaching resources.',
         systems: ['Tool discovery', 'Educator resource pathways', 'Public-facing support UX'],
         primary: 'A strong resource hub reduces support friction before questions become tickets.',
-        linkText: 'Launch Tech Hub',
+        linkText: 'Launch ✖️ Tech',
         linkUrl: 'https://www.xavier.edu/teachingwithtech'
       },
       etaAssistant: {
@@ -1096,7 +1096,7 @@
         copy: 'Course design support becomes more useful when AI is positioned as a planning partner for outcomes, activities, materials, feedback, and educator judgment.',
         systems: ['Outcome alignment', 'Activity planning', 'Educator judgment'],
         primary: 'AI should support better design decisions, not replace educator expertise.',
-        linkText: 'Launch AI Course Design',
+        linkText: 'Launch AI Design',
         linkUrl: 'https://www.xavier.edu/teachingwithtech/ai-in-design'
       },
       mediaPreview: {
@@ -1110,7 +1110,7 @@
         copy: 'The Showcase Bay now displays actual project visuals from the live portfolio package rather than placeholder future modules.',
         systems: ['Live screenshot preview', 'Educator support UX', 'Resource ecosystem design'],
         primary: 'Visual evidence makes the portfolio feel more concrete and easier to scan.',
-        linkText: 'Launch Image',
+        linkText: 'Launch Image 🚀',
         linkUrl: 'assets/showcase/TwT.png',
         mediaType: 'image',
         image: 'assets/showcase/TwT.png',
@@ -1130,7 +1130,7 @@
         copy: 'A visual module for the public-facing AI teaching support hub with prompting, tool comparisons, quick wins, and mission-aligned guidance.',
         systems: ['Generative AI support', 'Prompting guidance', 'Mission-aware design'],
         primary: 'AI support becomes more credible when educators can see the system’s structure.',
-        linkText: 'Launch Image',
+        linkText: 'Launch Image 🚀',
         linkUrl: 'assets/showcase/GenAIhub.png',
         mediaType: 'image',
         image: 'assets/showcase/GenAIhub.png',
@@ -1150,7 +1150,7 @@
         copy: 'A graduate instructional design project framed around helping faculty use AI as a planning partner while preserving educator judgment.',
         systems: ['Course design workflow', 'AI-supported planning', 'Learning design strategy'],
         primary: 'This module moves the media bay from reserved concept to working project console.',
-        linkText: 'Launch Image',
+        linkText: 'Launch Image 🚀',
         linkUrl: 'assets/showcase/AI4CD.png',
         mediaType: 'image',
         image: 'assets/showcase/AI4CD.png',
@@ -1170,7 +1170,7 @@
         copy: 'ETA functions as a conversational support layer for Canvas, supported educational technologies, accessibility workflows, and Teaching with Technology resources.',
         systems: ['Custom GPT workflow', 'Support architecture', 'Always-available guidance'],
         primary: 'The assistant works because it is connected to a real support ecosystem.',
-        linkText: 'Launch Image',
+        linkText: 'Launch Image 🚀',
         linkUrl: 'assets/showcase/ETA.png',
         mediaType: 'image',
         image: 'assets/showcase/ETA.png',
@@ -1190,7 +1190,7 @@
         copy: 'A visual identity module for the WInterface experience, giving the Showcase Bay a fifth live media target.',
         systems: ['Character interface asset', 'Visual system cue', 'Portfolio atmosphere'],
         primary: 'Real progress happens when innovation meets usability, accessibility, and purpose.',
-        linkText: 'Launch Image',
+        linkText: 'Launch Image 🚀',
         linkUrl: 'assets/showcase/Woodrow.png',
         mediaType: 'image',
         image: 'assets/showcase/Woodrow.png',
