@@ -1395,7 +1395,7 @@
     const link = interfaceSystem.querySelector('[data-interface-link]');
     const mediaPanel = interfaceSystem.querySelector('[data-interface-media-panel]');
     const mediaToggle = interfaceSystem.querySelector('[data-interface-media-toggle]');
-    const mediaFrame = interfaceSystem.querySelector('[data-interface-media-frame]');
+    let mediaFrame = interfaceSystem.querySelector('[data-interface-media-frame]');
     const videoFrameWrap = interfaceSystem.querySelector('[data-interface-video-frame-wrap]');
     const showcaseFrame = interfaceSystem.querySelector('[data-interface-showcase-frame]');
     const showcaseImage = interfaceSystem.querySelector('[data-interface-showcase-image]');
@@ -1451,8 +1451,7 @@
       const nextSource = decodeRouteTarget(route.target);
       if (!nextSource) return false;
 
-      mediaFrame.src = nextSource;
-      setInterfacePlaybackState(false);
+      rebuildInterfaceMediaRoute(nextSource);
 
       if (commandInput) {
         commandInput.value = interfaceData.caseStudyPlayer.command;
@@ -1671,7 +1670,10 @@
     }
 
 
-    let interfaceVimeoPlayer = null;
+    let interfaceMediaController = null;
+    let interfaceMediaControllerSource = '';
+    let interfaceMediaControllerToken = 0;
+    let youtubeIframeApiPromise = null;
 
     function setInterfacePlaybackState(isPlaying) {
       interfaceMediaPlaying = Boolean(isPlaying);
@@ -1699,16 +1701,289 @@
       }
     }
 
+    function getInterfaceMediaSource() {
+      return mediaFrame ? String(mediaFrame.getAttribute('src') || mediaFrame.src || '') : '';
+    }
+
+    function getInterfaceMediaProvider(source) {
+      if (!source) return '';
+
+      let host = '';
+
+      try {
+        host = new URL(source, window.location.href).hostname.toLowerCase();
+      } catch (error) {
+        host = source.toLowerCase();
+      }
+
+      if (host.includes('player.vimeo.com') || host.includes('vimeo.com')) return 'vimeo';
+      if (host.includes('youtube.com') || host.includes('youtube-nocookie.com') || host.includes('youtu.be')) return 'youtube';
+
+      return '';
+    }
+
+    function normalizeInterfaceMediaSource(source) {
+      const provider = getInterfaceMediaProvider(source);
+      if (provider !== 'youtube') return source;
+
+      try {
+        const url = new URL(source, window.location.href);
+        url.searchParams.set('enablejsapi', '1');
+        url.searchParams.set('playsinline', '1');
+        return url.toString();
+      } catch (error) {
+        return source;
+      }
+    }
+
+    function ensureYouTubeIframeApi() {
+      if (window.YT && typeof window.YT.Player === 'function') {
+        return Promise.resolve();
+      }
+
+      if (youtubeIframeApiPromise) return youtubeIframeApiPromise;
+
+      youtubeIframeApiPromise = new Promise((resolve, reject) => {
+        const existingScript = document.querySelector('script[src="https://www.youtube.com/iframe_api"]');
+        const previousReadyHandler = window.onYouTubeIframeAPIReady;
+
+        window.onYouTubeIframeAPIReady = function onYouTubeIframeAPIReady() {
+          if (typeof previousReadyHandler === 'function') {
+            previousReadyHandler();
+          }
+
+          resolve();
+        };
+
+        if (existingScript) return;
+
+        const script = document.createElement('script');
+        script.src = 'https://www.youtube.com/iframe_api';
+        script.async = true;
+        script.onerror = () => reject(new Error('YouTube IFrame API failed to load.'));
+        document.head.appendChild(script);
+      });
+
+      return youtubeIframeApiPromise;
+    }
+
+    let mediaFrameObserver = null;
+
+    function clearInterfaceMediaController() {
+      interfaceMediaControllerToken += 1;
+
+      const currentController = interfaceMediaController;
+      interfaceMediaController = null;
+      interfaceMediaControllerSource = '';
+
+      if (currentController && typeof currentController.destroy === 'function') {
+        try {
+          currentController.destroy();
+        } catch (error) {
+          // Some providers reject teardown after iframe route changes.
+        }
+      }
+    }
+
+    function observeInterfaceMediaFrame() {
+      if (mediaFrameObserver) {
+        mediaFrameObserver.disconnect();
+        mediaFrameObserver = null;
+      }
+
+      if (!mediaFrame) return;
+
+      mediaFrameObserver = new MutationObserver(mutations => {
+        if (mutations.some(mutation => mutation.attributeName === 'src')) {
+          setInterfacePlaybackState(false);
+          initializeInterfaceMediaController();
+        }
+      });
+
+      mediaFrameObserver.observe(mediaFrame, { attributes: true, attributeFilter: ['src'] });
+    }
+
+    function rebuildInterfaceMediaFrame(nextSource) {
+      if (!mediaFrame || !mediaFrame.parentNode) return '';
+
+      const normalizedSource = normalizeInterfaceMediaSource(nextSource || getInterfaceMediaSource());
+      const replacementFrame = mediaFrame.cloneNode(false);
+
+      if (normalizedSource) {
+        replacementFrame.setAttribute('src', normalizedSource);
+      }
+
+      if (mediaFrameObserver) {
+        mediaFrameObserver.disconnect();
+        mediaFrameObserver = null;
+      }
+
+      const previousFrame = mediaFrame;
+      previousFrame.parentNode.replaceChild(replacementFrame, previousFrame);
+      mediaFrame = replacementFrame;
+      observeInterfaceMediaFrame();
+
+      return normalizedSource;
+    }
+
+    function rebuildInterfaceMediaRoute(nextSource) {
+      const normalizedSource = rebuildInterfaceMediaFrame(nextSource);
+
+      clearInterfaceMediaController();
+      setInterfacePlaybackState(false);
+
+      if (normalizedSource) {
+        initializeInterfaceMediaController();
+      }
+
+      return Boolean(normalizedSource);
+    }
+
+    function initializeVimeoMediaController(source, token) {
+      if (!window.Vimeo || typeof window.Vimeo.Player !== 'function') {
+        setInterfacePlaybackState(false);
+        return;
+      }
+
+      try {
+        const player = new window.Vimeo.Player(mediaFrame);
+
+        interfaceMediaController = {
+          provider: 'vimeo',
+          play: () => player.play(),
+          pause: () => player.pause(),
+          setMuted: muted => player.setMuted(Boolean(muted)),
+          destroy: () => {
+            if (typeof player.unload === 'function') {
+              return player.unload();
+            }
+            return null;
+          }
+        };
+        interfaceMediaControllerSource = source;
+
+        player.ready().then(() => {
+          if (token === interfaceMediaControllerToken) applyInterfaceMediaMuteState();
+        }).catch(() => {});
+        player.on('play', () => setInterfacePlaybackState(true));
+        player.on('pause', () => setInterfacePlaybackState(false));
+        player.on('ended', () => setInterfacePlaybackState(false));
+      } catch (error) {
+        interfaceMediaController = null;
+        interfaceMediaControllerSource = '';
+        setInterfacePlaybackState(false);
+      }
+    }
+
+    function initializeYouTubeMediaController(source, token) {
+      ensureYouTubeIframeApi().then(() => {
+        if (token !== interfaceMediaControllerToken || !mediaFrame) return;
+
+        try {
+          const player = new window.YT.Player(mediaFrame, {
+            events: {
+              onReady: () => {
+                if (token === interfaceMediaControllerToken) applyInterfaceMediaMuteState();
+              },
+              onStateChange: event => {
+                if (!window.YT || !window.YT.PlayerState) return;
+
+                if (event.data === window.YT.PlayerState.PLAYING) {
+                  setInterfacePlaybackState(true);
+                  return;
+                }
+
+                if (event.data === window.YT.PlayerState.PAUSED || event.data === window.YT.PlayerState.ENDED || event.data === window.YT.PlayerState.CUED) {
+                  setInterfacePlaybackState(false);
+                }
+              }
+            }
+          });
+
+          interfaceMediaController = {
+            provider: 'youtube',
+            play: () => player.playVideo(),
+            pause: () => player.pauseVideo(),
+            setMuted: muted => {
+              if (muted && typeof player.mute === 'function') {
+                player.mute();
+              } else if (!muted && typeof player.unMute === 'function') {
+                player.unMute();
+              }
+            },
+            destroy: () => {
+              if (typeof player.destroy === 'function') {
+                player.destroy();
+              }
+            }
+          };
+          interfaceMediaControllerSource = source;
+        } catch (error) {
+          interfaceMediaController = null;
+          interfaceMediaControllerSource = '';
+          setInterfacePlaybackState(false);
+        }
+      }).catch(() => {
+        if (token === interfaceMediaControllerToken) {
+          interfaceMediaController = null;
+          interfaceMediaControllerSource = '';
+          setInterfacePlaybackState(false);
+        }
+      });
+    }
+
+    function initializeInterfaceMediaController() {
+      if (!mediaFrame) {
+        clearInterfaceMediaController();
+        setInterfacePlaybackState(false);
+        return;
+      }
+
+      const currentSource = getInterfaceMediaSource();
+      const normalizedSource = normalizeInterfaceMediaSource(currentSource);
+
+      if (normalizedSource && normalizedSource !== currentSource) {
+        mediaFrame.src = normalizedSource;
+      }
+
+      const source = normalizedSource || currentSource;
+      const provider = getInterfaceMediaProvider(source);
+
+      if (interfaceMediaController && interfaceMediaControllerSource === source && interfaceMediaController.provider === provider) {
+        applyInterfaceMediaMuteState();
+        return;
+      }
+
+      clearInterfaceMediaController();
+      const token = interfaceMediaControllerToken;
+
+      if (provider === 'vimeo') {
+        initializeVimeoMediaController(source, token);
+        return;
+      }
+
+      if (provider === 'youtube') {
+        initializeYouTubeMediaController(source, token);
+        return;
+      }
+
+      setInterfacePlaybackState(false);
+    }
+
     function applyInterfaceMediaMuteState() {
       updateInterfaceMuteControl();
 
-      if (interfaceVimeoPlayer && typeof interfaceVimeoPlayer.setMuted === 'function') {
-        const muteAction = interfaceVimeoPlayer.setMuted(interfaceMediaMuted);
+      if (interfaceMediaController && typeof interfaceMediaController.setMuted === 'function') {
+        try {
+          const muteAction = interfaceMediaController.setMuted(interfaceMediaMuted);
 
-        if (muteAction && typeof muteAction.catch === 'function') {
-          muteAction.catch(() => {
-            // Vimeo may reject mute calls before the player is ready or after iframe state changes.
-          });
+          if (muteAction && typeof muteAction.catch === 'function') {
+            muteAction.catch(() => {
+              // Providers may reject mute calls before the player is ready or after iframe route changes.
+            });
+          }
+        } catch (error) {
+          // YouTube may reject mute calls before the iframe API has finished binding.
         }
       }
     }
@@ -1737,41 +2012,46 @@
     }
 
     function pauseInterfaceMedia() {
-      if (interfaceVimeoPlayer && typeof interfaceVimeoPlayer.pause === 'function') {
-        interfaceVimeoPlayer.pause().catch(() => {
-          // Vimeo may reject pause calls before the player is ready or after iframe state changes.
-        });
+      if (interfaceMediaController && typeof interfaceMediaController.pause === 'function') {
+        try {
+          const pauseAction = interfaceMediaController.pause();
+
+          if (pauseAction && typeof pauseAction.catch === 'function') {
+            pauseAction.catch(() => {
+              // Providers may reject pause calls before the player is ready or after iframe route changes.
+            });
+          }
+        } catch (error) {
+          // Provider was not ready. The UI state is still reset below.
+        }
       }
 
       setInterfacePlaybackState(false);
     }
 
     function toggleInterfaceMediaPlayback() {
-      if (!interfaceVimeoPlayer || activeInterfaceKey !== 'caseStudyPlayer') return;
+      if (activeInterfaceKey !== 'caseStudyPlayer') return;
 
-      const mediaAction = interfaceMediaPlaying ? interfaceVimeoPlayer.pause() : interfaceVimeoPlayer.play();
+      initializeInterfaceMediaController();
 
-      if (mediaAction && typeof mediaAction.catch === 'function') {
-        mediaAction.catch(() => {
-          // Vimeo may reject play/pause calls before the player is ready or when browser policies block playback.
-        });
-      }
-    }
+      if (!interfaceMediaController) return;
 
-    if (mediaFrame && window.Vimeo && typeof window.Vimeo.Player === 'function') {
       try {
-        interfaceVimeoPlayer = new window.Vimeo.Player(mediaFrame);
-        interfaceVimeoPlayer.ready().then(applyInterfaceMediaMuteState).catch(() => {});
-        interfaceVimeoPlayer.on('play', () => setInterfacePlaybackState(true));
-        interfaceVimeoPlayer.on('pause', () => setInterfacePlaybackState(false));
-        interfaceVimeoPlayer.on('ended', () => setInterfacePlaybackState(false));
+        const mediaAction = interfaceMediaPlaying ? interfaceMediaController.pause() : interfaceMediaController.play();
+
+        if (mediaAction && typeof mediaAction.catch === 'function') {
+          mediaAction.catch(() => {
+            // Providers may reject play/pause calls before the player is ready or when browser policies block playback.
+          });
+        }
       } catch (error) {
-        interfaceVimeoPlayer = null;
-        setInterfacePlaybackState(false);
+        // Ignore provider-level control errors to preserve the surrounding interface.
       }
-    } else {
-      setInterfacePlaybackState(false);
     }
+
+    initializeInterfaceMediaController();
+
+    observeInterfaceMediaFrame();
 
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
