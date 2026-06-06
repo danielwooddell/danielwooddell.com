@@ -8309,10 +8309,8 @@ body.winterface-offline .interface-section .interface-shell {
 
 /* =========================
    WINTERFACE PRIMARY RAIL STABILITY PATCH
-   Keeps Active Pathways rail cards readable in normal desktop view without
-   inflating the full three-column WInterface grid. This prevents the right
-   Primary Signal / Live Systems stack and center player area from stretching
-   taller than Operational and Showcase modes.
+   Stabilizes the normal desktop Active Pathways console height so the left
+   navigation buttons keep a consistent, fuller shape when switching cards.
    Scope: normal embedded desktop view only. Fullscreen, mobile, operational,
    and showcase modes are intentionally untouched.
 ========================= */
@@ -8332,361 +8330,471 @@ body.winterface-offline .interface-section .interface-shell {
 }
 
 
-
 /* =========================
-   WFO 3.6 SECRET INTEL NORMAL-VIEW VIDEO SPACING GUARD
-   Preserves the latest WFO fixes while keeping the duplicated video player vertically balanced.
-   CSS-only: no button, rail, control, or fullscreen behavior changes.
+   WINTERFACE CHROME NOIR EDITION TEST PATCH
+   Scope: WInterface section only. CSS-only visual skin.
+   Direction: fully blacked-out tactical interface with polished chrome accents.
+   Preserves markup, JavaScript, Secret Intel video controls, audio, and assets.
 ========================= */
 
-@media (min-width: 901px) {
-  .interface-section.interface-system-is-media:not(.is-winterface-maximized) .interface-core {
-    justify-content: center;
-  }
-
-  .interface-section.interface-system-is-media:not(.is-winterface-maximized) .interface-media-panel:not([hidden]) {
-    margin-top: auto;
-    margin-bottom: auto;
-  }
-
-  .interface-section.interface-system-is-media:not(.is-winterface-maximized) .interface-response[data-interface-response] {
-    min-height: 0;
-  }
-}
-
-/* =========================================================
-   WINTERFACE THEME: NAVY / SKY BLUE / GREY
-   Scope: WInterface only
-   Build base: WFO Latest
-   Notes: CSS-only visual theme. Layout, JavaScript, content,
-   video bays, and confirmed rail-height fixes are untouched.
-========================================================= */
-
 .interface-section {
-  --winterface-accent: #7fcfff;
-  --winterface-accent-rgb: 127, 207, 255;
-  --winterface-accent-text: #b9e5ff;
-  --winterface-accent-soft: rgba(127, 207, 255, 0.105);
-  --winterface-accent-mid: rgba(127, 207, 255, 0.24);
-  --winterface-accent-strong: rgba(127, 207, 255, 0.58);
-  --winterface-panel-navy: rgba(9, 24, 43, 0.82);
-  --winterface-panel-bluegrey: rgba(30, 52, 75, 0.74);
-  --winterface-panel-steel: rgba(75, 96, 120, 0.26);
-  --winterface-border-steel: rgba(146, 180, 209, 0.26);
-  --winterface-text-ice: #eef8ff;
-  --winterface-muted-ice: #c7d6e8;
-  background:
-    radial-gradient(circle at 12% 12%, rgba(94, 171, 222, 0.18), transparent 34%),
-    radial-gradient(circle at 86% 18%, rgba(105, 126, 157, 0.18), transparent 38%),
-    radial-gradient(circle at 48% 92%, rgba(36, 75, 112, 0.22), transparent 44%),
-    linear-gradient(135deg, #06101e 0%, #0b1728 42%, #132238 100%) !important;
+  --cyan: #f8fbff;
+  --violet: #aeb4bc;
+  --pink: #ffffff;
+  --yellow: #d9dde3;
+  --muted-strong: #c6ccd4;
+  --interface-accent-rgb: 236, 241, 247;
+  --interface-accent: #edf2f8;
+  --interface-accent-text: #f7f9fc;
+  --interface-accent-soft: rgba(236, 241, 247, 0.085);
+  --interface-accent-border: rgba(236, 241, 247, 0.30);
+  --interface-accent-border-strong: rgba(255, 255, 255, 0.60);
+  --interface-accent-glow: rgba(236, 241, 247, 0.16);
+  color-scheme: dark;
 }
 
-.interface-section.interface-system-set-primary,
-.interface-section.interface-system-set-operations,
-.interface-section.interface-system-set-media {
-  --winterface-accent: #7fcfff;
-  --winterface-accent-rgb: 127, 207, 255;
-  --winterface-accent-text: #b9e5ff;
-  --winterface-accent-soft: rgba(127, 207, 255, 0.105);
-  --winterface-accent-mid: rgba(127, 207, 255, 0.24);
-  --winterface-accent-strong: rgba(127, 207, 255, 0.58);
+.interface-section,
+.interface-section .interface-shell,
+.interface-section .interface-topbar,
+.interface-section .interface-sidebar,
+.interface-section .interface-core,
+.interface-section .interface-status-panel,
+.interface-section .interface-media-panel,
+.interface-section .interface-showcase-panel,
+.interface-section .interface-panel,
+.interface-section .interface-card,
+.interface-section .interface-system-panel,
+.interface-section .interface-contact-form,
+.interface-section .case-study-card {
+  color: rgba(246, 248, 251, 0.92) !important;
 }
 
 .interface-section::before {
-  background: linear-gradient(90deg, transparent, rgba(127, 207, 255, 0.62), rgba(146, 180, 209, 0.36), transparent) !important;
+  background:
+    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), rgba(118, 126, 136, 0.22), rgba(255, 255, 255, 0.20), transparent) !important;
+  opacity: 0.82 !important;
+  filter: saturate(0) contrast(1.25) brightness(0.95) !important;
+}
+
+.interface-section::after {
+  opacity: 0.36 !important;
+  filter: grayscale(1) contrast(1.25) brightness(0.72) !important;
 }
 
 .interface-section .interface-shell {
-  border-color: rgba(127, 207, 255, 0.28) !important;
   background:
-    linear-gradient(145deg, rgba(185, 214, 238, 0.105), rgba(10, 22, 38, 0.72)),
-    radial-gradient(circle at 8% 12%, rgba(127, 207, 255, 0.18), transparent 36%),
-    radial-gradient(circle at 88% 22%, rgba(105, 126, 157, 0.22), transparent 42%),
-    radial-gradient(circle at 55% 108%, rgba(32, 64, 96, 0.30), transparent 46%),
-    linear-gradient(135deg, rgba(5, 14, 26, 0.94), rgba(14, 27, 46, 0.94)) !important;
+    linear-gradient(145deg, rgba(255, 255, 255, 0.050), rgba(255, 255, 255, 0.010) 42%, rgba(0, 0, 0, 0.36)),
+    radial-gradient(circle at 15% 12%, rgba(255, 255, 255, 0.075), transparent 34%),
+    radial-gradient(circle at 82% 18%, rgba(154, 163, 174, 0.065), transparent 38%),
+    radial-gradient(circle at 48% 92%, rgba(255, 255, 255, 0.040), transparent 44%),
+    linear-gradient(180deg, #000000, #020203 42%, #000000) !important;
+  border-color: rgba(244, 247, 251, 0.18) !important;
   box-shadow:
-    0 34px 110px rgba(0, 0, 0, 0.62),
-    0 0 64px rgba(127, 207, 255, 0.13),
-    inset 0 0 86px rgba(185, 214, 238, 0.045) !important;
+    0 40px 120px rgba(0, 0, 0, 0.86),
+    0 0 56px rgba(220, 228, 238, 0.070),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.050),
+    inset 0 0 80px rgba(255, 255, 255, 0.018) !important;
 }
 
-.interface-section .interface-shell::before {
-  border-color: rgba(127, 207, 255, 0.26) !important;
-}
-
+.interface-section .interface-shell::before,
 .interface-section .interface-shell::after {
-  background-image:
-    linear-gradient(rgba(185, 214, 238, 0.032) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(185, 214, 238, 0.026) 1px, transparent 1px),
-    radial-gradient(circle at var(--pointer-x, 50%) var(--pointer-y, 50%), rgba(127, 207, 255, 0.16), transparent 28%) !important;
-  opacity: 0.7 !important;
+  opacity: 0.58 !important;
+  filter: grayscale(1) contrast(1.36) brightness(0.62) !important;
 }
 
-.interface-section .interface-orbit {
-  border-color: rgba(127, 207, 255, 0.18) !important;
-  box-shadow:
-    inset 0 0 26px rgba(127, 207, 255, 0.065),
-    0 0 34px rgba(146, 180, 209, 0.095) !important;
-}
-
-.interface-section .interface-orbit-one {
-  border-top-color: rgba(127, 207, 255, 0.54) !important;
-}
-
-.interface-section .interface-orbit-two {
-  border-bottom-color: rgba(146, 180, 209, 0.36) !important;
-}
-
-.interface-section .interface-scan {
-  background: linear-gradient(180deg, transparent, rgba(127, 207, 255, 0.115), rgba(146, 180, 209, 0.075), transparent) !important;
-  opacity: 0.66 !important;
-}
-
-.interface-section .interface-status-bar {
-  background:
-    linear-gradient(135deg, rgba(3, 10, 20, 0.88), rgba(16, 31, 52, 0.82)) !important;
-  border-color: rgba(127, 207, 255, 0.23) !important;
-  color: #d5e6f7 !important;
-  box-shadow:
-    inset 0 0 28px rgba(127, 207, 255, 0.035),
-    0 16px 44px rgba(0, 0, 0, 0.34) !important;
-}
-
-.interface-section .interface-status-bar i,
-.interface-section .interface-status-bar > span:nth-child(1) i,
-.interface-section .interface-status-bar > span:nth-child(2) i,
-.interface-section .interface-status-bar > span:nth-child(3) i {
-  background: #7fcfff !important;
-  box-shadow:
-    0 0 12px rgba(127, 207, 255, 0.88),
-    0 0 28px rgba(127, 207, 255, 0.34) !important;
-}
-
-.interface-section .interface-rail,
+.interface-section .interface-topbar,
+.interface-section .interface-sidebar,
 .interface-section .interface-core,
-.interface-section .interface-side-panel {
-  border-color: rgba(127, 207, 255, 0.24) !important;
+.interface-section .interface-status-panel,
+.interface-section .interface-media-panel,
+.interface-section .interface-showcase-panel,
+.interface-section .interface-panel,
+.interface-section .interface-contact-form,
+.interface-section .interface-card,
+.interface-section .interface-system-panel,
+.interface-section .case-study-card {
+  border-color: rgba(233, 239, 247, 0.16) !important;
   background:
-    radial-gradient(circle at 12% 10%, rgba(127, 207, 255, 0.105), transparent 38%),
-    linear-gradient(145deg, rgba(33, 55, 78, 0.60), rgba(7, 17, 31, 0.76)) !important;
+    linear-gradient(155deg, rgba(255, 255, 255, 0.046), rgba(255, 255, 255, 0.010) 44%, rgba(0, 0, 0, 0.38)),
+    radial-gradient(circle at 15% 0%, rgba(255, 255, 255, 0.054), transparent 38%),
+    linear-gradient(180deg, rgba(6, 7, 8, 0.96), rgba(0, 0, 0, 0.96)) !important;
   box-shadow:
-    inset 0 0 36px rgba(127, 207, 255, 0.035),
-    0 18px 54px rgba(0, 0, 0, 0.34) !important;
+    0 24px 64px rgba(0, 0, 0, 0.58),
+    0 0 24px rgba(214, 223, 234, 0.045),
+    inset 0 1px 0 rgba(255, 255, 255, 0.075),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.025) !important;
 }
 
-.interface-section .interface-rail-label,
-.interface-section .interface-output-label,
-.interface-section .interface-response .panel-label,
-.interface-section .interface-core .panel-label,
-.interface-section .interface-core [data-interface-kicker],
-.interface-section .interface-core .interface-command-prefix,
-.interface-section .interface-core .interface-showcase-caption span,
-.interface-section .interface-side-panel [data-interface-output-label] {
-  color: #73ccff !important;
+.interface-section .interface-topbar {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.070), rgba(255, 255, 255, 0.012) 45%, rgba(255, 255, 255, 0.045)),
+    #000000 !important;
+  border-bottom-color: rgba(244, 247, 251, 0.18) !important;
+}
+
+.interface-section .interface-core {
+  background:
+    radial-gradient(circle at 50% 10%, rgba(255, 255, 255, 0.060), transparent 38%),
+    linear-gradient(155deg, rgba(255, 255, 255, 0.036), rgba(0, 0, 0, 0.72)),
+    #000000 !important;
+}
+
+.interface-section .interface-status-panel,
+.interface-section .interface-system-panel {
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.046), rgba(255, 255, 255, 0.010)),
+    radial-gradient(circle at 72% 12%, rgba(255, 255, 255, 0.055), transparent 34%),
+    #010101 !important;
+}
+
+.interface-section .interface-brand-mark,
+.interface-section .interface-status-dot,
+.interface-section .interface-node,
+.interface-section .interface-orbit,
+.interface-section .interface-playback-dot,
+.interface-section .interface-system-list li::before,
+.interface-section .interface-status-bar i,
+.interface-section .interface-signal-chip i {
+  border-color: rgba(255, 255, 255, 0.52) !important;
+  background:
+    radial-gradient(circle at 32% 24%, rgba(255, 255, 255, 0.96), transparent 20%),
+    radial-gradient(circle at 50% 52%, rgba(250, 252, 255, 0.56), rgba(166, 174, 184, 0.26) 48%, rgba(24, 26, 29, 0.70) 78%, rgba(0, 0, 0, 0.96) 100%) !important;
+  box-shadow:
+    inset 0 1px 7px rgba(255, 255, 255, 0.32),
+    inset 0 -8px 14px rgba(0, 0, 0, 0.50),
+    0 0 18px rgba(255, 255, 255, 0.20),
+    0 0 42px rgba(203, 213, 225, 0.080) !important;
+}
+
+.interface-section .interface-core::before {
+  background:
+    radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.070), transparent 36%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.030), transparent 44%) !important;
+}
+
+.interface-section .interface-eyebrow,
+.interface-section .interface-section-label,
+.interface-section .interface-card-kicker,
+.interface-section .interface-panel-kicker,
+.interface-section .interface-status-primary,
+.interface-section .interface-playback-status,
+.interface-section .interface-showcase-caption,
+.interface-section .showcase-meta,
+.interface-section .case-study-eyebrow,
+.interface-section .interface-command-label,
+.interface-section .interface-prompt,
+.interface-section .interface-status-pill,
+.interface-section .interface-signal-chip {
+  color: #f4f7fb !important;
+  letter-spacing: 0.12em;
   text-shadow:
-    0 0 10px rgba(127, 207, 255, 0.62),
-    0 0 22px rgba(127, 207, 255, 0.20) !important;
+    0 0 12px rgba(255, 255, 255, 0.18),
+    0 0 28px rgba(175, 185, 198, 0.10) !important;
 }
 
-.interface-section .interface-rail-subtitle,
-.interface-section .interface-copy,
-.interface-section .interface-system-list,
-.interface-section .interface-output-card,
-.interface-section .interface-output-card-soft {
-  color: #c7d6e8 !important;
-}
-
-.interface-section .interface-command-line {
-  border-color: rgba(127, 207, 255, 0.34) !important;
-  background:
-    linear-gradient(90deg, rgba(38, 63, 91, 0.72), rgba(9, 17, 31, 0.78), rgba(44, 55, 72, 0.62)) !important;
-  box-shadow:
-    inset 0 0 30px rgba(127, 207, 255, 0.055),
-    0 0 28px rgba(127, 207, 255, 0.15) !important;
-}
-
-.interface-section .interface-command-text,
 .interface-section .interface-title,
-.interface-section .interface-path strong,
-.interface-section .interface-output-card strong,
-.interface-section .interface-jump-link {
-  color: #eef8ff !important;
+.interface-section .interface-title span,
+.interface-section h1,
+.interface-section h2,
+.interface-section h3,
+.interface-section h4 {
+  color: #ffffff !important;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.20),
+    0 0 18px rgba(255, 255, 255, 0.20),
+    0 0 42px rgba(178, 187, 199, 0.12) !important;
+}
+
+.interface-section p,
+.interface-section .interface-description,
+.interface-section .interface-card p,
+.interface-section .interface-panel p,
+.interface-section .interface-system-list,
+.interface-section .interface-system-list li,
+.interface-section .case-study-card p,
+.interface-section .interface-input,
+.interface-section .interface-textarea {
+  color: rgba(232, 237, 244, 0.82) !important;
+}
+
+.interface-section strong,
+.interface-section .interface-highlight,
+.interface-section .interface-count,
+.interface-section .interface-metric strong,
+.interface-section .interface-meta strong {
+  color: #ffffff !important;
+}
+
+.interface-section a,
+.interface-section .interface-link,
+.interface-section .interface-nav a,
+.interface-section .interface-topbar a {
+  color: #f2f5f8 !important;
+  text-decoration-color: rgba(255, 255, 255, 0.28) !important;
+}
+
+.interface-section a:hover,
+.interface-section .interface-link:hover,
+.interface-section .interface-nav a:hover,
+.interface-section .interface-topbar a:hover {
+  color: #ffffff !important;
+  text-shadow: 0 0 16px rgba(255, 255, 255, 0.28) !important;
+}
+
+.interface-section .interface-command-line,
+.interface-section .interface-command-line:focus-within {
+  border-color: rgba(255, 255, 255, 0.30) !important;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.054), rgba(255, 255, 255, 0.012)),
+    radial-gradient(circle at left center, rgba(255, 255, 255, 0.070), transparent 42%),
+    #000000 !important;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.050),
+    0 0 24px rgba(230, 236, 244, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.070),
+    inset 0 0 28px rgba(255, 255, 255, 0.020) !important;
+}
+
+.interface-section .interface-command-line::before,
+.interface-section .interface-playback-status::before,
+.interface-section .interface-media-toggle::before,
+.interface-section .interface-jump-link::before,
+.interface-section .interface-signal-chip::before,
+.interface-section .interface-status-pill::before {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.20), rgba(145, 153, 164, 0.12), transparent) !important;
 }
 
 .interface-section .interface-cursor {
-  background: #7fcfff !important;
+  background: #ffffff !important;
   box-shadow:
-    0 0 12px rgba(127, 207, 255, 0.96),
-    0 0 28px rgba(127, 207, 255, 0.48),
-    0 0 46px rgba(127, 207, 255, 0.24) !important;
+    0 0 14px rgba(255, 255, 255, 0.78),
+    0 0 30px rgba(209, 216, 226, 0.38) !important;
 }
 
-.interface-section .interface-path {
-  border-color: rgba(127, 207, 255, 0.22) !important;
-  background:
-    linear-gradient(145deg, rgba(50, 78, 105, 0.46), rgba(13, 27, 46, 0.68)),
-    rgba(14, 27, 46, 0.54) !important;
-  box-shadow:
-    inset 0 0 24px rgba(127, 207, 255, 0.025),
-    0 10px 26px rgba(0, 0, 0, 0.24) !important;
-}
-
-.interface-section .interface-path:hover,
-.interface-section .interface-path:focus-visible,
-.interface-section .interface-path.is-active {
-  color: #eef8ff !important;
-  border-color: rgba(127, 207, 255, 0.54) !important;
-  background:
-    linear-gradient(145deg, rgba(70, 105, 132, 0.50), rgba(18, 36, 60, 0.78)),
-    rgba(24, 45, 70, 0.64) !important;
-  box-shadow:
-    0 0 0 1px rgba(127, 207, 255, 0.06),
-    0 0 24px rgba(127, 207, 255, 0.17),
-    inset 0 0 28px rgba(127, 207, 255, 0.045) !important;
-}
-
-.interface-section .interface-path span {
-  color: #b9e5ff !important;
-  border-color: rgba(127, 207, 255, 0.38) !important;
-  background:
-    radial-gradient(circle at 35% 28%, rgba(238, 248, 255, 0.28), transparent 25%),
-    radial-gradient(circle at 50% 52%, rgba(127, 207, 255, 0.20), rgba(75, 96, 120, 0.15) 58%, rgba(5, 12, 22, 0.30) 100%) !important;
-  text-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.68),
-    0 0 10px rgba(127, 207, 255, 0.54) !important;
-  box-shadow:
-    inset 0 0 15px rgba(127, 207, 255, 0.11),
-    0 0 17px rgba(127, 207, 255, 0.15) !important;
-}
-
-.interface-section .interface-path:hover span,
-.interface-section .interface-path:focus-visible span,
-.interface-section .interface-path.is-active span {
-  color: #f6fbff !important;
-  border-color: rgba(127, 207, 255, 0.68) !important;
-  background:
-    radial-gradient(circle at 35% 28%, rgba(238, 248, 255, 0.34), transparent 25%),
-    radial-gradient(circle at 50% 52%, rgba(127, 207, 255, 0.31), rgba(75, 96, 120, 0.18) 58%, rgba(5, 12, 22, 0.24) 100%) !important;
-  box-shadow:
-    inset 0 0 16px rgba(127, 207, 255, 0.18),
-    0 0 22px rgba(127, 207, 255, 0.28),
-    0 0 38px rgba(127, 207, 255, 0.12) !important;
-}
-
-.interface-section .interface-set-button {
-  border-color: rgba(146, 180, 209, 0.24) !important;
-  background: rgba(10, 22, 38, 0.48) !important;
-}
-
-.interface-section .interface-set-button.is-active,
-.interface-section .interface-set-button:hover,
-.interface-section .interface-set-button:focus-visible {
-  border-color: rgba(127, 207, 255, 0.58) !important;
-  background: rgba(127, 207, 255, 0.10) !important;
-  box-shadow: 0 0 18px rgba(127, 207, 255, 0.20) !important;
-}
-
-.interface-section .interface-set-button span,
-.interface-section .interface-set-button.is-active span {
-  background: #7fcfff !important;
-  box-shadow:
-    0 0 15px rgba(127, 207, 255, 0.76),
-    0 0 34px rgba(127, 207, 255, 0.24) !important;
-}
-
-.interface-section .interface-output-card,
-.interface-section .interface-output-card-soft,
-.interface-section .interface-response,
+.interface-section .interface-video-frame,
 .interface-section .interface-showcase-frame,
-.interface-section .interface-video-frame {
-  border-color: rgba(127, 207, 255, 0.24) !important;
+.interface-section .case-study-visual {
+  border-color: rgba(255, 255, 255, 0.18) !important;
   background:
-    linear-gradient(145deg, rgba(60, 81, 103, 0.34), rgba(12, 26, 45, 0.72)),
-    rgba(10, 22, 38, 0.62) !important;
+    linear-gradient(145deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.008)),
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.060), transparent 38%),
+    #000000 !important;
   box-shadow:
-    inset 0 0 30px rgba(127, 207, 255, 0.035),
-    0 16px 42px rgba(0, 0, 0, 0.28) !important;
+    0 28px 76px rgba(0, 0, 0, 0.66),
+    0 0 28px rgba(223, 230, 240, 0.060),
+    inset 0 1px 0 rgba(255, 255, 255, 0.070),
+    inset 0 0 32px rgba(255, 255, 255, 0.016) !important;
 }
 
-.interface-section .interface-system-list li::before,
-.interface-section .interface-playback-dot {
-  background: #7fcfff !important;
-  box-shadow:
-    0 0 10px rgba(127, 207, 255, 0.96),
-    0 0 22px rgba(127, 207, 255, 0.56),
-    0 0 38px rgba(127, 207, 255, 0.25) !important;
-}
-
-.interface-section .interface-signal-pulse,
-.interface-section .interface-playback-status,
-.interface-section .interface-media-toggle {
-  border-color: rgba(127, 207, 255, 0.32) !important;
+.interface-section .interface-video-frame::before,
+.interface-section .interface-showcase-frame::before,
+.interface-section .case-study-visual::before {
   background:
-    linear-gradient(145deg, rgba(67, 89, 114, 0.38), rgba(17, 31, 51, 0.72)) !important;
-  box-shadow:
-    0 0 28px rgba(127, 207, 255, 0.12),
-    inset 0 0 24px rgba(127, 207, 255, 0.05) !important;
+    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.20), transparent),
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.040), transparent 56%) !important;
 }
 
-.interface-section .interface-jump-link {
-  border-color: rgba(127, 207, 255, 0.34) !important;
+.interface-section .interface-video-frame::after,
+.interface-section .interface-showcase-frame::after,
+.interface-section .case-study-visual::after {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.028) !important;
+}
+
+.interface-section .interface-media-toggle,
+.interface-section .interface-jump-link,
+.interface-section .interface-button,
+.interface-section .interface-submit,
+.interface-section .interface-control,
+.interface-section .interface-filter,
+.interface-section .interface-link-button {
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
   background:
-    linear-gradient(145deg, rgba(78, 103, 132, 0.46), rgba(19, 37, 61, 0.82)) !important;
-  color: #b9e5ff !important;
+    linear-gradient(155deg, rgba(255, 255, 255, 0.090), rgba(255, 255, 255, 0.018) 48%, rgba(0, 0, 0, 0.50)),
+    #050505 !important;
   box-shadow:
-    0 14px 34px rgba(0, 0, 0, 0.32),
-    0 0 26px rgba(127, 207, 255, 0.12),
-    inset 0 0 26px rgba(127, 207, 255, 0.055) !important;
+    0 16px 38px rgba(0, 0, 0, 0.44),
+    0 0 18px rgba(225, 232, 242, 0.060),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.84) !important;
 }
 
-.interface-section .interface-jump-link::before {
-  background: radial-gradient(circle, rgba(127, 207, 255, 0.22), transparent 64%) !important;
-}
-
+.interface-section .interface-media-toggle:hover,
 .interface-section .interface-jump-link:hover,
-.interface-section .interface-jump-link:focus-visible,
-.interface-section .interface-jump-link.interface-jump-link-media-control:hover,
-.interface-section .interface-jump-link.interface-jump-link-media-control:focus-visible,
-.interface-section .interface-jump-link.interface-jump-link-media-control[aria-pressed="false"]:hover,
-.interface-section .interface-jump-link.interface-jump-link-media-control[aria-pressed="false"]:focus-visible,
-.interface-section.interface-system-set-primary .interface-side-panel .interface-jump-link:hover,
-.interface-section.interface-system-set-primary .interface-side-panel .interface-jump-link:focus-visible,
-.interface-section.interface-system-set-operations .interface-side-panel .interface-jump-link:hover,
-.interface-section.interface-system-set-operations .interface-side-panel .interface-jump-link:focus-visible,
-.interface-section.interface-system-set-media .interface-side-panel .interface-jump-link:hover,
-.interface-section.interface-system-set-media .interface-side-panel .interface-jump-link:focus-visible {
-  transform: translateY(-2px) !important;
-  border-color: rgba(127, 207, 255, 0.68) !important;
+.interface-section .interface-button:hover,
+.interface-section .interface-submit:hover,
+.interface-section .interface-control:hover,
+.interface-section .interface-filter:hover,
+.interface-section .interface-link-button:hover {
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.56) !important;
   background:
-    linear-gradient(145deg, rgba(104, 136, 164, 0.54), rgba(29, 55, 84, 0.86)) !important;
-  color: #f6fbff !important;
+    linear-gradient(155deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.035) 48%, rgba(0, 0, 0, 0.56)),
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.10), transparent 62%),
+    #060606 !important;
   box-shadow:
-    0 18px 44px rgba(0, 0, 0, 0.36),
-    0 0 34px rgba(127, 207, 255, 0.24),
-    inset 0 0 28px rgba(127, 207, 255, 0.075) !important;
+    0 20px 50px rgba(0, 0, 0, 0.58),
+    0 0 34px rgba(236, 241, 247, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.20),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.82) !important;
 }
 
-.interface-section .interface-module-card,
-.interface-section .interface-video-card {
-  border-color: rgba(127, 207, 255, 0.22) !important;
+.interface-section .interface-media-toggle.is-active,
+.interface-section .interface-filter.is-active,
+.interface-section .interface-jump-link.is-active,
+.interface-section .interface-status-pill.is-active,
+.interface-section .interface-card.is-active {
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.50) !important;
   background:
-    linear-gradient(145deg, rgba(44, 69, 96, 0.42), rgba(11, 25, 43, 0.76)) !important;
+    linear-gradient(145deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.022)),
+    #000000 !important;
   box-shadow:
-    inset 0 0 24px rgba(127, 207, 255, 0.03),
-    0 12px 30px rgba(0, 0, 0, 0.24) !important;
+    0 0 26px rgba(255, 255, 255, 0.13),
+    inset 0 0 24px rgba(255, 255, 255, 0.038) !important;
 }
 
-.interface-section .interface-module-card:hover,
-.interface-section .interface-module-card:focus-visible,
-.interface-section .interface-video-card:hover,
-.interface-section .interface-video-card:focus-visible,
-.interface-section .interface-module-card.is-active,
-.interface-section .interface-video-card.is-active {
-  border-color: rgba(127, 207, 255, 0.58) !important;
-  background:
-    linear-gradient(145deg, rgba(65, 96, 124, 0.50), rgba(16, 34, 56, 0.84)) !important;
+.interface-section .interface-card::before,
+.interface-section .interface-panel::before,
+.interface-section .case-study-card::before,
+.interface-section .interface-sidebar::before,
+.interface-section .interface-status-panel::before,
+.interface-section .interface-media-panel::before,
+.interface-section .interface-showcase-panel::before {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.16), rgba(139, 148, 160, 0.10), transparent) !important;
+}
+
+.interface-section .interface-card:hover,
+.interface-section .interface-panel:hover,
+.interface-section .case-study-card:hover {
+  border-color: rgba(255, 255, 255, 0.36) !important;
   box-shadow:
-    0 0 24px rgba(127, 207, 255, 0.18),
-    inset 0 0 28px rgba(127, 207, 255, 0.055) !important;
+    0 28px 76px rgba(0, 0, 0, 0.62),
+    0 0 34px rgba(237, 242, 248, 0.11),
+    inset 0 1px 0 rgba(255, 255, 255, 0.095),
+    inset 0 0 28px rgba(255, 255, 255, 0.024) !important;
+}
+
+.interface-section .interface-metric,
+.interface-section .interface-stat,
+.interface-section .interface-chip,
+.interface-section .interface-tag,
+.interface-section .interface-badge,
+.interface-section .interface-showcase-caption,
+.interface-section .showcase-meta {
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.010)),
+    #000000 !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.060) !important;
+}
+
+.interface-section .interface-input,
+.interface-section .interface-textarea,
+.interface-section input,
+.interface-section textarea,
+.interface-section select {
+  color: rgba(248, 250, 253, 0.92) !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  background: #000000 !important;
+  box-shadow: inset 0 0 18px rgba(255, 255, 255, 0.018) !important;
+}
+
+.interface-section .interface-input:focus,
+.interface-section .interface-textarea:focus,
+.interface-section input:focus,
+.interface-section textarea:focus,
+.interface-section select:focus {
+  border-color: rgba(255, 255, 255, 0.50) !important;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.095),
+    0 0 24px rgba(236, 241, 247, 0.13),
+    inset 0 0 20px rgba(255, 255, 255, 0.026) !important;
+}
+
+.interface-section .interface-system-toggle i,
+.interface-section .interface-status-bar > .interface-system-toggle i,
+.interface-section .interface-status-bar > span:nth-child(3) i {
+  background: #f7f9fc !important;
+  box-shadow:
+    0 0 10px rgba(255, 255, 255, 0.88),
+    0 0 24px rgba(223, 230, 240, 0.38),
+    0 0 44px rgba(223, 230, 240, 0.12) !important;
+}
+
+.interface-section .interface-system-toggle i::after,
+.interface-section .interface-status-bar > .interface-system-toggle i::after,
+.interface-section .interface-status-bar > span:nth-child(3) i::after {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.22), rgba(214, 222, 232, 0.10) 38%, transparent 70%) !important;
+}
+
+body.winterface-offline .interface-section .interface-system-toggle i,
+body.winterface-offline .interface-section .interface-status-bar > .interface-system-toggle i {
+  background: #8f969f !important;
+  box-shadow:
+    0 0 8px rgba(255, 255, 255, 0.34),
+    0 0 18px rgba(145, 153, 164, 0.24) !important;
+}
+
+.interface-section .interface-alert,
+.interface-section .interface-warning,
+.interface-section .interface-error,
+.interface-section .interface-danger,
+.interface-section .interface-status-alert {
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.30) !important;
+  background: rgba(255, 255, 255, 0.060) !important;
+  text-shadow: 0 0 16px rgba(255, 255, 255, 0.22) !important;
+}
+
+.interface-section .interface-command-input::selection,
+.interface-section ::selection {
+  color: #000000 !important;
+  background: #f7f9fc !important;
+}
+
+.interface-section .interface-showcase-image,
+.interface-section .case-study-visual img,
+.interface-section img {
+  filter: saturate(0.78) contrast(1.06) brightness(0.92) !important;
+}
+
+.interface-section .interface-progress,
+.interface-section .interface-progress-bar,
+.interface-section .interface-loader,
+.interface-section .interface-scanline {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.56), rgba(255, 255, 255, 0.12)) !important;
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.16) !important;
+}
+
+@keyframes interfaceChromeNoirLiveSystemOrbPulse {
+  0%, 100% {
+    transform: scale(0.94);
+    opacity: 0.70;
+    box-shadow:
+      0 0 9px rgba(255, 255, 255, 0.58),
+      0 0 20px rgba(226, 233, 242, 0.25),
+      0 0 34px rgba(226, 233, 242, 0.08);
+  }
+
+  50% {
+    transform: scale(1.12);
+    opacity: 1;
+    box-shadow:
+      0 0 12px rgba(255, 255, 255, 0.92),
+      0 0 30px rgba(226, 233, 242, 0.42),
+      0 0 52px rgba(226, 233, 242, 0.14);
+  }
+}
+
+.interface-section .interface-system-list li::before {
+  animation-name: interfaceChromeNoirLiveSystemOrbPulse !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interface-section .interface-system-list li::before {
+    animation: none !important;
+  }
 }
