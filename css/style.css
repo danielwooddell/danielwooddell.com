@@ -8354,726 +8354,339 @@ body.winterface-offline .interface-section .interface-shell {
   }
 }
 
-
 /* =========================================================
-   WFO WInterface Theme: Noir Chrome with Colored Left Nav
-   Scope: WInterface section only
-   Source baseline: latest WFO build supplied by user
-   Notes: CSS-only theme. Preserves layout, interactions, video bays, and fixes.
+   WINTERFACE THEME: NAVY / SKY BLUE / GREY
+   Scope: WInterface only
+   Build base: WFO Latest
+   Notes: CSS-only visual theme. Layout, JavaScript, content,
+   video bays, and confirmed rail-height fixes are untouched.
 ========================================================= */
 
 .interface-section {
-  --interface-accent-rgb: 165, 215, 242 !important;
-  --interface-accent: #a5d7f2 !important;
-  --interface-accent-text: #d9eefb !important;
-  --interface-accent-soft: rgba(165, 215, 242, 0.075) !important;
-  --interface-accent-border: rgba(165, 215, 242, 0.30) !important;
-  --interface-accent-border-strong: rgba(222, 237, 248, 0.58) !important;
-  --interface-accent-glow: rgba(165, 215, 242, 0.16) !important;
-  color: #d9e0e7 !important;
+  --winterface-accent: #7fcfff;
+  --winterface-accent-rgb: 127, 207, 255;
+  --winterface-accent-text: #b9e5ff;
+  --winterface-accent-soft: rgba(127, 207, 255, 0.105);
+  --winterface-accent-mid: rgba(127, 207, 255, 0.24);
+  --winterface-accent-strong: rgba(127, 207, 255, 0.58);
+  --winterface-panel-navy: rgba(9, 24, 43, 0.82);
+  --winterface-panel-bluegrey: rgba(30, 52, 75, 0.74);
+  --winterface-panel-steel: rgba(75, 96, 120, 0.26);
+  --winterface-border-steel: rgba(146, 180, 209, 0.26);
+  --winterface-text-ice: #eef8ff;
+  --winterface-muted-ice: #c7d6e8;
   background:
-    radial-gradient(ellipse at 92% 6%, rgba(238, 242, 246, 0.22), transparent 13%),
-    radial-gradient(circle at 88% 11%, rgba(255, 255, 255, 0.13), transparent 17%),
-    radial-gradient(circle at 18% 14%, rgba(120, 184, 220, 0.10), transparent 27%),
-    radial-gradient(circle at 68% 77%, rgba(255, 255, 255, 0.045), transparent 30%),
-    linear-gradient(135deg, #050607 0%, #010102 31%, #090a0c 61%, #000000 100%) !important;
-  border-color: rgba(210, 218, 226, 0.25) !important;
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.050),
-    inset 0 0 100px rgba(0, 0, 0, 0.86),
-    0 28px 82px rgba(0, 0, 0, 0.72),
-    0 0 36px rgba(165, 215, 242, 0.055) !important;
+    radial-gradient(circle at 12% 12%, rgba(94, 171, 222, 0.18), transparent 34%),
+    radial-gradient(circle at 86% 18%, rgba(105, 126, 157, 0.18), transparent 38%),
+    radial-gradient(circle at 48% 92%, rgba(36, 75, 112, 0.22), transparent 44%),
+    linear-gradient(135deg, #06101e 0%, #0b1728 42%, #132238 100%) !important;
 }
 
 .interface-section.interface-system-set-primary,
 .interface-section.interface-system-set-operations,
 .interface-section.interface-system-set-media {
-  --interface-accent-rgb: 165, 215, 242 !important;
-  --interface-accent: #a5d7f2 !important;
-  --interface-accent-text: #d9eefb !important;
-  --interface-accent-soft: rgba(165, 215, 242, 0.075) !important;
-  --interface-accent-border: rgba(165, 215, 242, 0.30) !important;
-  --interface-accent-border-strong: rgba(222, 237, 248, 0.58) !important;
-  --interface-accent-glow: rgba(165, 215, 242, 0.16) !important;
+  --winterface-accent: #7fcfff;
+  --winterface-accent-rgb: 127, 207, 255;
+  --winterface-accent-text: #b9e5ff;
+  --winterface-accent-soft: rgba(127, 207, 255, 0.105);
+  --winterface-accent-mid: rgba(127, 207, 255, 0.24);
+  --winterface-accent-strong: rgba(127, 207, 255, 0.58);
 }
 
 .interface-section::before {
-  opacity: 0.70 !important;
-  background:
-    linear-gradient(101deg, transparent 0%, transparent 62%, rgba(255, 255, 255, 0.18) 63%, transparent 64%, transparent 100%),
-    linear-gradient(115deg, rgba(225, 232, 238, 0.070), transparent 27%, rgba(255, 255, 255, 0.042) 48%, transparent 72%),
-    linear-gradient(90deg, rgba(195, 220, 235, 0.024) 1px, transparent 1px),
-    linear-gradient(0deg, rgba(195, 220, 235, 0.018) 1px, transparent 1px) !important;
-  background-size: auto, auto, 92px 92px, 92px 92px !important;
-}
-
-.interface-section::after {
-  background:
-    radial-gradient(ellipse at 94% 4%, rgba(235, 238, 241, 0.22), transparent 18%),
-    radial-gradient(ellipse at 88% 13%, rgba(80, 92, 104, 0.38), transparent 24%),
-    radial-gradient(circle at 12% 20%, rgba(165, 215, 242, 0.055), transparent 22%),
-    radial-gradient(circle at 50% 88%, rgba(255, 255, 255, 0.030), transparent 31%) !important;
-}
-
-.interface-section .interface-shell,
-.interface-section .interface-core,
-.interface-section .interface-side-panel,
-.interface-section .interface-status-bar {
-  border-color: rgba(202, 211, 220, 0.20) !important;
-  background:
-    linear-gradient(145deg, rgba(30, 34, 39, 0.68), rgba(2, 3, 4, 0.95) 43%, rgba(0, 0, 0, 0.98)),
-    rgba(2, 3, 4, 0.88) !important;
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.032),
-    inset 0 0 44px rgba(255, 255, 255, 0.020),
-    0 18px 48px rgba(0, 0, 0, 0.58) !important;
-}
-
-.interface-section .interface-rail {
-  border-color: rgba(72, 136, 178, 0.28) !important;
-  background:
-    linear-gradient(145deg, rgba(18, 31, 42, 0.84), rgba(4, 6, 9, 0.94) 58%, rgba(0, 0, 0, 0.98)),
-    rgba(4, 7, 10, 0.88) !important;
-  box-shadow:
-    inset 0 0 0 1px rgba(165, 215, 242, 0.035),
-    inset 0 0 42px rgba(56, 189, 248, 0.035),
-    0 18px 48px rgba(0, 0, 0, 0.58) !important;
+  background: linear-gradient(90deg, transparent, rgba(127, 207, 255, 0.62), rgba(146, 180, 209, 0.36), transparent) !important;
 }
 
 .interface-section .interface-shell {
+  border-color: rgba(127, 207, 255, 0.28) !important;
   background:
-    radial-gradient(ellipse at 92% 5%, rgba(255, 255, 255, 0.17), transparent 16%),
-    linear-gradient(145deg, rgba(20, 23, 27, 0.76), rgba(0, 0, 0, 0.94) 48%, rgba(5, 6, 7, 0.92)) !important;
+    linear-gradient(145deg, rgba(185, 214, 238, 0.105), rgba(10, 22, 38, 0.72)),
+    radial-gradient(circle at 8% 12%, rgba(127, 207, 255, 0.18), transparent 36%),
+    radial-gradient(circle at 88% 22%, rgba(105, 126, 157, 0.22), transparent 42%),
+    radial-gradient(circle at 55% 108%, rgba(32, 64, 96, 0.30), transparent 46%),
+    linear-gradient(135deg, rgba(5, 14, 26, 0.94), rgba(14, 27, 46, 0.94)) !important;
+  box-shadow:
+    0 34px 110px rgba(0, 0, 0, 0.62),
+    0 0 64px rgba(127, 207, 255, 0.13),
+    inset 0 0 86px rgba(185, 214, 238, 0.045) !important;
+}
+
+.interface-section .interface-shell::before {
+  border-color: rgba(127, 207, 255, 0.26) !important;
+}
+
+.interface-section .interface-shell::after {
+  background-image:
+    linear-gradient(rgba(185, 214, 238, 0.032) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(185, 214, 238, 0.026) 1px, transparent 1px),
+    radial-gradient(circle at var(--pointer-x, 50%) var(--pointer-y, 50%), rgba(127, 207, 255, 0.16), transparent 28%) !important;
+  opacity: 0.7 !important;
+}
+
+.interface-section .interface-orbit {
+  border-color: rgba(127, 207, 255, 0.18) !important;
+  box-shadow:
+    inset 0 0 26px rgba(127, 207, 255, 0.065),
+    0 0 34px rgba(146, 180, 209, 0.095) !important;
+}
+
+.interface-section .interface-orbit-one {
+  border-top-color: rgba(127, 207, 255, 0.54) !important;
+}
+
+.interface-section .interface-orbit-two {
+  border-bottom-color: rgba(146, 180, 209, 0.36) !important;
+}
+
+.interface-section .interface-scan {
+  background: linear-gradient(180deg, transparent, rgba(127, 207, 255, 0.115), rgba(146, 180, 209, 0.075), transparent) !important;
+  opacity: 0.66 !important;
 }
 
 .interface-section .interface-status-bar {
   background:
-    linear-gradient(90deg, rgba(8, 11, 14, 0.98), rgba(0, 0, 0, 0.98) 52%, rgba(18, 22, 26, 0.94)) !important;
+    linear-gradient(135deg, rgba(3, 10, 20, 0.88), rgba(16, 31, 52, 0.82)) !important;
+  border-color: rgba(127, 207, 255, 0.23) !important;
+  color: #d5e6f7 !important;
   box-shadow:
-    inset 0 0 30px rgba(255, 255, 255, 0.026),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.024),
-    0 0 26px rgba(165, 215, 242, 0.070) !important;
+    inset 0 0 28px rgba(127, 207, 255, 0.035),
+    0 16px 44px rgba(0, 0, 0, 0.34) !important;
 }
 
-.interface-section .interface-status-pill,
-.interface-section .interface-status-bar > span {
-  border-color: rgba(193, 214, 228, 0.22) !important;
-  background:
-    linear-gradient(145deg, rgba(42, 49, 56, 0.54), rgba(4, 5, 7, 0.90) 62%, rgba(0, 0, 0, 0.96)) !important;
-  color: #e8edf1 !important;
-  text-shadow: 0 0 10px rgba(220, 232, 240, 0.20) !important;
-}
-
-.interface-section .interface-status-pill i,
 .interface-section .interface-status-bar i,
-.interface-section .interface-set-button span,
-.interface-section .interface-system-list li::before,
-.interface-section .interface-playback-dot,
-.interface-section .interface-cursor {
-  background: #d9eefb !important;
+.interface-section .interface-status-bar > span:nth-child(1) i,
+.interface-section .interface-status-bar > span:nth-child(2) i,
+.interface-section .interface-status-bar > span:nth-child(3) i {
+  background: #7fcfff !important;
   box-shadow:
-    0 0 10px rgba(217, 238, 251, 0.92),
-    0 0 24px rgba(165, 215, 242, 0.34),
-    0 0 44px rgba(255, 255, 255, 0.16) !important;
+    0 0 12px rgba(127, 207, 255, 0.88),
+    0 0 28px rgba(127, 207, 255, 0.34) !important;
 }
 
-.interface-section .interface-set-button {
-  border-color: rgba(180, 205, 222, 0.24) !important;
-  background: linear-gradient(145deg, rgba(35, 41, 48, 0.60), rgba(3, 4, 6, 0.88)) !important;
+.interface-section .interface-rail,
+.interface-section .interface-core,
+.interface-section .interface-side-panel {
+  border-color: rgba(127, 207, 255, 0.24) !important;
+  background:
+    radial-gradient(circle at 12% 10%, rgba(127, 207, 255, 0.105), transparent 38%),
+    linear-gradient(145deg, rgba(33, 55, 78, 0.60), rgba(7, 17, 31, 0.76)) !important;
+  box-shadow:
+    inset 0 0 36px rgba(127, 207, 255, 0.035),
+    0 18px 54px rgba(0, 0, 0, 0.34) !important;
 }
 
-.interface-section .interface-set-button.is-active {
-  border-color: rgba(218, 236, 248, 0.46) !important;
-  box-shadow: 0 0 16px rgba(165, 215, 242, 0.18) !important;
-}
-
+.interface-section .interface-rail-label,
 .interface-section .interface-output-label,
 .interface-section .interface-response .panel-label,
 .interface-section .interface-core .panel-label,
 .interface-section .interface-core [data-interface-kicker],
 .interface-section .interface-core .interface-command-prefix,
 .interface-section .interface-core .interface-showcase-caption span,
-.interface-section .interface-side-panel [data-interface-output-label],
-.interface-section .interface-module-card small,
-.interface-section .interface-video-card small,
-.interface-section .interface-signal-pulse span,
-.interface-section .interface-media-toggle span {
-  color: #e8f4fb !important;
+.interface-section .interface-side-panel [data-interface-output-label] {
+  color: #73ccff !important;
   text-shadow:
-    0 0 9px rgba(216, 235, 248, 0.45),
-    0 0 22px rgba(165, 215, 242, 0.15) !important;
-}
-
-.interface-section .interface-rail-label {
-  color: var(--rail-accent-text, #7dd3fc) !important;
-  text-shadow:
-    0 0 9px rgba(var(--rail-accent-rgb, 56, 189, 248), 0.45),
-    0 0 22px rgba(var(--rail-accent-rgb, 56, 189, 248), 0.15) !important;
+    0 0 10px rgba(127, 207, 255, 0.62),
+    0 0 22px rgba(127, 207, 255, 0.20) !important;
 }
 
 .interface-section .interface-rail-subtitle,
 .interface-section .interface-copy,
 .interface-section .interface-system-list,
 .interface-section .interface-output-card,
-.interface-section .interface-output-card-soft,
-.interface-section .interface-response,
-.interface-section .interface-showcase-caption,
-.interface-section .interface-playback-status {
-  color: #c4ccd3 !important;
-}
-
-.interface-section .interface-title,
-.interface-section .interface-command-text,
-.interface-section .interface-path strong,
-.interface-section .interface-output-card strong,
-.interface-section .interface-jump-link,
-.interface-section .interface-module-card strong,
-.interface-section .interface-video-card strong {
-  color: #ffffff !important;
-  text-shadow:
-    0 0 12px rgba(255, 255, 255, 0.18),
-    0 1px 2px rgba(0, 0, 0, 0.92) !important;
+.interface-section .interface-output-card-soft {
+  color: #c7d6e8 !important;
 }
 
 .interface-section .interface-command-line {
-  border-color: rgba(190, 214, 232, 0.31) !important;
+  border-color: rgba(127, 207, 255, 0.34) !important;
   background:
-    linear-gradient(90deg, rgba(39, 46, 54, 0.48), rgba(0, 0, 0, 0.96) 36%, rgba(0, 0, 0, 0.98) 70%, rgba(52, 58, 63, 0.44)) !important;
+    linear-gradient(90deg, rgba(38, 63, 91, 0.72), rgba(9, 17, 31, 0.78), rgba(44, 55, 72, 0.62)) !important;
   box-shadow:
-    inset 0 0 36px rgba(255, 255, 255, 0.032),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.032),
-    0 0 32px rgba(165, 215, 242, 0.105) !important;
+    inset 0 0 30px rgba(127, 207, 255, 0.055),
+    0 0 28px rgba(127, 207, 255, 0.15) !important;
 }
 
-.interface-section .interface-command-prefix {
-  color: #d8efff !important;
-}
-
-.interface-section .interface-command-text {
-  background: #030303 !important;
-  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.72) !important;
-}
-
-.interface-section .interface-module-card,
-.interface-section .interface-video-card,
-.interface-section .interface-output-card,
-.interface-section .interface-output-card-soft,
-.interface-section .interface-response,
-.interface-section .interface-showcase-frame,
-.interface-section .interface-video-frame {
-  border-color: rgba(165, 215, 242, 0.18) !important;
-  background:
-    linear-gradient(145deg, rgba(30, 38, 45, 0.60), rgba(4, 5, 7, 0.92) 52%, rgba(0, 0, 0, 0.97)),
-    rgba(3, 4, 5, 0.84) !important;
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.026),
-    inset 0 0 30px rgba(255, 255, 255, 0.018),
-    0 15px 38px rgba(0, 0, 0, 0.50) !important;
-}
-
-.interface-section .interface-output-card,
-.interface-section .interface-output-card-soft {
-  background:
-    linear-gradient(145deg, rgba(47, 55, 63, 0.54), rgba(5, 6, 8, 0.92) 55%, rgba(0, 0, 0, 0.98)),
-    rgba(3, 4, 5, 0.88) !important;
-}
-
-.interface-section .interface-module-card:hover,
-.interface-section .interface-module-card:focus-visible,
-.interface-section .interface-module-card.is-active,
-.interface-section .interface-video-card:hover,
-.interface-section .interface-video-card:focus-visible,
-.interface-section .interface-video-card.is-active {
-  border-color: rgba(220, 238, 250, 0.46) !important;
-  background:
-    linear-gradient(145deg, rgba(46, 57, 66, 0.68), rgba(6, 7, 9, 0.94) 56%, rgba(0, 0, 0, 0.98)),
-    rgba(5, 6, 8, 0.90) !important;
-  box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.040),
-    0 0 25px rgba(165, 215, 242, 0.17),
-    inset 0 0 32px rgba(255, 255, 255, 0.027) !important;
-}
-
-.interface-section .interface-module-orb,
-.interface-section .interface-video-orb,
-.interface-section .interface-orb-core,
-.interface-section .interface-hero-orb {
-  color: #ffffff !important;
-  border-color: rgba(198, 224, 240, 0.34) !important;
-  background:
-    radial-gradient(circle at 31% 24%, rgba(255, 255, 255, 0.55), transparent 22%),
-    radial-gradient(circle at 52% 56%, rgba(128, 181, 214, 0.26), rgba(58, 67, 76, 0.22) 48%, rgba(0, 0, 0, 0.70) 100%) !important;
-  box-shadow:
-    inset 0 0 16px rgba(255, 255, 255, 0.095),
-    0 0 17px rgba(180, 220, 244, 0.20),
-    0 0 36px rgba(255, 255, 255, 0.075) !important;
-  text-shadow: 0 0 10px rgba(230, 245, 255, 0.60) !important;
-}
-
-.interface-section .interface-module-orb::after,
-.interface-section .interface-video-orb::after,
-.interface-section .interface-hero-orb::after {
-  background:
-    radial-gradient(circle, rgba(218, 236, 248, 0.85), rgba(96, 152, 190, 0.28) 44%, transparent 70%) !important;
-}
-
-.interface-section .interface-signal-pulse,
-.interface-section .interface-media-toggle {
-  border-color: rgba(67, 203, 208, 0.24) !important;
-  background:
-    linear-gradient(145deg, rgba(36, 76, 74, 0.44), rgba(9, 20, 22, 0.88) 52%, rgba(0, 0, 0, 0.94)) !important;
-  box-shadow:
-    inset 0 0 30px rgba(67, 203, 208, 0.050),
-    0 0 22px rgba(67, 203, 208, 0.090) !important;
-}
-
-.interface-section .interface-signal-pulse b,
-.interface-section .interface-media-toggle b,
-.interface-section .interface-media-toggle button,
-.interface-section .interface-video-control-button {
-  border-color: rgba(220, 238, 250, 0.30) !important;
-  background:
-    linear-gradient(145deg, rgba(74, 87, 99, 0.50), rgba(10, 11, 13, 0.88)) !important;
-  color: #f0f7fb !important;
-  text-shadow: 0 0 9px rgba(218, 236, 248, 0.34) !important;
-}
-
-.interface-section .interface-signal-pulse b:nth-of-type(2),
-.interface-section .interface-media-toggle button:nth-of-type(2) {
-  border-color: rgba(67, 203, 208, 0.42) !important;
-  background:
-    linear-gradient(145deg, rgba(30, 91, 98, 0.52), rgba(2, 13, 15, 0.94)) !important;
-}
-
-.interface-section .interface-signal-pulse b:nth-of-type(3),
-.interface-section .interface-media-toggle button:nth-of-type(3) {
-  border-color: rgba(214, 116, 122, 0.40) !important;
-  background:
-    linear-gradient(145deg, rgba(92, 47, 55, 0.50), rgba(14, 5, 7, 0.92)) !important;
-}
-
-.interface-section .interface-signal-pulse strong,
-.interface-section .interface-media-toggle strong,
-.interface-section .interface-video-control-status {
-  background:
-    linear-gradient(90deg, rgba(12, 17, 22, 0.92), rgba(0, 0, 0, 0.96), rgba(12, 17, 22, 0.92)) !important;
-  color: #dbe9f2 !important;
-  border-color: rgba(198, 224, 240, 0.14) !important;
-}
-
+.interface-section .interface-command-text,
+.interface-section .interface-title,
+.interface-section .interface-path strong,
+.interface-section .interface-output-card strong,
 .interface-section .interface-jump-link {
-  border-color: rgba(92, 146, 206, 0.36) !important;
-  background:
-    linear-gradient(145deg, rgba(56, 89, 130, 0.70), rgba(24, 26, 48, 0.92) 55%, rgba(0, 0, 0, 0.97)) !important;
+  color: #eef8ff !important;
+}
+
+.interface-section .interface-cursor {
+  background: #7fcfff !important;
   box-shadow:
-    inset 0 0 26px rgba(255, 255, 255, 0.030),
-    0 0 22px rgba(92, 146, 206, 0.14) !important;
-}
-
-.interface-section .interface-jump-link:hover,
-.interface-section .interface-jump-link:focus-visible {
-  border-color: rgba(224, 240, 250, 0.52) !important;
-  background:
-    linear-gradient(145deg, rgba(68, 82, 95, 0.70), rgba(10, 11, 13, 0.94)) !important;
-  box-shadow:
-    0 0 24px rgba(165, 215, 242, 0.20),
-    inset 0 0 28px rgba(255, 255, 255, 0.040) !important;
-}
-
-.interface-section .interface-progress-bar,
-.interface-section .interface-video-progress {
-  background: rgba(0, 0, 0, 0.72) !important;
-  border-color: rgba(178, 210, 232, 0.18) !important;
-}
-
-.interface-section .interface-progress-fill,
-.interface-section .interface-video-progress-fill {
-  background:
-    linear-gradient(90deg, rgba(210, 226, 238, 0.82), rgba(165, 215, 242, 0.94), rgba(255, 255, 255, 0.82)) !important;
-  box-shadow: 0 0 14px rgba(180, 224, 250, 0.28) !important;
-}
-
-.interface-section .interface-showcase-frame img,
-.interface-section .interface-video-frame iframe {
-  filter: saturate(0.78) contrast(1.08) brightness(0.92) !important;
-}
-
-.interface-section .interface-showcase-frame,
-.interface-section .interface-video-frame {
-  background:
-    radial-gradient(circle at 50% 50%, rgba(160, 190, 212, 0.08), rgba(0, 0, 0, 0.94) 64%) !important;
-}
-
-.interface-section .interface-video-placeholder,
-.interface-section .interface-showcase-placeholder {
-  color: #d8e7f0 !important;
-  background:
-    radial-gradient(circle at 50% 44%, rgba(180, 218, 242, 0.10), transparent 32%),
-    linear-gradient(145deg, rgba(18, 22, 26, 0.88), rgba(0, 0, 0, 0.95)) !important;
-}
-
-.interface-section .interface-response::before,
-.interface-section .interface-output-card::before,
-.interface-section .interface-output-card-soft::before,
-.interface-section .interface-core::before,
-.interface-section .interface-rail::before,
-.interface-section .interface-side-panel::before {
-  border-color: rgba(255, 255, 255, 0.040) !important;
-}
-
-.interface-section .interface-module-card::after,
-.interface-section .interface-video-card::after,
-.interface-section .interface-output-card::after,
-.interface-section .interface-output-card-soft::after,
-.interface-section .interface-response::after,
-.interface-section .interface-jump-link::after {
-  background:
-    linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.080), transparent) !important;
-  opacity: 0.32 !important;
-}
-
-.interface-section .interface-core-card,
-.interface-section .interface-media-card,
-.interface-section .interface-info-card {
-  border-color: rgba(165, 215, 242, 0.16) !important;
-  background:
-    linear-gradient(145deg, rgba(23, 28, 33, 0.68), rgba(1, 1, 2, 0.92)) !important;
-}
-
-.interface-section .interface-response[data-response-tone="cyan"],
-.interface-section .interface-module-card[data-module-tone="cyan"],
-.interface-section .interface-video-card[data-video-tone="cyan"] {
-  border-color: rgba(56, 189, 248, 0.30) !important;
-}
-
-.interface-section .interface-response[data-response-tone="purple"],
-.interface-section .interface-module-card[data-module-tone="purple"],
-.interface-section .interface-video-card[data-video-tone="purple"] {
-  border-color: rgba(139, 92, 246, 0.32) !important;
-}
-
-.interface-section .interface-response[data-response-tone="pink"],
-.interface-section .interface-module-card[data-module-tone="pink"],
-.interface-section .interface-video-card[data-video-tone="pink"] {
-  border-color: rgba(236, 72, 153, 0.30) !important;
-}
-
-.interface-section .interface-response[data-response-tone="cyan"] .interface-orb-core,
-.interface-section .interface-module-card[data-module-tone="cyan"] .interface-module-orb,
-.interface-section .interface-video-card[data-video-tone="cyan"] .interface-video-orb {
-  box-shadow:
-    inset 0 0 16px rgba(255, 255, 255, 0.10),
-    0 0 18px rgba(56, 189, 248, 0.28),
-    0 0 36px rgba(56, 189, 248, 0.12) !important;
-}
-
-.interface-section .interface-response[data-response-tone="purple"] .interface-orb-core,
-.interface-section .interface-module-card[data-module-tone="purple"] .interface-module-orb,
-.interface-section .interface-video-card[data-video-tone="purple"] .interface-video-orb {
-  box-shadow:
-    inset 0 0 16px rgba(255, 255, 255, 0.09),
-    0 0 18px rgba(139, 92, 246, 0.26),
-    0 0 36px rgba(139, 92, 246, 0.12) !important;
-}
-
-.interface-section .interface-response[data-response-tone="pink"] .interface-orb-core,
-.interface-section .interface-module-card[data-module-tone="pink"] .interface-module-orb,
-.interface-section .interface-video-card[data-video-tone="pink"] .interface-video-orb {
-  box-shadow:
-    inset 0 0 16px rgba(255, 255, 255, 0.09),
-    0 0 18px rgba(236, 72, 153, 0.26),
-    0 0 36px rgba(236, 72, 153, 0.12) !important;
-}
-
-.interface-section .interface-path:focus-visible,
-.interface-section .interface-module-card:focus-visible,
-.interface-section .interface-video-card:focus-visible,
-.interface-section .interface-jump-link:focus-visible,
-.interface-section .interface-set-button:focus-visible,
-.interface-section .interface-media-toggle button:focus-visible,
-.interface-section .interface-video-control-button:focus-visible {
-  outline: 2px solid rgba(222, 238, 248, 0.72) !important;
-  outline-offset: 3px !important;
-}
-
-.interface-section .interface-screen-glow,
-.interface-section .interface-media-glow,
-.interface-section .interface-showcase-glow {
-  background:
-    radial-gradient(circle, rgba(165, 215, 242, 0.12), transparent 62%) !important;
-}
-
-/* ---------------------------------------------------------
-   Colored left navigation preservation
-   Keeps the left rail pathway/module/video cards in their
-   original bay-driven cyan / purple / pink family while the
-   rest of WInterface uses the noir chrome treatment.
---------------------------------------------------------- */
-
-.interface-section.interface-system-set-primary {
-  --rail-accent-rgb: 56, 189, 248;
-  --rail-accent-text: #7dd3fc;
-  --rail-accent-border: rgba(56, 189, 248, 0.48);
-  --rail-accent-border-strong: rgba(56, 189, 248, 0.62);
-  --rail-accent-soft: rgba(56, 189, 248, 0.115);
-  --rail-accent-glow: rgba(56, 189, 248, 0.22);
-}
-
-.interface-section.interface-system-set-operations {
-  --rail-accent-rgb: 139, 92, 246;
-  --rail-accent-text: #b79cff;
-  --rail-accent-border: rgba(139, 92, 246, 0.52);
-  --rail-accent-border-strong: rgba(167, 139, 250, 0.68);
-  --rail-accent-soft: rgba(139, 92, 246, 0.12);
-  --rail-accent-glow: rgba(139, 92, 246, 0.24);
-}
-
-.interface-section.interface-system-set-media {
-  --rail-accent-rgb: 236, 72, 153;
-  --rail-accent-text: #ff8ac6;
-  --rail-accent-border: rgba(236, 72, 153, 0.52);
-  --rail-accent-border-strong: rgba(255, 138, 198, 0.68);
-  --rail-accent-soft: rgba(236, 72, 153, 0.12);
-  --rail-accent-glow: rgba(236, 72, 153, 0.24);
+    0 0 12px rgba(127, 207, 255, 0.96),
+    0 0 28px rgba(127, 207, 255, 0.48),
+    0 0 46px rgba(127, 207, 255, 0.24) !important;
 }
 
 .interface-section .interface-path {
-  border-color: rgba(var(--rail-accent-rgb, 56, 189, 248), 0.22) !important;
+  border-color: rgba(127, 207, 255, 0.22) !important;
   background:
-    linear-gradient(145deg, rgba(var(--rail-accent-rgb, 56, 189, 248), 0.070), rgba(20, 27, 36, 0.76) 52%, rgba(4, 6, 9, 0.92)),
-    rgba(255, 255, 255, 0.026) !important;
+    linear-gradient(145deg, rgba(50, 78, 105, 0.46), rgba(13, 27, 46, 0.68)),
+    rgba(14, 27, 46, 0.54) !important;
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.020),
-    inset 0 0 24px rgba(var(--rail-accent-rgb, 56, 189, 248), 0.026),
-    0 12px 30px rgba(0, 0, 0, 0.44) !important;
+    inset 0 0 24px rgba(127, 207, 255, 0.025),
+    0 10px 26px rgba(0, 0, 0, 0.24) !important;
 }
 
 .interface-section .interface-path:hover,
 .interface-section .interface-path:focus-visible,
 .interface-section .interface-path.is-active {
-  border-color: var(--rail-accent-border, rgba(56, 189, 248, 0.48)) !important;
+  color: #eef8ff !important;
+  border-color: rgba(127, 207, 255, 0.54) !important;
   background:
-    linear-gradient(145deg, rgba(var(--rail-accent-rgb, 56, 189, 248), 0.16), rgba(26, 34, 45, 0.78) 48%, rgba(5, 8, 13, 0.94)),
-    rgba(var(--rail-accent-rgb, 56, 189, 248), 0.055) !important;
+    linear-gradient(145deg, rgba(70, 105, 132, 0.50), rgba(18, 36, 60, 0.78)),
+    rgba(24, 45, 70, 0.64) !important;
   box-shadow:
-    0 0 0 1px rgba(var(--rail-accent-rgb, 56, 189, 248), 0.055),
-    0 0 24px var(--rail-accent-glow, rgba(56, 189, 248, 0.22)),
-    inset 0 0 25px rgba(var(--rail-accent-rgb, 56, 189, 248), 0.040) !important;
+    0 0 0 1px rgba(127, 207, 255, 0.06),
+    0 0 24px rgba(127, 207, 255, 0.17),
+    inset 0 0 28px rgba(127, 207, 255, 0.045) !important;
 }
 
 .interface-section .interface-path span {
-  color: var(--rail-accent-text, #7dd3fc) !important;
-  border-color: rgba(var(--rail-accent-rgb, 56, 189, 248), 0.34) !important;
+  color: #b9e5ff !important;
+  border-color: rgba(127, 207, 255, 0.38) !important;
   background:
-    radial-gradient(circle at 36% 28%, rgba(248, 250, 252, 0.24), transparent 25%),
-    radial-gradient(circle at 50% 52%, rgba(var(--rail-accent-rgb, 56, 189, 248), 0.18), rgba(var(--rail-accent-rgb, 56, 189, 248), 0.065) 58%, rgba(5, 8, 22, 0.20) 100%) !important;
+    radial-gradient(circle at 35% 28%, rgba(238, 248, 255, 0.28), transparent 25%),
+    radial-gradient(circle at 50% 52%, rgba(127, 207, 255, 0.20), rgba(75, 96, 120, 0.15) 58%, rgba(5, 12, 22, 0.30) 100%) !important;
   text-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.62),
-    0 0 9px rgba(var(--rail-accent-rgb, 56, 189, 248), 0.52) !important;
+    0 1px 2px rgba(0, 0, 0, 0.68),
+    0 0 10px rgba(127, 207, 255, 0.54) !important;
   box-shadow:
-    inset 0 0 12px rgba(var(--rail-accent-rgb, 56, 189, 248), 0.10),
-    0 0 14px rgba(var(--rail-accent-rgb, 56, 189, 248), 0.13) !important;
-}
-
-.interface-section .interface-path span::before {
-  border-color: rgba(var(--rail-accent-rgb, 56, 189, 248), 0.22) !important;
-  opacity: 0.48 !important;
-}
-
-.interface-section .interface-path span::after {
-  border-color: rgba(248, 250, 252, 0.13) !important;
+    inset 0 0 15px rgba(127, 207, 255, 0.11),
+    0 0 17px rgba(127, 207, 255, 0.15) !important;
 }
 
 .interface-section .interface-path:hover span,
 .interface-section .interface-path:focus-visible span,
 .interface-section .interface-path.is-active span {
-  color: #f8fafc !important;
-  border-color: var(--rail-accent-border-strong, rgba(56, 189, 248, 0.62)) !important;
+  color: #f6fbff !important;
+  border-color: rgba(127, 207, 255, 0.68) !important;
   background:
-    radial-gradient(circle at 36% 28%, rgba(248, 250, 252, 0.30), transparent 25%),
-    radial-gradient(circle at 50% 52%, rgba(var(--rail-accent-rgb, 56, 189, 248), 0.28), rgba(var(--rail-accent-rgb, 56, 189, 248), 0.11) 58%, rgba(5, 8, 22, 0.16) 100%) !important;
-  text-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.72),
-    0 0 10px rgba(var(--rail-accent-rgb, 56, 189, 248), 0.66) !important;
+    radial-gradient(circle at 35% 28%, rgba(238, 248, 255, 0.34), transparent 25%),
+    radial-gradient(circle at 50% 52%, rgba(127, 207, 255, 0.31), rgba(75, 96, 120, 0.18) 58%, rgba(5, 12, 22, 0.24) 100%) !important;
   box-shadow:
-    inset 0 0 15px rgba(var(--rail-accent-rgb, 56, 189, 248), 0.17),
-    0 0 18px rgba(var(--rail-accent-rgb, 56, 189, 248), 0.25),
-    0 0 34px rgba(var(--rail-accent-rgb, 56, 189, 248), 0.13) !important;
+    inset 0 0 16px rgba(127, 207, 255, 0.18),
+    0 0 22px rgba(127, 207, 255, 0.28),
+    0 0 38px rgba(127, 207, 255, 0.12) !important;
 }
 
-.interface-section .interface-path:hover span::before,
-.interface-section .interface-path:focus-visible span::before,
-.interface-section .interface-path.is-active span::before {
-  border-color: rgba(var(--rail-accent-rgb, 56, 189, 248), 0.40) !important;
-  opacity: 0.55 !important;
-  box-shadow: 0 0 16px rgba(var(--rail-accent-rgb, 56, 189, 248), 0.16) !important;
+.interface-section .interface-set-button {
+  border-color: rgba(146, 180, 209, 0.24) !important;
+  background: rgba(10, 22, 38, 0.48) !important;
 }
 
-
-/* =========================================================
-   WFO WInterface Theme: Noir Steel Natural Corner Effects
-   Scope: WInterface shell only
-   Purpose: recreate the screenshot's natural steel/moon arcs in
-   the top-right and bottom-left of the WInterface fullscreen view,
-   while preserving the colored left navigation treatment.
-========================================================= */
-
-.interface-section {
-  background:
-    radial-gradient(ellipse at 94% 7%, rgba(228, 234, 238, 0.12), transparent 20%),
-    radial-gradient(ellipse at 4% 96%, rgba(185, 197, 206, 0.080), transparent 22%),
-    linear-gradient(135deg, #060708 0%, #010101 34%, #080909 66%, #000000 100%) !important;
+.interface-section .interface-set-button.is-active,
+.interface-section .interface-set-button:hover,
+.interface-section .interface-set-button:focus-visible {
+  border-color: rgba(127, 207, 255, 0.58) !important;
+  background: rgba(127, 207, 255, 0.10) !important;
+  box-shadow: 0 0 18px rgba(127, 207, 255, 0.20) !important;
 }
 
-.interface-section .interface-shell {
-  position: relative !important;
-  overflow: hidden !important;
-  isolation: isolate !important;
-  background:
-    radial-gradient(ellipse at 93% 4%, rgba(214, 220, 225, 0.16), rgba(115, 123, 130, 0.080) 18%, transparent 35%),
-    radial-gradient(ellipse at 2% 98%, rgba(205, 214, 221, 0.105), rgba(82, 92, 102, 0.055) 18%, transparent 35%),
-    linear-gradient(145deg, rgba(22, 25, 29, 0.82), rgba(3, 4, 5, 0.96) 46%, rgba(0, 0, 0, 0.98) 100%) !important;
-  border-color: rgba(210, 218, 226, 0.28) !important;
+.interface-section .interface-set-button span,
+.interface-section .interface-set-button.is-active span {
+  background: #7fcfff !important;
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.058),
-    inset 0 0 88px rgba(0, 0, 0, 0.78),
-    inset -38px 20px 90px rgba(219, 226, 232, 0.035),
-    inset 32px -20px 76px rgba(206, 216, 225, 0.028),
-    0 32px 100px rgba(0, 0, 0, 0.70),
-    0 0 34px rgba(165, 215, 242, 0.055) !important;
+    0 0 15px rgba(127, 207, 255, 0.76),
+    0 0 34px rgba(127, 207, 255, 0.24) !important;
 }
 
-.interface-section .interface-shell::before {
-  z-index: 1 !important;
-  border-color: rgba(220, 228, 235, 0.18) !important;
+.interface-section .interface-output-card,
+.interface-section .interface-output-card-soft,
+.interface-section .interface-response,
+.interface-section .interface-showcase-frame,
+.interface-section .interface-video-frame {
+  border-color: rgba(127, 207, 255, 0.24) !important;
+  background:
+    linear-gradient(145deg, rgba(60, 81, 103, 0.34), rgba(12, 26, 45, 0.72)),
+    rgba(10, 22, 38, 0.62) !important;
   box-shadow:
-    inset 0 0 28px rgba(255, 255, 255, 0.026),
-    inset 0 0 92px rgba(0, 0, 0, 0.58) !important;
+    inset 0 0 30px rgba(127, 207, 255, 0.035),
+    0 16px 42px rgba(0, 0, 0, 0.28) !important;
 }
 
-.interface-section .interface-shell::after {
-  z-index: 1 !important;
-  opacity: 0.78 !important;
-  mix-blend-mode: screen !important;
-  background-image:
-    linear-gradient(101deg, transparent 0%, transparent 77.8%, rgba(240, 244, 247, 0.13) 78.15%, rgba(116, 126, 136, 0.08) 78.55%, transparent 79.05%, transparent 100%),
-    linear-gradient(96deg, transparent 0%, transparent 11.1%, rgba(210, 220, 228, 0.075) 11.35%, transparent 11.80%, transparent 100%),
-    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.014) 1px, transparent 1px),
-    radial-gradient(circle at var(--pointer-x, 50%) var(--pointer-y, 50%), rgba(165, 215, 242, 0.060), transparent 28%) !important;
-  background-size: auto, auto, 44px 44px, 44px 44px, auto !important;
-  mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.98), rgba(0,0,0,0.90) 72%, transparent 98%) !important;
-}
-
-.interface-section .interface-ambient {
-  z-index: 1 !important;
-  opacity: 1 !important;
-  overflow: hidden !important;
-  mix-blend-mode: screen !important;
-}
-
-.interface-section .interface-orbit {
-  opacity: 1 !important;
-  border-style: solid !important;
-  pointer-events: none !important;
-}
-
-.interface-section .interface-orbit-one {
-  width: 640px !important;
-  height: 640px !important;
-  right: -235px !important;
-  top: -320px !important;
-  border-color: rgba(210, 218, 226, 0.13) !important;
-  border-top-color: rgba(248, 250, 252, 0.38) !important;
-  border-left-color: rgba(232, 238, 242, 0.20) !important;
-  border-right-color: rgba(110, 120, 130, 0.15) !important;
-  background:
-    radial-gradient(circle at 39% 36%, rgba(255, 255, 255, 0.16), transparent 13%),
-    radial-gradient(circle at 47% 50%, rgba(216, 223, 229, 0.12), rgba(86, 94, 102, 0.090) 42%, rgba(10, 12, 14, 0.010) 68%, transparent 73%) !important;
+.interface-section .interface-system-list li::before,
+.interface-section .interface-playback-dot {
+  background: #7fcfff !important;
   box-shadow:
-    inset 0 0 46px rgba(255, 255, 255, 0.050),
-    inset 0 0 136px rgba(0, 0, 0, 0.46),
-    0 0 58px rgba(222, 230, 236, 0.11),
-    0 0 130px rgba(255, 255, 255, 0.040) !important;
-  filter: blur(0.1px) !important;
+    0 0 10px rgba(127, 207, 255, 0.96),
+    0 0 22px rgba(127, 207, 255, 0.56),
+    0 0 38px rgba(127, 207, 255, 0.25) !important;
 }
 
-.interface-section .interface-orbit-one::before {
-  content: "";
-  position: absolute;
-  inset: 15%;
-  border-radius: inherit;
-  border: 1px solid rgba(238, 244, 248, 0.10);
-  border-top-color: rgba(255, 255, 255, 0.26);
-  border-left-color: rgba(255, 255, 255, 0.12);
+.interface-section .interface-signal-pulse,
+.interface-section .interface-playback-status,
+.interface-section .interface-media-toggle {
+  border-color: rgba(127, 207, 255, 0.32) !important;
+  background:
+    linear-gradient(145deg, rgba(67, 89, 114, 0.38), rgba(17, 31, 51, 0.72)) !important;
   box-shadow:
-    inset 0 0 36px rgba(255, 255, 255, 0.026),
-    0 0 38px rgba(255, 255, 255, 0.035);
+    0 0 28px rgba(127, 207, 255, 0.12),
+    inset 0 0 24px rgba(127, 207, 255, 0.05) !important;
 }
 
-.interface-section .interface-orbit-one::after {
-  content: "";
-  position: absolute;
-  inset: 30%;
-  border-radius: inherit;
-  border: 1px solid rgba(238, 244, 248, 0.060);
-  border-top-color: rgba(255, 255, 255, 0.15);
-}
-
-.interface-section .interface-orbit-two {
-  width: 420px !important;
-  height: 420px !important;
-  left: -230px !important;
-  bottom: -255px !important;
-  border-color: rgba(202, 212, 220, 0.12) !important;
-  border-bottom-color: rgba(248, 250, 252, 0.30) !important;
-  border-right-color: rgba(218, 228, 236, 0.16) !important;
+.interface-section .interface-jump-link {
+  border-color: rgba(127, 207, 255, 0.34) !important;
   background:
-    radial-gradient(circle at 61% 43%, rgba(255, 255, 255, 0.105), transparent 17%),
-    radial-gradient(circle at 50% 52%, rgba(202, 212, 220, 0.095), rgba(72, 82, 92, 0.060) 44%, transparent 70%) !important;
+    linear-gradient(145deg, rgba(78, 103, 132, 0.46), rgba(19, 37, 61, 0.82)) !important;
+  color: #b9e5ff !important;
   box-shadow:
-    inset 0 0 34px rgba(255, 255, 255, 0.040),
-    inset 0 0 94px rgba(0, 0, 0, 0.54),
-    0 0 48px rgba(222, 230, 236, 0.085) !important;
-  filter: blur(0.08px) !important;
+    0 14px 34px rgba(0, 0, 0, 0.32),
+    0 0 26px rgba(127, 207, 255, 0.12),
+    inset 0 0 26px rgba(127, 207, 255, 0.055) !important;
 }
 
-.interface-section .interface-orbit-two::before {
-  content: "";
-  position: absolute;
-  inset: 15%;
-  border-radius: inherit;
-  border: 1px solid rgba(238, 244, 248, 0.075);
-  border-bottom-color: rgba(255, 255, 255, 0.18);
-  border-right-color: rgba(255, 255, 255, 0.10);
+.interface-section .interface-jump-link::before {
+  background: radial-gradient(circle, rgba(127, 207, 255, 0.22), transparent 64%) !important;
 }
 
-.interface-section .interface-scan {
-  z-index: 1 !important;
-  opacity: 0.28 !important;
+.interface-section .interface-jump-link:hover,
+.interface-section .interface-jump-link:focus-visible,
+.interface-section .interface-jump-link.interface-jump-link-media-control:hover,
+.interface-section .interface-jump-link.interface-jump-link-media-control:focus-visible,
+.interface-section .interface-jump-link.interface-jump-link-media-control[aria-pressed="false"]:hover,
+.interface-section .interface-jump-link.interface-jump-link-media-control[aria-pressed="false"]:focus-visible,
+.interface-section.interface-system-set-primary .interface-side-panel .interface-jump-link:hover,
+.interface-section.interface-system-set-primary .interface-side-panel .interface-jump-link:focus-visible,
+.interface-section.interface-system-set-operations .interface-side-panel .interface-jump-link:hover,
+.interface-section.interface-system-set-operations .interface-side-panel .interface-jump-link:focus-visible,
+.interface-section.interface-system-set-media .interface-side-panel .interface-jump-link:hover,
+.interface-section.interface-system-set-media .interface-side-panel .interface-jump-link:focus-visible {
+  transform: translateY(-2px) !important;
+  border-color: rgba(127, 207, 255, 0.68) !important;
   background:
-    linear-gradient(180deg, transparent, rgba(226, 234, 240, 0.050), rgba(80, 90, 100, 0.034), transparent) !important;
-  filter: blur(2.5px) !important;
+    linear-gradient(145deg, rgba(104, 136, 164, 0.54), rgba(29, 55, 84, 0.86)) !important;
+  color: #f6fbff !important;
+  box-shadow:
+    0 18px 44px rgba(0, 0, 0, 0.36),
+    0 0 34px rgba(127, 207, 255, 0.24),
+    inset 0 0 28px rgba(127, 207, 255, 0.075) !important;
 }
 
-.interface-section .interface-status-bar,
-.interface-section .interface-grid,
-.interface-section .interface-rail,
-.interface-section .interface-core,
-.interface-section .interface-side-panel {
-  position: relative !important;
-  z-index: 2 !important;
-}
-
-.interface-section .interface-core {
+.interface-section .interface-module-card,
+.interface-section .interface-video-card {
+  border-color: rgba(127, 207, 255, 0.22) !important;
   background:
-    radial-gradient(ellipse at 94% 5%, rgba(238, 244, 248, 0.060), transparent 21%),
-    linear-gradient(145deg, rgba(18, 21, 25, 0.72), rgba(1, 1, 2, 0.97) 45%, rgba(0, 0, 0, 0.99)) !important;
+    linear-gradient(145deg, rgba(44, 69, 96, 0.42), rgba(11, 25, 43, 0.76)) !important;
+  box-shadow:
+    inset 0 0 24px rgba(127, 207, 255, 0.03),
+    0 12px 30px rgba(0, 0, 0, 0.24) !important;
 }
 
-.interface-section .interface-side-panel,
-.interface-section .interface-status-bar {
+.interface-section .interface-module-card:hover,
+.interface-section .interface-module-card:focus-visible,
+.interface-section .interface-video-card:hover,
+.interface-section .interface-video-card:focus-visible,
+.interface-section .interface-module-card.is-active,
+.interface-section .interface-video-card.is-active {
+  border-color: rgba(127, 207, 255, 0.58) !important;
   background:
-    radial-gradient(ellipse at 96% 0%, rgba(238, 244, 248, 0.080), transparent 24%),
-    linear-gradient(145deg, rgba(35, 41, 47, 0.58), rgba(5, 6, 8, 0.94) 52%, rgba(0, 0, 0, 0.98)) !important;
+    linear-gradient(145deg, rgba(65, 96, 124, 0.50), rgba(16, 34, 56, 0.84)) !important;
+  box-shadow:
+    0 0 24px rgba(127, 207, 255, 0.18),
+    inset 0 0 28px rgba(127, 207, 255, 0.055) !important;
 }
