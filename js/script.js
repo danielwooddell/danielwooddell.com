@@ -657,14 +657,22 @@
     playAudio(interfaceLaunchSound, { volume: interfaceLaunchVolume });
   }
 
-  function playJarvisEasterEggSound() {
-    if (!soundEnabled || !startupPlayed) return;
-    playAudio(jarvisEasterEggSound, { volume: easterEggVolume });
-  }
+  function playInterfaceMediaSoundCue(wasMuted, isMutedNow, currentInterfaceKey) {
+    const mediaSoundWasTurnedOn = Boolean(wasMuted) && !isMutedNow;
 
-  function playGlitchEasterEggSound() {
-    if (!soundEnabled || !startupPlayed) return;
-    playAudio(glitchEasterEggSound, { volume: easterEggVolume });
+    if (mediaSoundWasTurnedOn && currentInterfaceKey === 'workflowReplay') {
+      playAudio(jarvisEasterEggSound, { volume: easterEggVolume });
+      return;
+    }
+
+    if (mediaSoundWasTurnedOn && currentInterfaceKey === 'caseStudyPlayer') {
+      playAudio(glitchEasterEggSound, { volume: easterEggVolume });
+      return;
+    }
+
+    if (typeof playInterfaceOrbSound === 'function') {
+      playInterfaceOrbSound();
+    }
   }
 
   function playSignalPulseSound(index) {
@@ -984,7 +992,7 @@
         copy: 'I build resource hubs, training materials, documentation, and AI support layers that help people find accurate guidance without waiting for one-to-one help every time.',
         systems: ['Resource hubs', 'Documentation systems', '24/7 support layers'],
         primary: 'Good support architecture multiplies capacity. 🔋',
-        linkText: 'Launch Support Systems',
+        linkText: 'Launch Support System',
         linkUrl: 'https://www.xavier.edu/teachingwithtech'
       },
       workflow: {
@@ -1022,10 +1030,10 @@
         command: 'launch_faculty_basics',
         aliases: ['canvas', 'canvas basics', 'lms basics', 'faculty canvas', 'canvas course', 'training course'],
         kicker: 'Faculty Training System',
-        title: 'Basics for Faculty',
+        title: 'LMS Basics for Faculty in Higher Education',
         copy: 'A structured faculty training course that supports practical LMS use, common workflows, and scalable LMS guidance for instructors who need clear next steps.',
         systems: ['Faculty LMS training', 'LMS workflow support', 'Reusable course guidance'],
-        primary: 'Effective LMS support gives educators confidence before complexity appears.',
+        primary: 'Effective LMS support gives educators confidence.',
         linkText: 'Launch LMS Basics',
         linkUrl: 'https://canvas.xavier.edu/courses/23190'
       },
@@ -1036,10 +1044,10 @@
         command: 'open_ally_accessibility_systems',
         aliases: ['ally', 'anthology ally', 'accessibility strategies', 'canvas accessibility', 'accessible canvas', 'accessible content'],
         kicker: 'Accessibility Support Layer',
-        title: 'Accessibility Built-in',
+        title: 'Accessibility Built-in to the Design',
         copy: 'Accessibility support becomes stronger when it is connected to LMS workflows, document improvement, readable design, captions, alternative text, & guidance.',
         systems: ['Ally-informed workflows', 'Accessible LMS practices', 'Improvement pathways'],
-        primary: 'Accessibility works best as a visible workflow, not a hidden compliance task. Systems go.',
+        primary: 'Accessibility works best as a visible workflow, not a hidden compliance task.',
         linkText: 'Launch Ally Intel',
         linkUrl: 'https://www.xavier.edu/teachingwithtech/a-z/tools/ally'
       },
@@ -1050,10 +1058,10 @@
         command: 'open_technology_hub',
         aliases: ['teaching with technology', 'technology hub', 'edtech hub', 'tool hub', 'teaching tools'],
         kicker: 'Digital Resource Ecosystem',
-        title: 'Teaching with Tech',
+        title: 'Teaching with Technology Educator Resource Hub',
         copy: 'A public-facing ecosystem for helping educators discover EdTech, generative AI guidance, accessibility support, and practical digital teaching resources.',
         systems: ['Tool discovery', 'Educator resource pathways', 'Public-facing support UX'],
-        primary: 'A strong resource hub reduces support friction before questions become tickets.',
+        primary: 'A strong resource hub reduces support friction before questions=tickets.',
         linkText: 'Launch ✖️ Tech',
         linkUrl: 'https://www.xavier.edu/teachingwithtech'
       },
@@ -1064,10 +1072,10 @@
         command: 'activate_edtech_assistant',
         aliases: ['eta', 'edtech assistant', 'custom gpt', 'assistant', 'ai assistant', 'support bot'],
         kicker: 'AI Support Assistant',
-        title: '24/7 EdTech Assistant',
+        title: '24/7 Educational Technology Assistant',
         copy: 'ETA extends the support ecosystem through conversational guidance for the LMS, EdTech tools, accessibility workflows, and Teaching with Tech resources.',
         systems: ['Custom GPT support', '24/7 guidance layer', 'Ed-tech workflow routing'],
-        primary: 'Artificial assistants are strongest when they sit inside a real support architecture.',
+        primary: 'Assistants are strongest when they sit inside a real support architecture.',
         linkText: 'Launch ETA',
         linkUrl: 'https://chatgpt.com/g/g-69ffe6dfccf48191b6afb459d0c78cce-edtech-assistant-eta'
       },
@@ -1078,10 +1086,10 @@
         command: 'route_prompting_systems',
         aliases: ['prompting', 'prompts', 'prompt', 'prompt design', 'ai prompts', 'genai prompts'],
         kicker: 'Prompting Architecture',
-        title: 'Prompting Workflow',
+        title: 'Prompting Systems and Workflows',
         copy: 'Prompting works best when users understand context, role, output format, constraints, examples, and review habits rather than relying on one-off prompt tricks.',
         systems: ['Prompt structure', 'Educator productivity', 'AI output review'],
-        primary: 'Good prompting is structured thinking made visible. An iterative process for my CPU.',
+        primary: 'Good prompting is structured thinking made visible. Iterative process.',
         linkText: 'Launch Prompting',
         linkUrl: 'https://www.xavier.edu/teachingwithtech/genai/prompting'
       },
@@ -1092,10 +1100,10 @@
         command: 'map_course_design_systems',
         aliases: ['course systems', 'course design', 'ai course design', 'ai in design', 'design systems'],
         kicker: 'Course Design Infrastructure',
-        title: 'AI-Supported Design',
+        title: 'AI-Supported Course Design Activities',
         copy: 'Course design support becomes more useful when AI is positioned as a planning partner for outcomes, activities, materials, feedback, and educator judgment.',
         systems: ['Outcome alignment', 'Activity planning', 'Educator judgment'],
-        primary: 'AI should support better design decisions, not replace educator expertise.',
+        primary: 'AI should support better design decisions, not replace expertise.',
         linkText: 'Launch AI Design',
         linkUrl: 'https://www.xavier.edu/teachingwithtech/ai-in-design'
       },
@@ -1109,7 +1117,7 @@
         title: 'Teaching with Technology Preview',
         copy: 'The Showcase Bay now displays actual project visuals from the live portfolio package rather than placeholder future modules.',
         systems: ['Live screenshot preview', 'Educator support UX', 'Resource ecosystem design'],
-        primary: 'Visual evidence makes the portfolio feel more concrete and easier to scan.',
+        primary: 'Visual evidence makes the portfolio feel more concrete.',
         linkText: 'Launch Image 🚀',
         linkUrl: 'assets/showcase/TwT.png',
         mediaType: 'image',
@@ -1129,7 +1137,7 @@
         title: 'Generative AI Hub Preview',
         copy: 'A visual module for the public-facing AI teaching support hub with prompting, tool comparisons, quick wins, and mission-aligned guidance.',
         systems: ['Generative AI support', 'Prompting guidance', 'Mission-aware design'],
-        primary: 'AI support becomes more credible when educators can see the system’s structure.',
+        primary: 'AI support becomes more credible when educators can see the structure.',
         linkText: 'Launch Image 🚀',
         linkUrl: 'assets/showcase/GenAIhub.png',
         mediaType: 'image',
@@ -1149,7 +1157,7 @@
         title: 'AI for Effective Course Design Preview',
         copy: 'A graduate instructional design project framed around helping faculty use AI as a planning partner while preserving educator judgment.',
         systems: ['Course design workflow', 'AI-supported planning', 'Learning design strategy'],
-        primary: 'This module moves the media bay from reserved concept to working project console.',
+        primary: 'This module moves from reserved concept to working project console.',
         linkText: 'Launch Image 🚀',
         linkUrl: 'assets/showcase/AI4CD.png',
         mediaType: 'image',
@@ -1169,7 +1177,7 @@
         title: 'EdTech Assistant Preview',
         copy: 'ETA functions as a conversational support layer for Canvas, supported educational technologies, accessibility workflows, and Teaching with Technology resources.',
         systems: ['Custom GPT workflow', 'Support architecture', 'Always-available guidance'],
-        primary: 'The assistant works because it is connected to a real support ecosystem.',
+        primary: 'The assistant works because it is connected to a real ecosystem.',
         linkText: 'Launch Image 🚀',
         linkUrl: 'assets/showcase/ETA.png',
         mediaType: 'image',
@@ -1189,7 +1197,7 @@
         title: 'Creator System Preview',
         copy: 'A visual identity module for the WInterface experience, giving the Showcase Bay a fifth live media target.',
         systems: ['Character interface asset', 'Visual system cue', 'Portfolio atmosphere'],
-        primary: 'Real progress happens when innovation meets usability, accessibility, and purpose.',
+        primary: 'Progress happens when innovation meets usability and purpose.',
         linkText: 'Launch Image 🚀',
         linkUrl: 'assets/showcase/Woodrow.png',
         mediaType: 'image',
@@ -1209,7 +1217,7 @@
         title: 'AI Course Design Walkthrough Player',
         copy: 'The Intel Player keeps the embedded walkthrough available as a focused playback layer inside the WInterface command system.',
         systems: ['Embedded walkthrough', 'Project playback', 'Focused explanation'],
-        primary: 'The video layer should remain available without replacing the faster image-based modules.',
+        primary: 'The video should remain available along with the image-based modules.',
         linkText: 'Play Intel',
         linkUrl: '#winterface',
         mediaType: 'video',
@@ -1979,7 +1987,7 @@
 
           if (muteAction && typeof muteAction.catch === 'function') {
             muteAction.catch(() => {
-              // Providers may reject mute calls before the player is ready or after iframe route changes.
+              // Providers may reject mute calls before the player is ready or after iframe state changes.
             });
           }
         } catch (error) {
@@ -1993,24 +2001,6 @@
       applyInterfaceMediaMuteState();
     }
 
-    function playInterfaceMediaMuteFeedback(wasMuted) {
-      const mediaSoundWasTurnedOn = wasMuted === true && interfaceMediaMuted === false;
-
-      if (mediaSoundWasTurnedOn && activeInterfaceKey === 'workflowReplay') {
-        playJarvisEasterEggSound();
-        return;
-      }
-
-      if (mediaSoundWasTurnedOn && activeInterfaceKey === 'caseStudyPlayer') {
-        playGlitchEasterEggSound();
-        return;
-      }
-
-      if (typeof playInterfaceOrbSound === 'function') {
-        playInterfaceOrbSound();
-      }
-    }
-
     function pauseInterfaceMedia() {
       if (interfaceMediaController && typeof interfaceMediaController.pause === 'function') {
         try {
@@ -2018,7 +2008,7 @@
 
           if (pauseAction && typeof pauseAction.catch === 'function') {
             pauseAction.catch(() => {
-              // Providers may reject pause calls before the player is ready or after iframe route changes.
+              // Providers may reject pause calls before the player is ready or after iframe state changes.
             });
           }
         } catch (error) {
@@ -2159,7 +2149,7 @@
         if (primary) primary.textContent = 'A good system should fail clearly, then help the user recover.';
         updateSystemsList({ systems: ['Try: AI systems', 'Try: Accessibility', 'Try: Media preview'] });
         updateInterfacePulse(null);
-        updateInterfaceLink({ linkText: 'Launch Projects', linkUrl: '#projects' });
+        updateInterfaceLink({ linkText: 'Launch Projects', linkUrl: '#winterface' });
         if (response) response.classList.remove('is-switching');
       }, prefersReducedMotion.matches ? 0 : 140);
     }
@@ -2205,7 +2195,7 @@
       mediaMute.addEventListener('click', () => {
         const wasMuted = interfaceMediaMuted;
         toggleInterfaceMediaMute();
-        playInterfaceMediaMuteFeedback(wasMuted);
+        playInterfaceMediaSoundCue(wasMuted, interfaceMediaMuted, activeInterfaceKey);
       });
     }
 
