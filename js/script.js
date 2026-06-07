@@ -878,7 +878,7 @@
       }
 
       if (interfaceSystemStatusText) {
-        interfaceSystemStatusText.textContent = winterfaceOnline ? 'WInterface™ v3.5 Online' : 'WInterface™ v3.5 Muted';
+        interfaceSystemStatusText.textContent = winterfaceOnline ? 'WInterface™ v3.7 Online' : 'WInterface™ v3.7 Muted';
       }
 
       if (!winterfaceOnline) {
