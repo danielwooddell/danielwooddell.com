@@ -2055,7 +2055,7 @@
 
     if (mediaToggle) {
         mediaToggle.setAttribute('aria-pressed', String(Boolean(expanded)));
-        mediaToggle.textContent = expanded ? 'Collapse WInterface☠️' : 'Expand WInterface🦇';
+        mediaToggle.textContent = expanded ? 'Collapse WInterface ☠️' : 'Expand WInterface 🦇';
       }
     }
 
