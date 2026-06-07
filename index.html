@@ -41,7 +41,7 @@
 <!-- =========================
        CSS
   ========================== -->
-<link href="css/style.css" rel="stylesheet" />
+<link href="css/style.css" id="winterface-theme-stylesheet" rel="stylesheet" />
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -814,6 +814,15 @@
         <span data-interface-mode-label>Primary pathways active</span>
         <i class="interface-status-orb interface-status-orb-mirror" aria-hidden="true"></i>
       </span>
+      <div class="interface-theme-selector" data-interface-theme-selector>
+        <button class="interface-theme-toggle" data-interface-theme-toggle type="button" aria-controls="interface-theme-menu" aria-expanded="false">Style Matrix</button>
+        <div class="interface-theme-menu" data-interface-theme-menu hidden id="interface-theme-menu" role="menu" aria-label="WInterface visual systems">
+          <button class="interface-theme-option is-active" data-interface-theme-option="default" data-interface-theme-index="01" role="menuitemradio" aria-checked="true" type="button">Default</button>
+          <button class="interface-theme-option" data-interface-theme-option="navy-sky-grey" data-interface-theme-index="02" role="menuitemradio" aria-checked="false" type="button">Navy Sky Grey</button>
+          <button class="interface-theme-option" data-interface-theme-option="green-gold" data-interface-theme-index="03" role="menuitemradio" aria-checked="false" type="button">Green Gold</button>
+          <button class="interface-theme-option" data-interface-theme-option="dark-purple" data-interface-theme-index="04" role="menuitemradio" aria-checked="false" type="button">Dark Purple</button>
+        </div>
+      </div>
       <span class="interface-status-item interface-status-count">
         <span data-interface-count-label>6 pathways connected</span>
         <button

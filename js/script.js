@@ -2293,6 +2293,89 @@
       startInterfaceAutoplay();
     });
 
+
+    const themeStylesheet = document.getElementById('winterface-theme-stylesheet');
+    const themeSelector = interfaceSystem.querySelector('[data-interface-theme-selector]');
+    const themeToggle = interfaceSystem.querySelector('[data-interface-theme-toggle]');
+    const themeMenu = interfaceSystem.querySelector('[data-interface-theme-menu]');
+    const themeOptions = Array.from(interfaceSystem.querySelectorAll('[data-interface-theme-option]'));
+    const themeStorageKey = 'winterface.visualSystem';
+    const themeFiles = {
+      default: '',
+      'navy-sky-grey': 'navy-sky-grey.css',
+      'green-gold': 'green-gold.css',
+      'dark-purple': 'dark-purple.css'
+    };
+
+    function getThemeBaseHref() {
+      if (!themeStylesheet) return 'css/';
+      const href = themeStylesheet.getAttribute('href') || '';
+      return href.startsWith('../') ? '../css/' : 'css/';
+    }
+
+    function setThemeMenuOpen(isOpen) {
+      if (!themeSelector || !themeToggle || !themeMenu) return;
+      themeSelector.classList.toggle('is-open', isOpen);
+      themeToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      themeMenu.hidden = !isOpen;
+    }
+
+    function applyWinterfaceTheme(themeKey, options = {}) {
+      if (!themeStylesheet || !themeFiles.hasOwnProperty(themeKey)) return;
+      const baseHref = getThemeBaseHref();
+      const nextHref = themeKey === 'default' ? `${baseHref}${baseHref.startsWith('../') ? 'style-dev.css' : 'style.css'}` : `${baseHref}themes/${themeFiles[themeKey]}`;
+      if (themeStylesheet.getAttribute('href') !== nextHref) {
+        themeStylesheet.setAttribute('href', nextHref);
+      }
+      document.documentElement.setAttribute('data-winterface-theme', themeKey);
+      themeOptions.forEach(option => {
+        const isActive = option.dataset.interfaceThemeOption === themeKey;
+        option.classList.toggle('is-active', isActive);
+        option.setAttribute('aria-checked', isActive ? 'true' : 'false');
+      });
+      if (!options.skipStorage) {
+        try {
+          window.localStorage.setItem(themeStorageKey, themeKey);
+        } catch (error) {
+          // localStorage may be unavailable in some embedded contexts.
+        }
+      }
+    }
+
+    if (themeToggle && themeMenu && themeOptions.length) {
+      themeToggle.addEventListener('click', event => {
+        event.preventDefault();
+        setThemeMenuOpen(themeMenu.hidden);
+      });
+
+      themeOptions.forEach(option => {
+        option.addEventListener('click', event => {
+          event.preventDefault();
+          applyWinterfaceTheme(option.dataset.interfaceThemeOption || 'default');
+          setThemeMenuOpen(false);
+          themeToggle.focus({ preventScroll: true });
+        });
+      });
+
+      document.addEventListener('click', event => {
+        if (!themeSelector || themeSelector.contains(event.target)) return;
+        setThemeMenuOpen(false);
+      });
+
+      document.addEventListener('keydown', event => {
+        if (event.key !== 'Escape') return;
+        setThemeMenuOpen(false);
+      });
+
+      let savedTheme = 'default';
+      try {
+        savedTheme = window.localStorage.getItem(themeStorageKey) || 'default';
+      } catch (error) {
+        savedTheme = 'default';
+      }
+      applyWinterfaceTheme(themeFiles.hasOwnProperty(savedTheme) ? savedTheme : 'default', { skipStorage: true });
+    }
+
     renderInterfacePaths('primary');
     setInterfacePath('ai', { updateSet: false });
     startInterfaceAutoplay();
