@@ -1420,6 +1420,7 @@
     let interfacePaused = false;
     let interfaceMediaPlaying = false;
     let interfaceMediaMuted = false;
+    let interfaceMediaAutoplay = false;
     const routeTokens = [
       {
         token: '3a9cead089fd87a9f599b65b29568c3900362c4dd5f588536f35d2ca342ec9b4',
@@ -1688,10 +1689,10 @@
 
       if (playbackStatus) {
         playbackStatus.classList.toggle('interface-playback-is-playing', interfaceMediaPlaying);
-        playbackStatus.setAttribute('aria-label', interfaceMediaPlaying ? 'Live playback status: video playing' : 'Live playback status: video paused or idle');
       }
 
       updateInterfacePlaybackControl();
+      updateInterfacePlaybackStatusLabel();
     }
 
 
@@ -1706,6 +1707,73 @@
 
       if (mediaMuteText) {
         mediaMuteText.textContent = labelText;
+      }
+    }
+
+    function getInterfacePlaybackVisibleLabel() {
+      const activeData = interfaceData[activeInterfaceKey];
+      const isVideo = activeData && activeData.mediaType === 'video';
+      const baseLabel = isVideo ? 'Live Playback' : 'Showcase Active';
+      const autoLabel = interfaceMediaAutoplay ? 'Auto-Play On' : 'Auto-Play Off';
+      return isVideo ? `${baseLabel} · ${autoLabel}` : baseLabel;
+    }
+
+    function updateInterfacePlaybackStatusLabel() {
+      const activeData = interfaceData[activeInterfaceKey];
+      const isVideo = activeData && activeData.mediaType === 'video';
+      const visibleLabel = getInterfacePlaybackVisibleLabel();
+
+      if (mediaStatusText) mediaStatusText.textContent = visibleLabel;
+      if (!playbackStatus) return;
+
+      playbackStatus.classList.toggle('is-autoplay-linked', Boolean(isVideo));
+      playbackStatus.setAttribute('aria-label', isVideo ? `${visibleLabel}. Click to toggle auto-play.` : visibleLabel);
+      playbackStatus.setAttribute('title', visibleLabel);
+
+      if (isVideo) {
+        playbackStatus.setAttribute('role', 'button');
+        playbackStatus.setAttribute('tabindex', '0');
+        playbackStatus.setAttribute('aria-pressed', String(interfaceMediaAutoplay));
+      } else {
+        playbackStatus.removeAttribute('role');
+        playbackStatus.removeAttribute('tabindex');
+        playbackStatus.removeAttribute('aria-pressed');
+      }
+    }
+
+    function setInterfaceMediaAutoplay(enabled) {
+      interfaceMediaAutoplay = Boolean(enabled);
+      updateInterfacePlaybackStatusLabel();
+    }
+
+    function toggleInterfaceMediaAutoplay() {
+      setInterfaceMediaAutoplay(!interfaceMediaAutoplay);
+      if (typeof playInteractionSound === 'function') {
+        playInteractionSound();
+      }
+    }
+
+    function playInterfaceMediaWhenReady(attempt = 0, expectedKey = activeInterfaceKey) {
+      if (!interfaceMediaAutoplay) return;
+      if (expectedKey !== activeInterfaceKey) return;
+      if (!interfaceData[activeInterfaceKey] || interfaceData[activeInterfaceKey].mediaType !== 'video') return;
+
+      initializeInterfaceMediaController();
+
+      if (interfaceMediaController && typeof interfaceMediaController.play === 'function') {
+        try {
+          const playAction = interfaceMediaController.play();
+          if (playAction && typeof playAction.catch === 'function') {
+            playAction.catch(() => setInterfacePlaybackState(false));
+          }
+        } catch (error) {
+          setInterfacePlaybackState(false);
+        }
+        return;
+      }
+
+      if (attempt < 8) {
+        window.setTimeout(() => playInterfaceMediaWhenReady(attempt + 1, expectedKey), 180);
       }
     }
 
@@ -1847,6 +1915,34 @@
       return Boolean(normalizedSource);
     }
 
+    function advanceInterfaceAfterMediaEnded(token) {
+      if (token !== interfaceMediaControllerToken) return;
+      if (!interfaceData[activeInterfaceKey] || interfaceData[activeInterfaceKey].mediaType !== 'video') return;
+
+      setInterfacePlaybackState(false);
+
+      window.setTimeout(() => {
+        if (token !== interfaceMediaControllerToken) return;
+        if (!interfaceData[activeInterfaceKey] || interfaceData[activeInterfaceKey].mediaType !== 'video') return;
+
+        if (typeof navigateInterfaceCard === 'function') {
+          navigateInterfaceCard(1);
+        } else {
+          const set = interfaceSets[activeInterfaceSet] || interfaceSets.primary;
+          if (set && Array.isArray(set.keys) && set.keys.length) {
+            const currentIndex = Math.max(0, set.keys.indexOf(activeInterfaceKey));
+            const nextKey = set.keys[(currentIndex + 1) % set.keys.length];
+            if (nextKey) setInterfacePath(nextKey, { updateSet: false });
+          }
+        }
+
+        if (interfaceMediaAutoplay) {
+          const expectedKey = activeInterfaceKey;
+          window.setTimeout(() => playInterfaceMediaWhenReady(0, expectedKey), 420);
+        }
+      }, 250);
+    }
+
     function initializeVimeoMediaController(source, token) {
       if (!window.Vimeo || typeof window.Vimeo.Player !== 'function') {
         setInterfacePlaybackState(false);
@@ -1875,7 +1971,7 @@
         }).catch(() => {});
         player.on('play', () => setInterfacePlaybackState(true));
         player.on('pause', () => setInterfacePlaybackState(false));
-        player.on('ended', () => setInterfacePlaybackState(false));
+        player.on('ended', () => advanceInterfaceAfterMediaEnded(token));
       } catch (error) {
         interfaceMediaController = null;
         interfaceMediaControllerSource = '';
@@ -1901,7 +1997,12 @@
                   return;
                 }
 
-                if (event.data === window.YT.PlayerState.PAUSED || event.data === window.YT.PlayerState.ENDED || event.data === window.YT.PlayerState.CUED) {
+                if (event.data === window.YT.PlayerState.ENDED) {
+                  advanceInterfaceAfterMediaEnded(token);
+                  return;
+                }
+
+                if (event.data === window.YT.PlayerState.PAUSED || event.data === window.YT.PlayerState.CUED) {
                   setInterfacePlaybackState(false);
                 }
               }
@@ -2051,6 +2152,7 @@
 
     function setInterfaceMediaExpanded(expanded) {
       interfaceSystem.classList.toggle('interface-system-media-expanded', Boolean(expanded));
+      updateInterfacePlaybackStatusLabel();
 
 
     if (mediaToggle) {
@@ -2067,7 +2169,7 @@
         showcaseFrame.dataset.showcaseKey = activeInterfaceKey;
       }
       if (videoFrameWrap) videoFrameWrap.hidden = !isVideo;
-      if (mediaStatusText) mediaStatusText.textContent = isVideo ? 'Live Playback' : 'Showcase Active';
+      updateInterfacePlaybackStatusLabel();
 
       if (!isVideo && showcaseImage) {
         if (showcaseFrame && !prefersReducedMotion.matches) showcaseFrame.classList.add('is-switching');
@@ -2199,6 +2301,21 @@
       });
     }
 
+    if (playbackStatus) {
+      updateInterfacePlaybackStatusLabel();
+      playbackStatus.addEventListener('click', () => {
+        if (!interfaceData[activeInterfaceKey] || interfaceData[activeInterfaceKey].mediaType !== 'video') return;
+        toggleInterfaceMediaAutoplay();
+      });
+
+      playbackStatus.addEventListener('keydown', event => {
+        if (!interfaceData[activeInterfaceKey] || interfaceData[activeInterfaceKey].mediaType !== 'video') return;
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        toggleInterfaceMediaAutoplay();
+      });
+    }
+
     if (mediaToggle) {
       mediaToggle.addEventListener('click', () => {
         const isExpanded = interfaceSystem.classList.contains('interface-system-media-expanded');
@@ -2323,7 +2440,9 @@
     function applyWinterfaceTheme(themeKey, options = {}) {
       if (!themeStylesheet || !themeFiles.hasOwnProperty(themeKey)) return;
       const baseHref = getThemeBaseHref();
-      const nextHref = themeKey === 'default' ? `${baseHref}${baseHref.startsWith('../') ? 'style-dev.css' : 'style.css'}` : `${baseHref}themes/${themeFiles[themeKey]}`;
+      const themeCacheVersion = '3.7-media-player-hotfix.1';
+      const nextHrefBase = themeKey === 'default' ? `${baseHref}${baseHref.startsWith('../') ? 'style-dev.css' : 'style.css'}` : `${baseHref}themes/${themeFiles[themeKey]}`;
+      const nextHref = `${nextHrefBase}?v=${themeCacheVersion}`;
       if (themeStylesheet.getAttribute('href') !== nextHref) {
         themeStylesheet.setAttribute('href', nextHref);
       }

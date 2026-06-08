@@ -9275,3 +9275,131 @@ html[data-winterface-theme="dark-purple"] {
     inset 0 0 18px rgba(var(--style-matrix-orb-left-rgb), 0.040) !important;
 }
 
+/* =========================
+   WInterface v3.7 MEDIA PLAYER FEATURE PATCH
+   Adds theme-safe integrated Live Playback / Auto-Play styling without adding a separate control row.
+========================= */
+.interface-section.interface-system-is-media .interface-media-actions {
+  min-width: 0 !important;
+}
+
+.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked,
+.interface-section.interface-system-is-media .interface-media-actions .interface-media-toggle {
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  font-family: "Space Grotesk", sans-serif !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+  text-transform: uppercase !important;
+}
+
+.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked {
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  gap: clamp(0.36rem, 0.55vw, 0.52rem) !important;
+  padding-inline: clamp(0.62rem, 0.95vw, 0.95rem) !important;
+}
+
+.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked span[data-interface-media-status-text] {
+  display: block !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: clip !important;
+  font-family: "Space Grotesk", sans-serif !important;
+  font-size: clamp(0.62rem, 0.78vw, 0.72rem) !important;
+  font-weight: 800 !important;
+  letter-spacing: clamp(0.055em, 0.18vw, 0.10em) !important;
+  line-height: 1 !important;
+  text-align: center !important;
+}
+
+.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked .interface-playback-dot {
+  flex: 0 0 auto !important;
+  width: 0.50rem !important;
+  height: 0.50rem !important;
+}
+
+.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked[aria-pressed="true"] .interface-playback-dot {
+  background: #4ade80 !important;
+  box-shadow: 0 0 16px rgba(74, 222, 128, 0.82), 0 0 30px rgba(34, 197, 94, 0.34) !important;
+}
+
+.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked[aria-pressed="false"] .interface-playback-dot {
+  background: #fb7185 !important;
+  box-shadow: 0 0 14px rgba(251, 113, 133, 0.78), 0 0 24px rgba(244, 63, 94, 0.30) !important;
+}
+
+.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked:hover,
+.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked:focus-visible {
+  outline: none;
+  border-color: rgba(52, 211, 153, 0.62) !important;
+  box-shadow: 0 0 0 1px rgba(52, 211, 153, 0.16), 0 18px 42px rgba(0, 0, 0, 0.24), 0 0 30px rgba(52, 211, 153, 0.18), inset 0 0 0 1px rgba(255,255,255,0.06) !important;
+}
+
+.interface-section.interface-system-is-media .interface-media-actions .interface-media-toggle,
+.interface-media-actions .interface-media-toggle,
+.interface-media-toggle {
+  font-family: "Space Grotesk", sans-serif !important;
+  font-size: clamp(0.66rem, 0.72vw, 0.76rem) !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.095em !important;
+  line-height: 1 !important;
+  text-transform: uppercase !important;
+  color: var(--muted, rgba(226, 232, 240, 0.78)) !important;
+  text-shadow: none !important;
+}
+
+.interface-section.interface-system-is-media .interface-media-actions .interface-media-toggle span,
+.interface-media-actions .interface-media-toggle span,
+.interface-media-toggle span {
+  font-family: inherit !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  letter-spacing: inherit !important;
+  line-height: inherit !important;
+  color: inherit !important;
+  text-shadow: inherit !important;
+}
+
+@media (min-width: 900px) {
+  .interface-section.interface-system-is-media .interface-media-actions {
+    grid-template-columns: minmax(0, 1.04fr) auto minmax(0, 1.04fr) !important;
+  }
+
+  .interface-section.is-winterface-maximized.interface-system-is-media.interface-system-media-expanded .interface-media-actions {
+    transform: translateY(-14px) !important;
+  }
+
+  .interface-section.is-winterface-maximized.interface-system-is-media.interface-system-media-expanded .interface-media-actions .interface-playback-status.is-autoplay-linked span[data-interface-media-status-text] {
+    font-size: clamp(0.64rem, 0.76vw, 0.74rem) !important;
+    letter-spacing: clamp(0.055em, 0.16vw, 0.10em) !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked span[data-interface-media-status-text] {
+    font-size: clamp(0.66rem, 0.72vw, 0.76rem) !important;
+    letter-spacing: 0.095em !important;
+  }
+}
+
+@media (max-width: 1100px) and (min-width: 900px) {
+  .interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked span[data-interface-media-status-text],
+  .interface-section.interface-system-is-media .interface-media-actions .interface-media-toggle,
+  .interface-media-actions .interface-media-toggle,
+  .interface-media-toggle {
+    font-size: clamp(0.58rem, 0.88vw, 0.68rem) !important;
+    letter-spacing: 0.045em !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked span[data-interface-media-status-text] {
+    font-size: clamp(0.62rem, 2.65vw, 0.76rem) !important;
+    letter-spacing: 0.07em !important;
+  }
+}
