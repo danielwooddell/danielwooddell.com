@@ -837,6 +837,11 @@
       document.documentElement.classList.toggle('winterface-maximized', winterfaceMaximized);
       interfaceSystem.classList.toggle('is-winterface-maximized', winterfaceMaximized);
       updateWinterfaceMaximizeControl();
+      if (typeof scheduleInterfaceMP4FrameFit === 'function') {
+        scheduleInterfaceMP4FrameFit();
+        window.setTimeout(scheduleInterfaceMP4FrameFit, 140);
+        window.setTimeout(scheduleInterfaceMP4FrameFit, 420);
+      }
     }
 
     if (interfaceMaximizeToggle) {
@@ -1451,7 +1456,7 @@
     }
 
     async function applyMediaRoute(value) {
-      if (activeInterfaceKey !== 'caseStudyPlayer' || !mediaFrame) return false;
+      if (!interfaceData[activeInterfaceKey] || interfaceData[activeInterfaceKey].mediaType !== 'video' || !mediaFrame) return false;
 
       const routeHash = await digestRouteInput(value);
       const route = routeTokens.find(item => item.token === routeHash);
@@ -1463,7 +1468,7 @@
       rebuildInterfaceMediaRoute(nextSource);
 
       if (commandInput) {
-        commandInput.value = interfaceData.caseStudyPlayer.command;
+        commandInput.value = interfaceData[activeInterfaceKey].command;
       }
 
       return true;
@@ -1476,7 +1481,7 @@
 
     function renderInterfacePaths(setKey) {
       const set = interfaceSets[setKey] || interfaceSets.primary;
-      interfaceSystem.classList.remove('interface-system-set-primary', 'interface-system-set-operations', 'interface-system-set-media');
+      interfaceSystem.classList.remove('interface-system-set-primary', 'interface-system-set-operations', 'interface-system-set-media', 'interface-system-set-youtubeEncore', 'interface-system-set-vimeoEncore', 'interface-system-set-priceEncore');
       interfaceSystem.classList.add(`interface-system-set-${setKey}`);
       if (railLabel) railLabel.textContent = set.label;
       if (railSubtitle) railSubtitle.textContent = set.subtitle;
@@ -1561,7 +1566,7 @@
     function updateInterfacePlaybackControl() {
       if (!link || !interfaceData[activeInterfaceKey] || interfaceData[activeInterfaceKey].mediaType !== 'video') return;
 
-      link.textContent = interfaceMediaPlaying ? 'Pause Intel' : 'Play Intel';
+      link.textContent = interfaceMediaPlaying ? 'Pause Video' : 'Play Video';
       link.setAttribute('href', '#winterface');
       link.setAttribute('role', 'button');
       link.setAttribute('aria-pressed', String(interfaceMediaPlaying));
@@ -1635,15 +1640,21 @@
       }
 
       pulse.hidden = false;
+      const navigationPulseItems = [
+        { label: 'Back', readout: 'PREVIOUS CARD: READY.' },
+        { label: 'Bay', readout: 'NEXT MEDIA BAY: READY.' },
+        { label: 'Next', readout: 'NEXT CARD: READY.' }
+      ];
+
       pulseChips.forEach((chip, index) => {
-        const item = items[index] || items[0];
-        chip.textContent = item.label || `Signal ${index + 1}`;
-        chip.setAttribute('aria-label', normalizePulseReadout(item.readout || item.label || `Signal ${index + 1}`));
-        chip.setAttribute('title', normalizePulseReadout(item.readout || item.label || `Signal ${index + 1}`));
+        const item = navigationPulseItems[index] || navigationPulseItems[0];
+        chip.textContent = item.label;
+        chip.setAttribute('aria-label', normalizePulseReadout(item.readout));
+        chip.setAttribute('title', normalizePulseReadout(item.readout));
         chip.dataset.interfacePulseIndex = String(index);
       });
 
-      setInterfacePulseReadout(items, 0);
+      setInterfacePulseReadout(navigationPulseItems, 0);
     }
 
 
@@ -1681,8 +1692,15 @@
 
     let interfaceMediaController = null;
     let interfaceMediaControllerSource = '';
+    let interfaceMediaControllerKey = '';
     let interfaceMediaControllerToken = 0;
     let youtubeIframeApiPromise = null;
+    let panoptoEmbedApiPromise = null;
+    const interfaceMediaPlaybackProgress = Object.create(null);
+    const interfaceMediaResumeThreshold = 0.75;
+    const interfaceMediaBackgroundAdvanceThreshold = 1.25;
+    let interfaceMediaAdvancePending = false;
+    let interfaceMediaBackgroundAdvanceBusy = false;
 
     function setInterfacePlaybackState(isPlaying) {
       interfaceMediaPlaying = Boolean(isPlaying);
@@ -1744,6 +1762,9 @@
     function setInterfaceMediaAutoplay(enabled) {
       interfaceMediaAutoplay = Boolean(enabled);
       updateInterfacePlaybackStatusLabel();
+      if (interfaceMediaAutoplay) {
+        window.setTimeout(checkInterfaceMediaBackgroundAdvance, 120);
+      }
     }
 
     function toggleInterfaceMediaAutoplay() {
@@ -1772,13 +1793,122 @@
         return;
       }
 
-      if (attempt < 8) {
-        window.setTimeout(() => playInterfaceMediaWhenReady(attempt + 1, expectedKey), 180);
+      if (attempt < 20) {
+        window.setTimeout(() => playInterfaceMediaWhenReady(attempt + 1, expectedKey), 250);
       }
     }
 
     function getInterfaceMediaSource() {
-      return mediaFrame ? String(mediaFrame.getAttribute('src') || mediaFrame.src || '') : '';
+      if (!mediaFrame) return '';
+      if (mediaFrame.dataset && mediaFrame.dataset.panoptoSource) {
+        return String(mediaFrame.dataset.panoptoSource || '');
+      }
+      if (mediaFrame.dataset && mediaFrame.dataset.mp4Source) {
+        return String(mediaFrame.dataset.mp4Source || '');
+      }
+      return String(mediaFrame.getAttribute('src') || mediaFrame.src || '');
+    }
+
+    function escapeInterfaceMediaAttribute(value) {
+      return String(value || '')
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+
+    function buildInterfaceMP4Srcdoc(source, captionSource = '', captionLabel = 'English', captionDefault = false) {
+      let resolvedSource = source;
+      try {
+        resolvedSource = new URL(source, window.location.href).href;
+      } catch (error) {
+        resolvedSource = source;
+      }
+
+      let resolvedCaptionSource = captionSource;
+      if (resolvedCaptionSource) {
+        try {
+          resolvedCaptionSource = new URL(resolvedCaptionSource, window.location.href).href;
+        } catch (error) {
+          resolvedCaptionSource = captionSource;
+        }
+      }
+
+      const safeSource = escapeInterfaceMediaAttribute(resolvedSource);
+      const safeCaptionSource = escapeInterfaceMediaAttribute(resolvedCaptionSource || '');
+      const safeCaptionLabel = escapeInterfaceMediaAttribute(captionLabel || 'English');
+      const captionTrack = safeCaptionSource
+        ? `<track data-interface-mp4-caption src="${safeCaptionSource}" kind="captions" srclang="en" label="${safeCaptionLabel}"${captionDefault ? ' default' : ''}>`
+        : '';
+      return `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>:root{accent-color:#44c8ff;}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000;}body{position:relative;}video{display:block;width:100%;height:100%;object-fit:contain;background:#000;accent-color:#44c8ff;}video::-webkit-media-controls-panel{background:linear-gradient(180deg,rgba(3,16,29,.08),rgba(3,16,29,.78));}video::-webkit-media-controls-timeline{accent-color:#44c8ff;filter:saturate(1.45) brightness(1.32);}video::-webkit-media-controls-fullscreen-button{display:none!important;}video::-webkit-media-controls-volume-slider{accent-color:#44c8ff;background:linear-gradient(90deg,#44c8ff,rgba(68,200,255,.32))!important;border-radius:999px;filter:saturate(1.5) brightness(1.35) drop-shadow(0 0 7px rgba(68,200,255,.7));}video::-webkit-media-controls-volume-slider-container{filter:saturate(1.35) brightness(1.18) drop-shadow(0 0 8px rgba(68,200,255,.48));}video::-webkit-media-controls-mute-button{filter:drop-shadow(0 0 8px rgba(68,200,255,.55));}video::-webkit-media-controls-current-time-display,video::-webkit-media-controls-time-remaining-display{color:#fff;text-shadow:0 0 10px rgba(68,200,255,.65);}.interface-mp4-seek{position:absolute;left:78px;right:132px;bottom:13px;height:12px;z-index:8;display:flex;align-items:center;pointer-events:auto;opacity:.98;}.interface-mp4-seek input{width:100%;height:8px;margin:0;appearance:none;-webkit-appearance:none;background:linear-gradient(90deg,#44c8ff var(--interface-mp4-progress,0%),rgba(68,200,255,.28) var(--interface-mp4-progress,0%),rgba(255,255,255,.18) 100%);border-radius:999px;box-shadow:0 0 0 1px rgba(68,200,255,.26),0 0 16px rgba(68,200,255,.45);cursor:pointer;outline:none;}.interface-mp4-seek input::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:13px;height:13px;border-radius:50%;background:#9ee7ff;border:1px solid rgba(255,255,255,.92);box-shadow:0 0 14px rgba(68,200,255,.9);}.interface-mp4-seek input::-moz-range-thumb{width:13px;height:13px;border-radius:50%;background:#9ee7ff;border:1px solid rgba(255,255,255,.92);box-shadow:0 0 14px rgba(68,200,255,.9);}.interface-mp4-seek input::-moz-range-track{height:8px;border-radius:999px;background:transparent;}.interface-mp4-fullscreen{position:absolute;right:55px;bottom:5px;width:42px;height:34px;z-index:10;border:0;border-radius:10px;background:rgba(3,16,29,.22);color:#f8fcff;display:flex;align-items:center;justify-content:center;cursor:pointer;pointer-events:auto;text-shadow:0 0 10px rgba(68,200,255,.58);box-shadow:none;transition:background .18s ease,color .18s ease,filter .18s ease;}.interface-mp4-fullscreen:before{content:'⛶';font-size:22px;line-height:1;font-weight:700;transform:translateY(-1px);}.interface-mp4-fullscreen:hover,.interface-mp4-fullscreen:focus-visible{background:rgba(68,200,255,.14);color:#9ee7ff;filter:drop-shadow(0 0 8px rgba(68,200,255,.72));outline:none;}html:fullscreen .interface-mp4-fullscreen:before{content:'×';font-size:30px;font-weight:500;transform:translateY(-2px);}html:-webkit-full-screen .interface-mp4-fullscreen:before{content:'×';font-size:30px;font-weight:500;transform:translateY(-2px);}@media(max-width:720px){.interface-mp4-seek{left:64px;right:96px;bottom:12px;height:10px}.interface-mp4-seek input{height:7px}.interface-mp4-fullscreen{right:45px;bottom:4px;width:36px;height:30px}.interface-mp4-fullscreen:before{font-size:20px}}</style></head><body><video data-interface-mp4-video controls playsinline preload="metadata" src="${safeSource}">${captionTrack}</video><div class="interface-mp4-seek" aria-hidden="true"><input data-interface-mp4-seek type="range" min="0" max="1000" value="0" step="1" tabindex="-1"></div><button class="interface-mp4-fullscreen" type="button" aria-label="Toggle MP4 fullscreen" title="Fullscreen"></button><script>(function(){var video=document.querySelector('[data-interface-mp4-video]');var seek=document.querySelector('[data-interface-mp4-seek]');var fs=document.querySelector('.interface-mp4-fullscreen');if(!video||!seek)return;var active=false;function pct(){var d=Number(video.duration)||0;return d>0?(video.currentTime/d)*100:0;}function paint(){var p=Math.max(0,Math.min(100,pct()));seek.value=Math.round(p*10);seek.style.setProperty('--interface-mp4-progress',p.toFixed(2)+'%');}function commit(){var d=Number(video.duration)||0;if(d>0)video.currentTime=(Number(seek.value)||0)/1000*d;paint();}function fullscreenElement(){return document.fullscreenElement||document.webkitFullscreenElement||null;}function requestFull(){var target=document.documentElement;if(target.requestFullscreen)return target.requestFullscreen();if(target.webkitRequestFullscreen)return target.webkitRequestFullscreen();return null;}function exitFull(){if(document.exitFullscreen)return document.exitFullscreen();if(document.webkitExitFullscreen)return document.webkitExitFullscreen();return null;}video.addEventListener('loadedmetadata',paint);video.addEventListener('durationchange',paint);video.addEventListener('timeupdate',function(){if(!active)paint();});video.addEventListener('progress',paint);video.addEventListener('seeking',paint);video.addEventListener('seeked',paint);seek.addEventListener('pointerdown',function(){active=true;});seek.addEventListener('input',function(){commit();});seek.addEventListener('change',function(){commit();active=false;});seek.addEventListener('pointerup',function(){commit();active=false;});seek.addEventListener('pointercancel',function(){active=false;paint();});if(fs){fs.addEventListener('click',function(event){event.preventDefault();event.stopPropagation();try{if(fullscreenElement()){exitFull();}else{requestFull();}}catch(error){}});}paint();})();<\/script></body></html>`;
+    }
+
+    function getInterfaceMediaProgressKey(key = activeInterfaceKey) {
+      const data = interfaceData[key];
+      if (!data || data.mediaType !== 'video') return '';
+      return key;
+    }
+
+    function rememberInterfaceMediaProgress(key, seconds) {
+      const progressKey = getInterfaceMediaProgressKey(key);
+      const value = Number(seconds);
+      if (!progressKey || !Number.isFinite(value)) return;
+
+      if (value > interfaceMediaResumeThreshold) {
+        interfaceMediaPlaybackProgress[progressKey] = value;
+      } else {
+        delete interfaceMediaPlaybackProgress[progressKey];
+      }
+    }
+
+    function forgetInterfaceMediaProgress(key = activeInterfaceKey) {
+      const progressKey = getInterfaceMediaProgressKey(key);
+      if (progressKey) delete interfaceMediaPlaybackProgress[progressKey];
+    }
+
+    function captureInterfaceMediaProgress(key = activeInterfaceKey) {
+      const progressKey = getInterfaceMediaProgressKey(key);
+      if (!progressKey || !interfaceMediaController || typeof interfaceMediaController.getCurrentTime !== 'function') return;
+
+      try {
+        const currentTime = interfaceMediaController.getCurrentTime();
+
+        if (currentTime && typeof currentTime.then === 'function') {
+          currentTime.then(seconds => rememberInterfaceMediaProgress(progressKey, seconds)).catch(() => {});
+          return;
+        }
+
+        rememberInterfaceMediaProgress(progressKey, currentTime);
+      } catch (error) {
+        // Provider progress can be unavailable during iframe teardown or route changes.
+      }
+    }
+
+    function applyInterfaceMediaSavedProgress(token, key = activeInterfaceKey, attempt = 0) {
+      if (token !== interfaceMediaControllerToken) return;
+      const progressKey = getInterfaceMediaProgressKey(key);
+      if (!progressKey || !interfaceMediaController || typeof interfaceMediaController.seekTo !== 'function') return;
+
+      const savedSeconds = Number(interfaceMediaPlaybackProgress[progressKey]);
+      if (!Number.isFinite(savedSeconds) || savedSeconds <= interfaceMediaResumeThreshold) return;
+
+      const retrySavedProgress = () => {
+        if (attempt >= 8 || token !== interfaceMediaControllerToken) return;
+        window.setTimeout(() => applyInterfaceMediaSavedProgress(token, key, attempt + 1), 180);
+      };
+
+      try {
+        const seekAction = interfaceMediaController.seekTo(savedSeconds);
+        if (seekAction && typeof seekAction.then === 'function') {
+          seekAction.then(() => setInterfacePlaybackState(false)).catch(retrySavedProgress);
+        } else if (seekAction && typeof seekAction.catch === 'function') {
+          seekAction.catch(retrySavedProgress);
+        }
+      } catch (error) {
+        retrySavedProgress();
+      }
+
+      setInterfacePlaybackState(false);
     }
 
     function getInterfaceMediaProvider(source) {
@@ -1792,24 +1922,104 @@
         host = source.toLowerCase();
       }
 
+      const lowerSource = source.toLowerCase().split('?')[0].split('#')[0];
+
       if (host.includes('player.vimeo.com') || host.includes('vimeo.com')) return 'vimeo';
       if (host.includes('youtube.com') || host.includes('youtube-nocookie.com') || host.includes('youtu.be')) return 'youtube';
+      if (host.includes('panopto.com') || source.toLowerCase().includes('/panopto/pages/embed.aspx')) return 'panopto';
+      if (lowerSource.endsWith('.mp4')) return 'mp4';
 
       return '';
     }
 
     function normalizeInterfaceMediaSource(source) {
       const provider = getInterfaceMediaProvider(source);
-      if (provider !== 'youtube') return source;
+      if (provider !== 'youtube' && provider !== 'vimeo' && provider !== 'panopto' && provider !== 'mp4') return source;
 
       try {
         const url = new URL(source, window.location.href);
-        url.searchParams.set('enablejsapi', '1');
-        url.searchParams.set('playsinline', '1');
-        return url.toString();
+
+        if (provider === 'youtube') {
+          url.searchParams.set('enablejsapi', '1');
+          url.searchParams.set('playsinline', '1');
+          return url.toString();
+        }
+
+        if (provider === 'vimeo') {
+          url.searchParams.set('api', '1');
+          url.searchParams.set('autopause', '0');
+          return url.toString();
+        }
+
+        if (provider === 'panopto') {
+          url.searchParams.set('autoplay', 'false');
+          url.searchParams.set('offerviewer', url.searchParams.get('offerviewer') || 'true');
+          url.searchParams.set('showtitle', url.searchParams.get('showtitle') || 'true');
+          url.searchParams.set('showbrand', url.searchParams.get('showbrand') || 'false');
+          url.searchParams.set('captions', url.searchParams.get('captions') || 'true');
+          url.searchParams.set('interactivity', url.searchParams.get('interactivity') || 'all');
+          return url.toString();
+        }
       } catch (error) {
         return source;
       }
+
+      return source;
+    }
+
+
+    function getPanoptoSourceConfig(source) {
+      try {
+        const url = new URL(source, window.location.href);
+        const sessionId = url.searchParams.get('id') || url.searchParams.get('sessionId') || '';
+        if (!url.hostname || !sessionId) return null;
+
+        return {
+          serverName: url.hostname,
+          sessionId,
+          videoParams: {
+            autoplay: 'false',
+            offerviewer: url.searchParams.get('offerviewer') || 'true',
+            showtitle: url.searchParams.get('showtitle') || 'true',
+            showbrand: url.searchParams.get('showbrand') || 'false',
+            captions: url.searchParams.get('captions') || 'true',
+            interactivity: url.searchParams.get('interactivity') || 'all'
+          }
+        };
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function ensurePanoptoEmbedApi() {
+      if (window.EmbedApi && typeof window.EmbedApi === 'function') {
+        return Promise.resolve();
+      }
+
+      if (panoptoEmbedApiPromise) return panoptoEmbedApiPromise;
+
+      panoptoEmbedApiPromise = new Promise((resolve, reject) => {
+        const existingScript = document.querySelector('script[src="https://developers.panopto.com/scripts/embedapi.min.js"]');
+        const previousReadyHandler = window.onPanoptoEmbedApiReady;
+
+        window.onPanoptoEmbedApiReady = function onPanoptoEmbedApiReady() {
+          if (typeof previousReadyHandler === 'function') {
+            previousReadyHandler();
+          }
+
+          resolve();
+        };
+
+        if (existingScript) return;
+
+        const script = document.createElement('script');
+        script.src = 'https://developers.panopto.com/scripts/embedapi.min.js';
+        script.async = true;
+        script.onerror = () => reject(new Error('Panopto Embed API failed to load.'));
+        document.head.appendChild(script);
+      });
+
+      return panoptoEmbedApiPromise;
     }
 
     function ensureYouTubeIframeApi() {
@@ -1846,11 +2056,14 @@
     let mediaFrameObserver = null;
 
     function clearInterfaceMediaController() {
+      captureInterfaceMediaProgress(interfaceMediaControllerKey || activeInterfaceKey);
       interfaceMediaControllerToken += 1;
 
       const currentController = interfaceMediaController;
       interfaceMediaController = null;
       interfaceMediaControllerSource = '';
+      interfaceMediaControllerKey = '';
+      interfaceMediaAdvancePending = false;
 
       if (currentController && typeof currentController.destroy === 'function') {
         try {
@@ -1876,17 +2089,129 @@
         }
       });
 
-      mediaFrameObserver.observe(mediaFrame, { attributes: true, attributeFilter: ['src'] });
+      mediaFrameObserver.observe(mediaFrame, { attributes: true, attributeFilter: ['src', 'data-panopto-source'] });
     }
+
+    let interfaceMp4FrameFitRaf = null;
+
+    function clearInterfaceMP4FrameFit() {
+      if (!videoFrameWrap) return;
+      videoFrameWrap.style.removeProperty('width');
+      videoFrameWrap.style.removeProperty('max-width');
+      videoFrameWrap.style.removeProperty('height');
+      videoFrameWrap.style.removeProperty('max-height');
+      videoFrameWrap.style.removeProperty('min-height');
+      videoFrameWrap.style.removeProperty('aspect-ratio');
+      videoFrameWrap.style.removeProperty('overflow');
+      videoFrameWrap.style.removeProperty('margin-left');
+      videoFrameWrap.style.removeProperty('margin-right');
+      videoFrameWrap.style.removeProperty('flex');
+      videoFrameWrap.style.removeProperty('align-self');
+      videoFrameWrap.style.removeProperty('contain');
+      delete videoFrameWrap.dataset.interfaceMp4FitWidth;
+      delete videoFrameWrap.dataset.interfaceMp4FitHeight;
+    }
+
+    function fitInterfaceMP4Frame() {
+      // Local MP4 cards now use the same CSS-driven 16:9 media frame as
+      // YouTube, Vimeo, and Panopto cards. Do not write calculated inline
+      // dimensions here; repeated card clicks and expand/collapse transitions
+      // can otherwise compound stale measurements and shrink the player.
+      clearInterfaceMP4FrameFit();
+
+      if (mediaFrame && mediaFrame.tagName === 'VIDEO') {
+        mediaFrame.style.removeProperty('width');
+        mediaFrame.style.removeProperty('height');
+        mediaFrame.style.removeProperty('max-width');
+        mediaFrame.style.removeProperty('max-height');
+        mediaFrame.style.removeProperty('position');
+        mediaFrame.style.removeProperty('inset');
+        mediaFrame.style.removeProperty('display');
+        mediaFrame.style.removeProperty('object-fit');
+        mediaFrame.style.removeProperty('object-position');
+        mediaFrame.style.removeProperty('background');
+        mediaFrame.style.removeProperty('box-sizing');
+      }
+    }
+
+    function scheduleInterfaceMP4FrameFit() {
+      if (interfaceMp4FrameFitRaf) window.cancelAnimationFrame(interfaceMp4FrameFitRaf);
+      interfaceMp4FrameFitRaf = window.requestAnimationFrame(() => {
+        interfaceMp4FrameFitRaf = null;
+        fitInterfaceMP4Frame();
+      });
+    }
+
+    window.addEventListener('resize', scheduleInterfaceMP4FrameFit, { passive: true });
+
+    // MP4 sizing is intentionally CSS-driven. The MP4 wrapper should match
+    // the fixed iframe media viewport exactly and must not run measurement-based
+    // width/height writes during card reloads or expand/collapse transitions.
 
     function rebuildInterfaceMediaFrame(nextSource) {
       if (!mediaFrame || !mediaFrame.parentNode) return '';
 
       const normalizedSource = normalizeInterfaceMediaSource(nextSource || getInterfaceMediaSource());
-      const replacementFrame = mediaFrame.cloneNode(false);
+      const provider = getInterfaceMediaProvider(normalizedSource);
+      const activeMediaData = interfaceData[activeInterfaceKey] || {};
+      const normalizedCaptionSource = activeMediaData.captionSource
+        ? normalizeInterfaceMediaSource(activeMediaData.captionSource)
+        : '';
+      let replacementFrame;
 
-      if (normalizedSource) {
-        replacementFrame.setAttribute('src', normalizedSource);
+      if (videoFrameWrap) {
+        videoFrameWrap.classList.toggle('is-interface-mp4-frame', provider === 'mp4');
+        videoFrameWrap.classList.toggle('is-interface-panopto-frame', provider === 'panopto');
+        videoFrameWrap.classList.toggle('is-interface-iframe-frame', provider !== 'mp4' && provider !== 'panopto');
+        if (provider === 'mp4') {
+          scheduleInterfaceMP4FrameFit();
+          window.setTimeout(scheduleInterfaceMP4FrameFit, 80);
+          window.setTimeout(scheduleInterfaceMP4FrameFit, 260);
+        } else {
+          clearInterfaceMP4FrameFit();
+        }
+      }
+
+      if (provider === 'panopto') {
+        replacementFrame = document.createElement('div');
+        replacementFrame.id = `interface-panopto-player-${Date.now()}`;
+        replacementFrame.dataset.panoptoSource = normalizedSource;
+        replacementFrame.dataset.interfaceMediaFrame = '';
+        replacementFrame.setAttribute('role', 'group');
+        replacementFrame.setAttribute('aria-label', 'Panopto Embedded Video Player');
+      } else if (provider === 'mp4') {
+        replacementFrame = document.createElement('iframe');
+        replacementFrame.dataset.interfaceMediaFrame = '';
+        replacementFrame.dataset.mp4Source = normalizedSource;
+        if (normalizedCaptionSource) replacementFrame.dataset.mp4CaptionSource = normalizedCaptionSource;
+        replacementFrame.setAttribute('allow', 'autoplay; fullscreen; picture-in-picture');
+        replacementFrame.setAttribute('frameborder', '0');
+        replacementFrame.setAttribute('referrerpolicy', 'same-origin');
+        replacementFrame.setAttribute('allowfullscreen', '');
+        replacementFrame.setAttribute('title', 'MP4 Video Player');
+
+        if (normalizedSource) {
+          replacementFrame.setAttribute(
+            'srcdoc',
+            buildInterfaceMP4Srcdoc(
+              normalizedSource,
+              normalizedCaptionSource,
+              activeMediaData.captionLabel || 'English',
+              Boolean(activeMediaData.captionDefault)
+            )
+          );
+        }
+      } else {
+        replacementFrame = document.createElement('iframe');
+        replacementFrame.dataset.interfaceMediaFrame = '';
+        replacementFrame.setAttribute('allow', 'autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share');
+        replacementFrame.setAttribute('frameborder', '0');
+        replacementFrame.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+        replacementFrame.setAttribute('allowfullscreen', '');
+
+        if (normalizedSource) {
+          replacementFrame.setAttribute('src', normalizedSource);
+        }
       }
 
       if (mediaFrameObserver) {
@@ -1898,6 +2223,9 @@
       previousFrame.parentNode.replaceChild(replacementFrame, previousFrame);
       mediaFrame = replacementFrame;
       observeInterfaceMediaFrame();
+      scheduleInterfaceMP4FrameFit();
+      window.setTimeout(scheduleInterfaceMP4FrameFit, 80);
+      window.setTimeout(scheduleInterfaceMP4FrameFit, 260);
 
       return normalizedSource;
     }
@@ -1915,32 +2243,329 @@
       return Boolean(normalizedSource);
     }
 
+    function resolveInterfaceMediaValue(value) {
+      if (value && typeof value.then === 'function') {
+        return value.catch(() => null);
+      }
+      return Promise.resolve(value);
+    }
+
+    function checkInterfaceMediaBackgroundAdvance() {
+      if (!interfaceMediaAutoplay || interfaceMediaAdvancePending || interfaceMediaBackgroundAdvanceBusy) return;
+      if (!interfaceMediaController || !interfaceData[activeInterfaceKey] || interfaceData[activeInterfaceKey].mediaType !== 'video') return;
+      if (!interfaceMediaPlaying) return;
+      if (typeof interfaceMediaController.getCurrentTime !== 'function' || typeof interfaceMediaController.getDuration !== 'function') return;
+
+      const token = interfaceMediaControllerToken;
+      interfaceMediaBackgroundAdvanceBusy = true;
+
+      Promise.all([
+        resolveInterfaceMediaValue(interfaceMediaController.getCurrentTime()),
+        resolveInterfaceMediaValue(interfaceMediaController.getDuration())
+      ]).then(([currentTimeValue, durationValue]) => {
+        if (token !== interfaceMediaControllerToken || !interfaceMediaAutoplay || interfaceMediaAdvancePending) return;
+
+        const currentTime = Number(currentTimeValue);
+        const duration = Number(durationValue);
+
+        if (!Number.isFinite(currentTime) || !Number.isFinite(duration) || duration <= 1) return;
+
+        if (currentTime >= Math.max(0, duration - interfaceMediaBackgroundAdvanceThreshold)) {
+          advanceInterfaceAfterMediaEnded(token);
+        }
+      }).catch(() => {
+        // Background tabs and third-party iframes may reject timing reads.
+      }).finally(() => {
+        interfaceMediaBackgroundAdvanceBusy = false;
+      });
+    }
+
     function advanceInterfaceAfterMediaEnded(token) {
-      if (token !== interfaceMediaControllerToken) return;
+      if (token !== interfaceMediaControllerToken || interfaceMediaAdvancePending) return;
       if (!interfaceData[activeInterfaceKey] || interfaceData[activeInterfaceKey].mediaType !== 'video') return;
 
+      interfaceMediaAdvancePending = true;
+      forgetInterfaceMediaProgress(activeInterfaceKey);
       setInterfacePlaybackState(false);
 
       window.setTimeout(() => {
-        if (token !== interfaceMediaControllerToken) return;
-        if (!interfaceData[activeInterfaceKey] || interfaceData[activeInterfaceKey].mediaType !== 'video') return;
-
-        if (typeof navigateInterfaceCard === 'function') {
-          navigateInterfaceCard(1);
-        } else {
-          const set = interfaceSets[activeInterfaceSet] || interfaceSets.primary;
-          if (set && Array.isArray(set.keys) && set.keys.length) {
-            const currentIndex = Math.max(0, set.keys.indexOf(activeInterfaceKey));
-            const nextKey = set.keys[(currentIndex + 1) % set.keys.length];
-            if (nextKey) setInterfacePath(nextKey, { updateSet: false });
-          }
+        if (token !== interfaceMediaControllerToken) {
+          interfaceMediaAdvancePending = false;
+          return;
         }
-
+        if (!interfaceData[activeInterfaceKey] || interfaceData[activeInterfaceKey].mediaType !== 'video') {
+          interfaceMediaAdvancePending = false;
+          return;
+        }
+        navigateInterfaceCard(1);
         if (interfaceMediaAutoplay) {
           const expectedKey = activeInterfaceKey;
           window.setTimeout(() => playInterfaceMediaWhenReady(0, expectedKey), 420);
+          window.setTimeout(() => playInterfaceMediaWhenReady(0, expectedKey), 1200);
+          window.setTimeout(() => playInterfaceMediaWhenReady(0, expectedKey), 2400);
         }
+        window.setTimeout(() => {
+          interfaceMediaAdvancePending = false;
+        }, 800);
       }, 250);
+    }
+
+
+    function initializePanoptoMediaController(source, token) {
+      const panoptoConfig = getPanoptoSourceConfig(source);
+      if (!panoptoConfig || !mediaFrame) {
+        setInterfacePlaybackState(false);
+        return;
+      }
+
+      if (!mediaFrame.id) {
+        mediaFrame.id = `interface-panopto-player-${Date.now()}`;
+      }
+
+      ensurePanoptoEmbedApi().then(() => {
+        if (token !== interfaceMediaControllerToken || !mediaFrame || !window.EmbedApi) return;
+
+        try {
+          const controllerKey = activeInterfaceKey;
+          let panoptoReady = false;
+          let panoptoIframeReady = false;
+          let lastKnownTime = 0;
+          let progressTimer = null;
+          let player = null;
+
+          const stopProgressTimer = () => {
+            if (progressTimer) {
+              window.clearInterval(progressTimer);
+              progressTimer = null;
+            }
+          };
+
+          const startProgressTimer = () => {
+            stopProgressTimer();
+            progressTimer = window.setInterval(() => {
+              if (token !== interfaceMediaControllerToken || !player || typeof player.getCurrentTime !== 'function') return;
+              try {
+                const currentTime = Number(player.getCurrentTime());
+                if (Number.isFinite(currentTime)) {
+                  lastKnownTime = currentTime;
+                  rememberInterfaceMediaProgress(controllerKey, currentTime);
+                }
+              } catch (error) {
+                // Panopto may reject progress queries while loading.
+              }
+            }, 1000);
+          };
+
+          const getPanoptoTime = () => {
+            try {
+              if (player && typeof player.getCurrentTime === 'function') {
+                const currentTime = Number(player.getCurrentTime());
+                if (Number.isFinite(currentTime)) {
+                  lastKnownTime = currentTime;
+                  return currentTime;
+                }
+              }
+            } catch (error) {
+              // Use the last tracked value if Panopto is between states.
+            }
+            return lastKnownTime;
+          };
+
+          player = new window.EmbedApi(mediaFrame.id, {
+            width: '100%',
+            height: '100%',
+            serverName: panoptoConfig.serverName,
+            sessionId: panoptoConfig.sessionId,
+            videoParams: panoptoConfig.videoParams,
+            events: {
+              onIframeReady: () => {
+                panoptoIframeReady = true;
+              },
+              onReady: () => {
+                if (token !== interfaceMediaControllerToken) return;
+                panoptoReady = true;
+                applyInterfaceMediaMuteState();
+                applyInterfaceMediaSavedProgress(token, controllerKey);
+              },
+              onStateChange: state => {
+                if (token !== interfaceMediaControllerToken) return;
+                const playerState = window.PlayerState || {};
+                const isPlaying = state === playerState.Playing || state === 1 || state === 'Playing';
+                const isEnded = state === playerState.Ended || state === 0 || state === 'Ended';
+                const isPaused = state === playerState.Paused || state === 2 || state === 'Paused';
+
+                if (isPlaying) {
+                  setInterfacePlaybackState(true);
+                  startProgressTimer();
+                  return;
+                }
+
+                if (isEnded) {
+                  stopProgressTimer();
+                  forgetInterfaceMediaProgress(controllerKey);
+                  advanceInterfaceAfterMediaEnded(token);
+                  return;
+                }
+
+                if (isPaused) {
+                  rememberInterfaceMediaProgress(controllerKey, getPanoptoTime());
+                  stopProgressTimer();
+                  setInterfacePlaybackState(false);
+                }
+              }
+            }
+          });
+
+          interfaceMediaController = {
+            provider: 'panopto',
+            play: () => {
+              if (!player) return null;
+              if (!panoptoReady && panoptoIframeReady && typeof player.loadVideo === 'function') {
+                return player.loadVideo();
+              }
+              if (typeof player.playVideo === 'function') return player.playVideo();
+              if (typeof player.loadVideo === 'function') return player.loadVideo();
+              return null;
+            },
+            pause: () => {
+              if (player && typeof player.pauseVideo === 'function') return player.pauseVideo();
+              return null;
+            },
+            getCurrentTime: () => getPanoptoTime(),
+            getDuration: () => {
+              if (player && typeof player.getDuration === 'function') return player.getDuration();
+              return 0;
+            },
+            seekTo: seconds => {
+              if (player && typeof player.seekTo === 'function') return player.seekTo(Math.max(0, Number(seconds) || 0));
+              return null;
+            },
+            setMuted: muted => {
+              if (!player) return null;
+              if (muted && typeof player.muteVideo === 'function') return player.muteVideo();
+              if (!muted && typeof player.unmuteVideo === 'function') return player.unmuteVideo();
+              if (typeof player.setVolume === 'function') return player.setVolume(muted ? 0 : 1);
+              return null;
+            },
+            destroy: () => {
+              stopProgressTimer();
+              return null;
+            }
+          };
+
+          interfaceMediaControllerSource = source;
+          interfaceMediaControllerKey = controllerKey;
+        } catch (error) {
+          interfaceMediaController = null;
+          interfaceMediaControllerSource = '';
+          interfaceMediaControllerKey = '';
+          setInterfacePlaybackState(false);
+        }
+      }).catch(() => {
+        if (token === interfaceMediaControllerToken) {
+          interfaceMediaController = null;
+          interfaceMediaControllerSource = '';
+          interfaceMediaControllerKey = '';
+          setInterfacePlaybackState(false);
+        }
+      });
+    }
+
+    function getInterfaceMP4VideoElement() {
+      if (!mediaFrame) return null;
+      if (mediaFrame.tagName === 'VIDEO') return mediaFrame;
+      if (mediaFrame.tagName !== 'IFRAME') return null;
+
+      try {
+        const doc = mediaFrame.contentDocument || (mediaFrame.contentWindow && mediaFrame.contentWindow.document);
+        if (!doc) return null;
+        return doc.querySelector('video[data-interface-mp4-video], video');
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function initializeMP4MediaController(source, token, attempt = 0) {
+      const player = getInterfaceMP4VideoElement();
+      if (!player) {
+        if (attempt < 12) {
+          window.setTimeout(() => initializeMP4MediaController(source, token, attempt + 1), 120);
+        } else {
+          setInterfacePlaybackState(false);
+        }
+        return;
+      }
+
+      try {
+        const controllerKey = activeInterfaceKey;
+
+        const onPlay = () => {
+          if (token === interfaceMediaControllerToken) setInterfacePlaybackState(true);
+        };
+        const onPause = () => {
+          if (token !== interfaceMediaControllerToken) return;
+          rememberInterfaceMediaProgress(controllerKey, player.currentTime);
+          setInterfacePlaybackState(false);
+        };
+        const onTimeUpdate = () => {
+          if (token !== interfaceMediaControllerToken) return;
+          rememberInterfaceMediaProgress(controllerKey, player.currentTime);
+        };
+        const onEnded = () => {
+          if (token !== interfaceMediaControllerToken) return;
+          forgetInterfaceMediaProgress(controllerKey);
+          advanceInterfaceAfterMediaEnded(token);
+        };
+        const onLoadedMetadata = () => {
+          if (token !== interfaceMediaControllerToken) return;
+          applyInterfaceMediaMuteState();
+          applyInterfaceMediaSavedProgress(token, controllerKey);
+        };
+
+        player.addEventListener('play', onPlay);
+        player.addEventListener('pause', onPause);
+        player.addEventListener('timeupdate', onTimeUpdate);
+        player.addEventListener('ended', onEnded);
+        player.addEventListener('loadedmetadata', onLoadedMetadata);
+
+        interfaceMediaController = {
+          provider: 'mp4',
+          play: () => player.play(),
+          pause: () => player.pause(),
+          getCurrentTime: () => player.currentTime || 0,
+          getDuration: () => player.duration || 0,
+          seekTo: seconds => {
+            player.currentTime = Math.max(0, Number(seconds) || 0);
+            return Promise.resolve();
+          },
+          setMuted: muted => {
+            player.muted = Boolean(muted);
+            if (!muted && player.volume === 0) player.volume = 1;
+            return null;
+          },
+          destroy: () => {
+            player.removeEventListener('play', onPlay);
+            player.removeEventListener('pause', onPause);
+            player.removeEventListener('timeupdate', onTimeUpdate);
+            player.removeEventListener('ended', onEnded);
+            player.removeEventListener('loadedmetadata', onLoadedMetadata);
+            try { player.pause(); } catch (error) {}
+            return null;
+          }
+        };
+
+        interfaceMediaControllerSource = source;
+        interfaceMediaControllerKey = controllerKey;
+        applyInterfaceMediaMuteState();
+        if (player.readyState >= 1) {
+          applyInterfaceMediaSavedProgress(token, controllerKey);
+        }
+      } catch (error) {
+        interfaceMediaController = null;
+        interfaceMediaControllerSource = '';
+        interfaceMediaControllerKey = '';
+        setInterfacePlaybackState(false);
+      }
     }
 
     function initializeVimeoMediaController(source, token) {
@@ -1951,11 +2576,15 @@
 
       try {
         const player = new window.Vimeo.Player(mediaFrame);
+        const controllerKey = activeInterfaceKey;
 
         interfaceMediaController = {
           provider: 'vimeo',
           play: () => player.play(),
           pause: () => player.pause(),
+          getCurrentTime: () => player.getCurrentTime(),
+          getDuration: () => player.getDuration(),
+          seekTo: seconds => player.setCurrentTime(Math.max(0, Number(seconds) || 0)),
           setMuted: muted => player.setMuted(Boolean(muted)),
           destroy: () => {
             if (typeof player.unload === 'function') {
@@ -1965,16 +2594,42 @@
           }
         };
         interfaceMediaControllerSource = source;
+        interfaceMediaControllerKey = controllerKey;
 
         player.ready().then(() => {
-          if (token === interfaceMediaControllerToken) applyInterfaceMediaMuteState();
+          if (token === interfaceMediaControllerToken) {
+            applyInterfaceMediaMuteState();
+            applyInterfaceMediaSavedProgress(token, controllerKey);
+            window.setTimeout(() => applyInterfaceMediaSavedProgress(token, controllerKey), 300);
+          }
         }).catch(() => {});
+        player.on('loaded', () => applyInterfaceMediaSavedProgress(token, controllerKey));
+        player.on('timeupdate', data => {
+          if (token !== interfaceMediaControllerToken || !data) return;
+          rememberInterfaceMediaProgress(controllerKey, data.seconds);
+        });
         player.on('play', () => setInterfacePlaybackState(true));
-        player.on('pause', () => setInterfacePlaybackState(false));
-        player.on('ended', () => advanceInterfaceAfterMediaEnded(token));
+        player.on('pause', data => {
+          if (data && Number.isFinite(Number(data.seconds))) {
+            rememberInterfaceMediaProgress(controllerKey, data.seconds);
+          } else {
+            captureInterfaceMediaProgress(controllerKey);
+          }
+          setInterfacePlaybackState(false);
+        });
+        player.on('seeked', data => {
+          if (data && Number.isFinite(Number(data.seconds))) {
+            rememberInterfaceMediaProgress(controllerKey, data.seconds);
+          }
+        });
+        player.on('ended', () => {
+          forgetInterfaceMediaProgress(controllerKey);
+          advanceInterfaceAfterMediaEnded(token);
+        });
       } catch (error) {
         interfaceMediaController = null;
         interfaceMediaControllerSource = '';
+        interfaceMediaControllerKey = '';
         setInterfacePlaybackState(false);
       }
     }
@@ -1987,7 +2642,10 @@
           const player = new window.YT.Player(mediaFrame, {
             events: {
               onReady: () => {
-                if (token === interfaceMediaControllerToken) applyInterfaceMediaMuteState();
+                if (token === interfaceMediaControllerToken) {
+                  applyInterfaceMediaMuteState();
+                  applyInterfaceMediaSavedProgress(token);
+                }
               },
               onStateChange: event => {
                 if (!window.YT || !window.YT.PlayerState) return;
@@ -2013,6 +2671,11 @@
             provider: 'youtube',
             play: () => player.playVideo(),
             pause: () => player.pauseVideo(),
+            getCurrentTime: () => (typeof player.getCurrentTime === 'function' ? player.getCurrentTime() : 0),
+            getDuration: () => (typeof player.getDuration === 'function' ? player.getDuration() : 0),
+            seekTo: seconds => {
+              if (typeof player.seekTo === 'function') player.seekTo(Math.max(0, Number(seconds) || 0), true);
+            },
             setMuted: muted => {
               if (muted && typeof player.mute === 'function') {
                 player.mute();
@@ -2027,15 +2690,18 @@
             }
           };
           interfaceMediaControllerSource = source;
+          interfaceMediaControllerKey = activeInterfaceKey;
         } catch (error) {
           interfaceMediaController = null;
           interfaceMediaControllerSource = '';
+          interfaceMediaControllerKey = '';
           setInterfacePlaybackState(false);
         }
       }).catch(() => {
         if (token === interfaceMediaControllerToken) {
           interfaceMediaController = null;
           interfaceMediaControllerSource = '';
+          interfaceMediaControllerKey = '';
           setInterfacePlaybackState(false);
         }
       });
@@ -2065,6 +2731,16 @@
 
       clearInterfaceMediaController();
       const token = interfaceMediaControllerToken;
+
+      if (provider === 'panopto') {
+        initializePanoptoMediaController(source, token);
+        return;
+      }
+
+      if (provider === 'mp4') {
+        initializeMP4MediaController(source, token);
+        return;
+      }
 
       if (provider === 'vimeo') {
         initializeVimeoMediaController(source, token);
@@ -2103,6 +2779,8 @@
     }
 
     function pauseInterfaceMedia() {
+      captureInterfaceMediaProgress(interfaceMediaControllerKey || activeInterfaceKey);
+
       if (interfaceMediaController && typeof interfaceMediaController.pause === 'function') {
         try {
           const pauseAction = interfaceMediaController.pause();
@@ -2121,7 +2799,7 @@
     }
 
     function toggleInterfaceMediaPlayback() {
-      if (activeInterfaceKey !== 'caseStudyPlayer') return;
+      if (!interfaceData[activeInterfaceKey] || interfaceData[activeInterfaceKey].mediaType !== 'video') return;
 
       initializeInterfaceMediaController();
 
@@ -2145,14 +2823,30 @@
     observeInterfaceMediaFrame();
 
     document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        pauseInterfaceMedia();
+      captureInterfaceMediaProgress(interfaceMediaControllerKey || activeInterfaceKey);
+
+      if (!document.hidden) {
+        initializeInterfaceMediaController();
       }
+
+      window.setTimeout(checkInterfaceMediaBackgroundAdvance, 120);
+      window.setTimeout(checkInterfaceMediaBackgroundAdvance, 1200);
+    });
+
+    window.setInterval(checkInterfaceMediaBackgroundAdvance, 2000);
+
+    window.addEventListener('pagehide', () => {
+      captureInterfaceMediaProgress(interfaceMediaControllerKey || activeInterfaceKey);
     });
 
     function setInterfaceMediaExpanded(expanded) {
       interfaceSystem.classList.toggle('interface-system-media-expanded', Boolean(expanded));
       updateInterfacePlaybackStatusLabel();
+      scheduleInterfaceMP4FrameFit();
+      window.setTimeout(scheduleInterfaceMP4FrameFit, 60);
+      window.setTimeout(scheduleInterfaceMP4FrameFit, 140);
+      window.setTimeout(scheduleInterfaceMP4FrameFit, 320);
+      window.setTimeout(scheduleInterfaceMP4FrameFit, 640);
 
 
     if (mediaToggle) {
@@ -2170,6 +2864,19 @@
       }
       if (videoFrameWrap) videoFrameWrap.hidden = !isVideo;
       updateInterfacePlaybackStatusLabel();
+      scheduleInterfaceMP4FrameFit();
+      window.setTimeout(scheduleInterfaceMP4FrameFit, 80);
+
+      if (isVideo) {
+        const nextSource = data.mediaSource || data.videoSource || '';
+        const currentSource = getInterfaceMediaSource();
+        if (nextSource && normalizeInterfaceMediaSource(nextSource) !== normalizeInterfaceMediaSource(currentSource)) {
+          rebuildInterfaceMediaRoute(nextSource);
+        } else {
+          initializeInterfaceMediaController();
+        }
+        if (mediaFrame) mediaFrame.title = data.mediaTitle || data.title || 'Secret Intel Player';
+      }
 
       if (!isVideo && showcaseImage) {
         if (showcaseFrame && !prefersReducedMotion.matches) showcaseFrame.classList.add('is-switching');
@@ -2201,6 +2908,10 @@
     function setInterfacePath(key, options = {}) {
       const data = interfaceData[key];
       if (!data) return;
+
+      if (key !== activeInterfaceKey) {
+        captureInterfaceMediaProgress(activeInterfaceKey);
+      }
 
       const targetSet = getSetForKey(key);
       if (options.updateSet !== false && targetSet !== activeInterfaceSet) {
@@ -2276,11 +2987,36 @@
       });
     });
 
+    const navigationPulseItems = [
+      { label: 'Back', readout: 'PREVIOUS CARD: READY.' },
+      { label: 'Bay', readout: 'NEXT MEDIA BAY: READY.' },
+      { label: 'Next', readout: 'NEXT CARD: READY.' }
+    ];
+
+    function navigateInterfaceCard(direction) {
+      const set = interfaceSets[activeInterfaceSet] || interfaceSets.primary;
+      if (!set || !Array.isArray(set.keys) || !set.keys.length) return;
+
+      const currentIndex = Math.max(0, set.keys.indexOf(activeInterfaceKey));
+      const nextIndex = (currentIndex + direction + set.keys.length) % set.keys.length;
+      const nextKey = set.keys[nextIndex];
+
+      if (nextKey) {
+        setInterfacePath(nextKey, { updateSet: false });
+      }
+    }
+
+    function navigateInterfaceBay() {
+      const setOrder = Object.keys(interfaceSets);
+      const currentSetIndex = Math.max(0, setOrder.indexOf(activeInterfaceSet));
+      const nextSet = setOrder[(currentSetIndex + 1) % setOrder.length];
+      switchInterfaceSet(nextSet, { playSound: false });
+    }
+
     pulseChips.forEach(chip => {
       const activatePulseChip = () => {
-        const items = interfacePulseMap[activeInterfaceKey] || [];
         const index = Number(chip.dataset.interfacePulseIndex || chip.dataset.interfacePulseChip || 0);
-        setInterfacePulseReadout(items, index);
+        setInterfacePulseReadout(navigationPulseItems, index);
       };
 
       chip.addEventListener('mouseenter', activatePulseChip);
@@ -2289,6 +3025,14 @@
         activatePulseChip();
         const index = Number(chip.dataset.interfacePulseIndex || chip.dataset.interfacePulseChip || 0);
         playSignalPulseSound(index);
+
+        if (index === 0) {
+          navigateInterfaceCard(-1);
+        } else if (index === 1) {
+          navigateInterfaceBay();
+        } else if (index === 2) {
+          navigateInterfaceCard(1);
+        }
       });
     });
 
@@ -2410,7 +3154,6 @@
       startInterfaceAutoplay();
     });
 
-
     const themeStylesheet = document.getElementById('winterface-theme-stylesheet');
     const themeSelector = interfaceSystem.querySelector('[data-interface-theme-selector]');
     const themeToggle = interfaceSystem.querySelector('[data-interface-theme-toggle]');
@@ -2440,7 +3183,7 @@
     function applyWinterfaceTheme(themeKey, options = {}) {
       if (!themeStylesheet || !themeFiles.hasOwnProperty(themeKey)) return;
       const baseHref = getThemeBaseHref();
-      const themeCacheVersion = '3.7-media-player-hotfix.1';
+      const themeCacheVersion = '3.7-bay-orb-sync-20260609';
       const nextHrefBase = themeKey === 'default' ? `${baseHref}${baseHref.startsWith('../') ? 'style-dev.css' : 'style.css'}` : `${baseHref}themes/${themeFiles[themeKey]}`;
       const nextHref = `${nextHrefBase}?v=${themeCacheVersion}`;
       if (themeStylesheet.getAttribute('href') !== nextHref) {

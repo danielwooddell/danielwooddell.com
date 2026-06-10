@@ -8115,6 +8115,64 @@ body.winterface-offline .interface-section .interface-shell {
   opacity: 0.42 !important;
 }
 
+
+.interface-section.interface-system-set-youtubeEncore .interface-signal-pulse {
+  border-color: rgba(34, 197, 94, 0.34) !important;
+  background:
+    linear-gradient(145deg, rgba(34, 197, 94, 0.115), rgba(21, 128, 61, 0.060) 52%, rgba(5, 8, 22, 0.19)),
+    radial-gradient(circle at 16% 18%, rgba(34, 197, 94, 0.18), transparent 48%),
+    radial-gradient(circle at 88% 72%, rgba(74, 222, 128, 0.10), transparent 44%),
+    rgba(255, 255, 255, 0.034) !important;
+  box-shadow:
+    0 0 0 1px rgba(34, 197, 94, 0.045),
+    0 14px 30px rgba(0, 0, 0, 0.17),
+    0 0 24px rgba(34, 197, 94, 0.105),
+    inset 0 0 20px rgba(34, 197, 94, 0.036) !important;
+}
+
+.interface-section.interface-system-set-youtubeEncore .interface-signal-pulse::before {
+  background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.18), rgba(74, 222, 128, 0.10), transparent) !important;
+  opacity: 0.42 !important;
+}
+
+.interface-section.interface-system-set-vimeoEncore .interface-signal-pulse {
+  border-color: rgba(252, 214, 18, 0.34) !important;
+  background:
+    linear-gradient(145deg, rgba(252, 214, 18, 0.115), rgba(205, 180, 64, 0.060) 52%, rgba(5, 8, 22, 0.19)),
+    radial-gradient(circle at 16% 18%, rgba(252, 214, 18, 0.18), transparent 48%),
+    radial-gradient(circle at 88% 72%, rgba(253, 224, 71, 0.10), transparent 44%),
+    rgba(255, 255, 255, 0.034) !important;
+  box-shadow:
+    0 0 0 1px rgba(252, 214, 18, 0.045),
+    0 14px 30px rgba(0, 0, 0, 0.17),
+    0 0 24px rgba(252, 214, 18, 0.105),
+    inset 0 0 20px rgba(252, 214, 18, 0.036) !important;
+}
+
+.interface-section.interface-system-set-vimeoEncore .interface-signal-pulse::before {
+  background: linear-gradient(90deg, transparent, rgba(252, 214, 18, 0.18), rgba(253, 224, 71, 0.10), transparent) !important;
+  opacity: 0.42 !important;
+}
+
+.interface-section.interface-system-set-priceEncore .interface-signal-pulse {
+  border-color: rgba(56, 189, 248, 0.34) !important;
+  background:
+    linear-gradient(145deg, rgba(56, 189, 248, 0.115), rgba(14, 165, 233, 0.060) 52%, rgba(5, 8, 22, 0.19)),
+    radial-gradient(circle at 16% 18%, rgba(56, 189, 248, 0.18), transparent 48%),
+    radial-gradient(circle at 88% 72%, rgba(125, 211, 252, 0.10), transparent 44%),
+    rgba(255, 255, 255, 0.034) !important;
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.045),
+    0 14px 30px rgba(0, 0, 0, 0.17),
+    0 0 24px rgba(56, 189, 248, 0.105),
+    inset 0 0 20px rgba(56, 189, 248, 0.036) !important;
+}
+
+.interface-section.interface-system-set-priceEncore .interface-signal-pulse::before {
+  background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.18), rgba(125, 211, 252, 0.10), transparent) !important;
+  opacity: 0.42 !important;
+}
+
 /* =========================
    WINTERFACE V3.5 MICROPHONE ORB CLIP FIX
    Scope: Showcase Bay audio mute button only.
@@ -9275,9 +9333,56 @@ html[data-winterface-theme="dark-purple"] {
     inset 0 0 18px rgba(var(--style-matrix-orb-left-rgb), 0.040) !important;
 }
 
+
+
+/* WFO Media v3.7: integrated Live Playback Auto-Play toggle
+   Auto-Play is now part of the existing Live Playback bubble, so no extra control row is added. */
+.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked {
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked span[data-interface-media-status-text] {
+  white-space: nowrap;
+}
+
+.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked[aria-pressed="true"] .interface-playback-dot {
+  background: #4ade80 !important;
+  box-shadow: 0 0 16px rgba(74, 222, 128, 0.82), 0 0 30px rgba(34, 197, 94, 0.34) !important;
+}
+
+.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked[aria-pressed="false"] .interface-playback-dot {
+  background: #fb7185 !important;
+  box-shadow: 0 0 14px rgba(251, 113, 133, 0.78), 0 0 24px rgba(244, 63, 94, 0.30) !important;
+}
+
+.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked:hover,
+.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked:focus-visible {
+  outline: none;
+  border-color: rgba(52, 211, 153, 0.62) !important;
+  box-shadow: 0 0 0 1px rgba(52, 211, 153, 0.16), 0 18px 42px rgba(0, 0, 0, 0.24), 0 0 30px rgba(52, 211, 153, 0.18), inset 0 0 0 1px rgba(255,255,255,0.06) !important;
+}
+
+@media (min-width: 900px) {
+  .interface-section.is-winterface-maximized.interface-system-is-media.interface-system-media-expanded .interface-media-actions .interface-playback-status.is-autoplay-linked span[data-interface-media-status-text] {
+    font-size: clamp(0.68rem, 0.84vw, 0.82rem);
+    letter-spacing: 0.095em;
+  }
+}
+
+@media (max-width: 720px) {
+  .interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked span[data-interface-media-status-text] {
+    font-size: clamp(0.62rem, 2.65vw, 0.76rem);
+    letter-spacing: 0.07em;
+  }
+}
+
 /* =========================
-   WInterface v3.7 MEDIA PLAYER FEATURE PATCH
-   Adds theme-safe integrated Live Playback / Auto-Play styling without adding a separate control row.
+   WFO MEDIA v3.7 LIVE PLAYBACK BUBBLE LAYOUT FIX
+   Fixes the integrated Auto-Play status label so it fits inside the Live Playback bubble
+   and aligns visually with the Expand WInterface control. Also re-centers the control strip
+   in fullscreen expanded/snap mode without changing video/player sizing.
 ========================= */
 .interface-section.interface-system-is-media .interface-media-actions {
   min-width: 0 !important;
@@ -9295,9 +9400,6 @@ html[data-winterface-theme="dark-purple"] {
 }
 
 .interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked {
-  cursor: pointer;
-  user-select: none;
-  white-space: nowrap;
   gap: clamp(0.36rem, 0.55vw, 0.52rem) !important;
   padding-inline: clamp(0.62rem, 0.95vw, 0.95rem) !important;
 }
@@ -9323,23 +9425,72 @@ html[data-winterface-theme="dark-purple"] {
   height: 0.50rem !important;
 }
 
-.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked[aria-pressed="true"] .interface-playback-dot {
-  background: #4ade80 !important;
-  box-shadow: 0 0 16px rgba(74, 222, 128, 0.82), 0 0 30px rgba(34, 197, 94, 0.34) !important;
+@media (min-width: 900px) {
+  .interface-section.interface-system-is-media .interface-media-actions {
+    grid-template-columns: minmax(0, 1.04fr) auto minmax(0, 1.04fr) !important;
+  }
+
+  .interface-section.is-winterface-maximized.interface-system-is-media.interface-system-media-expanded .interface-media-actions {
+    transform: translateY(-10px) !important;
+  }
+
+  .interface-section.is-winterface-maximized.interface-system-is-media.interface-system-media-expanded .interface-media-actions .interface-playback-status.is-autoplay-linked span[data-interface-media-status-text] {
+    font-size: clamp(0.64rem, 0.76vw, 0.74rem) !important;
+    letter-spacing: clamp(0.055em, 0.16vw, 0.10em) !important;
+  }
 }
 
-.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked[aria-pressed="false"] .interface-playback-dot {
-  background: #fb7185 !important;
-  box-shadow: 0 0 14px rgba(251, 113, 133, 0.78), 0 0 24px rgba(244, 63, 94, 0.30) !important;
+@media (min-width: 1200px) {
+  .interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked span[data-interface-media-status-text] {
+    font-size: clamp(0.66rem, 0.72vw, 0.76rem) !important;
+    letter-spacing: 0.095em !important;
+  }
 }
 
-.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked:hover,
-.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked:focus-visible {
-  outline: none;
-  border-color: rgba(52, 211, 153, 0.62) !important;
-  box-shadow: 0 0 0 1px rgba(52, 211, 153, 0.16), 0 18px 42px rgba(0, 0, 0, 0.24), 0 0 30px rgba(52, 211, 153, 0.18), inset 0 0 0 1px rgba(255,255,255,0.06) !important;
+@media (max-width: 1100px) and (min-width: 900px) {
+  .interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked span[data-interface-media-status-text] {
+    font-size: clamp(0.58rem, 0.88vw, 0.68rem) !important;
+    letter-spacing: 0.045em !important;
+  }
 }
 
+
+/* =========================
+   WFO MEDIA v3.7 SNAP CONTROL MICRO-LIFT
+   Moves the fullscreen expanded/snap control strip up a hair for cleaner centering.
+========================= */
+@media (min-width: 900px) {
+  .interface-section.is-winterface-maximized.interface-system-is-media.interface-system-media-expanded .interface-media-actions {
+    transform: translateY(-14px) !important;
+  }
+}
+
+/* =========================
+   EXPAND / COLLAPSE LABEL WEIGHT PATCH
+   Keeps the WInterface expand/collapse control visually aligned with the
+   playback bubble while removing the heavy bold weight from the label.
+========================= */
+.interface-media-toggle,
+.interface-section .interface-media-toggle,
+.interface-media-actions .interface-media-toggle,
+.interface-section.interface-system-is-media .interface-media-actions .interface-media-toggle,
+.interface-system-set-media .interface-media-toggle,
+.interface-system-set-operations .interface-media-toggle {
+  font-weight: 500 !important;
+}
+
+.interface-media-toggle span,
+.interface-section .interface-media-toggle span,
+.interface-media-actions .interface-media-toggle span,
+.interface-section.interface-system-is-media .interface-media-actions .interface-media-toggle span {
+  font-weight: 500 !important;
+}
+
+/* =========================
+   WFO MEDIA v3.7 EXPAND / COLLAPSE FONT MATCH
+   Matches the Expand/Collapse WInterface button typography to the integrated
+   Live Playback / Auto-Play bubble while preserving the existing labels.
+========================= */
 .interface-section.interface-system-is-media .interface-media-actions .interface-media-toggle,
 .interface-media-actions .interface-media-toggle,
 .interface-media-toggle {
@@ -9365,30 +9516,7 @@ html[data-winterface-theme="dark-purple"] {
   text-shadow: inherit !important;
 }
 
-@media (min-width: 900px) {
-  .interface-section.interface-system-is-media .interface-media-actions {
-    grid-template-columns: minmax(0, 1.04fr) auto minmax(0, 1.04fr) !important;
-  }
-
-  .interface-section.is-winterface-maximized.interface-system-is-media.interface-system-media-expanded .interface-media-actions {
-    transform: translateY(-14px) !important;
-  }
-
-  .interface-section.is-winterface-maximized.interface-system-is-media.interface-system-media-expanded .interface-media-actions .interface-playback-status.is-autoplay-linked span[data-interface-media-status-text] {
-    font-size: clamp(0.64rem, 0.76vw, 0.74rem) !important;
-    letter-spacing: clamp(0.055em, 0.16vw, 0.10em) !important;
-  }
-}
-
-@media (min-width: 1200px) {
-  .interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked span[data-interface-media-status-text] {
-    font-size: clamp(0.66rem, 0.72vw, 0.76rem) !important;
-    letter-spacing: 0.095em !important;
-  }
-}
-
 @media (max-width: 1100px) and (min-width: 900px) {
-  .interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked span[data-interface-media-status-text],
   .interface-section.interface-system-is-media .interface-media-actions .interface-media-toggle,
   .interface-media-actions .interface-media-toggle,
   .interface-media-toggle {
@@ -9397,9 +9525,326 @@ html[data-winterface-theme="dark-purple"] {
   }
 }
 
-@media (max-width: 720px) {
-  .interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked span[data-interface-media-status-text] {
-    font-size: clamp(0.62rem, 2.65vw, 0.76rem) !important;
-    letter-spacing: 0.07em !important;
+/* =========================
+   WFO MEDIA EDITION v3.7 - LOCAL MP4 IFRAME FRAME MATCH
+   MP4 videos render inside the same iframe-based 16:9 viewport as other video providers.
+   CSS is intentionally minimal so the base iframe player sizing remains authoritative.
+========================= */
+.interface-video-frame[data-interface-video-frame-wrap].is-interface-mp4-frame iframe[data-interface-media-frame] {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  border: 0 !important;
+}
+
+
+/* === WFO Media v3.7 Bay 6 Price Expansion Compatibility Patch START ===
+   Adds the sixth bay accent/orb support used by the Bay 6 Price $ expansion.
+   This is intentionally limited to bay accent variables and the sixth bay orb;
+   theme colors, gradients, shadows, media player rules, and Style Matrix behavior are preserved.
+*/
+.interface-system-set-priceEncore,
+.interface-section.interface-system-set-priceEncore {
+  --interface-accent: var(--cyan, #38bdf8);
+  --interface-accent-rgb: 56, 189, 248;
+  --winterface-accent: var(--cyan, #38bdf8);
+  --winterface-accent-rgb: 56, 189, 248;
+  --winterface-accent-text: #7dd3fc;
+  --winterface-accent-soft: rgba(56, 189, 248, 0.095);
+  --winterface-accent-mid: rgba(56, 189, 248, 0.22);
+  --winterface-accent-strong: rgba(56, 189, 248, 0.56);
+}
+
+.interface-set-button:nth-child(4).is-active span {
+  background: var(--online-green, #22c55e) !important;
+  box-shadow: 0 0 16px rgba(34, 197, 94, 0.68), 0 0 34px rgba(56, 189, 248, 0.16) !important;
+  animation: interfaceActiveOrbPulse 2.65s ease-in-out infinite;
+}
+
+.interface-set-button:nth-child(5).is-active span {
+  background: var(--yellow, #fcd612) !important;
+  box-shadow: 0 0 16px rgba(252, 214, 18, 0.68), 0 0 34px rgba(56, 189, 248, 0.16) !important;
+  animation: interfaceActiveOrbPulse 2.65s ease-in-out infinite;
+}
+
+.interface-set-button:nth-child(6).is-active span {
+  background: var(--cyan, #38bdf8) !important;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.68), 0 0 34px rgba(252, 214, 18, 0.16) !important;
+  animation: interfaceActiveOrbPulse 2.65s ease-in-out infinite;
+}
+
+.interface-system-set-priceEncore .interface-status-bar > span {
+  border-color: rgba(var(--interface-accent-rgb), 0.18);
+  background: rgba(var(--interface-accent-rgb), 0.055);
+}
+
+.interface-system-set-priceEncore .interface-status-bar > span::before {
+  border-color: rgba(var(--interface-accent-rgb), 0.26);
+}
+
+.interface-system-set-priceEncore .interface-status-bar > span:nth-child(2) i,
+.interface-system-set-priceEncore .interface-status-bar > span:nth-child(3) i {
+  background: var(--interface-accent);
+  box-shadow: 0 0 16px rgba(var(--interface-accent-rgb), 0.62), 0 0 30px rgba(var(--interface-accent-rgb), 0.20);
+}
+
+.interface-system-set-priceEncore .interface-maximize-button {
+  border-color: rgba(var(--interface-accent-rgb), 0.26);
+}
+
+.interface-system-set-priceEncore .interface-maximize-button:hover,
+.interface-system-set-priceEncore .interface-maximize-button:focus-visible,
+.interface-system-set-priceEncore .interface-maximize-button[aria-pressed="true"] {
+  border-color: rgba(var(--interface-accent-rgb), 0.62);
+  box-shadow: 0 0 22px rgba(var(--interface-accent-rgb), 0.24), inset 0 0 18px rgba(var(--interface-accent-rgb), 0.10);
+}
+/* === WFO Media v3.7 Bay 6 Price Expansion Compatibility Patch END === */
+
+/* === WFO Media v3.7 Active Bay Orb Sync Patch START ===
+   Syncs the active bay orb, Media Bay status orbs, and top-right console orb
+   to the active bay color. Left-nav 01-06 path buttons and Style Matrix orbs
+   are intentionally untouched.
+*/
+.interface-section.interface-system-set-primary,
+.interface-system-set-primary {
+  --wfo-active-bay-accent: #3b82f6;
+  --wfo-active-bay-accent-rgb: 59, 130, 246;
+}
+
+.interface-section.interface-system-set-operations,
+.interface-system-set-operations {
+  --wfo-active-bay-accent: #8b5cf6;
+  --wfo-active-bay-accent-rgb: 139, 92, 246;
+}
+
+.interface-section.interface-system-set-media,
+.interface-system-set-media {
+  --wfo-active-bay-accent: #ec4899;
+  --wfo-active-bay-accent-rgb: 236, 72, 153;
+}
+
+.interface-section.interface-system-set-youtubeEncore,
+.interface-system-set-youtubeEncore {
+  --wfo-active-bay-accent: #22c55e;
+  --wfo-active-bay-accent-rgb: 34, 197, 94;
+}
+
+.interface-section.interface-system-set-vimeoEncore,
+.interface-system-set-vimeoEncore {
+  --wfo-active-bay-accent: #fcd612;
+  --wfo-active-bay-accent-rgb: 252, 214, 18;
+}
+
+.interface-section.interface-system-set-priceEncore,
+.interface-system-set-priceEncore {
+  --wfo-active-bay-accent: #38bdf8;
+  --wfo-active-bay-accent-rgb: 56, 189, 248;
+}
+
+.interface-section.interface-system-set-primary .interface-set-button[data-interface-set-button="primary"].is-active,
+.interface-section.interface-system-set-operations .interface-set-button[data-interface-set-button="operations"].is-active,
+.interface-section.interface-system-set-media .interface-set-button[data-interface-set-button="media"].is-active,
+.interface-section.interface-system-set-youtubeEncore .interface-set-button[data-interface-set-button="youtubeEncore"].is-active,
+.interface-section.interface-system-set-vimeoEncore .interface-set-button[data-interface-set-button="vimeoEncore"].is-active,
+.interface-section.interface-system-set-priceEncore .interface-set-button[data-interface-set-button="priceEncore"].is-active {
+  border-color: rgba(var(--wfo-active-bay-accent-rgb), 0.62) !important;
+  background: rgba(var(--wfo-active-bay-accent-rgb), 0.10) !important;
+  box-shadow: 0 0 18px rgba(var(--wfo-active-bay-accent-rgb), 0.22) !important;
+}
+
+.interface-section.interface-system-set-primary .interface-set-button[data-interface-set-button="primary"].is-active span,
+.interface-section.interface-system-set-operations .interface-set-button[data-interface-set-button="operations"].is-active span,
+.interface-section.interface-system-set-media .interface-set-button[data-interface-set-button="media"].is-active span,
+.interface-section.interface-system-set-youtubeEncore .interface-set-button[data-interface-set-button="youtubeEncore"].is-active span,
+.interface-section.interface-system-set-vimeoEncore .interface-set-button[data-interface-set-button="vimeoEncore"].is-active span,
+.interface-section.interface-system-set-priceEncore .interface-set-button[data-interface-set-button="priceEncore"].is-active span {
+  background: var(--wfo-active-bay-accent) !important;
+  box-shadow:
+    0 0 16px rgba(var(--wfo-active-bay-accent-rgb), 0.72),
+    0 0 34px rgba(var(--wfo-active-bay-accent-rgb), 0.24) !important;
+  animation: interfaceActiveOrbPulse 2.65s ease-in-out infinite;
+}
+
+.interface-section .interface-status-mode .interface-status-orb,
+.interface-section .interface-status-count .interface-maximize-button .interface-status-orb {
+  background: var(--wfo-active-bay-accent) !important;
+  box-shadow:
+    0 0 14px rgba(var(--wfo-active-bay-accent-rgb), 0.72),
+    0 0 28px rgba(var(--wfo-active-bay-accent-rgb), 0.28) !important;
+}
+
+.interface-section .interface-status-mode {
+  border-color: rgba(var(--wfo-active-bay-accent-rgb), 0.24) !important;
+  background: rgba(var(--wfo-active-bay-accent-rgb), 0.055) !important;
+}
+
+.interface-section .interface-status-mode::before {
+  border-color: rgba(var(--wfo-active-bay-accent-rgb), 0.30) !important;
+}
+
+.interface-section .interface-status-count .interface-maximize-button {
+  color: var(--wfo-active-bay-accent) !important;
+  border-color: rgba(var(--wfo-active-bay-accent-rgb), 0.30) !important;
+  box-shadow: inset 0 0 14px rgba(var(--wfo-active-bay-accent-rgb), 0.055) !important;
+}
+
+.interface-section .interface-status-count .interface-maximize-button:hover,
+.interface-section .interface-status-count .interface-maximize-button:focus-visible,
+.interface-section .interface-status-count .interface-maximize-button[aria-pressed="true"] {
+  border-color: rgba(var(--wfo-active-bay-accent-rgb), 0.64) !important;
+  background:
+    radial-gradient(circle at 35% 30%, rgba(248, 250, 252, 0.22), transparent 28%),
+    rgba(var(--wfo-active-bay-accent-rgb), 0.10) !important;
+  box-shadow:
+    0 0 20px rgba(var(--wfo-active-bay-accent-rgb), 0.24),
+    inset 0 0 16px rgba(var(--wfo-active-bay-accent-rgb), 0.07) !important;
+}
+
+.interface-section .interface-system-toggle[aria-pressed="true"] i,
+body:not(.winterface-offline) .interface-section .interface-system-toggle i {
+  background: #22c55e !important;
+  box-shadow:
+    0 0 10px rgba(34, 197, 94, 0.95),
+    0 0 24px rgba(34, 197, 94, 0.56),
+    0 0 42px rgba(34, 197, 94, 0.26) !important;
+}
+
+.interface-section .interface-system-toggle[aria-pressed="true"] i::after,
+body:not(.winterface-offline) .interface-section .interface-system-toggle i::after {
+  background: radial-gradient(circle, rgba(34, 197, 94, 0.30), rgba(34, 197, 94, 0.12) 38%, transparent 70%) !important;
+}
+
+body.winterface-offline .interface-section .interface-system-toggle i,
+.interface-section .interface-system-toggle[aria-pressed="false"] i {
+  background: #ef4444 !important;
+  box-shadow:
+    0 0 10px rgba(239, 68, 68, 0.88),
+    0 0 22px rgba(239, 68, 68, 0.46),
+    0 0 38px rgba(239, 68, 68, 0.22) !important;
+}
+
+body.winterface-offline .interface-section .interface-system-toggle i::after,
+.interface-section .interface-system-toggle[aria-pressed="false"] i::after {
+  background: radial-gradient(circle, rgba(239, 68, 68, 0.28), rgba(239, 68, 68, 0.10) 38%, transparent 70%) !important;
+}
+/* === WFO Media v3.7 Active Bay Orb Sync Patch END === */
+
+
+
+/* === WFO Media v3.7 Normal Expanded Snap Rail Containment Fix START ===
+   Scope: normal desktop Expanded/Snap media view only.
+   Keeps the six top bay orbs and the six left-rail media cards inside the rail
+   without affecting WF widescreen/maximized view, collapsed view, labels, JS, media playback, or colors.
+*/
+@media (min-width: 1101px) {
+  .interface-section.interface-system-is-media.interface-system-media-expanded:not(.is-winterface-maximized) .interface-rail {
+    min-width: 0 !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  .interface-section.interface-system-is-media.interface-system-media-expanded:not(.is-winterface-maximized) .interface-rail-header {
+    min-width: 0 !important;
+    gap: clamp(0.36rem, 0.48vw, 0.54rem) !important;
+  }
+
+  .interface-section.interface-system-is-media.interface-system-media-expanded:not(.is-winterface-maximized) .interface-rail-header > div:first-child {
+    flex: 0 1 auto !important;
+    min-width: 0 !important;
+    max-width: clamp(4.15rem, 38%, 5.85rem) !important;
+  }
+
+  .interface-section.interface-system-is-media.interface-system-media-expanded:not(.is-winterface-maximized) .interface-set-controls {
+    flex: 0 1 auto !important;
+    min-width: 0 !important;
+    max-width: calc(100% - 4.7rem) !important;
+    gap: clamp(0.18rem, 0.24vw, 0.28rem) !important;
+    overflow: hidden !important;
+  }
+
+  .interface-section.interface-system-is-media.interface-system-media-expanded:not(.is-winterface-maximized) .interface-set-button {
+    flex: 0 0 auto !important;
+    width: clamp(1.02rem, 1.04vw, 1.16rem) !important;
+    height: clamp(1.02rem, 1.04vw, 1.16rem) !important;
+  }
+
+  .interface-section.interface-system-is-media.interface-system-media-expanded:not(.is-winterface-maximized) .interface-set-button span {
+    inset: clamp(0.27rem, 0.30vw, 0.31rem) !important;
+  }
+
+  .interface-section.interface-system-is-media.interface-system-media-expanded:not(.is-winterface-maximized) .interface-set-button:hover,
+  .interface-section.interface-system-is-media.interface-system-media-expanded:not(.is-winterface-maximized) .interface-set-button:focus-visible,
+  .interface-section.interface-system-is-media.interface-system-media-expanded:not(.is-winterface-maximized) .interface-set-button.is-active {
+    transform: translateY(-1px) scale(1.02) !important;
+  }
+
+  .interface-section.interface-system-is-media.interface-system-media-expanded:not(.is-winterface-maximized) .interface-path-list,
+  .interface-section.interface-system-is-media.interface-system-media-expanded:not(.is-winterface-maximized) .interface-path {
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .interface-section.interface-system-is-media.interface-system-media-expanded:not(.is-winterface-maximized) .interface-path {
+    overflow: hidden !important;
+    padding-inline: clamp(0.54rem, 0.66vw, 0.68rem) !important;
+  }
+
+  .interface-section.interface-system-is-media.interface-system-media-expanded:not(.is-winterface-maximized) .interface-path:hover,
+  .interface-section.interface-system-is-media.interface-system-media-expanded:not(.is-winterface-maximized) .interface-path:focus-visible,
+  .interface-section.interface-system-is-media.interface-system-media-expanded:not(.is-winterface-maximized) .interface-path.is-active {
+    transform: translateX(0) !important;
+  }
+
+  .interface-section.interface-system-is-media.interface-system-media-expanded:not(.is-winterface-maximized) .interface-path strong {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
   }
 }
+/* === WFO Media v3.7 Normal Expanded Snap Rail Containment Fix END === */
+
+/* === WFO Media v3.7 Normal Expanded Snap Orb Hover Clip Final Fix START ===
+   Scope: normal desktop Expanded/Snap media view only.
+   Prevents top-edge clipping on hover/active bay orbs by giving the orb row
+   vertical clearance and removing the upward hover lift only in this affected view.
+*/
+@media (min-width: 1101px) {
+  .interface-section.interface-system-is-media.interface-system-media-expanded:not(.is-winterface-maximized) .interface-rail {
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+    padding-top: clamp(0.95rem, 1.08vw, 1.12rem) !important;
+  }
+
+  .interface-section.interface-system-is-media.interface-system-media-expanded:not(.is-winterface-maximized) .interface-rail-header {
+    min-height: clamp(2.85rem, 3.18vw, 3.12rem) !important;
+    padding-block: clamp(0.24rem, 0.34vw, 0.32rem) !important;
+    align-items: center !important;
+    overflow: visible !important;
+    box-sizing: border-box !important;
+  }
+
+  .interface-section.interface-system-is-media.interface-system-media-expanded:not(.is-winterface-maximized) .interface-set-controls {
+    min-height: clamp(1.92rem, 2.15vw, 2.08rem) !important;
+    padding-block: clamp(0.24rem, 0.32vw, 0.30rem) !important;
+    align-items: center !important;
+    overflow: visible !important;
+    box-sizing: border-box !important;
+  }
+
+  .interface-section.interface-system-is-media.interface-system-media-expanded:not(.is-winterface-maximized) .interface-set-button {
+    margin-block: clamp(0.08rem, 0.12vw, 0.12rem) !important;
+    transform-origin: center center !important;
+  }
+
+  .interface-section.interface-system-is-media.interface-system-media-expanded:not(.is-winterface-maximized) .interface-set-button:hover,
+  .interface-section.interface-system-is-media.interface-system-media-expanded:not(.is-winterface-maximized) .interface-set-button:focus-visible,
+  .interface-section.interface-system-is-media.interface-system-media-expanded:not(.is-winterface-maximized) .interface-set-button.is-active {
+    transform: translateY(0) scale(1.02) !important;
+  }
+}
+/* === WFO Media v3.7 Normal Expanded Snap Orb Hover Clip Final Fix END === */
