@@ -9780,3 +9780,289 @@ body.winterface-offline .interface-section .interface-system-toggle i::after,
   }
 }
 /* === WFO Media v3.7 Normal Expanded Snap Orb Hover Clip Final Fix END === */
+
+/* =========================
+   WFO v3.7 mobile browser WInterface canvas sync
+   Scope: phone/tablet browsers only. Preserves WInterface content/UI while using the stable standalone mobile canvas behavior.
+========================= */
+
+@media (max-width: 1180px) and (pointer: coarse) {
+  body.winterface-mobile-browser-canvas {
+    overflow-x: auto !important;
+    overscroll-behavior-x: contain !important;
+    touch-action: pan-x pan-y !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section {
+    position: relative !important;
+    box-sizing: border-box !important;
+    width: var(--wi-mobile-scaled-w, 738px) !important;
+    height: var(--wi-mobile-scaled-h, 415px) !important;
+    min-width: var(--wi-mobile-scaled-w, 738px) !important;
+    min-height: var(--wi-mobile-scaled-h, 415px) !important;
+    max-width: none !important;
+    max-height: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    transform: none !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section::before {
+    content: none !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section .interface-header {
+    display: none !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section .interface-shell {
+    position: absolute !important;
+    inset: auto !important;
+    top: 0 !important;
+    left: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    width: var(--wi-mobile-canvas-w, 1366px) !important;
+    height: var(--wi-mobile-canvas-h, 768px) !important;
+    min-width: var(--wi-mobile-canvas-w, 1366px) !important;
+    min-height: var(--wi-mobile-canvas-h, 768px) !important;
+    max-width: none !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0.92rem !important;
+    border-radius: 30px !important;
+    overflow: hidden !important;
+    transform: scale(var(--wi-mobile-phone-scale, 0.54)) !important;
+    transform-origin: top left !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section .interface-status-bar {
+    display: grid !important;
+    grid-template-columns: max-content max-content minmax(0, 1fr) max-content !important;
+    align-items: center !important;
+    justify-content: stretch !important;
+    column-gap: 0.72rem !important;
+    flex: 0 0 auto !important;
+    min-height: 4.35rem !important;
+    margin-bottom: 0.82rem !important;
+    padding: 0.82rem 1rem !important;
+    overflow: visible !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section .interface-status-bar > *,
+  body.winterface-mobile-browser-canvas .interface-section .interface-status-bar > span,
+  body.winterface-mobile-browser-canvas .interface-section .interface-system-toggle,
+  body.winterface-mobile-browser-canvas .interface-section .interface-theme-selector,
+  body.winterface-mobile-browser-canvas .interface-section .interface-theme-toggle {
+    width: auto !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    white-space: nowrap !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section .interface-system-toggle,
+  body.winterface-mobile-browser-canvas .interface-section .interface-status-mode {
+    justify-self: start !important;
+    width: max-content !important;
+    min-width: 0 !important;
+    max-width: max-content !important;
+    padding-left: 0.78rem !important;
+    padding-right: 0.78rem !important;
+    gap: 0.42rem !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section .interface-system-toggle span,
+  body.winterface-mobile-browser-canvas .interface-section .interface-status-mode span {
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    white-space: nowrap !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section .interface-status-mode .interface-status-orb {
+    flex: 0 0 auto !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section .interface-theme-selector {
+    order: initial !important;
+    display: inline-flex !important;
+    justify-self: end !important;
+    justify-content: flex-end !important;
+    align-self: center !important;
+    width: max-content !important;
+    min-width: max-content !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section .interface-status-count {
+    justify-self: end !important;
+    align-self: center !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section .interface-theme-toggle,
+  body.winterface-mobile-browser-canvas .interface-section .interface-system-toggle,
+  body.winterface-mobile-browser-canvas .interface-section .interface-status-item {
+    justify-content: center !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section .interface-theme-menu {
+    right: 0 !important;
+    left: auto !important;
+    width: 22rem !important;
+    transform-origin: top right !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section .interface-grid {
+    display: grid !important;
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    height: auto !important;
+    grid-template-columns: minmax(220px, 0.62fr) minmax(0, 1.58fr) minmax(270px, 0.82fr) !important;
+    gap: 0.9rem !important;
+    align-items: stretch !important;
+    overflow: hidden !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section.interface-system-media-expanded .interface-grid {
+    grid-template-columns: minmax(220px, 0.48fr) minmax(0, 2fr) !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section.interface-system-media-expanded .interface-core {
+    grid-column: auto !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section.interface-system-media-expanded .interface-side-panel {
+    display: none !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section .interface-rail,
+  body.winterface-mobile-browser-canvas .interface-section .interface-core,
+  body.winterface-mobile-browser-canvas .interface-section .interface-side-panel {
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: hidden !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section .interface-rail {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto minmax(0, 1fr) !important;
+    gap: 0.64rem !important;
+    padding: 0.85rem !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section .interface-rail-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 0.65rem !important;
+    min-height: 2.25rem !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section .interface-set-controls {
+    display: inline-flex !important;
+    flex-wrap: nowrap !important;
+    gap: 0.36rem !important;
+    max-width: none !important;
+    overflow: visible !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section .interface-path-list {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: repeat(6, minmax(0, 1fr)) !important;
+    gap: 0.5rem !important;
+    min-height: 0 !important;
+    height: 100% !important;
+    overflow: hidden !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section .interface-path {
+    min-height: 0 !important;
+    height: auto !important;
+    padding: 0.58rem 0.68rem !important;
+    gap: 0.72rem !important;
+    grid-template-columns: auto minmax(0, 1fr) !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section .interface-path span {
+    width: 1.62rem !important;
+    height: 1.62rem !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section .interface-core {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    min-height: 0 !important;
+    padding: clamp(1.25rem, 2vw, 2.1rem) !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section .interface-command {
+    flex: 0 0 auto !important;
+    width: min(100%, 42rem) !important;
+    margin-inline: auto !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section .interface-response[data-interface-response] {
+    min-height: 0 !important;
+    flex: 0 1 auto !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section .interface-media-panel:not([hidden]) {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    margin-top: 1.2rem !important;
+    margin-bottom: 0 !important;
+    overflow: visible !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section .interface-video-frame,
+  body.winterface-mobile-browser-canvas .interface-section .interface-showcase-frame {
+    max-height: 430px !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section .interface-media-actions {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) !important;
+    align-items: center !important;
+    gap: 0.72rem !important;
+    transform: translateY(-6px) !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section .interface-playback-status {
+    justify-self: start !important;
+    width: min(100%, 22rem) !important;
+    min-height: 2.18rem !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section .interface-media-mute {
+    justify-self: center !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section .interface-media-toggle {
+    justify-self: end !important;
+    width: min(100%, 22rem) !important;
+    min-height: 2.18rem !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section .interface-side-panel {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: minmax(7.25rem, auto) minmax(0, 1fr) minmax(4.5rem, auto) !important;
+    gap: 0.9rem !important;
+    min-height: 0 !important;
+  }
+
+  body.winterface-mobile-browser-canvas .interface-section .interface-output-card,
+  body.winterface-mobile-browser-canvas .interface-section .interface-output-card-soft,
+  body.winterface-mobile-browser-canvas .interface-section .interface-jump-link {
+    min-height: 0 !important;
+  }
+}
+

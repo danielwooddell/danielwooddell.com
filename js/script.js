@@ -3245,3 +3245,66 @@
 
 
 })();
+
+/* =========================
+   WFO v3.7 mobile browser WInterface canvas sync
+   Phone/tablet browser only. Keeps the WInterface desktop canvas intact and scales it like the accepted WFO Standalone mobile baseline.
+========================= */
+(function () {
+  const mediaQuery = window.matchMedia ? window.matchMedia('(max-width: 1180px) and (pointer: coarse)') : null;
+
+  function isMobileCanvasViewport() {
+    return Boolean(mediaQuery && mediaQuery.matches);
+  }
+
+  function syncMobileWinterfaceCanvas() {
+    const root = document.documentElement;
+    const body = document.body;
+    const interfaceSystem = document.querySelector('[data-interface-system]');
+
+    if (!root || !body || !interfaceSystem) return;
+
+    const viewport = window.visualViewport;
+    const viewportWidth = viewport && viewport.width ? viewport.width : window.innerWidth;
+    const canvasWidth = 1366;
+    const canvasHeight = 768;
+    const gutter = 12;
+    const minReadableScale = 0.54;
+    const scale = Math.min(1, Math.max(minReadableScale, (viewportWidth - gutter) / canvasWidth));
+
+    root.style.setProperty('--wi-mobile-canvas-w', canvasWidth + 'px');
+    root.style.setProperty('--wi-mobile-canvas-h', canvasHeight + 'px');
+    root.style.setProperty('--wi-mobile-phone-scale', String(scale));
+    root.style.setProperty('--wi-mobile-scaled-w', Math.ceil(canvasWidth * scale) + 'px');
+    root.style.setProperty('--wi-mobile-scaled-h', Math.ceil(canvasHeight * scale) + 'px');
+
+    const active = isMobileCanvasViewport();
+    body.classList.toggle('winterface-mobile-browser-canvas', active);
+    interfaceSystem.classList.toggle('winterface-mobile-browser-interface', active);
+  }
+
+  ['resize', 'orientationchange', 'visibilitychange'].forEach(eventName => {
+    window.addEventListener(eventName, () => {
+      window.setTimeout(syncMobileWinterfaceCanvas, 40);
+      window.setTimeout(syncMobileWinterfaceCanvas, 220);
+      window.setTimeout(syncMobileWinterfaceCanvas, 520);
+    }, true);
+  });
+
+  if (mediaQuery && typeof mediaQuery.addEventListener === 'function') {
+    mediaQuery.addEventListener('change', syncMobileWinterfaceCanvas);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', syncMobileWinterfaceCanvas);
+  } else {
+    syncMobileWinterfaceCanvas();
+  }
+
+  window.addEventListener('load', () => {
+    window.setTimeout(syncMobileWinterfaceCanvas, 80);
+    window.setTimeout(syncMobileWinterfaceCanvas, 420);
+    window.setTimeout(syncMobileWinterfaceCanvas, 760);
+  });
+})();
+
