@@ -934,7 +934,7 @@
         keys: ['canvasBasics', 'allyAccess', 'teachingTech', 'etaAssistant', 'genaiPrompting', 'courseSystems']
       },
       media: {
-        label: 'Showcase Bay',
+        label: 'Showcase',
         subtitle: 'Media Modules',
         modeLabel: 'Showcase bay active',
         countLabel: '6 media modules connected',
@@ -1426,6 +1426,9 @@
     let interfaceMediaPlaying = false;
     let interfaceMediaMuted = false;
     let interfaceMediaAutoplay = false;
+    let interfaceImageSlideshow = false;
+    let interfaceImageSlideshowTimer = null;
+    const interfaceImageSlideshowDelay = 5000;
     const routeTokens = [
       {
         token: '3a9cead089fd87a9f599b65b29568c3900362c4dd5f588536f35d2ca342ec9b4',
@@ -1728,34 +1731,101 @@
       }
     }
 
+    function isInterfaceImageCard(key = activeInterfaceKey) {
+      const data = interfaceData[key];
+      return Boolean(data && data.mediaType === 'image');
+    }
+
+    function getInterfaceImageSlideshowKeys() {
+      const setKey = getSetForKey(activeInterfaceKey);
+      const set = interfaceSets[setKey] || interfaceSets[activeInterfaceSet] || interfaceSets.primary;
+      if (!set || !Array.isArray(set.keys)) return [];
+      return set.keys.filter(key => isInterfaceImageCard(key));
+    }
+
+    function clearInterfaceImageSlideshowTimer() {
+      window.clearInterval(interfaceImageSlideshowTimer);
+      interfaceImageSlideshowTimer = null;
+    }
+
+    function advanceInterfaceImageSlideshow() {
+      if (!interfaceImageSlideshow || !isInterfaceImageCard()) {
+        setInterfaceImageSlideshow(false);
+        return;
+      }
+
+      const imageKeys = getInterfaceImageSlideshowKeys();
+      if (imageKeys.length < 2) return;
+
+      const currentIndex = Math.max(0, imageKeys.indexOf(activeInterfaceKey));
+      const nextKey = imageKeys[(currentIndex + 1) % imageKeys.length];
+
+      if (nextKey) {
+        setInterfacePath(nextKey, { updateSet: false });
+      }
+    }
+
+    function startInterfaceImageSlideshowTimer() {
+      clearInterfaceImageSlideshowTimer();
+      if (!interfaceImageSlideshow || !isInterfaceImageCard() || prefersReducedMotion.matches) return;
+      interfaceImageSlideshowTimer = window.setInterval(advanceInterfaceImageSlideshow, interfaceImageSlideshowDelay);
+    }
+
     function getInterfacePlaybackVisibleLabel() {
       const activeData = interfaceData[activeInterfaceKey];
       const isVideo = activeData && activeData.mediaType === 'video';
-      const baseLabel = isVideo ? 'Live Playback' : 'Showcase Active';
-      const autoLabel = interfaceMediaAutoplay ? 'Auto-Play On' : 'Auto-Play Off';
-      return isVideo ? `${baseLabel} · ${autoLabel}` : baseLabel;
+      const isImage = isInterfaceImageCard();
+      if (isVideo) {
+        const autoLabel = interfaceMediaAutoplay ? 'Auto-Play On' : 'Auto-Play Off';
+        return `Live Playback · ${autoLabel}`;
+      }
+      if (isImage) {
+        return interfaceImageSlideshow ? 'Slideshow On' : 'Slideshow Off';
+      }
+      return 'Showcase Active';
     }
 
     function updateInterfacePlaybackStatusLabel() {
       const activeData = interfaceData[activeInterfaceKey];
       const isVideo = activeData && activeData.mediaType === 'video';
+      const isImage = isInterfaceImageCard();
+      const isToggle = Boolean(isVideo || isImage);
       const visibleLabel = getInterfacePlaybackVisibleLabel();
 
       if (mediaStatusText) mediaStatusText.textContent = visibleLabel;
       if (!playbackStatus) return;
 
-      playbackStatus.classList.toggle('is-autoplay-linked', Boolean(isVideo));
-      playbackStatus.setAttribute('aria-label', isVideo ? `${visibleLabel}. Click to toggle auto-play.` : visibleLabel);
+      playbackStatus.classList.toggle('is-autoplay-linked', isToggle);
+      playbackStatus.classList.toggle('is-slideshow-linked', Boolean(isImage));
+      playbackStatus.setAttribute('aria-label', isToggle ? `${visibleLabel}. Click to toggle ${isVideo ? 'auto-play' : 'slideshow mode'}.` : visibleLabel);
       playbackStatus.setAttribute('title', visibleLabel);
 
-      if (isVideo) {
+      if (isToggle) {
         playbackStatus.setAttribute('role', 'button');
         playbackStatus.setAttribute('tabindex', '0');
-        playbackStatus.setAttribute('aria-pressed', String(interfaceMediaAutoplay));
+        playbackStatus.setAttribute('aria-pressed', String(isVideo ? interfaceMediaAutoplay : interfaceImageSlideshow));
       } else {
         playbackStatus.removeAttribute('role');
         playbackStatus.removeAttribute('tabindex');
         playbackStatus.removeAttribute('aria-pressed');
+      }
+    }
+
+    function setInterfaceImageSlideshow(enabled) {
+      interfaceImageSlideshow = Boolean(enabled) && isInterfaceImageCard();
+      updateInterfacePlaybackStatusLabel();
+
+      if (interfaceImageSlideshow) {
+        startInterfaceImageSlideshowTimer();
+      } else {
+        clearInterfaceImageSlideshowTimer();
+      }
+    }
+
+    function toggleInterfaceImageSlideshow() {
+      setInterfaceImageSlideshow(!interfaceImageSlideshow);
+      if (typeof playInteractionSound === 'function') {
+        playInteractionSound();
       }
     }
 
@@ -2920,8 +2990,14 @@
       }
 
       activeInterfaceKey = key;
+      if (!isInterfaceImageCard(key)) {
+        setInterfaceImageSlideshow(false);
+      }
       setInterfaceMediaMode(data.mediaType === 'image' || data.mediaType === 'video');
       updateInterfaceMediaPanel(data);
+      if (interfaceImageSlideshow) {
+        startInterfaceImageSlideshowTimer();
+      }
       Array.from(interfaceSystem.querySelectorAll('[data-interface-path]')).forEach(button => {
         const isActive = button.dataset.interfacePath === key;
         button.classList.toggle('is-active', isActive);
@@ -3048,15 +3124,27 @@
     if (playbackStatus) {
       updateInterfacePlaybackStatusLabel();
       playbackStatus.addEventListener('click', () => {
-        if (!interfaceData[activeInterfaceKey] || interfaceData[activeInterfaceKey].mediaType !== 'video') return;
-        toggleInterfaceMediaAutoplay();
+        const activeData = interfaceData[activeInterfaceKey];
+        if (!activeData) return;
+        if (activeData.mediaType === 'video') {
+          toggleInterfaceMediaAutoplay();
+          return;
+        }
+        if (isInterfaceImageCard()) {
+          toggleInterfaceImageSlideshow();
+        }
       });
 
       playbackStatus.addEventListener('keydown', event => {
-        if (!interfaceData[activeInterfaceKey] || interfaceData[activeInterfaceKey].mediaType !== 'video') return;
+        const activeData = interfaceData[activeInterfaceKey];
+        if (!activeData || (activeData.mediaType !== 'video' && !isInterfaceImageCard())) return;
         if (event.key !== 'Enter' && event.key !== ' ') return;
         event.preventDefault();
-        toggleInterfaceMediaAutoplay();
+        if (activeData.mediaType === 'video') {
+          toggleInterfaceMediaAutoplay();
+        } else {
+          toggleInterfaceImageSlideshow();
+        }
       });
     }
 
