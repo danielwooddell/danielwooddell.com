@@ -1720,7 +1720,7 @@
     function updateInterfaceMuteControl() {
       if (!mediaMute) return;
 
-      const labelText = interfaceMediaMuted ? 'Unmute Showcase Bay Audio' : 'Mute Showcase Bay Audio';
+      const labelText = interfaceMediaMuted ? 'Unmute Media Audio' : 'Mute Media Audio';
       mediaMute.classList.toggle('is-muted', interfaceMediaMuted);
       mediaMute.setAttribute('aria-pressed', String(interfaceMediaMuted));
       mediaMute.setAttribute('aria-label', labelText);
@@ -1771,13 +1771,30 @@
       interfaceImageSlideshowTimer = window.setInterval(advanceInterfaceImageSlideshow, interfaceImageSlideshowDelay);
     }
 
+    function getInterfacePlaybackFullLabel() {
+      const liveLabel = interfaceMediaPlaying ? 'Live Media On' : 'Live Media Off';
+      const autoLabel = interfaceMediaAutoplay ? 'Auto-Play On' : 'Auto-Play Off';
+      return `${liveLabel} · ${autoLabel}`;
+    }
+
+    function shouldUseCompactInterfacePlaybackLabel() {
+      if (!interfaceSystem) return false;
+      const isMaximized = interfaceSystem.classList.contains('is-winterface-maximized');
+      const isExpanded = interfaceSystem.classList.contains('interface-system-media-expanded');
+      return !isMaximized && !isExpanded;
+    }
+
     function getInterfacePlaybackVisibleLabel() {
       const activeData = interfaceData[activeInterfaceKey];
       const isVideo = activeData && activeData.mediaType === 'video';
       const isImage = isInterfaceImageCard();
       if (isVideo) {
-        const autoLabel = interfaceMediaAutoplay ? 'Auto-Play On' : 'Auto-Play Off';
-        return `Live Playback · ${autoLabel}`;
+        if (shouldUseCompactInterfacePlaybackLabel()) {
+          const liveLabel = interfaceMediaPlaying ? 'Media On' : 'Media Off';
+          const autoLabel = interfaceMediaAutoplay ? 'Auto On' : 'Auto Off';
+          return `${liveLabel} · ${autoLabel}`;
+        }
+        return getInterfacePlaybackFullLabel();
       }
       if (isImage) {
         return interfaceImageSlideshow ? 'Slideshow On' : 'Slideshow Off';
@@ -1791,14 +1808,15 @@
       const isImage = isInterfaceImageCard();
       const isToggle = Boolean(isVideo || isImage);
       const visibleLabel = getInterfacePlaybackVisibleLabel();
+      const fullLabel = isVideo ? getInterfacePlaybackFullLabel() : visibleLabel;
 
       if (mediaStatusText) mediaStatusText.textContent = visibleLabel;
       if (!playbackStatus) return;
 
       playbackStatus.classList.toggle('is-autoplay-linked', isToggle);
       playbackStatus.classList.toggle('is-slideshow-linked', Boolean(isImage));
-      playbackStatus.setAttribute('aria-label', isToggle ? `${visibleLabel}. Click to toggle ${isVideo ? 'auto-play' : 'slideshow mode'}.` : visibleLabel);
-      playbackStatus.setAttribute('title', visibleLabel);
+      playbackStatus.setAttribute('aria-label', isToggle ? `${fullLabel}. Click to toggle ${isVideo ? 'auto-play' : 'slideshow mode'}.` : fullLabel);
+      playbackStatus.setAttribute('title', fullLabel);
 
       if (isToggle) {
         playbackStatus.setAttribute('role', 'button');

@@ -10125,3 +10125,232 @@ body.winterface-offline .interface-section .interface-system-toggle i::after,
     0 0 38px rgba(var(--style-matrix-orb-right-rgb), 0.22) !important;
 }
 /* === WFO Media Theme-Synced Controller Sound Button END === */
+
+/* v3.7 Hover Caption / Live Media sync: keep the Live Media / Auto-Play button cyan in Bay 3.
+   This overrides older Showcase Bay pink status-button treatment only for the integrated
+   Live Media button, preserving the button text, behavior, and layout. */
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked,
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing) {
+  color: var(--text) !important;
+  border-color: rgba(56, 189, 248, 0.48) !important;
+  background:
+    linear-gradient(145deg, rgba(56, 189, 248, 0.17), rgba(139, 92, 246, 0.095)),
+    radial-gradient(circle at 18% 12%, rgba(125, 211, 252, 0.13), transparent 44%),
+    radial-gradient(circle at 88% 92%, rgba(139, 92, 246, 0.10), transparent 46%),
+    rgba(255, 255, 255, 0.055) !important;
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.105),
+    0 16px 38px rgba(0, 0, 0, 0.24),
+    0 0 28px rgba(56, 189, 248, 0.18),
+    0 0 52px rgba(139, 92, 246, 0.075),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.055),
+    inset 0 0 30px rgba(56, 189, 248, 0.062) !important;
+}
+
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked::before,
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing)::before {
+  background:
+    linear-gradient(90deg, transparent, rgba(125, 211, 252, 0.32), rgba(139, 92, 246, 0.18), transparent) !important;
+  opacity: 0.64 !important;
+}
+
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked::after,
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing)::after {
+  border-color: rgba(255, 255, 255, 0.060) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.070),
+    inset 0 -1px 0 rgba(56, 189, 248, 0.055) !important;
+}
+
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked:hover,
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked:focus-visible,
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing):hover,
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing):focus-visible {
+  transform: translateY(-2px) !important;
+  color: var(--text) !important;
+  border-color: rgba(56, 189, 248, 0.72) !important;
+  background:
+    linear-gradient(145deg, rgba(56, 189, 248, 0.21), rgba(139, 92, 246, 0.125)),
+    radial-gradient(circle at 18% 12%, rgba(125, 211, 252, 0.17), transparent 44%),
+    radial-gradient(circle at 88% 92%, rgba(139, 92, 246, 0.13), transparent 46%),
+    rgba(255, 255, 255, 0.065) !important;
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.14),
+    0 18px 42px rgba(0, 0, 0, 0.26),
+    0 0 34px rgba(56, 189, 248, 0.24),
+    0 0 60px rgba(139, 92, 246, 0.10),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.070),
+    inset 0 0 34px rgba(56, 189, 248, 0.080) !important;
+}
+
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked:hover::before,
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked:focus-visible::before,
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing):hover::before,
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing):focus-visible::before {
+  background:
+    linear-gradient(90deg, transparent, rgba(125, 211, 252, 0.36), rgba(139, 92, 246, 0.20), transparent) !important;
+  opacity: 0.72 !important;
+}
+
+/* === v3.7 FINAL: Bay 3 Live Media Button Cyan Override START ===
+   Keeps the integrated Live Media / Auto-Play button visually consistent in Bay 3.
+   This override is intentionally scoped to the autoplay-linked Live Media button only,
+   so Showcase/Bay 3 card styling, media content, labels, and layout remain unchanged.
+*/
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked,
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing),
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked.interface-playback-is-playing,
+.interface-section.interface-system-is-media.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked,
+.interface-section.interface-system-is-media.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing),
+.interface-section.interface-system-is-media.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked.interface-playback-is-playing {
+  color: var(--text) !important;
+  border-color: rgba(56, 189, 248, 0.58) !important;
+  background:
+    linear-gradient(145deg, rgba(56, 189, 248, 0.18), rgba(139, 92, 246, 0.10)),
+    radial-gradient(circle at 18% 12%, rgba(125, 211, 252, 0.16), transparent 44%),
+    radial-gradient(circle at 88% 92%, rgba(139, 92, 246, 0.12), transparent 46%),
+    rgba(255, 255, 255, 0.055) !important;
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.12),
+    0 16px 38px rgba(0, 0, 0, 0.24),
+    0 0 30px rgba(56, 189, 248, 0.22),
+    0 0 54px rgba(139, 92, 246, 0.09),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.060),
+    inset 0 0 30px rgba(56, 189, 248, 0.070) !important;
+}
+
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked::before,
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing)::before,
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked.interface-playback-is-playing::before,
+.interface-section.interface-system-is-media.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked::before,
+.interface-section.interface-system-is-media.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing)::before,
+.interface-section.interface-system-is-media.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked.interface-playback-is-playing::before {
+  background:
+    linear-gradient(90deg, transparent, rgba(125, 211, 252, 0.36), rgba(139, 92, 246, 0.20), transparent) !important;
+  opacity: 0.70 !important;
+}
+
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked::after,
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing)::after,
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked.interface-playback-is-playing::after,
+.interface-section.interface-system-is-media.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked::after,
+.interface-section.interface-system-is-media.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing)::after,
+.interface-section.interface-system-is-media.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked.interface-playback-is-playing::after {
+  border-color: rgba(255, 255, 255, 0.065) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.075),
+    inset 0 -1px 0 rgba(56, 189, 248, 0.060) !important;
+}
+
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked:hover,
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked:focus-visible,
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing):hover,
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing):focus-visible,
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked.interface-playback-is-playing:hover,
+.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked.interface-playback-is-playing:focus-visible,
+.interface-section.interface-system-is-media.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked:hover,
+.interface-section.interface-system-is-media.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked:focus-visible {
+  color: var(--text) !important;
+  border-color: rgba(56, 189, 248, 0.76) !important;
+  background:
+    linear-gradient(145deg, rgba(56, 189, 248, 0.22), rgba(139, 92, 246, 0.13)),
+    radial-gradient(circle at 18% 12%, rgba(125, 211, 252, 0.19), transparent 44%),
+    radial-gradient(circle at 88% 92%, rgba(139, 92, 246, 0.14), transparent 46%),
+    rgba(255, 255, 255, 0.065) !important;
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.15),
+    0 18px 42px rgba(0, 0, 0, 0.26),
+    0 0 36px rgba(56, 189, 248, 0.26),
+    0 0 62px rgba(139, 92, 246, 0.11),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.075),
+    inset 0 0 34px rgba(56, 189, 248, 0.085) !important;
+}
+/* === v3.7 FINAL: Bay 3 Live Media Button Cyan Override END === */
+
+/* === v3.7 FINAL: Live Media Button Consistency Across Bays START ===
+   Keeps the integrated Live Media / Auto-Play button visually consistent in every bay,
+   including Bay 3/Showcase-style media sets that previously inherited pink treatment.
+   This is scoped to the autoplay-linked Live Media control only. */
+html body .interface-section.interface-system-is-media[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-playback-status.is-autoplay-linked,
+html body .interface-section.interface-system-is-media[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing),
+html body .interface-section.interface-system-is-media[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-playback-status.is-autoplay-linked.interface-playback-is-playing,
+html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-playback-status.is-autoplay-linked,
+html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing),
+html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-playback-status.is-autoplay-linked.interface-playback-is-playing {
+  color: var(--text) !important;
+  border-color: rgba(56, 189, 248, 0.58) !important;
+  background:
+    linear-gradient(145deg, rgba(56, 189, 248, 0.18), rgba(139, 92, 246, 0.10)),
+    radial-gradient(circle at 18% 12%, rgba(125, 211, 252, 0.16), transparent 44%),
+    radial-gradient(circle at 88% 92%, rgba(139, 92, 246, 0.12), transparent 46%),
+    rgba(255, 255, 255, 0.055) !important;
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.12),
+    0 16px 38px rgba(0, 0, 0, 0.24),
+    0 0 30px rgba(56, 189, 248, 0.22),
+    0 0 54px rgba(139, 92, 246, 0.09),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.060),
+    inset 0 0 30px rgba(56, 189, 248, 0.070) !important;
+}
+
+html body .interface-section.interface-system-is-media[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-playback-status.is-autoplay-linked::before,
+html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-playback-status.is-autoplay-linked::before {
+  background:
+    linear-gradient(90deg, transparent, rgba(125, 211, 252, 0.36), rgba(139, 92, 246, 0.20), transparent) !important;
+  opacity: 0.70 !important;
+}
+
+html body .interface-section.interface-system-is-media[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-playback-status.is-autoplay-linked::after,
+html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-playback-status.is-autoplay-linked::after {
+  border-color: rgba(255, 255, 255, 0.065) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.075),
+    inset 0 -1px 0 rgba(56, 189, 248, 0.060) !important;
+}
+
+html body .interface-section.interface-system-is-media[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-playback-status.is-autoplay-linked:hover,
+html body .interface-section.interface-system-is-media[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-playback-status.is-autoplay-linked:focus-visible,
+html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-playback-status.is-autoplay-linked:hover,
+html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-playback-status.is-autoplay-linked:focus-visible {
+  color: var(--text) !important;
+  border-color: rgba(56, 189, 248, 0.76) !important;
+  background:
+    linear-gradient(145deg, rgba(56, 189, 248, 0.22), rgba(139, 92, 246, 0.13)),
+    radial-gradient(circle at 18% 12%, rgba(125, 211, 252, 0.19), transparent 44%),
+    radial-gradient(circle at 88% 92%, rgba(139, 92, 246, 0.14), transparent 46%),
+    rgba(255, 255, 255, 0.065) !important;
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.15),
+    0 18px 42px rgba(0, 0, 0, 0.26),
+    0 0 36px rgba(56, 189, 248, 0.26),
+    0 0 62px rgba(139, 92, 246, 0.11),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.075),
+    inset 0 0 34px rgba(56, 189, 248, 0.085) !important;
+}
+/* === v3.7 FINAL: Live Media Button Consistency Across Bays END === */
+
+/* WFO v3.7: Live Media button style matched to Expand WInterface CTA. */
+.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked {
+justify-self: end !important;
+    width: min(100%, 22rem) !important;
+    min-height: 2.18rem !important;
+}
+
+.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked:hover,
+.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked:focus-visible {
+transform: translateY(-2px);
+  border-color: rgba(56, 189, 248, 0.72) !important;
+  background:
+    linear-gradient(145deg, rgba(56, 189, 248, 0.21), rgba(139, 92, 246, 0.125)),
+    radial-gradient(circle at 18% 12%, rgba(125, 211, 252, 0.17), transparent 44%),
+    radial-gradient(circle at 88% 92%, rgba(139, 92, 246, 0.13), transparent 46%),
+    rgba(255, 255, 255, 0.065) !important;
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.14),
+    0 18px 42px rgba(0, 0, 0, 0.26),
+    0 0 34px rgba(56, 189, 248, 0.24),
+    0 0 60px rgba(139, 92, 246, 0.10),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.070),
+    inset 0 0 34px rgba(56, 189, 248, 0.080) !important;
+}
+
