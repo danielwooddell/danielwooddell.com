@@ -2614,7 +2614,7 @@
     function applyWinterfaceTheme(themeKey, options = {}) {
       if (!themeStylesheet || !themeFiles.hasOwnProperty(themeKey)) return;
       const baseHref = getThemeBaseHref();
-      const themeCacheVersion = '3.7-dwo-caption-labels-20260612';
+      const themeCacheVersion = '20260612-dwo-css-js-cleanup';
       const nextHrefBase = themeKey === 'default' ? `${baseHref}${baseHref.startsWith('../') ? 'style-dev.css' : 'style.css'}` : `${baseHref}themes/${themeFiles[themeKey]}`;
       const nextHref = `${nextHrefBase}?v=${themeCacheVersion}`;
       if (themeStylesheet.getAttribute('href') !== nextHref) {

@@ -4043,7 +4043,6 @@ body.winterface-offline .interface-status-bar > span:nth-child(3) i::after {
 }
 
 
-
 /* =========================
    WINTERFACE CONTEXTUAL BAY ACCENTS
    Syncs module card borders and numbered circles to the active bay color.
@@ -5478,8 +5477,6 @@ body.winterface-offline .interface-status-bar > span:nth-child(3) i::after {
     0 0 48px rgba(236, 72, 153, 0.12),
     inset 0 0 28px rgba(239, 68, 68, 0.065) !important;
 }
-
-
 
 
 /* =========================
@@ -8332,7 +8329,6 @@ body.winterface-offline .interface-section .interface-shell {
 }
 
 
-
 /* =========================
    WFO 3.6 SECRET INTEL NORMAL-VIEW VIDEO SPACING GUARD
    Preserves the latest WFO fixes while keeping the duplicated video player vertically balanced.
@@ -9404,213 +9400,15 @@ html[data-winterface-theme="dark-purple"] {
   }
 }
 
-/* === WInterface Live Media Glass + Typography Repair START ===
-   Targeted sync from the accepted Danieldev.us build:
-   - Live Media / Auto-Play shares the transparent glass control treatment.
-   - Live Media text uses the approved lighter label typography.
-   - Playing-state dot/effect is preserved.
-   - Expand/Collapse WInterface typography matches Live Media typography.
-   - Theme-synced volume orb rules are not modified.
-*/
-.interface-section .interface-media-actions .interface-playback-status.is-autoplay-linked,
-.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked,
-.interface-media-actions .interface-playback-status.is-autoplay-linked,
-.interface-playback-status.is-autoplay-linked,
-.interface-section .interface-media-actions .interface-media-toggle,
-.interface-media-actions .interface-media-toggle {
-  color: var(--text) !important;
-  border-color: rgba(255, 255, 255, 0.13) !important;
-  background:
-    linear-gradient(145deg, rgba(25, 30, 48, 0.68), rgba(8, 10, 22, 0.48)),
-    radial-gradient(circle at 18% 16%, rgba(255, 255, 255, 0.075), transparent 42%),
-    radial-gradient(circle at 88% 88%, rgba(var(--style-matrix-orb-left-rgb), 0.075), transparent 50%),
-    rgba(255, 255, 255, 0.025) !important;
-  box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.035),
-    0 14px 32px rgba(0, 0, 0, 0.28),
-    0 0 18px rgba(var(--style-matrix-orb-left-rgb), 0.075),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.050),
-    inset 0 0 24px rgba(255, 255, 255, 0.030) !important;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  text-shadow: none !important;
-}
-
-.interface-section .interface-media-actions .interface-playback-status.is-autoplay-linked span[data-interface-media-status-text],
-.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked span[data-interface-media-status-text],
-.interface-media-actions .interface-playback-status.is-autoplay-linked span[data-interface-media-status-text],
-.interface-playback-status.is-autoplay-linked span[data-interface-media-status-text],
-.interface-section .interface-media-actions .interface-media-toggle,
-.interface-section.interface-system-is-media .interface-media-actions .interface-media-toggle,
-.interface-media-actions .interface-media-toggle,
-.interface-media-toggle {
-  color: var(--text) !important;
-  font-family: "Space Grotesk", sans-serif !important;
-  font-size: clamp(0.62rem, 0.78vw, 0.72rem) !important;
-  font-weight: 650 !important;
-  letter-spacing: clamp(0.045em, 0.14vw, 0.075em) !important;
-  line-height: 1 !important;
-  text-transform: none !important;
-  text-shadow: none !important;
-}
-
-.interface-section .interface-media-actions .interface-media-toggle span,
-.interface-section.interface-system-is-media .interface-media-actions .interface-media-toggle span,
-.interface-media-actions .interface-media-toggle span,
-.interface-media-toggle span {
-  color: inherit !important;
-  font-family: inherit !important;
-  font-size: inherit !important;
-  font-weight: inherit !important;
-  letter-spacing: inherit !important;
-  line-height: inherit !important;
-  text-transform: inherit !important;
-  text-shadow: inherit !important;
-}
-
-.interface-section .interface-media-actions .interface-playback-status.is-autoplay-linked::before,
-.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked::before,
-.interface-media-actions .interface-playback-status.is-autoplay-linked::before,
-.interface-playback-status.is-autoplay-linked::before,
-.interface-section .interface-media-actions .interface-media-toggle::before,
-.interface-media-actions .interface-media-toggle::before {
-  background:
-    linear-gradient(90deg, transparent, rgba(var(--style-matrix-orb-left-rgb), 0.18), rgba(var(--style-matrix-orb-right-rgb), 0.12), transparent) !important;
-  opacity: 0.44 !important;
-}
-
-.interface-section .interface-media-actions .interface-playback-status.is-autoplay-linked::after,
-.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked::after,
-.interface-media-actions .interface-playback-status.is-autoplay-linked::after,
-.interface-playback-status.is-autoplay-linked::after,
-.interface-section .interface-media-actions .interface-media-toggle::after,
-.interface-media-actions .interface-media-toggle::after {
-  border-color: rgba(255, 255, 255, 0.055) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.055),
-    inset 0 -1px 0 rgba(var(--style-matrix-orb-left-rgb), 0.035) !important;
-}
-
-.interface-section .interface-media-actions .interface-playback-status.is-autoplay-linked:hover,
-.interface-section .interface-media-actions .interface-playback-status.is-autoplay-linked:focus-visible,
-.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked:hover,
-.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked:focus-visible,
-.interface-media-actions .interface-playback-status.is-autoplay-linked:hover,
-.interface-media-actions .interface-playback-status.is-autoplay-linked:focus-visible,
-.interface-playback-status.is-autoplay-linked:hover,
-.interface-playback-status.is-autoplay-linked:focus-visible,
-.interface-section .interface-media-actions .interface-media-toggle:hover,
-.interface-section .interface-media-actions .interface-media-toggle:focus-visible,
-.interface-media-actions .interface-media-toggle:hover,
-.interface-media-actions .interface-media-toggle:focus-visible {
-  transform: translateY(-2px);
-  border-color: rgba(var(--style-matrix-orb-left-rgb), 0.36) !important;
-  background:
-    linear-gradient(145deg, rgba(30, 36, 58, 0.72), rgba(10, 12, 26, 0.52)),
-    radial-gradient(circle at 18% 16%, rgba(255, 255, 255, 0.090), transparent 42%),
-    radial-gradient(circle at 88% 88%, rgba(var(--style-matrix-orb-left-rgb), 0.105), transparent 50%),
-    rgba(255, 255, 255, 0.032) !important;
-  box-shadow:
-    0 0 0 1px rgba(var(--style-matrix-orb-left-rgb), 0.050),
-    0 16px 36px rgba(0, 0, 0, 0.30),
-    0 0 24px rgba(var(--style-matrix-orb-left-rgb), 0.11),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.062),
-    inset 0 0 28px rgba(255, 255, 255, 0.035) !important;
-}
-
-.interface-section .interface-media-actions .interface-playback-status.is-autoplay-linked .interface-playback-dot,
-.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked .interface-playback-dot,
-.interface-media-actions .interface-playback-status.is-autoplay-linked .interface-playback-dot,
-.interface-playback-status.is-autoplay-linked .interface-playback-dot {
-  width: 0.50rem !important;
-  height: 0.50rem !important;
-  background: #fb7185 !important;
-  box-shadow:
-    0 0 14px rgba(251, 113, 133, 0.78),
-    0 0 24px rgba(244, 63, 94, 0.30) !important;
-}
-
-.interface-section .interface-media-actions .interface-playback-status.is-autoplay-linked.interface-playback-is-playing .interface-playback-dot,
-.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked.interface-playback-is-playing .interface-playback-dot,
-.interface-media-actions .interface-playback-status.is-autoplay-linked.interface-playback-is-playing .interface-playback-dot,
-.interface-playback-status.is-autoplay-linked.interface-playback-is-playing .interface-playback-dot {
-  background: #ef4444 !important;
-  transform: scale(1.08) !important;
-  box-shadow:
-    0 0 12px rgba(239, 68, 68, 0.92),
-    0 0 28px rgba(239, 68, 68, 0.46),
-    0 0 42px rgba(236, 72, 153, 0.22) !important;
-}
-
-.interface-section .interface-media-actions .interface-playback-status.is-autoplay-linked[aria-pressed="true"]:not(.interface-playback-is-playing) .interface-playback-dot,
-.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked[aria-pressed="true"]:not(.interface-playback-is-playing) .interface-playback-dot,
-.interface-media-actions .interface-playback-status.is-autoplay-linked[aria-pressed="true"]:not(.interface-playback-is-playing) .interface-playback-dot,
-.interface-playback-status.is-autoplay-linked[aria-pressed="true"]:not(.interface-playback-is-playing) .interface-playback-dot {
-  background: #4ade80 !important;
-  box-shadow:
-    0 0 16px rgba(74, 222, 128, 0.82),
-    0 0 30px rgba(34, 197, 94, 0.34) !important;
-}
-
-@media (max-width: 1100px) and (min-width: 900px) {
-  .interface-section .interface-media-actions .interface-playback-status.is-autoplay-linked span[data-interface-media-status-text],
-  .interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked span[data-interface-media-status-text],
-  .interface-media-actions .interface-playback-status.is-autoplay-linked span[data-interface-media-status-text],
-  .interface-playback-status.is-autoplay-linked span[data-interface-media-status-text],
-  .interface-section .interface-media-actions .interface-media-toggle,
-  .interface-section.interface-system-is-media .interface-media-actions .interface-media-toggle,
-  .interface-media-actions .interface-media-toggle,
-  .interface-media-toggle {
-    font-size: clamp(0.58rem, 0.88vw, 0.68rem) !important;
-    letter-spacing: 0.045em !important;
-  }
-}
-
-@media (max-width: 720px) {
-  .interface-section .interface-media-actions .interface-playback-status.is-autoplay-linked span[data-interface-media-status-text],
-  .interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked span[data-interface-media-status-text],
-  .interface-media-actions .interface-playback-status.is-autoplay-linked span[data-interface-media-status-text],
-  .interface-playback-status.is-autoplay-linked span[data-interface-media-status-text],
-  .interface-section .interface-media-actions .interface-media-toggle,
-  .interface-section.interface-system-is-media .interface-media-actions .interface-media-toggle,
-  .interface-media-actions .interface-media-toggle,
-  .interface-media-toggle {
-    font-size: clamp(0.62rem, 2.65vw, 0.76rem) !important;
-    letter-spacing: 0.07em !important;
-  }
-}
-/* === WInterface Live Media Glass + Typography Repair END === */
-
-
-/* === WInterface Live Media Neutral Glass Color Fix START ===
-   Final sync repair: neutralizes bay-specific colored Live Media button
-   container rules across all bays while preserving approved typography,
-   playback dot/playing-state effects, and theme-synced volume orb behavior.
-*/
-.interface-section .interface-media-actions .interface-playback-status.is-autoplay-linked,
-.interface-section .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing),
-.interface-section[class*="interface-system-set-"] .interface-media-actions .interface-playback-status.is-autoplay-linked,
-.interface-section[class*="interface-system-set-"] .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing),
-.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked,
-.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing),
-.interface-section.interface-system-set-primary .interface-media-actions .interface-playback-status.is-autoplay-linked,
-.interface-section.interface-system-set-primary .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing),
-.interface-section.interface-system-set-operations .interface-media-actions .interface-playback-status.is-autoplay-linked,
-.interface-section.interface-system-set-operations .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing),
-.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked,
-.interface-section.interface-system-set-media .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing),
-.interface-section.interface-system-set-bay4 .interface-media-actions .interface-playback-status.is-autoplay-linked,
-.interface-section.interface-system-set-bay4 .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing),
-.interface-section.interface-system-set-bay5 .interface-media-actions .interface-playback-status.is-autoplay-linked,
-.interface-section.interface-system-set-bay5 .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing),
-.interface-section.interface-system-set-bay6 .interface-media-actions .interface-playback-status.is-autoplay-linked,
-.interface-section.interface-system-set-bay6 .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing),
-.interface-section.interface-system-set-youtubeEncore .interface-media-actions .interface-playback-status.is-autoplay-linked,
-.interface-section.interface-system-set-youtubeEncore .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing),
-.interface-section.interface-system-set-vimeoEncore .interface-media-actions .interface-playback-status.is-autoplay-linked,
-.interface-section.interface-system-set-vimeoEncore .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing),
-.interface-section.interface-system-set-priceEncore .interface-media-actions .interface-playback-status.is-autoplay-linked,
-.interface-section.interface-system-set-priceEncore .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing) {
+/* WInterface media controls: stable capsule styling and status dots. */
+html body .interface-section .interface-core .interface-media-actions .interface-playback-status.is-autoplay-linked,
+html body .interface-section .interface-core .interface-media-actions .interface-playback-status.is-slideshow-linked,
+html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-playback-status.is-autoplay-linked,
+html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-playback-status.is-slideshow-linked,
+html body .interface-section.interface-system-is-media .interface-core .interface-media-actions .interface-playback-status.is-autoplay-linked,
+html body .interface-section.interface-system-is-media .interface-core .interface-media-actions .interface-playback-status.is-slideshow-linked,
+html body .interface-section .interface-core .interface-media-actions .interface-media-toggle,
+html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-media-toggle {
   color: var(--text) !important;
   border-color: rgba(255, 255, 255, 0.13) !important;
   background:
@@ -9624,42 +9422,75 @@ html[data-winterface-theme="dark-purple"] {
     0 0 18px rgba(var(--style-matrix-orb-left-rgb), 0.075),
     inset 0 0 0 1px rgba(255, 255, 255, 0.055),
     inset 0 0 26px rgba(255, 255, 255, 0.030) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  text-shadow: none !important;
 }
 
-.interface-section .interface-media-actions .interface-playback-status.is-autoplay-linked::before,
-.interface-section .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing)::before,
-.interface-section[class*="interface-system-set-"] .interface-media-actions .interface-playback-status.is-autoplay-linked::before,
-.interface-section[class*="interface-system-set-"] .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing)::before,
-.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked::before,
-.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing)::before {
+html body .interface-section .interface-core .interface-media-actions .interface-playback-status.is-autoplay-linked span[data-interface-media-status-text],
+html body .interface-section .interface-core .interface-media-actions .interface-playback-status.is-slideshow-linked span[data-interface-media-status-text],
+html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-playback-status.is-autoplay-linked span[data-interface-media-status-text],
+html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-playback-status.is-slideshow-linked span[data-interface-media-status-text],
+html body .interface-section.interface-system-is-media .interface-core .interface-media-actions .interface-playback-status.is-autoplay-linked span[data-interface-media-status-text],
+html body .interface-section.interface-system-is-media .interface-core .interface-media-actions .interface-playback-status.is-slideshow-linked span[data-interface-media-status-text],
+html body .interface-section .interface-core .interface-media-actions .interface-media-toggle,
+html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-media-toggle {
+  color: var(--text) !important;
+  font-family: "Space Grotesk", sans-serif !important;
+  font-size: clamp(0.62rem, 0.78vw, 0.72rem) !important;
+  font-weight: 650 !important;
+  letter-spacing: clamp(0.045em, 0.14vw, 0.075em) !important;
+  line-height: 1 !important;
+  text-transform: none !important;
+  text-shadow: none !important;
+}
+
+html body .interface-section .interface-core .interface-media-actions .interface-media-toggle span,
+html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-media-toggle span {
+  color: inherit !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  letter-spacing: inherit !important;
+  line-height: inherit !important;
+  text-transform: inherit !important;
+  text-shadow: inherit !important;
+}
+
+html body .interface-section .interface-core .interface-media-actions .interface-playback-status.is-autoplay-linked::before,
+html body .interface-section .interface-core .interface-media-actions .interface-playback-status.is-slideshow-linked::before,
+html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-playback-status.is-autoplay-linked::before,
+html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-playback-status.is-slideshow-linked::before,
+html body .interface-section .interface-core .interface-media-actions .interface-media-toggle::before,
+html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-media-toggle::before {
   background: linear-gradient(90deg, transparent, rgba(var(--style-matrix-orb-left-rgb), 0.18), rgba(var(--style-matrix-orb-right-rgb), 0.12), transparent) !important;
   opacity: 0.44 !important;
 }
 
-.interface-section .interface-media-actions .interface-playback-status.is-autoplay-linked::after,
-.interface-section .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing)::after,
-.interface-section[class*="interface-system-set-"] .interface-media-actions .interface-playback-status.is-autoplay-linked::after,
-.interface-section[class*="interface-system-set-"] .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing)::after,
-.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked::after,
-.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing)::after {
+html body .interface-section .interface-core .interface-media-actions .interface-playback-status.is-autoplay-linked::after,
+html body .interface-section .interface-core .interface-media-actions .interface-playback-status.is-slideshow-linked::after,
+html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-playback-status.is-autoplay-linked::after,
+html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-playback-status.is-slideshow-linked::after,
+html body .interface-section .interface-core .interface-media-actions .interface-media-toggle::after,
+html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-media-toggle::after {
   border-color: rgba(255, 255, 255, 0.055) !important;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.055),
     inset 0 -1px 0 rgba(var(--style-matrix-orb-left-rgb), 0.035) !important;
 }
 
-.interface-section .interface-media-actions .interface-playback-status.is-autoplay-linked:hover,
-.interface-section .interface-media-actions .interface-playback-status.is-autoplay-linked:focus-visible,
-.interface-section .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing):hover,
-.interface-section .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing):focus-visible,
-.interface-section[class*="interface-system-set-"] .interface-media-actions .interface-playback-status.is-autoplay-linked:hover,
-.interface-section[class*="interface-system-set-"] .interface-media-actions .interface-playback-status.is-autoplay-linked:focus-visible,
-.interface-section[class*="interface-system-set-"] .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing):hover,
-.interface-section[class*="interface-system-set-"] .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing):focus-visible,
-.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked:hover,
-.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked:focus-visible,
-.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing):hover,
-.interface-section.interface-system-is-media .interface-media-actions .interface-playback-status.is-autoplay-linked:not(.interface-playback-is-playing):focus-visible {
+html body .interface-section .interface-core .interface-media-actions .interface-playback-status.is-autoplay-linked:hover,
+html body .interface-section .interface-core .interface-media-actions .interface-playback-status.is-autoplay-linked:focus-visible,
+html body .interface-section .interface-core .interface-media-actions .interface-playback-status.is-slideshow-linked:hover,
+html body .interface-section .interface-core .interface-media-actions .interface-playback-status.is-slideshow-linked:focus-visible,
+html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-playback-status.is-autoplay-linked:hover,
+html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-playback-status.is-autoplay-linked:focus-visible,
+html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-playback-status.is-slideshow-linked:hover,
+html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-playback-status.is-slideshow-linked:focus-visible,
+html body .interface-section .interface-core .interface-media-actions .interface-media-toggle:hover,
+html body .interface-section .interface-core .interface-media-actions .interface-media-toggle:focus-visible,
+html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-media-toggle:hover,
+html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-media-toggle:focus-visible {
   transform: translateY(-2px) !important;
   border-color: rgba(var(--style-matrix-orb-left-rgb), 0.36) !important;
   background:
@@ -9674,20 +9505,65 @@ html[data-winterface-theme="dark-purple"] {
     inset 0 0 0 1px rgba(255, 255, 255, 0.062),
     inset 0 0 28px rgba(255, 255, 255, 0.035) !important;
 }
-/* === WInterface Live Media Neutral Glass Color Fix END === */
 
-/* === DWO v3.7 Controls Hover + Theme Volume Sync START === */
-.interface-section .interface-media-mute::before,
-.interface-section.interface-system-set-primary .interface-media-mute::before,
-.interface-section.interface-system-set-operations .interface-media-mute::before,
-.interface-section.interface-system-set-media .interface-media-mute::before {
+html body .interface-section .interface-core .interface-media-actions .interface-playback-status .interface-playback-dot,
+html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-playback-status .interface-playback-dot {
+  width: 0.50rem !important;
+  height: 0.50rem !important;
+  background: #fb7185 !important;
+  box-shadow:
+    0 0 14px rgba(251, 113, 133, 0.78),
+    0 0 24px rgba(244, 63, 94, 0.30) !important;
+}
+
+html body .interface-section .interface-core .interface-media-actions .interface-playback-status.is-autoplay-linked.interface-playback-is-playing .interface-playback-dot,
+html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-playback-status.is-autoplay-linked.interface-playback-is-playing .interface-playback-dot {
+  background: #ef4444 !important;
+  transform: scale(1.08) !important;
+  box-shadow:
+    0 0 12px rgba(239, 68, 68, 0.92),
+    0 0 28px rgba(239, 68, 68, 0.46),
+    0 0 42px rgba(236, 72, 153, 0.22) !important;
+}
+
+html body .interface-section .interface-core .interface-media-actions .interface-playback-status.is-autoplay-linked[aria-pressed="true"]:not(.interface-playback-is-playing) .interface-playback-dot,
+html body .interface-section .interface-core .interface-media-actions .interface-playback-status.is-slideshow-linked[aria-pressed="true"] .interface-playback-dot,
+html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-playback-status.is-autoplay-linked[aria-pressed="true"]:not(.interface-playback-is-playing) .interface-playback-dot,
+html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-playback-status.is-slideshow-linked[aria-pressed="true"] .interface-playback-dot {
+  background: #4ade80 !important;
+  box-shadow:
+    0 0 16px rgba(74, 222, 128, 0.82),
+    0 0 30px rgba(34, 197, 94, 0.34) !important;
+}
+
+@media (max-width: 1100px) and (min-width: 900px) {
+  html body .interface-section .interface-core .interface-media-actions .interface-playback-status span[data-interface-media-status-text],
+  html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-playback-status span[data-interface-media-status-text],
+  html body .interface-section .interface-core .interface-media-actions .interface-media-toggle,
+  html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-media-toggle {
+    font-size: clamp(0.58rem, 0.88vw, 0.68rem) !important;
+    letter-spacing: 0.045em !important;
+  }
+}
+
+@media (max-width: 720px) {
+  html body .interface-section .interface-core .interface-media-actions .interface-playback-status span[data-interface-media-status-text],
+  html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-playback-status span[data-interface-media-status-text],
+  html body .interface-section .interface-core .interface-media-actions .interface-media-toggle,
+  html body .interface-section[class*="interface-system-set-"] .interface-core .interface-media-actions .interface-media-toggle {
+    font-size: clamp(0.62rem, 2.65vw, 0.76rem) !important;
+    letter-spacing: 0.07em !important;
+  }
+}
+
+/* WInterface volume control: theme-synced orb. */
+html body .interface-section .interface-media-mute::before,
+html body .interface-section[class*="interface-system-set-"] .interface-media-mute::before {
   background: radial-gradient(ellipse at center, rgba(var(--style-matrix-orb-left-rgb), 0.38), rgba(var(--style-matrix-orb-right-rgb), 0.20) 42%, transparent 72%) !important;
 }
 
-.interface-section .interface-media-mute-stick,
-.interface-section.interface-system-set-primary .interface-media-mute-stick,
-.interface-section.interface-system-set-operations .interface-media-mute-stick,
-.interface-section.interface-system-set-media .interface-media-mute-stick {
+html body .interface-section .interface-media-mute-stick,
+html body .interface-section[class*="interface-system-set-"] .interface-media-mute-stick {
   background:
     linear-gradient(180deg, rgba(248, 250, 252, 0.20), transparent 22%),
     linear-gradient(180deg, rgba(var(--style-matrix-orb-left-rgb), 0.74), rgba(var(--style-matrix-orb-right-rgb), 0.36)) !important;
@@ -9697,10 +9573,8 @@ html[data-winterface-theme="dark-purple"] {
     0 0 17px rgba(var(--style-matrix-orb-left-rgb), 0.28) !important;
 }
 
-.interface-section .interface-media-mute-orb,
-.interface-section.interface-system-set-primary .interface-media-mute-orb,
-.interface-section.interface-system-set-operations .interface-media-mute-orb,
-.interface-section.interface-system-set-media .interface-media-mute-orb {
+html body .interface-section .interface-media-mute-orb,
+html body .interface-section[class*="interface-system-set-"] .interface-media-mute-orb {
   border-color: rgba(var(--style-matrix-orb-left-rgb), 0.68) !important;
   background:
     radial-gradient(circle at 32% 24%, rgba(255, 255, 255, 0.32), transparent 20%),
@@ -9712,24 +9586,18 @@ html[data-winterface-theme="dark-purple"] {
     0 0 36px rgba(var(--style-matrix-orb-right-rgb), 0.24) !important;
 }
 
-.interface-section .interface-media-mute-orb::before,
-.interface-section.interface-system-set-primary .interface-media-mute-orb::before,
-.interface-section.interface-system-set-operations .interface-media-mute-orb::before,
-.interface-section.interface-system-set-media .interface-media-mute-orb::before {
+html body .interface-section .interface-media-mute-orb::before,
+html body .interface-section[class*="interface-system-set-"] .interface-media-mute-orb::before {
   border-color: rgba(var(--style-matrix-orb-left-rgb), 0.24) !important;
   box-shadow:
     0 0 22px rgba(var(--style-matrix-orb-left-rgb), 0.22),
     inset 0 0 16px rgba(var(--style-matrix-orb-right-rgb), 0.12) !important;
 }
 
-.interface-section .interface-media-mute:hover .interface-media-mute-orb,
-.interface-section .interface-media-mute:focus-visible .interface-media-mute-orb,
-.interface-section.interface-system-set-primary .interface-media-mute:hover .interface-media-mute-orb,
-.interface-section.interface-system-set-primary .interface-media-mute:focus-visible .interface-media-mute-orb,
-.interface-section.interface-system-set-operations .interface-media-mute:hover .interface-media-mute-orb,
-.interface-section.interface-system-set-operations .interface-media-mute:focus-visible .interface-media-mute-orb,
-.interface-section.interface-system-set-media .interface-media-mute:hover .interface-media-mute-orb,
-.interface-section.interface-system-set-media .interface-media-mute:focus-visible .interface-media-mute-orb {
+html body .interface-section .interface-media-mute:hover .interface-media-mute-orb,
+html body .interface-section .interface-media-mute:focus-visible .interface-media-mute-orb,
+html body .interface-section[class*="interface-system-set-"] .interface-media-mute:hover .interface-media-mute-orb,
+html body .interface-section[class*="interface-system-set-"] .interface-media-mute:focus-visible .interface-media-mute-orb {
   border-color: rgba(var(--style-matrix-orb-right-rgb), 0.86) !important;
   box-shadow:
     inset 0 0 16px rgba(255, 255, 255, 0.13),
@@ -9738,10 +9606,8 @@ html[data-winterface-theme="dark-purple"] {
     0 0 46px rgba(var(--style-matrix-orb-right-rgb), 0.28) !important;
 }
 
-.interface-section .interface-media-mute.is-muted .interface-media-mute-orb,
-.interface-section.interface-system-set-primary .interface-media-mute.is-muted .interface-media-mute-orb,
-.interface-section.interface-system-set-operations .interface-media-mute.is-muted .interface-media-mute-orb,
-.interface-section.interface-system-set-media .interface-media-mute.is-muted .interface-media-mute-orb {
+html body .interface-section .interface-media-mute.is-muted .interface-media-mute-orb,
+html body .interface-section[class*="interface-system-set-"] .interface-media-mute.is-muted .interface-media-mute-orb {
   background:
     radial-gradient(circle at 32% 24%, rgba(255, 255, 255, 0.25), transparent 21%),
     radial-gradient(circle at 46% 46%, rgba(var(--style-matrix-orb-left-rgb), 0.64), rgba(var(--style-matrix-orb-right-rgb), 0.38) 50%, rgba(8, 10, 22, 0.98) 100%) !important;
@@ -9751,5 +9617,4 @@ html[data-winterface-theme="dark-purple"] {
     0 0 22px rgba(var(--style-matrix-orb-left-rgb), 0.46),
     0 0 42px rgba(var(--style-matrix-orb-right-rgb), 0.25) !important;
 }
-/* === DWO v3.7 Controls Hover + Theme Volume Sync END === */
 
